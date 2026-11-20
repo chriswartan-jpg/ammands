@@ -58,7 +58,8 @@ function CasePanel({ c }: { c: RepairCase }) {
         <div className="case-title-row">
           <div>
             <p className="eyebrow">
-              {c.id} · {formatDayTime(c.createdAt)} · {c.report.method === 'voice' ? 'Voice intake' : c.report.channel}
+              {c.id} · {formatDayTime(c.createdAt)} · {c.report.method === 'voice' ? 'Voice intake' : c.report.method === 'sms' ? 'SMS demo' : c.report.channel}
+              {c.report.priority === 'urgent' && ' · Urgent per tenant'}
             </p>
             <h2>{caseTitle(c)}</h2>
           </div>
@@ -68,6 +69,14 @@ function CasePanel({ c }: { c: RepairCase }) {
           <div>
             <h3>Tenant report</h3>
             <blockquote className="quote">“{c.report.text}”<cite>{unit.tenant.name}</cite></blockquote>
+            {c.report.photo && (
+              <>
+                <img className="repair-photo" src={c.report.photo.dataUrl} alt="Damage reported by the tenant" />
+                <p className="muted">{c.report.photo.estimateCents == null
+                  ? 'No estimate from the photo'
+                  : `Simulated photo estimate: ${formatMoney(c.report.photo.estimateCents)}`}</p>
+              </>
+            )}
           </div>
           {c.followUpAnswers.length > 0 && (
             <div>
@@ -204,7 +213,9 @@ function DispatchCard({ c }: { c: RepairCase }) {
           <p className="eyebrow">Prepared for you</p>
           <h3>Plumber job for {partner.name}</h3>
           <p className="muted">
-            Review the priority and what the plumber will receive.
+            {c.report.photo?.estimateCents == null
+              ? 'A cost estimate is unavailable. Review the job before dispatch.'
+              : `The simulated estimate is ${formatMoney(c.report.photo.estimateCents)} and requires your approval.`}
           </p>
         </div>
         <button type="button" className="btn btn-primary" onClick={actions.dispatchJob}>
@@ -223,7 +234,7 @@ function DispatchCard({ c }: { c: RepairCase }) {
         </select>
       </label>
       <details className="job-disclosure">
-        <summary>What the plumber receives <span>{job.shared.length} details</span></summary>
+        <summary>What the plumber receives <span>{job.shared.length} details{c.report.photo && ' and a photo'}</span></summary>
         <JobFieldTable job={job} />
 
         <div className="withheld">
@@ -255,7 +266,7 @@ function CurrentState({ c, status }: { c: RepairCase; status: DownstreamStatus }
       <h3>{WAITING_ON[status]}</h3>
       <details>
         <summary>
-          {c.job.shared.length} details sent to {partner.shortName}
+          {c.job.shared.length} details{c.report.photo && ' and a photo'} sent to {partner.shortName}
           {c.dispatchedAt && ` at ${formatTime(c.dispatchedAt)}`}
         </summary>
         <JobFieldTable job={c.job} />

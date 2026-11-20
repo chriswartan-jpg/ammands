@@ -1,12 +1,14 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 
+import { InvoiceCard } from '../components/InvoiceCard.tsx'
+import { RepairPhotoInput } from '../components/RepairPhotoInput.tsx'
 import { caseTitle } from '../domain/caseFlow.ts'
-import type { CaseStatus, RepairCase } from '../domain/caseFlow.ts'
+import type { CaseStatus, RepairCase, RepairPhoto, ReportPriority } from '../domain/caseFlow.ts'
 import {
   partner,
   unit,
 } from '../domain/demoData.ts'
-import { formatDayTime, formatSlot, formatTime } from '../domain/format.ts'
+import { formatDayTime, formatMoney, formatSlot, formatTime } from '../domain/format.ts'
 import { actions } from '../store.ts'
 
 const VoiceIntake = lazy(() => import('../components/VoiceIntake.tsx').then(
@@ -37,19 +39,44 @@ export function TenantView({ repairCase }: { repairCase: RepairCase | null }) {
         </p>
       </header>
 
-      {repairCase ? <RepairRequest c={repairCase} /> : (
-        <>
-          <Suspense fallback={null}><VoiceIntake /></Suspense>
-          <ReportComposer />
-        </>
-      )}
+      {repairCase ? <RepairRequest c={repairCase} /> : <ReportIntake />}
     </div>
   )
 }
 
-function ReportComposer() {
+function ReportIntake() {
+  const [priority, setPriority] = useState<ReportPriority>()
+  const [channel, setChannel] = useState<'website' | 'sms'>('website')
+
+  return (
+    <>
+      <section className="card" aria-labelledby="report-priority">
+        <h2 id="report-priority">Is the repair urgent?</h2>
+        <div className="answer-options" role="group" aria-labelledby="report-priority">
+          <button type="button" className="answer-option" aria-pressed={priority === 'urgent'} onClick={() => setPriority('urgent')}>Urgent</button>
+          <button type="button" className="answer-option" aria-pressed={priority === 'standard'} onClick={() => setPriority('standard')}>Not urgent</button>
+        </div>
+      </section>
+      {priority === 'urgent' && <Suspense fallback={null}><VoiceIntake /></Suspense>}
+      {priority === 'standard' && (
+        <section className="card" aria-labelledby="report-channel">
+          <h2 id="report-channel">How would you like to report it?</h2>
+          <div className="answer-options" role="group" aria-labelledby="report-channel">
+            <button type="button" className="answer-option" aria-pressed={channel === 'website'} onClick={() => setChannel('website')}>Website</button>
+            <button type="button" className="answer-option" aria-pressed={channel === 'sms'} onClick={() => setChannel('sms')}>SMS demo</button>
+          </div>
+        </section>
+      )}
+      {priority && <ReportComposer key={priority} priority={priority} sms={priority === 'standard' && channel === 'sms'} />}
+    </>
+  )
+}
+
+function ReportComposer({ priority, sms }: { priority: ReportPriority; sms: boolean }) {
   const [text, setText] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [photo, setPhoto] = useState<RepairPhoto>()
+  const [readingPhoto, setReadingPhoto] = useState(false)
   const request = useRef<AbortController | null>(null)
   useEffect(() => () => request.current?.abort(), [])
 
@@ -58,12 +85,12 @@ function ReportComposer() {
       className="card composer"
       onSubmit={async (event) => {
         event.preventDefault()
-        if (request.current || !text.trim()) return
+        if (request.current || readingPhoto || !text.trim()) return
         const controller = new AbortController()
         request.current = controller
         setSubmitting(true)
         try {
-          await actions.submitReport(text.trim(), controller.signal)
+          await actions.submitReport(text.trim(), controller.signal, { priority, method: sms ? 'sms' : undefined, photo })
         } finally {
           request.current = null
           if (!controller.signal.aborted) setSubmitting(false)
@@ -71,9 +98,9 @@ function ReportComposer() {
       }}
     >
       <label htmlFor="report" className="composer-label">
-        Type your report
+        {sms ? 'Write a simulated SMS' : 'Type your report'}
       </label>
-      <p className="muted">Tell us what happened and where you noticed it.</p>
+      <p className="muted">{sms ? 'This message stays in the demo. Describe what happened and where.' : 'Tell us what happened and where you noticed it.'}</p>
       <textarea
         id="report"
         rows={3}
@@ -83,8 +110,9 @@ function ReportComposer() {
         onChange={(event) => setText(event.target.value)}
         placeholder="e.g. The tap in the bathroom keeps dripping"
       />
-      <button type="submit" className="btn btn-primary btn-block" disabled={submitting || !text.trim()}>
-        {submitting ? 'Checking your report…' : 'Send report'}
+      {text.trim() && <RepairPhotoInput photo={photo} setPhoto={setPhoto} reading={readingPhoto} setReading={setReadingPhoto} />}
+      <button type="submit" className="btn btn-primary btn-block" disabled={submitting || readingPhoto || !text.trim()}>
+        {submitting ? 'Checking your report…' : sms ? 'Send demo SMS' : 'Send report'}
       </button>
     </form>
   )
@@ -121,8 +149,15 @@ function RepairRequest({ c }: { c: RepairCase }) {
         <div className="your-report">
           <p className="eyebrow">Your report, {formatTime(c.report.submittedAt)}</p>
           <p>“{c.report.text}”</p>
+          {c.report.photo && <img className="repair-photo" src={c.report.photo.dataUrl} alt="Photo submitted with your repair report" />}
         </div>
       </section>
+
+      {c.invoice && (
+        <section className="card" aria-label="Repair invoice">
+          <InvoiceCard invoice={c.invoice} />
+        </section>
+      )}
 
       <section className="updates" aria-label="Updates">
         <h3>Updates</h3>
@@ -194,7 +229,9 @@ function RequestStatus({ c }: { c: RepairCase }) {
       return (
         <div className="status-block">
           <h3>Your details are with the property manager</h3>
-          <p>The plumbing job is prepared for review. Nothing more for you to do right now.</p>
+          <p>{c.report.photo?.estimateCents == null
+            ? 'The manager will review the job because a cost estimate is unavailable.'
+            : `The simulated photo estimate is ${formatMoney(c.report.photo.estimateCents)}. The manager will review it before dispatch.`}</p>
         </div>
       )
     case 'dispatched':
@@ -208,7 +245,7 @@ function RequestStatus({ c }: { c: RepairCase }) {
       return (
         <div className="status-block is-action">
           <h3>Pick a time for the visit</h3>
-          <p>{partner.name} can come at either of these times.</p>
+          <p>{partner.name} can come at one of these times.</p>
           <div className="slot-choices">
             {c.proposedSlots.map((slot) => (
               <button key={slot.id} type="button" className="slot-choice" onClick={() => actions.chooseSlot(slot.id)}>

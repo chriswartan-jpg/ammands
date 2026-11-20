@@ -11,6 +11,7 @@ import {
   completeRepair,
   continueAsPlumbing,
   dispatchJob,
+  ESTIMATE_REVIEW_LIMIT_CENTS,
   initialState,
   nextStep,
   proposeSlots,
@@ -52,6 +53,52 @@ function answerAllQuestions(state: DemoState, startMinute = 1): DemoState {
 function readyPlumbingCase(): DemoState {
   return answerAllQuestions(submitReport(initialState, DEMO_REPORT, at(0)))
 }
+
+test('a plumbing photo estimate below €3,000 dispatches automatically after follow-up', () => {
+  const state = submitReport(initialState, DEMO_REPORT, at(0), undefined, {
+    method: 'sms',
+    priority: 'standard',
+    photo: { dataUrl: 'sample-photo', estimateCents: ESTIMATE_REVIEW_LIMIT_CENTS - 1 },
+  })
+  assert.equal(state.case?.status, 'gathering_details')
+  const ready = answerAllQuestions(state)
+  assert.equal(ready.case?.status, 'dispatched')
+  assert.equal(ready.case?.report.method, 'sms')
+  assert.ok(ready.case?.consent.dataShared.includes('repair photo'))
+  assert.equal(ready.case?.timeline.at(-1)?.actor, 'system')
+  assert.equal(nextStep(ready.case).role, 'plumber')
+})
+
+test('estimates at or above €3,000, and inconclusive photos, wait for the manager', () => {
+  for (const estimateCents of [ESTIMATE_REVIEW_LIMIT_CENTS, ESTIMATE_REVIEW_LIMIT_CENTS + 1, null]) {
+    const state = submitReport(initialState, DEMO_REPORT, at(0), undefined, {
+      priority: 'urgent',
+      method: 'voice',
+      photo: { dataUrl: 'sample-photo', estimateCents },
+    })
+    const ready = answerAllQuestions(state)
+    assert.equal(ready.case?.status, 'awaiting_dispatch')
+    assert.equal(ready.case?.dispatchedAt, undefined)
+    assert.equal(ready.case?.job?.urgent, true)
+    assert.equal(dispatchJob(ready, at(5)).case?.timeline.at(-1)?.actor, 'manager')
+  }
+})
+
+test('a low estimate cannot route a non-plumbing report to a plumber', () => {
+  const state = submitReport(initialState, DEMO_NON_PLUMBING_REPORT, at(0), undefined, {
+    photo: { dataUrl: 'sample-photo', estimateCents: 27500 },
+  })
+  assert.equal(state.case?.status, 'manager_review')
+  assert.equal(state.case?.job, undefined)
+})
+
+test('a confirmed plumbing report with no follow-up questions still routes by estimate', () => {
+  const state = submitReport(initialState, DEMO_REPORT, at(0), {
+    classification: classifyReport(DEMO_REPORT), questions: [],
+  }, { photo: { dataUrl: 'sample-photo', estimateCents: 27500 } })
+  assert.equal(state.case?.status, 'dispatched')
+  assert.equal(state.case?.timeline.at(-1)?.actor, 'system')
+})
 
 test('full flow: tenant report to invoice linked on Unit 4B', () => {
   let state = submitReport(initialState, DEMO_REPORT, at(0))
@@ -157,7 +204,7 @@ test('the job shares the report and unit details, and withholds the rest', () =>
   for (const meter of unit.details.meters) assert.ok(!sent.includes(meter.number))
 })
 
-test('the tenant portal never receives the internal or invoice events', () => {
+test('the tenant portal receives completion and invoice updates without internal events', () => {
   let state = readyPlumbingCase()
   state = dispatchJob(state, at(4))
   state = proposeSlots(state, windows, at(5))
@@ -175,7 +222,10 @@ test('the tenant portal never receives the internal or invoice events', () => {
     'slots_proposed',
     'appointment',
     'completed',
+    'invoice',
   ])
+  const invoiceUpdate = state.case!.timeline.find((event) => event.kind === 'invoice')
+  assert.ok(invoiceUpdate?.tenantText?.includes(state.case!.invoice!.number))
 })
 
 test('out-of-order and invalid actions leave the case unchanged', () => {

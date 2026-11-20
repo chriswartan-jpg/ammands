@@ -13,7 +13,7 @@ const VIEWS: { role: Role; label: string }[] = [
   { role: 'plumber', label: 'Plumber' },
 ]
 
-const MILESTONES = ['Report', 'Manager review', 'Appointment', 'Repair', 'Invoice']
+const MILESTONES = ['Report', 'Review and routing', 'Appointment', 'Repair', 'Invoice']
 const MILESTONE_BY_STATUS: Record<CaseStatus, number> = {
   gathering_details: 0,
   manager_review: 1,
@@ -97,7 +97,7 @@ export function App() {
         {role === 'plumber' && <PlumberView repairCase={repairCase} />}
       </main>
 
-      <footer className="demo-foot">Demo data and simulated integrations. No real people, partners or messages.</footer>
+      <footer className="demo-foot">Demo data. SMS, photo estimates, dispatch, and portal notifications are simulated.</footer>
     </div>
   )
 }

@@ -15,7 +15,7 @@ import {
   setDispatchUrgency,
   submitReport,
 } from './domain/caseFlow.ts'
-import type { AvailabilityWindow, DemoState, InvoiceLine, Role } from './domain/caseFlow.ts'
+import type { AvailabilityWindow, DemoState, InvoiceLine, RepairPhoto, ReportDetails, Role } from './domain/caseFlow.ts'
 
 import type { IntakeTriage } from './domain/plumbingTriage.ts'
 
@@ -88,21 +88,20 @@ export async function requestTriage(text: string, signal: AbortSignal): Promise<
 }
 
 export const actions = {
-  submitVoiceReport: (report: string, intake: IntakeTriage, answers: string[]) =>
+  submitVoiceReport: (report: string, intake: IntakeTriage, answers: string[], photo?: RepairPhoto) =>
     apply((current, now) => {
       if (current.case || answers.length !== intake.questions.length) return current
-      let next = submitReport(current, report, now, intake)
+      let next = submitReport(current, report, now, intake, { priority: 'urgent', method: 'voice', photo })
       for (const [index, question] of intake.questions.entries()) {
         const answered = answerFollowUp(next, question.id, answers[index], now)
         if (answered === next) return current
         next = answered
       }
-      if (!next.case) return current
-      return { case: { ...next.case, report: { ...next.case.report, method: 'voice' } } }
+      return next
     }),
-  submitReport: async (text: string, signal: AbortSignal) => {
+  submitReport: async (text: string, signal: AbortSignal, details?: ReportDetails) => {
     const intake = await requestTriage(text, signal)
-    if (!signal.aborted) apply((s, now) => submitReport(s, text, now, intake))
+    if (!signal.aborted) apply((s, now) => submitReport(s, text, now, intake, details))
   },
   answerFollowUp: (questionId: string, value: string) =>
     apply((s, now) => answerFollowUp(s, questionId, value, now)),

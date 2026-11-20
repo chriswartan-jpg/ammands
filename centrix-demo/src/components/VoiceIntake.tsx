@@ -1,6 +1,8 @@
 import { ConversationProvider, useConversation } from '@elevenlabs/react'
 import { useEffect, useRef, useState } from 'react'
 
+import { RepairPhotoInput } from './RepairPhotoInput.tsx'
+import type { RepairPhoto } from '../domain/caseFlow.ts'
 import { classifyReport, questionsFor } from '../domain/plumbingTriage.ts'
 import type { IntakeTriage } from '../domain/plumbingTriage.ts'
 import { actions, requestTriage } from '../store.ts'
@@ -23,6 +25,8 @@ function VoiceControls() {
   const [draft, setDraft] = useState<VoiceDraft>()
   const [error, setError] = useState('')
   const [starting, setStarting] = useState(false)
+  const [photo, setPhoto] = useState<RepairPhoto>()
+  const [readingPhoto, setReadingPhoto] = useState(false)
   const session = useRef<AbortController | null>(null)
   const currentDraft = useRef<VoiceDraft | null>(null)
   const preparing = useRef(false)
@@ -85,6 +89,7 @@ function VoiceControls() {
     session.current = controller
     currentDraft.current = null
     setDraft(undefined)
+    setPhoto(undefined)
     setError('')
     setStarting(true)
     try {
@@ -120,8 +125,8 @@ function VoiceControls() {
     <section className="card voice-intake" aria-label="Voice repair intake">
       <div className="voice-intake-main">
         <div className="voice-copy">
-          <h2>Tell us what happened</h2>
-          <p>Describe the problem out loud. Centrix asks any follow-up questions and prepares a report for you to review.</p>
+          <h2>Talk to Centrix about an urgent repair</h2>
+          <p>Describe the issue out loud. Centrix will ask follow-up questions and prepare a report for you to review.</p>
         </div>
         <div className={`voice-meter${connected ? ' is-live' : ''}`} aria-hidden="true">
           {[4, 10, 17, 26, 17, 10, 4].map((height, index) => <i key={index} style={{ height }} />)}
@@ -163,20 +168,22 @@ function VoiceControls() {
               })}
             </dl>
           )}
+          {ready && <RepairPhotoInput photo={photo} setPhoto={setPhoto} reading={readingPhoto} setReading={setReadingPhoto} />}
           <div className="voice-review-actions">
             {ready && (
-              <button type="button" className="btn btn-primary" onClick={() => {
+              <button type="button" className="btn btn-primary" disabled={readingPhoto} onClick={() => {
                 session.current?.abort()
                 void endSession()
-                actions.submitVoiceReport(draft.report, draft.intake, draft.answers)
+                actions.submitVoiceReport(draft.report, draft.intake, draft.answers, photo)
               }}>
                 Send voice report
               </button>
             )}
             {ready && !connected && (
-              <button type="button" className="btn btn-secondary" onClick={() => {
+              <button type="button" className="btn btn-secondary" disabled={readingPhoto} onClick={() => {
                 currentDraft.current = null
                 setDraft(undefined)
+                setPhoto(undefined)
               }}>
                 Discard draft
               </button>

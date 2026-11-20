@@ -113,12 +113,27 @@ export interface Invoice {
   withinPreApprovedLimit: boolean
 }
 
+export type ReportPriority = 'urgent' | 'standard'
+
+export const ESTIMATE_REVIEW_LIMIT_CENTS = 300_000
+
+export interface RepairPhoto {
+  dataUrl: string
+  estimateCents: number | null
+}
+
+export interface ReportDetails {
+  priority?: ReportPriority
+  method?: 'voice' | 'sms'
+  photo?: RepairPhoto
+}
+
 export interface RepairCase {
   id: string
   unitId: string
   createdAt: string
   status: CaseStatus
-  report: { text: string; submittedAt: string; channel: 'Tenant portal'; method?: 'voice' }
+  report: ReportDetails & { text: string; submittedAt: string; channel: 'Tenant portal' }
   consent: { dataShared: string[]; givenAt: string; channel: 'Tenant portal' }
   classification: Classification
   followUpQuestions: FollowUpQuestion[]
@@ -155,7 +170,12 @@ const PLUMBING_ISSUE: Record<PlumbingSubtype, string> = {
   general: 'Plumbing issue',
 }
 
-export function triageReport(text: string, answers: FollowUpAnswer[] = [], subtype?: PlumbingSubtype): Triage {
+export function triageReport(
+  text: string,
+  answers: FollowUpAnswer[] = [],
+  subtype?: PlumbingSubtype,
+  priority?: ReportPriority,
+): Triage {
   const t = text.toLowerCase()
 
   const leak = /leak|drip|flood|burst/.test(t)
@@ -198,8 +218,8 @@ export function triageReport(text: string, answers: FollowUpAnswer[] = [], subty
   return {
     issue: subtype ? PLUMBING_ISSUE[subtype] : issue,
     location,
-    urgent,
-    urgencyLabel: urgent ? 'Priority: active water leak' : 'Standard priority',
+    urgent: urgent || priority === 'urgent',
+    urgencyLabel: urgent ? 'Priority: active water leak' : priority === 'urgent' ? 'Urgent per tenant' : 'Standard priority',
   }
 }
 
@@ -321,7 +341,13 @@ function withEvents(c: RepairCase, events: Omit<TimelineEvent, 'id'>[]): Timelin
 }
 
 /** Tenant sends a report: opens a case and decides whether plumbing automation may continue. */
-export function submitReport(state: DemoState, text: string, now: Date, intake?: IntakeTriage): DemoState {
+export function submitReport(
+  state: DemoState,
+  text: string,
+  now: Date,
+  intake?: IntakeTriage,
+  details?: ReportDetails,
+): DemoState {
   const reportText = text.trim()
   if (state.case || !reportText) return state
 
@@ -332,15 +358,19 @@ export function submitReport(state: DemoState, text: string, now: Date, intake?:
     : []
   const isPlumbing = classification.route === 'plumbing'
   const ready = isPlumbing && followUpQuestions.length === 0
-  const triage = ready ? triageReport(reportText, [], classification.subtype) : undefined
+  const triage = ready ? triageReport(reportText, [], classification.subtype, details?.priority) : undefined
   const draft: RepairCase = {
     id: CASE_ID,
     unitId: unit.id,
     createdAt: at,
     status: ready ? 'awaiting_dispatch' : isPlumbing ? 'gathering_details' : 'manager_review',
     ...(triage && { triage, job: buildJobDraft(reportText, triage) }),
-    report: { text: reportText, submittedAt: at, channel: 'Tenant portal' },
-    consent: { dataShared: ['name', 'phone number', 'address'], givenAt: at, channel: 'Tenant portal' },
+    report: { text: reportText, submittedAt: at, channel: 'Tenant portal', ...details },
+    consent: {
+      dataShared: ['name', 'phone number', 'address', ...(details?.photo ? ['repair photo'] : [])],
+      givenAt: at,
+      channel: 'Tenant portal',
+    },
     classification,
     followUpQuestions,
     followUpAnswers: [],
@@ -374,7 +404,7 @@ export function submitReport(state: DemoState, text: string, now: Date, intake?:
       }.`,
       tenantText: isPlumbing
         ? ready
-          ? 'Your property manager will review the plumbing request before dispatch.'
+          ? 'Your plumbing request is ready to be routed.'
           : `This looks like a plumbing problem. Please answer ${followUpQuestions.length} quick ${followUpQuestions.length === 1 ? 'question' : 'questions'} so we can send the right details.`
         : 'Your property-management team will review this request and contact you through the portal.',
     },
@@ -386,10 +416,10 @@ export function submitReport(state: DemoState, text: string, now: Date, intake?:
       actor: 'system',
       kind: 'job_prepared',
       title: `Plumber job prepared for ${partner.name}`,
-      detail: `Combined the original report and the ${unit.label} record. Waiting for manager approval.`,
+      detail: `Combined the original report and the ${unit.label} record.`,
     }])
   }
-  return { case: c }
+  return routePreparedJob({ case: c }, now)
 }
 
 /** Tenant answers the current plumbing question. The job is prepared after the final answer. */
@@ -413,10 +443,10 @@ export function answerFollowUp(
   if (!complete) return { case: { ...c, followUpAnswers } }
 
   const modelSubtype = c.followUpQuestions[0]?.id.startsWith('n8n-') ? c.classification.subtype : undefined
-  const triage = triageReport(c.report.text, followUpAnswers, modelSubtype)
+  const triage = triageReport(c.report.text, followUpAnswers, modelSubtype, c.report.priority)
   const job = buildJobDraft(c.report.text, triage, followUpAnswers)
   const at = now.toISOString()
-  return {
+  return routePreparedJob({
     case: {
       ...c,
       status: 'awaiting_dispatch',
@@ -430,18 +460,18 @@ export function answerFollowUp(
           kind: 'details_collected',
           title: `${unit.tenant.name} answered ${followUpAnswers.length} plumbing follow-up questions`,
           detail: followUpAnswers.map((item) => `${item.fact}: ${item.label}`).join(' · '),
-          tenantText: 'Thanks — your plumbing details have been sent to your property manager for review.',
+          tenantText: 'Thanks. Your plumbing details are ready to be routed.',
         },
         {
           at,
           actor: 'system',
           kind: 'job_prepared',
           title: `Plumber job prepared for ${partner.name}`,
-          detail: `Combined the original report, ${followUpAnswers.length} tenant answers and the ${unit.label} record. Waiting for manager approval.`,
+          detail: `Combined the original report, ${followUpAnswers.length} tenant answers and the ${unit.label} record.`,
         },
       ]),
     },
-  }
+  }, now)
 }
 
 /** Manager can move a misclassified case into plumbing; the tenant is then asked for details. */
@@ -497,8 +527,17 @@ export function setDispatchUrgency(state: DemoState, urgent: boolean, now: Date)
   }
 }
 
-/** Manager approves the prepared job and sends it to the partner. */
-export function dispatchJob(state: DemoState, now: Date): DemoState {
+function routePreparedJob(state: DemoState, now: Date): DemoState {
+  const c = state.case
+  if (c?.classification.route !== 'plumbing' || c.status !== 'awaiting_dispatch') return state
+  const estimate = c.report.photo?.estimateCents
+  if (typeof estimate === 'number' && Number.isSafeInteger(estimate) && estimate >= 0 && estimate < ESTIMATE_REVIEW_LIMIT_CENTS) {
+    return dispatchJob(state, now, 'system')
+  }
+  return state
+}
+
+export function dispatchJob(state: DemoState, now: Date, actor: 'manager' | 'system' = 'manager'): DemoState {
   const c = state.case
   if (!c || c.status !== 'awaiting_dispatch' || !c.job) return state
   const at = now.toISOString()
@@ -510,10 +549,12 @@ export function dispatchJob(state: DemoState, now: Date): DemoState {
       timeline: withEvents(c, [
         {
           at,
-          actor: 'manager',
+          actor,
           kind: 'dispatched',
           title: `Job dispatched to ${partner.name}`,
-          detail: `${c.job.shared.length} details shared through the partner connector (simulated).`,
+          detail: actor === 'system'
+            ? `Automatically dispatched because the simulated estimate was below ${formatMoney(ESTIMATE_REVIEW_LIMIT_CENTS)}.`
+            : `${c.job.shared.length} details shared through the partner connector (simulated).`,
           tenantText: `${partner.name} has been assigned. They will suggest visit times shortly.`,
         },
       ]),
@@ -622,6 +663,7 @@ export function addInvoice(state: DemoState, now: Date, lines?: InvoiceLine[]): 
           detail: `Linked to ${CASE_ID} and ${unit.label}. ${
             invoice.withinPreApprovedLimit ? 'Within' : 'Above'
           } the pre-approved limit of ${formatMoney(unit.repairPolicy.preApprovedNetLimitCents)} net.`,
+          tenantText: `Your repair invoice ${invoice.number} is available in your portal. Total: ${formatMoney(invoice.grossCents)}.`,
         },
       ]),
     },
@@ -643,7 +685,7 @@ export const STATUS_LABEL: Record<CaseStatus, string> = {
 
 /** Who acts next. Drives the guide in the demo bar. */
 export function nextStep(c: RepairCase | null): { role: Role; label: string; done: boolean } {
-  if (!c) return { role: 'tenant', label: 'Report a repair by voice or text', done: false }
+  if (!c) return { role: 'tenant', label: 'Tell us how urgent your repair is', done: false }
   switch (c.status) {
     case 'gathering_details':
       return { role: 'tenant', label: 'Tenant answers the repair questions', done: false }
@@ -660,7 +702,7 @@ export function nextStep(c: RepairCase | null): { role: Role; label: string; don
     case 'completed':
       return { role: 'plumber', label: 'Plumber reviews and sends the invoice', done: false }
     case 'invoiced':
-      return { role: 'manager', label: `Invoice linked to ${unit.label}`, done: true }
+      return { role: 'manager', label: `Invoice shared and linked to ${unit.label}`, done: true }
   }
 }
 

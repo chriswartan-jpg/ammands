@@ -39,7 +39,7 @@ export function PlumberView({ repairCase }: { repairCase: RepairCase | null }) {
       ) : (
         <section className="card empty">
           <h2>No open jobs</h2>
-          <p className="muted">New jobs from Centrix appear here as soon as a property manager dispatches them.</p>
+          <p className="muted">New jobs appear here as soon as Centrix sends them.</p>
         </section>
       )}
     </div>
@@ -65,7 +65,7 @@ function Job({ c }: { c: RepairCase }) {
         </div>
 
         <details className="job-disclosure">
-          <summary>Job brief <span>{job.shared.length} details</span></summary>
+          <summary>Job brief <span>{job.shared.length} details{c.report.photo && ' and a photo'}</span></summary>
           <dl className="job-sheet">
             {job.shared.map((field) => (
               <div key={field.label}>
@@ -74,6 +74,7 @@ function Job({ c }: { c: RepairCase }) {
               </div>
             ))}
           </dl>
+          {c.report.photo && <img className="repair-photo" src={c.report.photo.dataUrl} alt="Damage reported by the tenant" />}
         </details>
       </section>
 
@@ -102,7 +103,10 @@ function Job({ c }: { c: RepairCase }) {
       {c.status === 'scheduled' && <CompleteRepair />}
 
       {c.status === 'completed' && c.completion && (
-        <EditInvoice caseId={c.id} completedAt={c.completion.at} />
+        <>
+          <p className="card" role="status">Repair complete. The tenant and property manager have an update in their portals.</p>
+          <EditInvoice caseId={c.id} completedAt={c.completion.at} />
+        </>
       )}
 
       {c.status === 'invoiced' && c.completion && c.invoice && (
@@ -223,8 +227,8 @@ function EditInvoice({ caseId, completedAt }: { caseId: string; completedAt: str
           <p className="muted">Enter a description and a non-negative amount with up to two decimal places for each line.</p>
         )}
         <div className="dispatch-actions">
-          <button type="submit" className="btn btn-primary" disabled={!valid}>Send invoice to Centrix</button>
-          <span className="muted">The invoice is linked to {caseId} and the unit.</span>
+          <button type="submit" className="btn btn-primary" disabled={!valid}>Share invoice</button>
+          <span className="muted">The tenant and property manager can view it. It stays linked to {caseId} and the unit.</span>
         </div>
       </form>
     </section>
