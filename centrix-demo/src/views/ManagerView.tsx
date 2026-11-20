@@ -3,6 +3,7 @@ import { caseTitle, STATUS_LABEL } from '../domain/caseFlow.ts'
 import type { Actor, CaseStatus, JobDraft, RepairCase } from '../domain/caseFlow.ts'
 import { partner, unit } from '../domain/demoData.ts'
 import { formatDate, formatDayTime, formatMoney, formatSlot, formatTime } from '../domain/format.ts'
+import { formatPhotoEstimate } from '../domain/photoReview.ts'
 import { actions } from '../store.ts'
 
 const ACTOR_LABEL: Record<Actor, string> = {
@@ -72,9 +73,10 @@ function CasePanel({ c }: { c: RepairCase }) {
             {c.report.photo && (
               <>
                 <img className="repair-photo" src={c.report.photo.dataUrl} alt="Damage reported by the tenant" />
-                <p className="muted">{c.report.photo.estimateCents == null
-                  ? 'No estimate from the photo'
-                  : `Simulated photo estimate: ${formatMoney(c.report.photo.estimateCents)}`}</p>
+                {c.report.photo.review && <p>{c.report.photo.review.finding}</p>}
+                <p className="muted">{c.report.photo.review?.estimate
+                  ? `AI photo estimate ${formatPhotoEstimate(c.report.photo.review.estimate)}`
+                  : 'No estimate from the photo'}</p>
               </>
             )}
           </div>
@@ -213,9 +215,9 @@ function DispatchCard({ c }: { c: RepairCase }) {
           <p className="eyebrow">Prepared for you</p>
           <h3>Plumber job for {partner.name}</h3>
           <p className="muted">
-            {c.report.photo?.estimateCents == null
-              ? 'A cost estimate is unavailable. Review the job before dispatch.'
-              : `The simulated estimate is ${formatMoney(c.report.photo.estimateCents)} and requires your approval.`}
+            {c.report.photo?.review?.estimate
+              ? `The estimated cost is ${formatPhotoEstimate(c.report.photo.review.estimate)} and requires your approval.`
+              : 'A cost estimate is unavailable. Review the job before dispatch.'}
           </p>
         </div>
         <button type="button" className="btn btn-primary" onClick={actions.dispatchJob}>

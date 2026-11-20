@@ -8,7 +8,8 @@ import {
   partner,
   unit,
 } from '../domain/demoData.ts'
-import { formatDayTime, formatMoney, formatSlot, formatTime } from '../domain/format.ts'
+import { formatDayTime, formatSlot, formatTime } from '../domain/format.ts'
+import { formatPhotoEstimate } from '../domain/photoReview.ts'
 import { actions } from '../store.ts'
 
 const VoiceIntake = lazy(() => import('../components/VoiceIntake.tsx').then(
@@ -110,7 +111,7 @@ function ReportComposer({ priority, sms }: { priority: ReportPriority; sms: bool
         onChange={(event) => setText(event.target.value)}
         placeholder="e.g. The tap in the bathroom keeps dripping"
       />
-      {text.trim() && <RepairPhotoInput photo={photo} setPhoto={setPhoto} reading={readingPhoto} setReading={setReadingPhoto} />}
+      <RepairPhotoInput photo={photo} setPhoto={setPhoto} reading={readingPhoto} setReading={setReadingPhoto} />
       <button type="submit" className="btn btn-primary btn-block" disabled={submitting || readingPhoto || !text.trim()}>
         {submitting ? 'Checking your report…' : sms ? 'Send demo SMS' : 'Send report'}
       </button>
@@ -150,6 +151,7 @@ function RepairRequest({ c }: { c: RepairCase }) {
           <p className="eyebrow">Your report, {formatTime(c.report.submittedAt)}</p>
           <p>“{c.report.text}”</p>
           {c.report.photo && <img className="repair-photo" src={c.report.photo.dataUrl} alt="Photo submitted with your repair report" />}
+          {c.report.photo?.review && <p><strong>AI photo review:</strong> {c.report.photo.review.finding}</p>}
         </div>
       </section>
 
@@ -229,9 +231,9 @@ function RequestStatus({ c }: { c: RepairCase }) {
       return (
         <div className="status-block">
           <h3>Your details are with the property manager</h3>
-          <p>{c.report.photo?.estimateCents == null
-            ? 'The manager will review the job because a cost estimate is unavailable.'
-            : `The simulated photo estimate is ${formatMoney(c.report.photo.estimateCents)}. The manager will review it before dispatch.`}</p>
+          <p>{c.report.photo?.review?.estimate
+            ? `The estimated cost is ${formatPhotoEstimate(c.report.photo.review.estimate)}. The manager will review it before dispatch.`
+            : 'The manager will review the job because a cost estimate is unavailable.'}</p>
         </div>
       )
     case 'dispatched':

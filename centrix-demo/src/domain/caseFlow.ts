@@ -4,6 +4,7 @@
 
 import { partner, unit } from './demoData.ts'
 import { formatMoney, formatSlot } from './format.ts'
+import type { PhotoReview } from './photoReview.ts'
 import {
   answerQuestion,
   classifyReport,
@@ -119,7 +120,7 @@ export const ESTIMATE_REVIEW_LIMIT_CENTS = 300_000
 
 export interface RepairPhoto {
   dataUrl: string
-  estimateCents: number | null
+  review?: PhotoReview
 }
 
 export interface ReportDetails {
@@ -530,8 +531,9 @@ export function setDispatchUrgency(state: DemoState, urgent: boolean, now: Date)
 function routePreparedJob(state: DemoState, now: Date): DemoState {
   const c = state.case
   if (c?.classification.route !== 'plumbing' || c.status !== 'awaiting_dispatch') return state
-  const estimate = c.report.photo?.estimateCents
-  if (typeof estimate === 'number' && Number.isSafeInteger(estimate) && estimate >= 0 && estimate < ESTIMATE_REVIEW_LIMIT_CENTS) {
+  const estimate = c.report.photo?.review?.estimate
+  if (estimate && Number.isSafeInteger(estimate.highCents) && estimate.highCents >= estimate.lowCents &&
+      estimate.lowCents > 0 && estimate.highCents < ESTIMATE_REVIEW_LIMIT_CENTS) {
     return dispatchJob(state, now, 'system')
   }
   return state
@@ -553,7 +555,7 @@ export function dispatchJob(state: DemoState, now: Date, actor: 'manager' | 'sys
           kind: 'dispatched',
           title: `Job dispatched to ${partner.name}`,
           detail: actor === 'system'
-            ? `Automatically dispatched because the simulated estimate was below ${formatMoney(ESTIMATE_REVIEW_LIMIT_CENTS)}.`
+            ? `Automatically dispatched because the full estimated range was below ${formatMoney(ESTIMATE_REVIEW_LIMIT_CENTS)}.`
             : `${c.job.shared.length} details shared through the partner connector (simulated).`,
           tenantText: `${partner.name} has been assigned. They will suggest visit times shortly.`,
         },

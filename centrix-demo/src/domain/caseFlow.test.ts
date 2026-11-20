@@ -54,11 +54,18 @@ function readyPlumbingCase(): DemoState {
   return answerAllQuestions(submitReport(initialState, DEMO_REPORT, at(0)))
 }
 
+function reviewedPhoto(highCents: number | null) {
+  return {
+    dataUrl: 'sample-photo',
+    review: { finding: 'Example finding', estimate: highCents === null ? null : { lowCents: 10000, highCents } },
+  }
+}
+
 test('a plumbing photo estimate below €3,000 dispatches automatically after follow-up', () => {
   const state = submitReport(initialState, DEMO_REPORT, at(0), undefined, {
     method: 'sms',
     priority: 'standard',
-    photo: { dataUrl: 'sample-photo', estimateCents: ESTIMATE_REVIEW_LIMIT_CENTS - 1 },
+    photo: reviewedPhoto(ESTIMATE_REVIEW_LIMIT_CENTS - 1),
   })
   assert.equal(state.case?.status, 'gathering_details')
   const ready = answerAllQuestions(state)
@@ -74,7 +81,7 @@ test('estimates at or above €3,000, and inconclusive photos, wait for the mana
     const state = submitReport(initialState, DEMO_REPORT, at(0), undefined, {
       priority: 'urgent',
       method: 'voice',
-      photo: { dataUrl: 'sample-photo', estimateCents },
+      photo: reviewedPhoto(estimateCents),
     })
     const ready = answerAllQuestions(state)
     assert.equal(ready.case?.status, 'awaiting_dispatch')
@@ -86,7 +93,7 @@ test('estimates at or above €3,000, and inconclusive photos, wait for the mana
 
 test('a low estimate cannot route a non-plumbing report to a plumber', () => {
   const state = submitReport(initialState, DEMO_NON_PLUMBING_REPORT, at(0), undefined, {
-    photo: { dataUrl: 'sample-photo', estimateCents: 27500 },
+    photo: reviewedPhoto(27500),
   })
   assert.equal(state.case?.status, 'manager_review')
   assert.equal(state.case?.job, undefined)
@@ -95,9 +102,15 @@ test('a low estimate cannot route a non-plumbing report to a plumber', () => {
 test('a confirmed plumbing report with no follow-up questions still routes by estimate', () => {
   const state = submitReport(initialState, DEMO_REPORT, at(0), {
     classification: classifyReport(DEMO_REPORT), questions: [],
-  }, { photo: { dataUrl: 'sample-photo', estimateCents: 27500 } })
+  }, { photo: reviewedPhoto(27500) })
   assert.equal(state.case?.status, 'dispatched')
   assert.equal(state.case?.timeline.at(-1)?.actor, 'system')
+})
+
+test('a photo without a live review stays with the manager', () => {
+  const oldPhoto = { dataUrl: 'sample-photo', estimateCents: 27500 }
+  const state = submitReport(initialState, DEMO_REPORT, at(0), undefined, { photo: oldPhoto })
+  assert.equal(answerAllQuestions(state).case?.status, 'awaiting_dispatch')
 })
 
 test('full flow: tenant report to invoice linked on Unit 4B', () => {

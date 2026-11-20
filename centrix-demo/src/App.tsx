@@ -97,7 +97,7 @@ export function App() {
         {role === 'plumber' && <PlumberView repairCase={repairCase} />}
       </main>
 
-      <footer className="demo-foot">Demo data. SMS, photo estimates, dispatch, and portal notifications are simulated.</footer>
+      <footer className="demo-foot">Demo data. SMS, dispatch, and portal notifications are simulated.</footer>
     </div>
   )
 }

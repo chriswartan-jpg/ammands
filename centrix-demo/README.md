@@ -2,9 +2,9 @@
 
 Hackathon prototype for Reltix's Centrix challenge. It demonstrates one shared repair case across tenant, property-manager, and plumber views—from intelligent intake through appointment booking, repair completion, and invoicing.
 
-Urgent reports can use ElevenLabs voice intake, with a website form as a fallback. Non-urgent reports can use the website or the simulated SMS form. Both paths ask for a photo when it is safe to take one. The photo estimate is a selectable demo result.
+Urgent reports can use ElevenLabs voice intake, with a website form as a fallback. Non-urgent reports can use the website or the simulated SMS form. Both paths ask for a photo when it is safe to take one. When configured, OpenAI reviews the photo as soon as it is selected and returns visible findings and an indicative price range when possible.
 
-Confirmed plumbing jobs with an estimate below €3,000 go directly to the plumber after any follow-up questions. A missing, inconclusive, or higher estimate (including exactly €3,000) goes to the manager before dispatch. Non-plumbing and uncertain reports remain with the property manager, who can override the classification. Completion updates and the edited invoice appear in the relevant portals.
+Confirmed plumbing jobs go directly to the plumber after any follow-up questions when the upper end of the range is below €3,000. A missing or inconclusive estimate, or a range reaching €3,000, goes to the manager before dispatch. Non-plumbing and uncertain reports remain with the property manager, who can override the classification. Completion updates and the edited invoice appear in the relevant portals.
 
 ## Run locally
 
@@ -14,6 +14,10 @@ npm run dev
 ```
 
 Open the URL printed by Vite. Use **Reset demo** to return the flow to its starting state.
+
+## Enable automatic photo review
+
+Set `OPENAI_API_KEY` in the Git-ignored `.env.local` file and restart Vite. Centrix sends a resized copy of the photo to OpenAI from the server. Use a synthetic or approved demo image. If the service or estimate is unavailable, the tenant can still submit the photo and the manager receives the case. Protect the metered endpoint with authentication and rate limits before exposing it to the public.
 
 ## Connect n8n Cloud
 
