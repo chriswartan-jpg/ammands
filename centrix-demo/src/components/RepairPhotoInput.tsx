@@ -4,6 +4,8 @@ import type { RepairPhoto } from '../domain/caseFlow.ts'
 import { formatPhotoEstimate } from '../domain/photoReview.ts'
 import type { PhotoReview } from '../domain/photoReview.ts'
 
+const REVIEW_TIMEOUT_SECONDS = 15
+
 async function resizePhoto(file: File): Promise<string> {
   if (!file.type.startsWith('image/') || file.size > 10 * 1024 * 1024) {
     throw new Error('Choose an image smaller than 10 MB.')
@@ -61,7 +63,7 @@ export function RepairPhotoInput({ photo, setPhoto, reading, setReading }: {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ photo: dataUrl }),
-        signal: AbortSignal.any([controller.signal, AbortSignal.timeout(15_000)]),
+        signal: AbortSignal.any([controller.signal, AbortSignal.timeout(REVIEW_TIMEOUT_SECONDS * 1000)]),
       })
       if (!response.ok) throw new Error('Photo review unavailable')
       const review: PhotoReview = await response.json()
@@ -89,7 +91,11 @@ export function RepairPhotoInput({ photo, setPhoto, reading, setReading }: {
         input.value = ''
         await reviewPhoto(file)
       }} />
-      {reading && <p role="status">Reviewing the photo…</p>}
+      <p role="status" className="muted">
+        {reading
+          ? `AI is reviewing your photo. Keep this page open. The review can take up to ${REVIEW_TIMEOUT_SECONDS} seconds after the image is prepared.`
+          : !photo && `After the photo is prepared, AI review can take up to ${REVIEW_TIMEOUT_SECONDS} seconds.`}
+      </p>
       {error && <p role="alert">{error}</p>}
       {photo && (
         <>
