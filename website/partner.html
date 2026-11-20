@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Partner jobs · centrix</title>
+  <meta name="description" content="Your plumbing jobs on a map, with the details and the conversation for each job.">
+  <script>
+    // Only a logged-in partner may see this page. Demo check in the browser only.
+    (function () {
+      var session = null;
+      try { session = JSON.parse(sessionStorage.getItem("centrix.session")); } catch (e) {}
+      if (!session || session.role !== "partner") location.replace("login.html?role=partner");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="styles.css?v=19">
+  <link rel="stylesheet" href="partner.css?v=7">
+</head>
+<body class="app">
+  <header class="app-bar">
+    <a class="brand" href="index.html" aria-label="centrix home">
+      <img class="brand-mark" src="assets/logo-mark-white.png" width="19" height="28" alt="">
+      <span>centrix</span>
+    </a>
+    <span class="app-crumb">Partner <span aria-hidden="true">›</span> <strong>Jobs map</strong></span>
+    <div class="app-bar-end">
+      <span class="app-who">
+        <span class="avatar" id="app-avatar" aria-hidden="true"></span>
+        <span class="app-user" id="app-user"></span>
+      </span>
+      <button type="button" class="btn-ghost" id="logout">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6.5 2.5h-3v11h3M10 5l3 3-3 3M13 8H6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="btn-label">Log out</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <div id="map" class="map" role="region" aria-label="Map of your jobs"></div>
+
+    <!-- Left panel: jobs and legend -->
+    <aside class="panel panel-left" aria-label="Jobs">
+      <div class="panel-head">
+        <h1 class="panel-heading">Your jobs</h1>
+        <p class="panel-sub">Plumbing · Aachen</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Jobs panel">
+        <button type="button" role="tab" id="tab-jobs" aria-selected="true" aria-controls="pane-jobs">Jobs</button>
+        <button type="button" role="tab" id="tab-legend" aria-selected="false" aria-controls="pane-legend">Legend</button>
+      </div>
+
+      <div id="pane-jobs" role="tabpanel" aria-labelledby="tab-jobs">
+        <div class="stats" id="stats"></div>
+        <div class="chips" id="filters" role="group" aria-label="Filter by status"></div>
+        <ul class="job-list" id="job-list"></ul>
+      </div>
+
+      <div id="pane-legend" role="tabpanel" aria-labelledby="tab-legend" hidden>
+        <h2 class="panel-title">Status</h2>
+        <ul class="legend" id="legend"></ul>
+        <h2 class="panel-title">Urgency</h2>
+        <ul class="legend">
+          <li><span class="dot dot-ring" aria-hidden="true"></span>Urgent: pulsing ring under the pin</li>
+        </ul>
+        <p class="panel-note">Positions are approximate. Exact address and access details are shown once you open a job.</p>
+      </div>
+    </aside>
+
+    <!-- Right panel: the selected job -->
+    <aside class="panel panel-right" id="detail" aria-label="Job details" hidden>
+      <div class="detail-head">
+        <div>
+          <p class="detail-id" id="d-id"></p>
+          <h2 class="detail-title" id="d-title"></h2>
+        </div>
+        <button type="button" class="icon-btn" id="d-close" aria-label="Close job details" data-tip="Close (Esc)">
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <ol class="steps" id="d-steps" aria-label="Job progress"></ol>
+
+      <div class="detail-tabs tabs" role="tablist" aria-label="Job panel">
+        <button type="button" role="tab" id="dt-info" aria-selected="true" aria-controls="dp-info">Job</button>
+        <button type="button" role="tab" id="dt-chat" aria-selected="false" aria-controls="dp-chat">Messages <span class="count" id="d-msg-count"></span></button>
+      </div>
+
+      <div class="detail-body" id="dp-info" role="tabpanel" aria-labelledby="dt-info">
+        <p class="detail-badges" id="d-badges"></p>
+        <p class="detail-desc" id="d-desc"></p>
+
+        <h2 class="panel-title">Possible causes</h2>
+        <ul class="causes" id="d-causes"></ul>
+        <p class="panel-note">Estimated by centrix from the tenant's report and photos.</p>
+
+        <h2 class="panel-title">Details</h2>
+        <dl class="props" id="d-props"></dl>
+
+        <div class="detail-actions" id="d-actions"></div>
+      </div>
+
+      <div class="detail-body chat" id="dp-chat" role="tabpanel" aria-labelledby="dt-chat" hidden>
+        <ol class="thread" id="d-thread" aria-live="polite"></ol>
+        <form class="composer" id="composer">
+          <label class="sr-only" for="composer-input">Message to the tenant</label>
+          <input id="composer-input" type="text" autocomplete="off" placeholder="Message the tenant…">
+          <button type="submit" class="send" id="send" aria-label="Send message" data-tip="Send" disabled>
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="map-style.js?v=1"></script>
+  <script src="data/partner-jobs.js?v=1"></script>
+  <script src="partner.js?v=8"></script>
+</body>
+</html>

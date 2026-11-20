@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in · centrix</title>
+  <meta name="description" content="Log in to centrix as a tenant or a service partner.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=19">
+</head>
+<body>
+  <header class="nav">
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="index.html">Global coverage</a></li>
+        <li><a href="what-centrix-does.html">What centrix does</a></li>
+        <li><a href="index.html#how-it-works">How it works</a></li>
+      </ul>
+    </nav>
+    <a class="brand" href="index.html" aria-label="centrix home">
+      <img class="brand-mark" src="assets/logo-mark-white.png" width="19" height="28" alt="">
+      <span>centrix</span>
+    </a>
+    <div class="nav-actions">
+      <p class="nav-meta">by reltix</p>
+    </div>
+  </header>
+
+  <main class="login">
+    <section class="login-card" aria-labelledby="login-title">
+      <div id="login-form-view">
+        <h1 id="login-title">Welcome back</h1>
+        <p class="lede">Follow your repair as a tenant, or pick up jobs as a service partner.</p>
+
+        <form id="login-form" novalidate>
+          <fieldset class="role-switch">
+            <legend class="sr-only">I am a</legend>
+            <label class="role-option">
+              <input type="radio" name="role" value="tenant" checked>
+              <span>Tenant<small>Report and follow repairs</small></span>
+            </label>
+            <label class="role-option">
+              <input type="radio" name="role" value="partner">
+              <span>Partner<small>Receive and close jobs</small></span>
+            </label>
+          </fieldset>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="username" aria-describedby="email-error" required>
+            <p class="field-error" id="email-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" aria-describedby="password-error" required>
+            <p class="field-error" id="password-error" aria-live="polite"></p>
+          </div>
+
+          <p class="form-error" id="form-error" aria-live="polite"></p>
+
+          <button type="submit" class="btn-white btn-block">
+            <span id="submit-label">Log in as tenant</span>
+            <span class="btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="12" height="12"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+        </form>
+
+        <p class="login-note">This is a demo login with test accounts. The details are checked in your browser only and nothing is sent anywhere.</p>
+      </div>
+
+      <div id="login-success" class="login-success" hidden tabindex="-1">
+        <p class="role-badge" id="success-tag">Tenant</p>
+        <h1 id="success-title">You're in</h1>
+        <p id="success-text"></p>
+        <p>The portal itself is built in the next phase. For now this is where the demo login ends.</p>
+        <a class="btn-white btn-block" href="index.html">
+          Back to the start
+          <span class="btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="12" height="12"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <p class="login-foot"><a href="index.html">Back to the start</a></p>
+    </section>
+  </main>
+
+  <script src="space.js?v=22"></script>
+  <script src="data/demo-accounts.js?v=18"></script>
+  <script src="login.js?v=20"></script>
+</body>
+</html>

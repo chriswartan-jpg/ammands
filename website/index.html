@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Global coverage · centrix</title>
+  <meta name="description" content="centrix, the platform reltix runs on, connects tenants with local service partners, starting with plumbing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20">
+</head>
+<body>
+  <header class="nav">
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">Global coverage</a></li>
+        <li><a href="what-centrix-does.html">What centrix does</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+      </ul>
+    </nav>
+    <a class="brand" href="index.html" aria-label="centrix home">
+      <img class="brand-mark" src="assets/logo-mark-white.png" width="19" height="28" alt="">
+      <span>centrix</span>
+    </a>
+    <div class="nav-actions">
+      <p class="nav-meta">by reltix</p>
+      <a class="btn-white nav-login" href="login.html">
+        Log in
+        <span class="btn-icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" width="12" height="12"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <section class="hero-text" aria-labelledby="coverage-title">
+        <h1 id="coverage-title">Global coverage</h1>
+        <p class="lede">centrix is the platform reltix runs on, and it connects tenants directly with vetted local service partners, starting with plumbing. A tenant reports a problem once, and centrix hands the right partner the job with everything they need.</p>
+        <ul class="hero-links">
+          <li><a class="text-link" href="what-centrix-does.html">What centrix does</a></li>
+          <li><a class="text-link" href="#how-it-works">How a repair runs</a></li>
+        </ul>
+      </section>
+
+      <section class="globe-panel" aria-label="Globe">
+        <canvas class="sun" id="sun" aria-hidden="true"></canvas>
+        <canvas id="globe" role="img" aria-label="The Earth drawn in text characters, lit by the sun"></canvas>
+      </section>
+    </div>
+
+    <div class="band">
+    <section class="how" id="how-it-works" aria-labelledby="how-title">
+      <div class="how-head">
+        <h2 id="how-title">How a repair runs through centrix</h2>
+        <p>Following one example: a leak under the kitchen sink in unit 4B.</p>
+      </div>
+
+      <ol class="timeline">
+        <li>
+          <span class="step-no" aria-hidden="true">1</span>
+          <h3>The tenant reports it</h3>
+          <p>In the tenant portal, the tenant describes the problem and adds a photo. centrix already knows the address, floor and contact details.</p>
+          <p class="step-example">“There's water under the kitchen sink.”</p>
+        </li>
+        <li>
+          <span class="step-no" aria-hidden="true">2</span>
+          <h3>centrix picks the partner</h3>
+          <p>centrix sees it's a plumbing job and chooses a vetted plumber who works in the area and has time.</p>
+          <p class="step-example">A plumber nearby with a slot tomorrow morning</p>
+        </li>
+        <li>
+          <span class="step-no" aria-hidden="true">3</span>
+          <h3>They agree a time</h3>
+          <p>The tenant agrees to share what the plumber needs and picks a slot. The plumber gets the job with photos and access details.</p>
+          <p class="step-example">Tuesday at 10:00, key with the caretaker</p>
+        </li>
+        <li>
+          <span class="step-no" aria-hidden="true">4</span>
+          <h3>The job is closed</h3>
+          <p>The plumber reports progress and uploads the invoice. centrix links both to the home, and the tenant confirms it's fixed.</p>
+          <p class="step-example">Repair and invoice saved on unit 4B</p>
+        </li>
+      </ol>
+    </section>
+    </div>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <h2 id="closing-title">Tenant or partner? Log in to follow your repairs and jobs.</h2>
+      <a class="btn-white" href="login.html">
+        Log in
+        <span class="btn-icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" width="12" height="12"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>centrix is built and used by reltix.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+  <script src="space.js?v=22"></script>
+  <script src="app.js?v=24"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your home · centrix</title>
+  <meta name="description" content="Report a problem in your home, see the price, book a plumber and follow the repair.">
+  <script>
+    // Only a logged-in tenant may see this page. Demo check in the browser only.
+    (function () {
+      var session = null;
+      try { session = JSON.parse(sessionStorage.getItem("centrix.session")); } catch (e) {}
+      if (!session || session.role !== "tenant") location.replace("login.html?role=tenant");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="styles.css?v=19">
+  <link rel="stylesheet" href="partner.css?v=7">
+  <link rel="stylesheet" href="tenant.css?v=2">
+</head>
+<body class="app tenant">
+  <header class="app-bar">
+    <a class="brand" href="index.html" aria-label="centrix home">
+      <img class="brand-mark" src="assets/logo-mark-white.png" width="19" height="28" alt="">
+      <span>centrix</span>
+    </a>
+    <span class="app-crumb">Tenant <span aria-hidden="true">›</span> <strong>My home</strong></span>
+    <div class="app-bar-end">
+      <span class="app-who">
+        <span class="avatar" id="app-avatar" aria-hidden="true"></span>
+        <span class="app-user" id="app-user"></span>
+      </span>
+      <button type="button" class="btn-ghost" id="logout">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6.5 2.5h-3v11h3M10 5l3 3-3 3M13 8H6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="btn-label">Log out</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="t-wrap">
+    <section class="t-main" aria-label="Report and follow a repair">
+      <div class="t-hello">
+        <h1 id="hello">Hi</h1>
+        <p id="hello-sub"></p>
+      </div>
+
+      <!-- Live tracking: only shown while the plumber is on the way -->
+      <section class="t-card t-track" id="track" aria-labelledby="track-title" hidden>
+        <div class="track-head">
+          <span class="avatar avatar-lg" id="track-avatar" aria-hidden="true"></span>
+          <div>
+            <h2 id="track-title">Plumber on the way</h2>
+            <p class="t-muted" id="track-name"></p>
+          </div>
+          <div class="eta" aria-live="polite">
+            <b id="eta-min">15</b><span id="eta-unit">min</span>
+          </div>
+        </div>
+        <div class="track-map" id="track-map" role="img" aria-label="Map showing the plumber driving to your home"></div>
+        <div class="track-foot">
+          <p class="t-muted" id="track-note">Getting closer. You'll get a message when they're at the door.</p>
+          <button type="button" class="btn-ghost" id="track-msg">Message plumber</button>
+        </div>
+      </section>
+
+      <!-- Assistant chat: report, price, plumbers, booking, all in one conversation -->
+      <section class="t-card t-chat" aria-labelledby="chat-title">
+        <div class="chat-head">
+          <span class="bot" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.8l1.6 3.6 3.6 1.6-3.6 1.6L8 12.2 6.4 8.6 2.8 7l3.6-1.6z" fill="currentColor"/></svg>
+          </span>
+          <div>
+            <h2 id="chat-title">centrix assistant</h2>
+            <p class="t-muted">Tell it what's wrong. It already knows your address and access details.</p>
+          </div>
+        </div>
+
+        <ol class="t-thread" id="thread" aria-live="polite"></ol>
+        <div class="t-actions" id="actions"></div>
+
+        <form class="t-composer" id="composer">
+          <label class="sr-only" for="message">Your message</label>
+          <button type="button" class="icon-btn" id="photo-btn" aria-label="Add a photo" data-tip="Add photo">
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 5.5h2.5L6 3.5h4l1.5 2H14v7H2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </button>
+          <input type="file" id="photo-input" accept="image/*" hidden>
+          <textarea id="message" rows="1" placeholder="There's water under my kitchen sink…"></textarea>
+          <button type="submit" class="send" id="send" aria-label="Send message" data-tip="Send" disabled>
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </section>
+    </section>
+
+    <aside class="t-side" aria-label="Your repair and your home">
+      <section class="t-card" aria-labelledby="repair-title">
+        <h2 class="t-card-title" id="repair-title">Your repair</h2>
+        <p class="t-status" id="repair-status">No open repair. Report a problem in the chat.</p>
+        <ol class="t-steps" id="repair-steps"></ol>
+        <button type="button" class="demo-btn" id="demo-next" hidden></button>
+      </section>
+
+      <section class="t-card" aria-labelledby="nearby-title" id="nearby-card">
+        <h2 class="t-card-title" id="nearby-title">Plumbers near you</h2>
+        <ul class="t-pros" id="nearby"></ul>
+        <p class="t-muted t-small">Vetted partners of your property manager.</p>
+      </section>
+
+      <section class="t-card" aria-labelledby="home-title">
+        <h2 class="t-card-title" id="home-title">Your home</h2>
+        <dl class="t-facts" id="home-facts"></dl>
+        <p class="t-muted t-small">centrix already knows this, so you're never asked again.</p>
+      </section>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="map-style.js?v=1"></script>
+  <script src="data/tenant-data.js?v=1"></script>
+  <script src="tenant.js?v=2"></script>
+</body>
+</html>
