@@ -58,14 +58,17 @@
   }
 
   // ---------- voice in: record, then ElevenLabs Scribe ----------
-  // start() returns a handle; handle.stop() resolves to { text, language }.
-  async function listen() {
+  // listen(opts) returns a handle; handle.stop() resolves to { text, language }.
+  // opts.onSilence() is called once when the speaker stops talking (or never
+  // starts), so the caller can stop the recording without a second tap.
+  // opts.onInterim(text) gets live partial text when the browser recogniser is used.
+  async function listen(opts = {}) {
     const s = await status;
-    if (s.voice && navigator.mediaDevices && window.MediaRecorder) return recordAndTranscribe();
-    return browserListen();
+    if (s.voice && navigator.mediaDevices && window.MediaRecorder) return recordAndTranscribe(opts);
+    return browserListen(opts);
   }
 
-  async function recordAndTranscribe() {
+  async function recordAndTranscribe(opts) {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const type = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"].find((t) => MediaRecorder.isTypeSupported(t)) || "";
     const rec = new MediaRecorder(stream, type ? { mimeType: type } : undefined);
@@ -73,16 +76,57 @@
     rec.ondataavailable = (e) => { if (e.data.size) chunks.push(e.data); };
     const finished = new Promise((done) => { rec.onstop = done; });
     rec.start();
+    const vad = watchForSilence(stream, opts.onSilence);
     return {
       async stop() {
+        vad.stop();
         if (rec.state !== "inactive") rec.stop();
         await finished;
         stream.getTracks().forEach((t) => t.stop());
         const blob = new Blob(chunks, { type: rec.mimeType || "audio/webm" });
         return transcribe(blob);
       },
-      cancel() { if (rec.state !== "inactive") rec.stop(); stream.getTracks().forEach((t) => t.stop()); }
+      cancel() { vad.stop(); if (rec.state !== "inactive") rec.stop(); stream.getTracks().forEach((t) => t.stop()); }
     };
+  }
+
+  // Voice activity detection on the microphone level. Speech is anything clearly
+  // above the room's noise floor; after speech, 1.4 s of quiet means "done".
+  // Nothing said within 7 s, or 60 s in total, also ends the recording.
+  const VAD = { tick: 50, calibrate: 400, speechMs: 200, silenceMs: 1400, noSpeechMs: 7000, maxMs: 60000 };
+  function watchForSilence(stream, onSilence) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!onSilence || !AC) return { stop() {} };
+    let ctx;
+    try { ctx = new AC(); } catch (e) { return { stop() {} }; }
+    if (ctx.state === "suspended") ctx.resume().catch(() => {});
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 1024;
+    ctx.createMediaStreamSource(stream).connect(analyser);
+    const buf = new Float32Array(analyser.fftSize);
+    const started = Date.now();
+    let floor = 0, samples = 0, voiced = 0, quietSince = 0, heard = false, fired = false;
+    const fire = () => { if (fired) return; fired = true; stop(); onSilence(); };
+    const timer = setInterval(() => {
+      analyser.getFloatTimeDomainData(buf);
+      let sum = 0;
+      for (let i = 0; i < buf.length; i++) sum += buf[i] * buf[i];
+      const rms = Math.sqrt(sum / buf.length);
+      const t = Date.now() - started;
+      if (t < VAD.calibrate) { floor += rms; samples += 1; return; }
+      const threshold = Math.max(0.012, (samples ? floor / samples : 0) * 2.5);
+      if (rms > threshold) {
+        voiced += VAD.tick;
+        quietSince = 0;
+        if (voiced >= VAD.speechMs) heard = true;
+      } else if (heard) {
+        quietSince = quietSince || Date.now();
+        if (Date.now() - quietSince >= VAD.silenceMs) fire();
+      }
+      if ((!heard && t >= VAD.noSpeechMs) || t >= VAD.maxMs) fire();
+    }, VAD.tick);
+    function stop() { clearInterval(timer); if (ctx.state !== "closed") ctx.close().catch(() => {}); }
+    return { stop };
   }
 
   async function transcribe(blob) {
@@ -91,20 +135,33 @@
     return r.json();
   }
 
-  function browserListen() {
+  // The browser recogniser ends by itself when the speaker pauses
+  // (continuous = false); that end is reported as onSilence.
+  function browserListen(opts) {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) return Promise.reject(new Error("Voice input isn't available in this browser."));
     const rec = new SR();
     rec.lang = navigator.language || "en-GB";
-    rec.interimResults = false;
+    rec.continuous = false;
+    rec.interimResults = true;
     let text = "";
+    let stopped = false;
+    let signaled = false;
+    const signal = () => { if (stopped || signaled) return; signaled = true; if (opts.onSilence) opts.onSilence(); };
     const finished = new Promise((done, fail) => {
-      rec.onresult = (e) => { text = [...e.results].map((r) => r[0].transcript).join(" "); };
-      rec.onerror = (e) => fail(new Error(e.error || "Couldn't hear you"));
-      rec.onend = () => done({ text, language: null });
+      rec.onresult = (e) => {
+        text = [...e.results].map((r) => r[0].transcript).join(" ").trim();
+        if (opts.onInterim) opts.onInterim(text);
+      };
+      rec.onerror = (e) => { if (e.error === "no-speech" || e.error === "aborted") return; fail(new Error(e.error || "Couldn't hear you")); };
+      rec.onend = () => {
+        done({ text, language: null });
+        signal();
+      };
     });
+    finished.catch(signal);
     rec.start();
-    return Promise.resolve({ stop() { rec.stop(); return finished; }, cancel() { rec.abort(); } });
+    return Promise.resolve({ stop() { stopped = true; rec.stop(); return finished; }, cancel() { stopped = true; rec.abort(); } });
   }
 
   window.CentrixAI = { status, ask, speak, stopSpeaking, listen, transcribe };

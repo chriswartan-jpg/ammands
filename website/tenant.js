@@ -22,6 +22,7 @@
   let live = false;          // OpenAI available through the centrix server
   let voiceLive = false;     // ElevenLabs available
   let voiceReplies = false;  // speak every assistant and plumber message
+  let currentChips = [];     // the chips on screen, for matching spoken or typed answers
   const STEPS = ["Reported", "Brief and consent", "Dispatched", "Booked", "On the way", "Repair", "Fixed and invoiced", "Closed"];
 
   const state = {
@@ -91,6 +92,13 @@
     input.value = "";
     input.style.height = "auto";
     send.disabled = true;
+    // An answer that matches a quick-reply chip ("today", "a couple of days",
+    // "yes") works as if the chip was tapped; anything else is a normal message.
+    const chip = matchChip(text);
+    if (chip) {
+      setActions([]);
+      return chip.run();
+    }
     onText(text);
   });
   $("photo-btn").addEventListener("click", () => $("photo-input").click());
@@ -119,6 +127,7 @@
     if (state.step === "closed") resetCase();
     say("me", text, { raw: true });
     if (state.step === "start") {
+      setActions([]); // the starting buttons are answered by the report; shown again only if it's unclear
       state.report = text;
       if (live) return aiStart(text);
       detectLanguage(text);
@@ -595,6 +604,7 @@
   function managerReview() {
     {
       state.step = "manager_review";
+      setActions([]);
       state.progress = 0;
       say("centrix", `Not clearly plumbing, so your report went to ${POLICY.manager} for review. They'll handle it, or continue it as a plumbing repair.`);
       renderRepair();
@@ -912,35 +922,66 @@
 
   // ---------- voice (browser preview of the ElevenLabs voice agent) ----------
 
-  // Talk to the assistant: record → ElevenLabs speech-to-text → send. Using the
-  // microphone also turns on spoken replies, so it becomes a real conversation.
-  let listening = null;
+  // Talk to the assistant: tap the microphone and speak. Recording stops by
+  // itself when you pause, and the words land in the message field. An answer
+  // to a quick-reply question ("today", "a few days", "yes") is sent straight
+  // away; anything else waits in the field so you can check it and press send.
+  // Using the microphone also turns on spoken replies.
+  let listening = null;  // the active recording
+  let starting = false;  // waiting for microphone permission
+  let draftBase = "";    // text already in the field before dictating
   async function dictate() {
-    if (listening) {
-      const handle = listening;
-      listening = null;
-      setMic("busy");
-      try {
-        const r = await handle.stop();
-        if (r.text) {
-          voiceReplies = true;
-          renderMode();
-          onText(r.text);
-        } else toast("I didn't catch that. Try again, or type instead.");
-      } catch (e) {
-        toast("Couldn't understand the recording. Try again, or type instead.");
-      }
-      setMic("idle");
-      return;
-    }
+    if (starting) return;
+    if (listening) return finishListening();
+    starting = true;
+    let handle = null;
+    let silentEarly = false;
+    draftBase = input.value.trim();
     try {
       AI.stopSpeaking();
-      listening = await AI.listen();
+      handle = await AI.listen({
+        onSilence: () => { if (handle && listening === handle) finishListening(); else if (!handle) silentEarly = true; },
+        onInterim: (text) => { if (listening === handle) showDraft(text); }
+      });
+      listening = handle;
       setMic("live");
+      if (silentEarly) finishListening();
     } catch (e) {
       setMic("idle");
       toast(/denied|allowed|permission/i.test(e.message) ? "Allow microphone access to talk, or type instead." : "Voice input isn't available here. Type your message instead.");
     }
+    starting = false;
+  }
+
+  async function finishListening() {
+    const handle = listening;
+    if (!handle) return;
+    listening = null;
+    setMic("busy");
+    try {
+      const r = await handle.stop();
+      const text = (r.text || "").trim();
+      if (text) {
+        voiceReplies = true;
+        renderMode();
+        showDraft(text);
+        if (matchChip(text)) $("composer").requestSubmit();
+        else input.focus();
+      } else {
+        showDraft("");
+        toast("I didn't catch that. Try again, or type instead.");
+      }
+    } catch (e) {
+      showDraft("");
+      toast("Couldn't understand the recording. Try again, or type instead.");
+    }
+    setMic("idle");
+  }
+
+  // Put dictated words in the message field, after anything already typed.
+  function showDraft(text) {
+    input.value = [draftBase, text].filter(Boolean).join(" ");
+    input.dispatchEvent(new Event("input"));
   }
 
   function setMic(mode) {
@@ -949,9 +990,77 @@
     btn.classList.toggle("is-busy", mode === "busy");
     btn.disabled = mode === "busy";
     btn.setAttribute("aria-pressed", String(mode === "live"));
-    btn.setAttribute("aria-label", mode === "live" ? "Stop and send" : "Speak your message");
-    btn.dataset.tip = mode === "live" ? "Stop and send" : mode === "busy" ? "Transcribing…" : "Speak";
-    input.placeholder = mode === "live" ? "Listening… tap the microphone again to send" : mode === "busy" ? "Transcribing…" : "There's water under my kitchen sink…";
+    btn.setAttribute("aria-label", mode === "live" ? "Stop listening" : "Speak your message");
+    btn.dataset.tip = mode === "live" ? "Stop listening" : mode === "busy" ? "Transcribing…" : "Speak";
+    input.placeholder = mode === "live" ? "Listening… stops when you pause" : mode === "busy" ? "Transcribing…" : "There's water under my kitchen sink…";
+  }
+
+  // ---------- matching a spoken or typed answer to a quick-reply chip ----------
+
+  const NUMBERS = { one: 1, a: 1, an: 1, two: 2, couple: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, twee: 2, drie: 3, vier: 4, vijf: 5, zes: 6, zeven: 7, zwei: 2, drei: 3, fünf: 5, sechs: 6, sieben: 7 };
+  const YES = /^(yes|yeah|yep|yup|ya|sure|correct|right|indeed|of course|definitely|absolutely|ok yes|ja|jawel|jazeker|klopt|oui|si|sí)\b/;
+  const NO = /^(no|nope|nah|not yet|not really|nee|nein|non)\b/;
+
+  function norm(text) {
+    return String(text).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[’']/g, "").replace(/[^a-z0-9ß]+/g, " ").trim();
+  }
+
+  // "Since when?" answers fall into three buckets, whatever the wording.
+  function timeBucket(text) {
+    const t = norm(text);
+    const days = t.match(/\b(\d+|[a-z]+) (days?|dagen|dag|tage|tagen)\b/);
+    const n = days && (/^\d+$/.test(days[1]) ? Number(days[1]) : NUMBERS[days[1]]);
+    if (n) return n >= 7 ? "longer" : "few";
+    if (/\b(more than|over|longer than|meer dan|langer dan|mehr als|langer als)\b.*\b(days?|dagen|tage)\b/.test(t)) return "longer";
+    if (/\b(this week|deze week|diese woche)\b/.test(t)) return "few";
+    if (/\b(longer|long time|ages|forever|weeks?|months?|years?|a while|langer|lang|lange|weken|maanden|maand|jaren|lange tijd|wochen|woche|monate|monat|jahre|lange zeit)\b/.test(t)) return "longer";
+    if (/\b(few days|couple days|couple of days|several days|days|yesterday|day before yesterday|last night|monday|tuesday|wednesday|thursday|friday|saturday|sunday|weekend|gisteren|eergisteren|paar dagen|dagen|gestern|vorgestern|paar tage|tage)\b/.test(t)) return "few";
+    if (/\b(today|this morning|this afternoon|this evening|tonight|just now|right now|hours?|minutes?|just started|just happened|vandaag|vanochtend|vanmorgen|vanmiddag|vanavond|zojuist|heute|gerade|stunden?|uur)\b/.test(t)) return "today";
+    return null;
+  }
+
+  function polarity(text) {
+    const t = norm(text);
+    if (NO.test(t)) return "no";
+    if (YES.test(t)) return "yes";
+    return null;
+  }
+
+  // Which chip does this answer mean? Returns { label, run } or null.
+  // Exact label first, then a unique "Since when?" bucket, then a unique yes/no,
+  // then a short answer that contains a chip's label ("I'd say longer").
+  function matchChip(text) {
+    if (!currentChips.length) return null;
+    const t = norm(text);
+    if (!t) return null;
+    const names = (c) => [norm(c.label), norm(c.shown())].filter(Boolean);
+    const unique = (list) => (list.length === 1 ? list[0] : null);
+
+    const exact = unique(currentChips.filter((c) => names(c).includes(t)));
+    if (exact) return exact;
+
+    // Only for a "since when" set: every chip in a different time bucket.
+    const buckets = currentChips.map((c) => timeBucket(c.label));
+    const sinceWhen = buckets.filter(Boolean).length >= 2 && new Set(buckets).size === buckets.length;
+    const bucket = sinceWhen && timeBucket(t);
+    if (bucket) {
+      const byTime = unique(currentChips.filter((c) => names(c).some((n) => timeBucket(n) === bucket)));
+      if (byTime) return byTime;
+    }
+
+    const words = t.split(" ").length;
+    // Only for a yes/no set: at least one "yes" chip and one "no" chip.
+    const pols = currentChips.map((c) => polarity(c.label));
+    const yesNo = pols.includes("yes") && pols.includes("no");
+    const pol = yesNo && words <= 6 ? polarity(t) : null;
+    if (pol) {
+      const byPol = unique(currentChips.filter((c) => names(c).some((n) => polarity(n) === pol)));
+      if (byPol) return byPol;
+    }
+
+    const contains = currentChips.filter((c) => names(c).some((n) => words <= n.split(" ").length + 4 && new RegExp(`\\b${n}\\b`).test(t)));
+    return unique(contains);
   }
 
   // Spoken messages: ElevenLabs voice through the server, browser voice as fallback.
@@ -1034,6 +1143,7 @@
 
   // Quick-reply chips under the conversation
   function chips(list, raw) {
+    const entries = [];
     setActions(list.map(([label, run, icon]) => {
       const b = button("t-chip", "");
       const text = span("", label);
@@ -1041,8 +1151,10 @@
       if (!raw) localize(label, (x) => { text.textContent = x; });
       if (icon) b.prepend(iconEl(icon));
       b.addEventListener("click", () => { setActions([]); run(); });
+      entries.push({ label, run, shown: () => text.textContent });
       return b;
     }));
+    currentChips = entries;
   }
   function showProblemChips(withOther) {
     const list = Object.entries(DATA.problems).map(([key, p]) => [p.label, () => { me(p.label); withTyping(() => startCase(key)); }]);
@@ -1050,6 +1162,7 @@
     chips(list);
   }
   function setActions(nodes) {
+    currentChips = [];
     $("actions").replaceChildren(...nodes);
     const thread = $("thread");
     thread.scrollTop = thread.scrollHeight;

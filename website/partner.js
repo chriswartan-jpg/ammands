@@ -881,34 +881,44 @@
     b.innerHTML = `<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">${ICONS.mic}</svg>`;
     b.append(" ", label);
     let handle = null;
+    let starting = false;
     const set = (mode) => {
       b.classList.toggle("is-live", mode === "live");
       b.disabled = mode === "busy";
       b.setAttribute("aria-pressed", String(mode === "live"));
       label.textContent = mode === "live" ? "Stop dictating" : mode === "busy" ? "Writing it down…" : "Dictate";
     };
-    b.addEventListener("click", async () => {
-      if (handle) {
-        const h = handle;
-        handle = null;
-        set("busy");
-        try {
-          const r = await h.stop();
-          if (r.text) await onText(r.text);
-          else toast("I didn't catch that. Try again, or type instead.");
-        } catch (e) {
-          toast("Couldn't understand the recording. Try again, or type instead.");
-        }
-        set("idle");
-        return;
-      }
+    // Stops on a tap, or by itself once you pause.
+    const finish = async () => {
+      const h = handle;
+      if (!h) return;
+      handle = null;
+      set("busy");
       try {
-        handle = await AI.listen();
+        const r = await h.stop();
+        if (r.text) await onText(r.text);
+        else toast("I didn't catch that. Try again, or type instead.");
+      } catch (e) {
+        toast("Couldn't understand the recording. Try again, or type instead.");
+      }
+      set("idle");
+    };
+    b.addEventListener("click", async () => {
+      if (starting) return;
+      if (handle) return finish();
+      starting = true;
+      let h = null;
+      let silentEarly = false;
+      try {
+        h = await AI.listen({ onSilence: () => { if (h && handle === h) finish(); else if (!h) silentEarly = true; } });
+        handle = h;
         set("live");
+        if (silentEarly) finish();
       } catch (e) {
         set("idle");
         toast(/denied|allowed|permission/i.test(e.message) ? "Allow microphone access to dictate, or type instead." : "Dictation isn't available here. Type instead.");
       }
+      starting = false;
     });
     return b;
   }
