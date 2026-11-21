@@ -21,7 +21,7 @@
   AI.status.then((st) => {
     live = st.live;
     const badge = $("ai-mode");
-    badge.textContent = st.live ? (st.voice ? "Live AI · voice" : "Live AI") : "Demo mode";
+    badge.textContent = st.live ? (st.voice ? "Live AI · voice" : "Live AI") : "Basic mode";
     badge.classList.toggle("is-live", st.live);
   });
   // The partner's part of the final workflow, in order (steps 10–21)
@@ -435,7 +435,7 @@
   }
 
   // The next step for this job, based on its stage in the final workflow.
-  // Every real step has Undo; "Demo:" buttons play the tenant or the manager.
+  // Every real step has Undo; the dashed buttons play the tenant or the manager.
   function renderActions(job) {
     const box = $("d-actions");
     const card = document.createElement("div");
@@ -532,14 +532,14 @@
     awaiting_pick(job, card) {
       card.append(note("Waiting for the tenant to pick one of your windows:"));
       card.append(list(job.windows));
-      card.append(...job.windows.map((w, i) => demo(`Demo: tenant picks window ${i + 1}`, () => change(job, () => {
+      card.append(...job.windows.map((w, i) => demo(`Tenant picks window ${i + 1}`, () => change(job, () => {
         job.stage = "booked";
         job.slot = w;
         job.reminder = "Day-before reminder scheduled for the tenant";
         log(job, "tenant", `${w} works for me.`);
         log(job, "centrix", `Confirmation sent to ${job.tenant} and ${POLICY.manager}: ${w}.`);
       }))));
-      card.append(demo("Demo: none of these fit", () => change(job, () => {
+      card.append(demo("None of these fit", () => change(job, () => {
         job.stage = "propose";
         job.slot = "Waiting for new time windows";
         log(job, "tenant", "None of these times work for me. Could you propose new ones?");
@@ -610,7 +610,7 @@
 
     approval(job, card) {
       card.append(note(`Your quote of €${fmt(job.quote)} net is with ${POLICY.manager}. Don't start until it's approved.`));
-      card.append(demo("Demo: manager approves the quote", () => change(job, () => {
+      card.append(demo("Manager approves the quote", () => change(job, () => {
         job.stage = "working";
         log(job, "centrix", `${POLICY.manager} approved the quote of €${fmt(job.quote)} net. You can start.`);
       })));
@@ -651,12 +651,12 @@
     // Step 18: the tenant confirms the fix. No invoice before that.
     confirm(job, card) {
       card.append(note("Waiting for the tenant to confirm the problem is fixed. The invoice opens after that."));
-      card.append(demo("Demo: tenant confirms it's fixed", () => change(job, () => {
+      card.append(demo("Tenant confirms it's fixed", () => change(job, () => {
         job.tenantConfirmed = true;
         job.stage = "invoice";
         log(job, "tenant", "Yes, it's fixed. Thank you!");
       })));
-      card.append(demo("Demo: tenant says it's not fixed", () => change(job, () => {
+      card.append(demo("Tenant says it's not fixed", () => change(job, () => {
         job.status = "scheduled";
         job.stage = "propose";
         job.slot = "Return visit: propose new windows";
@@ -719,7 +719,7 @@
     follow_up(job, card) {
       card.append(summary(job));
       card.append(note("centrix checks with the tenant in seven days that it stayed fixed."));
-      card.append(demo("Demo: seven days later", () => change(job, () => {
+      card.append(demo("Seven days later", () => change(job, () => {
         job.stage = "closed";
         job.followUp = "Still fixed after seven days. Unit record updated.";
         log(job, "centrix", `Seven-day check: still fixed. ${job.caseId} closed and the unit record updated.`);

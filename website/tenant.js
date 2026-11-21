@@ -270,8 +270,8 @@
 
   function renderMode() {
     const badge = $("ai-mode");
-    badge.textContent = live ? (voiceLive ? "Live AI · voice" : "Live AI") : "Demo mode";
-    badge.title = live ? "Answers by OpenAI, voice by ElevenLabs, through the centrix server" : "Built-in demo assistant (the AI server isn't running)";
+    badge.textContent = live ? (voiceLive ? "Live AI · voice" : "Live AI") : "Basic mode";
+    badge.title = live ? "Answers by OpenAI, voice by ElevenLabs, through the centrix server" : "Built-in assistant (the AI server isn't running)";
     badge.classList.toggle("is-live", live);
     const t = $("voice-toggle");
     t.setAttribute("aria-pressed", String(voiceReplies));
@@ -632,14 +632,14 @@
   // The demo buttons in the "Your repair" card, per step
   function demoActions() {
     return {
-      manager_review: [["Demo: manager continues as plumbing", managerOverride], ["Demo: manager handles it", managerKeeps]],
-      booked: [["Demo: day-before reminder", remind], ["Demo: plumber leaves now", startTrip]],
-      reminded: [["Demo: plumber leaves now", startTrip]],
-      on_the_way: [["Demo: plumber arrives", arrive]],
-      cost_check: [[`Demo: quote within €${fmt(POLICY.preApprovedLimit)}`, () => quote(Math.round(avgPrice() / (1 + POLICY.vat / 100)))], [`Demo: quote over €${fmt(POLICY.preApprovedLimit)}`, () => quote(3480)]],
-      approval: [["Demo: manager approves quote", approveQuote]],
-      working: [["Demo: plumber finishes", finishJob]],
-      followup_wait: [["Demo: seven days later", sevenDays]]
+      manager_review: [["Manager continues as plumbing", managerOverride], ["Manager handles it", managerKeeps]],
+      booked: [["Day-before reminder", remind], ["Plumber leaves now", startTrip]],
+      reminded: [["Plumber leaves now", startTrip]],
+      on_the_way: [["Plumber arrives", arrive]],
+      cost_check: [[`Quote within €${fmt(POLICY.preApprovedLimit)}`, () => quote(Math.round(avgPrice() / (1 + POLICY.vat / 100)))], [`Quote over €${fmt(POLICY.preApprovedLimit)}`, () => quote(3480)]],
+      approval: [["Manager approves quote", approveQuote]],
+      working: [["Plumber finishes", finishJob]],
+      followup_wait: [["Seven days later", sevenDays]]
     }[state.step] || [];
   }
 

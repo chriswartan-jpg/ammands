@@ -298,7 +298,7 @@
         }
         window.CENTRIX_DB = db;
       } catch (e) {
-        console.warn("centrix: could not load data/centrix/*.json, using the built-in demo data instead.", e);
+        console.warn("centrix: could not load data/centrix/*.json, using the built-in data instead.", e);
       }
     }
     for (const src of scripts) await loadScript(src);
