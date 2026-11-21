@@ -54,7 +54,7 @@
   // ---------- top bar ----------
   const first = session.name.split(" ")[0];
   $("app-user").textContent = session.name;
-  $("app-avatar").textContent = initials(session.name);
+  setAvatar($("app-avatar"), initials(session.name), HOME.photo);
   $("hello").textContent = `Hi ${first}`;
   $("hello-sub").textContent = `${HOME.unit} · ${HOME.address}`;
   $("logout").addEventListener("click", (event) => {
@@ -641,7 +641,7 @@
     $("track").hidden = false;
     $("track-title").textContent = "Plumber on the way";
     $("track-note").textContent = "Getting closer. You'll get a message when they're at the door.";
-    $("track-avatar").textContent = pro.initials;
+    setAvatar($("track-avatar"), pro.initials, pro.photo);
     $("track-name").textContent = `${pro.name} · ${pro.rating} ★`;
     $("track").scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -842,7 +842,7 @@
   function proRow(p) {
     const row = document.createElement("li");
     row.className = "pro";
-    const av = span("avatar", p.initials);
+    const av = setAvatar(span("avatar", ""), p.initials, p.photo);
     av.setAttribute("aria-hidden", "true");
     const info = div("pro-info");
     info.append(span("pro-name", p.name), span("pro-meta", `${p.distance} · ${p.rating} ★ (${p.reviews}) · from €${p.from}`));
@@ -1128,6 +1128,13 @@
     return item;
   }
   function button(cls, text) { const b = document.createElement("button"); b.type = "button"; b.className = cls; b.textContent = text; return b; }
+  // A profile picture when there is one, otherwise the initials
+  function setAvatar(el, letters, photo) {
+    el.textContent = photo ? "" : letters;
+    el.classList.toggle("has-photo", !!photo);
+    el.style.backgroundImage = photo ? `url("${photo}")` : "";
+    return el;
+  }
   function initials(name) { return name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join(""); }
   function avgPrice() { const p = DATA.problems[state.problem]; return Math.round((p.price[0] + p.price[1]) / 2); }
   function fmt(n) { return n.toLocaleString("en-GB"); }

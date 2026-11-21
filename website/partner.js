@@ -59,7 +59,9 @@
   // ---------- top bar ----------
 
   $("app-user").textContent = session.name;
-  $("app-avatar").textContent = initials(session.name);
+  const appAvatar = $("app-avatar");
+  appAvatar.textContent = POLICY.photo ? "" : initials(session.name);
+  if (POLICY.photo) { appAvatar.classList.add("has-photo"); appAvatar.style.backgroundImage = `url("${POLICY.photo}")`; }
   $("logout").addEventListener("click", (event) => {
     const btn = event.currentTarget;
     btn.disabled = true;
@@ -357,6 +359,15 @@
       dt.textContent = k;
       const dd = document.createElement("dd");
       dd.textContent = v;
+      if (k === "Tenant" && job.tenantPhoto) {
+        // the tenant's profile picture next to their name
+        const av = document.createElement("span");
+        av.className = "avatar avatar-sm has-photo";
+        av.setAttribute("aria-hidden", "true");
+        av.style.backgroundImage = `url("${job.tenantPhoto}")`;
+        dd.classList.add("with-avatar");
+        dd.prepend(av);
+      }
       return [dt, dd];
     }));
 

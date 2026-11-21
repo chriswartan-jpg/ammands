@@ -9,6 +9,7 @@
 window.CENTRIX_TENANT = {
   home: {
     tenant: "Lena Hoffmann",
+    photo: "assets/avatars/lena-hoffmann.jpg",
     unit: "Unit 4B",
     address: "Musterstraße 12, 52062 Aachen",
     floor: "2nd floor, lift",
@@ -104,7 +105,7 @@ window.CENTRIX_TENANT = {
   // A few vetted plumbers around the building [assumption]
   plumbers: [
     {
-      id: "p1", name: "Example Plumbing GmbH", initials: "EP",
+      id: "p1", name: "Example Plumbing GmbH", initials: "EP", photo: "assets/avatars/example-plumbing.jpg",
       distance: "1.2 km", rating: 4.8, reviews: 126, eta: "18 min",
       next: "Tomorrow", from: 45,
       slots: ["Today 16:00–18:00", "Tomorrow 10:00–12:00", "Tomorrow 14:00–16:00"],

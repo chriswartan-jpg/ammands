@@ -605,3 +605,8 @@ button:disabled { cursor: not-allowed; }
 }
 .ai-mode.is-live { border-color: rgba(143, 211, 193, 0.5); color: #8fd3c1; background: rgba(143, 211, 193, 0.1); }
 .wf-mic:disabled { opacity: 0.6; cursor: progress; }
+
+/* profile pictures in avatars */
+.avatar.has-photo { background-size: cover; background-position: center; background-repeat: no-repeat; color: transparent; box-shadow: 0 0 0 2px rgba(252, 246, 239, 0.18); }
+.avatar-sm { width: 22px; height: 22px; }
+.props dd.with-avatar { display: flex; align-items: center; gap: 8px; }

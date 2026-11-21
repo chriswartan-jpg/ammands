@@ -18,6 +18,7 @@ The setup is generic, so other partners (internet, energy, heating, insurance) c
 | Path | What it is |
 |---|---|
 | [`PROJECT.md`](PROJECT.md) | Full project description: the problem, the challenge, the end-to-end flow and what we build |
+| [`docs/final-workflow.md`](docs/final-workflow.md) | The final 21-step workflow for one plumbing case, with the diagram, that the portals follow |
 | [`BUILD-PLAN.md`](BUILD-PLAN.md) | Build plan in phases: screens, fake data, automation |
 | [`website/`](website/) | The prototype: a static site in plain HTML, CSS and JavaScript |
 

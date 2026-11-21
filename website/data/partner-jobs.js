@@ -199,6 +199,7 @@ window.CENTRIX_PARTNER_JOBS = [
  *   done:         follow_up → closed
  */
 window.CENTRIX_PARTNER_POLICY = {
+  photo: "assets/avatars/example-plumbing.jpg",   // profile picture of the logged-in partner
   manager: "Hausverwaltung Example GmbH",
   preApprovedLimit: 3000,   // € net, above this the manager approves the quote first
   vat: 19,                  // % VAT on the invoice
@@ -212,6 +213,7 @@ window.CENTRIX_PARTNER_POLICY = {
   const WORKFLOW = {
     "JOB-1042": {
       caseId: "CASE-1042", stage: "review", language: "German",
+      tenantPhoto: "assets/avatars/lena-hoffmann.jpg",
       answers: ["Still leaking", "Stays in the cupboard", "Since last night"],
       consent: { at: "Today, 08:13", channel: "Tenant portal (tap)" },
       linkedCase: { id: "CASE-1038", unit: "Unit 3B, the flat below", text: "Damp patch on the kitchen ceiling" },
