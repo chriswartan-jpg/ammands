@@ -44,19 +44,41 @@ Both portals follow the 21-step final workflow, from the tenant's report to the 
 | Repair (16–18) | Cost check against the €3,000 pre-approved limit, manager approval above it, work note, "Is it dry now?" | Enter the quote (over €3,000 goes to the manager), dictate the work note, wait for the tenant's confirmation |
 | Close (19–21) | Invoice with 19% VAT linked to the case and unit, two feedback questions, seven-day check that updates the home record | Build the invoice from hours and parts, see feedback and the seven-day follow-up |
 
-The manager and the other side of the conversation are played by the dashed **Demo:** buttons. Voice uses the browser's own speech recognition and speech synthesis as a stand-in for the ElevenLabs voice agent, so it needs no API key; where the browser has no speech support, the portals say so and you can type instead.
+The manager and the other side of the conversation are played by the dashed **Demo:** buttons. With the server running, the conversation and voice are live (OpenAI and ElevenLabs, see below). Without it, the portals fall back to built-in rules and the browser's own speech support.
 
-There's no backend. All data is fake and lives in `website/data/`, and the login only checks it in the browser.
+The demo data is fake and lives in `website/data/`, and the login only checks it in the browser.
 
 ## Running it locally
 
-No build step and no dependencies to install. Serve the `website` folder with any static server, for example:
+### With live AI (OpenAI + ElevenLabs)
+
+Needs Node 20 or newer. No packages to install.
+
+```bash
+cp .env.example .env   # then put your OpenAI and ElevenLabs keys in .env
+npm start              # http://localhost:8780
+```
+
+The small server in [`server/server.mjs`](server/server.mjs) serves the website and is the only place that holds the keys. The browser calls `/api/*` on it, never OpenAI or ElevenLabs directly. `.env` is git-ignored: never commit real keys.
+
+What runs live:
+
+| | Tenant portal | Partner portal |
+|---|---|---|
+| **OpenAI** (`gpt-4.1-mini`, configurable) | Reads the first report: language, plumbing or not, problem type, urgency, and writes 3 follow-up questions in the tenant's language. Answers free questions at every step from the case facts (cost, time, what's shared) and spots intents like "can it be later?" (rebook), "it's leaking again" (reopen) or a new emergency. Translates the portal's own messages and cards into the tenant's language. | Turns a dictated sentence ("tomorrow at ten, Friday two to four…") into 3 time windows, and tidies a dictated work note. |
+| **ElevenLabs** | Microphone: record, then Scribe speech-to-text, then the assistant answers. Talking turns on spoken replies (multilingual voice), so it becomes a voice conversation. Every assistant message has a Listen button. | Dictation for time windows and the work note (Scribe), and "Play what the tenant hears" for the spoken ETA. |
+
+The badge next to the assistant's name says **Live AI · voice** when the server and keys are there.
+
+### Without a server (demo mode)
+
+Serve the `website` folder with any static server, for example:
 
 ```bash
 cd website && python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>. The maps (MapLibre), the globe (D3) and the fonts load from public CDNs, so you need an internet connection.
+Then open <http://localhost:8000>. The badge says **Demo mode** and the portals use their built-in rules (keyword classification, fixed questions, browser speech). The maps (MapLibre), the globe (D3) and the fonts load from public CDNs, so you need an internet connection.
 
 ### Demo accounts
 

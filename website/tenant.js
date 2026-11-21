@@ -18,6 +18,10 @@
   const POLICY = DATA.policy;
   const CASE_ID = "CASE-1042";
   const $ = (id) => document.getElementById(id);
+  const AI = window.CentrixAI;
+  let live = false;          // OpenAI available through the centrix server
+  let voiceLive = false;     // ElevenLabs available
+  let voiceReplies = false;  // speak every assistant and plumber message
   const STEPS = ["Reported", "Brief and consent", "Dispatched", "Booked", "On the way", "Repair", "Fixed and invoiced", "Closed"];
 
   const state = {
@@ -41,6 +45,8 @@
     quote: null,         // net € the plumber quoted on site
     invoice: null,
     feedback: {},
+    aiFollowUps: null,   // follow-up questions written by OpenAI, in the tenant's language
+    aiTitle: null,       // short English title for the plumber's brief
     progress: -1,        // index in STEPS
     messages: []
   };
@@ -94,6 +100,12 @@
     if (file && file.type.startsWith("image/")) onPhoto(URL.createObjectURL(file));
   });
   $("mic-btn").addEventListener("click", dictate);
+  $("voice-toggle").addEventListener("click", () => {
+    voiceReplies = !voiceReplies;
+    if (!voiceReplies) AI.stopSpeaking();
+    renderMode();
+  });
+  AI.status.then((st) => { live = st.live; voiceLive = st.voice; renderMode(); renderThread(); });
   $("track-msg").addEventListener("click", () => {
     input.focus();
     input.placeholder = `Message ${state.plumber ? state.plumber.name : "the plumber"}…`;
@@ -105,9 +117,10 @@
 
   function onText(text) {
     if (state.step === "closed") resetCase();
-    me(text);
+    say("me", text, { raw: true });
     if (state.step === "start") {
       state.report = text;
+      if (live) return aiStart(text);
       detectLanguage(text);
       const key = classify(text);
       if (key) return withTyping(() => startCase(key));
@@ -116,10 +129,145 @@
         showProblemChips(true);
       });
     }
+    if (live) return aiChat();
     if (["booked", "reminded", "on_the_way", "cost_check", "approval", "working"].includes(state.step)) {
       return later(() => say("centrix", `Sent to ${state.plumber.name}. They'll reply here.`), 400);
     }
     withTyping(() => say("ai", "Noted, I've added that to your report for the plumber."));
+  }
+
+  // ---------- live AI (OpenAI through the centrix server) ----------
+
+  // Steps 2, 3, 5 and 7 in one call: language, classification, follow-ups, urgency.
+  function aiStart(text) {
+    thinking(AI.ask("classify", { text, home: { unit: HOME.unit, address: HOME.address, building: HOME.building } }))
+      .then((r) => {
+        if (r.language && r.language.code && r.language.code !== "en") {
+          state.language = { code: r.language.code, name: r.language.name };
+          say("centrix", `Language detected: ${r.language.name}. The assistant answers you in ${r.language.name}; the plumber gets the brief in German.`);
+        }
+        if (r.reply) say("ai", r.reply, { raw: true });
+        if (r.route === "plumbing" && DATA.problems[r.problem]) {
+          state.aiTitle = r.title || null;
+          state.aiFollowUps = (r.followUps || []).slice(0, 3)
+            .filter((f) => f.q && f.options && f.options.length >= 2)
+            .map((f) => ({ q: f.q, raw: true, options: f.options.slice(0, 3).map((o) => [o.label, !!o.urgent]) }));
+          if (!state.aiFollowUps.length) state.aiFollowUps = null;
+          if (r.urgent) state.urgent = true;
+          return startCase(r.problem);
+        }
+        if (r.route === "not_plumbing") return managerReview();
+        say("ai", "I'm not sure this is a plumbing problem. Which of these is closest?");
+        showProblemChips(true);
+      })
+      .catch(() => {
+        // Fall back to the built-in rules
+        detectLanguage(text);
+        const key = classify(text);
+        if (key) return startCase(key);
+        say("ai", "I'm not sure this is a plumbing problem. Which of these is closest?");
+        showProblemChips(true);
+      });
+  }
+
+  // Free conversation at any step, grounded in the case.
+  function aiChat() {
+    const history = state.messages.filter((m) => m.text && !m.typing).slice(-14).map((m) => ({
+      role: m.from === "me" ? "user" : "assistant",
+      content: m.from === "centrix" ? `[centrix status] ${m.text}` : m.from === "plumber" ? `[plumber] ${m.text}` : m.text
+    }));
+    thinking(AI.ask("chat", { messages: history, context: caseContext() }))
+      .then((r) => {
+        say("ai", r.reply, { raw: true });
+        handleIntent(r.intent);
+      })
+      .catch(() => say("ai", "Noted, I've added that to your report for the plumber."));
+  }
+
+  function handleIntent(intent) {
+    if (intent === "rebook" && ["windows", "booked", "reminded"].includes(state.step)) {
+      setActions([]);
+      state.step = "dispatch";
+      renderRepair();
+      say("centrix", `Asked ${state.plumber.name} for new times.`);
+      return later(proposeWindows, 1000);
+    }
+    if (intent === "not_fixed" && ["done", "feedback", "followup_wait", "followup_check"].includes(state.step)) {
+      setActions([]);
+      return reopen();
+    }
+    if (intent === "urgent" && state.step !== "start" && state.step !== "closed") {
+      state.urgent = true;
+      renderRepair();
+      say("centrix", `Marked urgent. ${POLICY.manager} has been alerted and the voice agent will call you on ${HOME.phone}.`);
+    }
+  }
+
+  function caseContext() {
+    const p = state.problem ? DATA.problems[state.problem] : null;
+    return {
+      step: state.step,
+      home: { unit: HOME.unit, address: HOME.address, floor: HOME.floor, access: HOME.access, shutoffValve: HOME.shutoff },
+      problem: state.aiTitle || (p && p.title) || null,
+      tenantAnswers: state.answers.map((a) => `${a.q} → ${a.a}`),
+      urgent: state.urgent,
+      tenantLanguage: state.language ? state.language.name : "English",
+      linkedCase: state.linked ? `${state.linked.id} (${state.linked.unit}): ${state.linked.text}` : null,
+      estimate: p ? `€${p.price[0]}–€${p.price[1]} net incl. €${DATA.callOut} call-out (example prices)` : null,
+      preApprovedLimit: `€${fmt(POLICY.preApprovedLimit)} net; above that the property manager approves the quote first`,
+      propertyManager: POLICY.manager,
+      neverShared: DATA.withheld,
+      consentGiven: state.consent ? `${state.consent.at} via ${state.consent.channel}` : false,
+      plumber: state.plumber ? state.plumber.name : null,
+      proposedWindows: state.windows,
+      bookedSlot: state.slot,
+      quote: state.quote ? `€${fmt(state.quote)} net` : null,
+      invoice: state.invoice ? `${state.invoice.number}, €${money(state.invoice.gross)} incl. ${POLICY.vat}% VAT, billed to ${POLICY.invoiceTo}` : null
+    };
+  }
+
+  // Show "typing" until the promise settles; keeps any open quick replies.
+  function thinking(promise) {
+    const typing = { from: "ai", typing: true };
+    state.messages.push(typing);
+    renderThread();
+    return promise.finally(() => {
+      const i = state.messages.indexOf(typing);
+      if (i >= 0) state.messages.splice(i, 1);
+      renderThread();
+    });
+  }
+
+  // Scripted messages follow the tenant's language (translated once, then cached).
+  const translations = new Map();
+  let translateQueue = [];
+  function localize(text, apply) {
+    if (!live || !state.language || state.language.code === "en" || !text) return false;
+    if (translations.has(text)) { apply(translations.get(text)); return true; }
+    translateQueue.push([text, apply]);
+    if (translateQueue.length === 1) setTimeout(flushTranslations, 40);
+    return true;
+  }
+  async function flushTranslations() {
+    const batch = translateQueue;
+    translateQueue = [];
+    const texts = [...new Set(batch.map((b) => b[0]))];
+    try {
+      const r = await AI.ask("translate", { texts, language: state.language.name });
+      texts.forEach((t, i) => { if (r.texts && r.texts[i]) translations.set(t, r.texts[i]); });
+    } catch (e) { /* keep English */ }
+    batch.forEach(([t, apply]) => apply(translations.get(t) || t));
+  }
+
+  function renderMode() {
+    const badge = $("ai-mode");
+    badge.textContent = live ? (voiceLive ? "Live AI · voice" : "Live AI") : "Demo mode";
+    badge.title = live ? "Answers by OpenAI, voice by ElevenLabs, through the centrix server" : "Built-in demo assistant (the AI server isn't running)";
+    badge.classList.toggle("is-live", live);
+    const t = $("voice-toggle");
+    t.setAttribute("aria-pressed", String(voiceReplies));
+    t.setAttribute("aria-label", voiceReplies ? "Turn spoken replies off" : "Turn spoken replies on");
+    t.dataset.tip = voiceReplies ? "Spoken replies on" : "Spoken replies off";
   }
 
   // Step 2: language detection. The voice agent keeps talking in the tenant's language.
@@ -156,15 +304,16 @@
   // Step 5: up to 3 one-tap follow-up questions.
   function askFollowUp(i) {
     const p = DATA.problems[state.problem];
-    const f = p.followUps[i];
+    const list = state.aiFollowUps || p.followUps;
+    const f = list[i];
     if (!f) return withTyping(askPhoto);
-    say("ai", i === 0 ? `That sounds like: ${p.title.toLowerCase()}. ${f.q}` : f.q);
+    say("ai", i === 0 && !f.raw ? `That sounds like: ${p.title.toLowerCase()}. ${f.q}` : f.q, { raw: f.raw });
     chips(f.options.map(([label, urgent]) => [label, () => {
-      me(label);
+      say("me", label, { raw: f.raw });
       state.answers.push({ q: f.q, a: label });
       if (urgent) state.urgent = true;
       withTyping(() => askFollowUp(i + 1));
-    }]));
+    }]), f.raw);
   }
 
   // Step 6: optional photo.
@@ -337,15 +486,26 @@
     setActions([]);
     if (!ok) {
       me("No, it's not fixed yet");
+      return reopen();
+    }
+    me("Yes, it's fixed");
+    fixed();
+  }
+
+  // Not fixed (after the repair or at the seven-day check): no invoice, the plumber comes back.
+  function reopen() {
+    {
       state.step = "dispatch";
       state.progress = 2;
       renderRepair();
       return withTyping(() => {
-        say("ai", `Sorry about that. No invoice goes out yet. I've asked ${state.plumber.name} to come back at no extra cost.`);
+        say("ai", `Sorry about that. I've asked ${state.plumber.name} to come back at no extra cost.`);
         later(proposeWindows, 900);
       });
     }
-    me("Yes, it's fixed");
+  }
+
+  function fixed() {
     state.progress = 6;
     withTyping(() => {
       // Step 19: the invoice, made from the work note and linked to the case and the unit.
@@ -420,7 +580,7 @@
     Object.assign(state, {
       step: "start", problem: null, report: "", language: null, linked: null, answers: [], urgent: false,
       photo: null, plumber: null, slot: null, windows: null, windowRound: 0, access: "caretaker",
-      consent: null, quote: null, invoice: null, feedback: {}, progress: -1
+      consent: null, quote: null, invoice: null, feedback: {}, aiFollowUps: null, aiTitle: null, progress: -1
     });
     renderRepair();
     renderNearby();
@@ -429,12 +589,16 @@
   // Manager review (3b): not plumbing or unsure.
   function toManager() {
     me("Something else");
-    withTyping(() => {
+    withTyping(managerReview);
+  }
+
+  function managerReview() {
+    {
       state.step = "manager_review";
       state.progress = 0;
       say("centrix", `Not clearly plumbing, so your report went to ${POLICY.manager} for review. They'll handle it, or continue it as a plumbing repair.`);
       renderRepair();
-    });
+    }
   }
 
   function managerOverride() {
@@ -578,7 +742,7 @@
     const rows = [
       ["Name and phone", `${HOME.tenant}, ${HOME.phone}`],
       ["Address", `${HOME.address}, ${HOME.floor}`],
-      ["Problem", `${p.title}${state.urgent ? " (urgent)" : ""}`],
+      ["Problem", `${state.aiTitle || p.title}${state.urgent ? " (urgent)" : ""}`],
       ["Your answers", state.answers.map((x) => x.a).join(" · ") || "None"],
       ["Photo", state.photo ? "1 photo" : "No photo"],
       ["Shut-off valve", HOME.shutoff],
@@ -748,45 +912,73 @@
 
   // ---------- voice (browser preview of the ElevenLabs voice agent) ----------
 
-  // Speech-to-text for the report. Uses the browser's built-in recogniser as a stand-in;
-  // in production the ElevenLabs voice agent takes the report.
-  let recogniser = null;
-  function dictate() {
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const btn = $("mic-btn");
-    if (!SR) return toast("Voice input isn't available in this browser. Type your message instead.");
-    if (recogniser) { recogniser.stop(); return; }
-    recogniser = new SR();
-    recogniser.lang = navigator.language || "en-GB";
-    recogniser.interimResults = true;
-    btn.classList.add("is-live");
-    btn.setAttribute("aria-pressed", "true");
-    recogniser.onresult = (e) => {
-      input.value = [...e.results].map((r) => r[0].transcript).join(" ");
-      input.dispatchEvent(new Event("input"));
-    };
-    recogniser.onerror = () => toast("Couldn't hear you. Check microphone access, or type instead.");
-    recogniser.onend = () => {
-      recogniser = null;
-      btn.classList.remove("is-live");
-      btn.setAttribute("aria-pressed", "false");
-      input.focus();
-    };
-    recogniser.start();
+  // Talk to the assistant: record → ElevenLabs speech-to-text → send. Using the
+  // microphone also turns on spoken replies, so it becomes a real conversation.
+  let listening = null;
+  async function dictate() {
+    if (listening) {
+      const handle = listening;
+      listening = null;
+      setMic("busy");
+      try {
+        const r = await handle.stop();
+        if (r.text) {
+          voiceReplies = true;
+          renderMode();
+          onText(r.text);
+        } else toast("I didn't catch that. Try again, or type instead.");
+      } catch (e) {
+        toast("Couldn't understand the recording. Try again, or type instead.");
+      }
+      setMic("idle");
+      return;
+    }
+    try {
+      AI.stopSpeaking();
+      listening = await AI.listen();
+      setMic("live");
+    } catch (e) {
+      setMic("idle");
+      toast(/denied|allowed|permission/i.test(e.message) ? "Allow microphone access to talk, or type instead." : "Voice input isn't available here. Type your message instead.");
+    }
   }
 
-  // Text-to-speech for spoken messages. In production this is an ElevenLabs voice.
-  function speak(text) {
-    if (!("speechSynthesis" in window)) return toast("Audio isn't available in this browser.");
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+  function setMic(mode) {
+    const btn = $("mic-btn");
+    btn.classList.toggle("is-live", mode === "live");
+    btn.classList.toggle("is-busy", mode === "busy");
+    btn.disabled = mode === "busy";
+    btn.setAttribute("aria-pressed", String(mode === "live"));
+    btn.setAttribute("aria-label", mode === "live" ? "Stop and send" : "Speak your message");
+    btn.dataset.tip = mode === "live" ? "Stop and send" : mode === "busy" ? "Transcribing…" : "Speak";
+    input.placeholder = mode === "live" ? "Listening… tap the microphone again to send" : mode === "busy" ? "Transcribing…" : "There's water under my kitchen sink…";
   }
+
+  // Spoken messages: ElevenLabs voice through the server, browser voice as fallback.
+  function speak(text) { AI.speak(text); }
 
   // ---------- chat rendering ----------
 
   function say(from, text, extra = {}) {
-    state.messages.push({ from, text, time: now(), card: extra.card || null, speak: !!extra.speak });
+    const msg = { from, text, time: now(), card: extra.card || null, speak: !!extra.speak };
+    state.messages.push(msg);
     renderThread();
+    const voiced = from === "ai" || from === "plumber";
+    const pending = !extra.raw && localize(text, (x) => {
+      msg.text = x;
+      renderThread();
+      if (voiced && voiceReplies) speak(x);
+    });
+    if (!pending && voiced && voiceReplies) speak(text);
+    if (msg.card && !extra.raw) localizeTree(msg.card);
+  }
+
+  // Cards (estimate, brief, invoice) follow the tenant's language too
+  function localizeTree(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) if (/[a-z]{2}/i.test(walker.currentNode.nodeValue)) nodes.push(walker.currentNode);
+    nodes.forEach((n) => localize(n.nodeValue.trim(), (x) => { n.nodeValue = x; }));
   }
   function me(text) { say("me", text); }
 
@@ -810,7 +1002,7 @@
       }
       if (m.text) item.append(p_("", m.text));
       if (m.card) item.append(m.card);
-      if (m.speak) {
+      if (m.speak || (voiceLive && (m.from === "ai" || m.from === "plumber"))) {
         // spoken messages (ElevenLabs voice in production) get a play button
         const play = button("t-listen", "");
         play.append(iconEl("play"), " Listen");
@@ -841,9 +1033,12 @@
   function later(fn, ms) { setTimeout(fn, ms); }
 
   // Quick-reply chips under the conversation
-  function chips(list) {
+  function chips(list, raw) {
     setActions(list.map(([label, run, icon]) => {
-      const b = button("t-chip", label);
+      const b = button("t-chip", "");
+      const text = span("", label);
+      b.append(text);
+      if (!raw) localize(label, (x) => { text.textContent = x; });
       if (icon) b.prepend(iconEl(icon));
       b.addEventListener("click", () => { setActions([]); run(); });
       return b;

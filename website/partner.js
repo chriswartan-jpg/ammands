@@ -16,6 +16,14 @@
     done: "Done"
   };
   const POLICY = window.CENTRIX_PARTNER_POLICY;
+  const AI = window.CentrixAI;
+  let live = false;
+  AI.status.then((st) => {
+    live = st.live;
+    const badge = $("ai-mode");
+    badge.textContent = st.live ? (st.voice ? "Live AI · voice" : "Live AI") : "Demo mode";
+    badge.classList.toggle("is-live", st.live);
+  });
   // The partner's part of the final workflow, in order (steps 10–21)
   const FLOW = [
     "Job accepted",
@@ -480,7 +488,18 @@
         fields.forEach((f, i) => { f.value = POLICY.suggestedWindows[i]; });
         error.textContent = "";
       });
-      tools.append(suggest, micBtn((text) => {
+      tools.append(suggest, micBtn(async (text) => {
+        // OpenAI turns "tomorrow at ten, Friday two to four…" into 3 clean windows
+        if (live) {
+          try {
+            const r = await AI.ask("windows", { text });
+            if (r.windows && r.windows.length) {
+              r.windows.slice(0, 3).forEach((w, i) => { fields[i].value = w; });
+              error.textContent = r.windows.length < 3 ? "I heard fewer than 3 windows. Add the rest." : "";
+              return;
+            }
+          } catch (e) { /* fall through to plain text */ }
+        }
         const empty = fields.find((f) => !f.value.trim()) || fields[2];
         empty.value = text;
       }));
@@ -550,6 +569,8 @@
 
     on_the_way(job, card) {
       card.append(note(`On the way. The tenant expects you in about ${job.eta || 15} minutes.`));
+      const first = job.tenant.split(" ")[0];
+      card.append(textBtn("▶ Play what the tenant hears", () => AI.speak(`Hi ${first}, this is ${session.name}. I'm on my way and will be with you in about ${job.eta || 15} minutes.`)));
       card.append(primary("I've arrived", "pin", () => go(job, "Check the cost before you start.", () => {
         job.stage = "cost_check";
         log(job, "partner", "I've arrived.");
@@ -596,7 +617,13 @@
       const error = errorLine();
       const tools = document.createElement("div");
       tools.className = "wf-tools";
-      tools.append(micBtn((text) => { area.value = (area.value ? area.value + " " : "") + text; }));
+      tools.append(micBtn(async (text) => {
+        let note = text;
+        if (live) {
+          try { note = (await AI.ask("work_note", { text })).note || text; } catch (e) { /* keep the raw dictation */ }
+        }
+        area.value = (area.value ? area.value + " " : "") + note;
+      }));
       card.append(area, tools, error);
       card.append(primary("Mark repair done", "flag", () => {
         const text = area.value.trim();
@@ -831,28 +858,46 @@
     return ul;
   }
 
-  // Dictation for time windows and work notes. Uses the browser's recogniser as a
-  // stand-in; in production this is ElevenLabs speech-to-text (Scribe).
+  // Dictation for time windows and work notes: record → ElevenLabs speech-to-text
+  // (Scribe) through the centrix server; the browser's recogniser is the fallback.
   function micBtn(onText) {
     const b = document.createElement("button");
     b.type = "button";
     b.className = "text-btn wf-mic";
     b.setAttribute("aria-pressed", "false");
+    const label = document.createElement("span");
+    label.textContent = "Dictate";
     b.innerHTML = `<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">${ICONS.mic}</svg>`;
-    b.append(" Dictate");
-    let rec = null;
-    b.addEventListener("click", () => {
-      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SR) { toast("Dictation isn't available in this browser. Type instead."); return; }
-      if (rec) { rec.stop(); return; }
-      rec = new SR();
-      rec.lang = navigator.language || "en-GB";
-      rec.onresult = (e) => onText([...e.results].map((r) => r[0].transcript).join(" "));
-      rec.onerror = () => toast("Couldn't hear you. Check microphone access, or type instead.");
-      rec.onend = () => { rec = null; b.classList.remove("is-live"); b.setAttribute("aria-pressed", "false"); };
-      b.classList.add("is-live");
-      b.setAttribute("aria-pressed", "true");
-      rec.start();
+    b.append(" ", label);
+    let handle = null;
+    const set = (mode) => {
+      b.classList.toggle("is-live", mode === "live");
+      b.disabled = mode === "busy";
+      b.setAttribute("aria-pressed", String(mode === "live"));
+      label.textContent = mode === "live" ? "Stop dictating" : mode === "busy" ? "Writing it down…" : "Dictate";
+    };
+    b.addEventListener("click", async () => {
+      if (handle) {
+        const h = handle;
+        handle = null;
+        set("busy");
+        try {
+          const r = await h.stop();
+          if (r.text) await onText(r.text);
+          else toast("I didn't catch that. Try again, or type instead.");
+        } catch (e) {
+          toast("Couldn't understand the recording. Try again, or type instead.");
+        }
+        set("idle");
+        return;
+      }
+      try {
+        handle = await AI.listen();
+        set("live");
+      } catch (e) {
+        set("idle");
+        toast(/denied|allowed|permission/i.test(e.message) ? "Allow microphone access to dictate, or type instead." : "Dictation isn't available here. Type instead.");
+      }
     });
     return b;
   }

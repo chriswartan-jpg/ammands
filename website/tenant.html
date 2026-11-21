@@ -18,8 +18,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
   <link rel="stylesheet" href="styles.css?v=19">
-  <link rel="stylesheet" href="partner.css?v=8">
-  <link rel="stylesheet" href="tenant.css?v=3">
+  <link rel="stylesheet" href="partner.css?v=9">
+  <link rel="stylesheet" href="tenant.css?v=4">
 </head>
 <body class="app tenant">
   <header class="app-bar">
@@ -73,9 +73,12 @@
             <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.8l1.6 3.6 3.6 1.6-3.6 1.6L8 12.2 6.4 8.6 2.8 7l3.6-1.6z" fill="currentColor"/></svg>
           </span>
           <div>
-            <h2 id="chat-title">centrix assistant</h2>
-            <p class="t-muted">Type or speak. It already knows your address and access details.</p>
+            <h2 id="chat-title">centrix assistant <span class="ai-mode" id="ai-mode">Demo mode</span></h2>
+            <p class="t-muted">Type or talk, in any language. It already knows your address and access details.</p>
           </div>
+          <button type="button" class="icon-btn voice-toggle" id="voice-toggle" aria-pressed="false" aria-label="Turn spoken replies on" data-tip="Spoken replies off">
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2.5 6h2.5l3.5-3v10L5 10H2.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path class="wave" d="M11 5.5a3.5 3.5 0 0 1 0 5M12.8 3.8a6 6 0 0 1 0 8.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
         </div>
 
         <ol class="t-thread" id="thread" aria-live="polite"></ol>
@@ -126,6 +129,7 @@
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="map-style.js?v=1"></script>
   <script src="data/tenant-data.js?v=2"></script>
-  <script src="tenant.js?v=3"></script>
+  <script src="ai.js?v=1"></script>
+  <script src="tenant.js?v=4"></script>
 </body>
 </html>
