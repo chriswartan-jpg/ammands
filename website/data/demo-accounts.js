@@ -19,7 +19,6 @@ window.CENTRIX_DEMO_ACCOUNTS = [
   {
     role: "partner",
     name: "Stefan Brandt",
-    company: "Example Plumbing GmbH",
     email: "stefan.brandt@example-plumbing.test",
     password: "stefan-e06b44-demo",
     unit: null
@@ -35,7 +34,7 @@ window.CENTRIX_DEMO_ACCOUNTS = [
   },
   {
     role: "partner",
-    name: "Example Plumbing GmbH",
+    name: "Stefan Brandt",
     email: "jobs@example-plumbing.test",
     password: "plumber-demo-7",
     unit: null

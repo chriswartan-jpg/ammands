@@ -199,7 +199,7 @@ window.CENTRIX_PARTNER_JOBS = [
  *   done:         follow_up → closed
  */
 window.CENTRIX_PARTNER_POLICY = {
-  photo: "assets/avatars/example-plumbing.jpg",   // profile picture of the logged-in partner
+  photo: "assets/avatars/stefan-brandt.jpg",   // profile picture of the logged-in partner
   manager: "Hausverwaltung Example GmbH",
   preApprovedLimit: 3000,   // € net, above this the manager approves the quote first
   vat: 19,                  // % VAT on the invoice
