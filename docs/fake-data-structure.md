@@ -159,7 +159,7 @@ The tenant's report and everything centrix decides about it.
 
 `new` → `manager_review` (not plumbing / unsure) → `awaiting_consent` → `dispatched` → `scheduling` (windows proposed) → `scheduled` → `in_progress` → `quote_approval` (over €3,000) → `awaiting_confirmation` ("is it dry now?") → `invoiced` → `follow_up` (7-day check) → `closed`
 
-**The 19 cases** cover every status, so each screen has something to show:
+**The 19 cases** cover almost every status, so each screen has something to show (`awaiting_consent` happens live when a tenant reports in the portal):
 
 | Case | Unit | Tenant | Problem | Status | Shows |
 |---|---|---|---|---|---|
@@ -180,10 +180,10 @@ The tenant's report and everything centrix decides about it.
 | C-2026-0184 | Rechtstraat 58, 3rd | Mateo Garcia | sewer smell | scheduled | |
 | C-2026-0185 | Oranjeplein 87D | Hannah Becker | slow washbasin | scheduled | German, tenant pays |
 | C-2026-0186 | Brusselsestraat 74, 2nd | Daan Smeets | no hot water (F28) | scheduling | tenant still has to pick a window |
-| C-2026-0187 | Oranjeplein 87C | Lotte Hendriks | leaking shower mixer | awaiting_consent | consent question sent |
+| C-2026-0187 | Oranjeplein 87C | Lotte Hendriks | leaking shower mixer | dispatched | waiting for the plumber to accept |
 | C-2026-0188 | Randwycksingel 15, 0.1 | Anouk Vermeulen | dishwasher leak | new | arrived this morning |
 
-### `jobs.json` (14)
+### `jobs.json` (15)
 What the **partner** sees. One job per case that has been dispatched.
 
 | Field | Meaning |
@@ -193,7 +193,7 @@ What the **partner** sees. One job per case that has been dispatched.
 | `withheld` | What the partner never receives |
 | `consent_id`, `proposed_windows`, `appointment_id`, `quote`, `work_report_id`, `invoice_id` | |
 
-### `consents.json` (14)
+### `consents.json` (15)
 The track says consent must be handled. One record per job, like the track's `consent` payload: `data_shared`, `data_withheld`, `given_at`, `channel`, the exact `wording` the tenant agreed to, and `revoked_at`.
 
 ### `appointments.json` (13)
@@ -205,7 +205,7 @@ The track says consent must be handled. One record per job, like the track's `co
 ### `invoices.json` (8)
 `lines` (call-out, labour, parts), `subtotal_eur`, `vat_rate_pct` 21, `vat_eur`, `total_eur`, `bill_to` (`property_manager` or `tenant`), `status` (`sent`, `paid`) and the PDF `document`. Linked to the case **and** the unit, as the challenge asks.
 
-### `events.json` (176)
+### `events.json` (178)
 The trigger events, shaped like the track's example: `event`, `occurred_at`, `unit_id`, `contact_id`, `case_id`, `actor`, `data`.
 
 Case events: `case.created`, `case.classified`, `case.linked`, `consent.given`, `job.dispatched`, `job.accepted`, `job.windows_proposed`, `appointment.booked`, `job.on_the_way`, `job.started`, `quote.submitted`, `job.completed`, `tenant.confirmed_fix`, `invoice.issued`, `tenant.feedback`, `case.closed`.
