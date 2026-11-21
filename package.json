@@ -1,0 +1,10 @@
+{
+  "name": "centrix-plumbing-demo",
+  "private": true,
+  "type": "module",
+  "description": "centrix x reltix hackathon prototype: tenant and partner portals with OpenAI and ElevenLabs",
+  "scripts": {
+    "start": "node server/server.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

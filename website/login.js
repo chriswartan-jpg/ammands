@@ -74,10 +74,10 @@
     }
 
     // Partners and tenants go straight to their own portal. The session lives in this tab
-    // only (sessionStorage) and only holds the role and display name.
+    // only (sessionStorage) and only holds the role, display name and company.
     if (account.role === "partner" || account.role === "tenant") {
       try {
-        sessionStorage.setItem("centrix.session", JSON.stringify({ role: account.role, name: account.name, email: account.email }));
+        sessionStorage.setItem("centrix.session", JSON.stringify({ role: account.role, name: account.name, company: account.company || null, email: account.email }));
         password.value = "";
         location.href = account.role === "partner" ? "partner.html" : "tenant.html";
         return;

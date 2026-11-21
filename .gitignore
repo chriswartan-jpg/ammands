@@ -1,2 +1,8 @@
 .DS_Store
 .claude/
+
+# Local secrets: API keys live only here, never in git
+.env
+.env.*
+!.env.example
+node_modules/

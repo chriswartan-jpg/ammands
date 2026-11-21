@@ -188,3 +188,80 @@ window.CENTRIX_PARTNER_JOBS = [
     ]
   }
 ];
+
+/*
+ * Final workflow fields (see the final plumbing workflow, steps 2–21).
+ *
+ * stage is where the job is inside its status:
+ *   new:          review
+ *   scheduled:    propose → awaiting_pick → booked
+ *   in_progress:  on_the_way → cost_check → (approval) → working → confirm → invoice
+ *   done:         follow_up → closed
+ */
+window.CENTRIX_PARTNER_POLICY = {
+  photo: "assets/avatars/stefan-brandt.jpg",   // profile picture of the logged-in partner
+  manager: "Hausverwaltung Example GmbH",
+  preApprovedLimit: 3000,   // € net, above this the manager approves the quote first
+  vat: 19,                  // % VAT on the invoice
+  callOut: 45,              // € net call-out fee
+  hourly: 65,               // € net per hour of labour
+  withheld: ["Tenant email address", "Owner details", "Lease and rent", "Meter numbers"],
+  suggestedWindows: ["Today 16:00–18:00", "Tomorrow 10:00–12:00", "Tomorrow 14:00–16:00"]
+};
+
+(function () {
+  const WORKFLOW = {
+    "JOB-1042": {
+      caseId: "CASE-1042", stage: "review", language: "German",
+      tenantPhoto: "assets/avatars/lena-hoffmann.jpg",
+      answers: ["Still leaking", "Stays in the cupboard", "Since last night"],
+      consent: { at: "Today, 08:13", channel: "Tenant portal (tap)" },
+      linkedCase: { id: "CASE-1038", unit: "Unit 3B, the flat below", text: "Damp patch on the kitchen ceiling" },
+      shutoff: "Blue tap under the kitchen sink, behind the bin. Main valve in the cellar, room K4."
+    },
+    "JOB-1039": {
+      caseId: "CASE-1039", stage: "booked", language: "German",
+      answers: ["Drains slowly", "Just this one", "A few days"],
+      consent: { at: "Yesterday, 17:41", channel: "Voice agent (spoken yes)" },
+      windows: ["Tomorrow 10:00–12:00", "Tomorrow 14:00–16:00", "Fri 08:00–10:00"],
+      reminder: "Day-before reminder sent to the tenant"
+    },
+    "JOB-1037": {
+      caseId: "CASE-1037", stage: "review", language: "Turkish",
+      answers: ["Nowhere in the flat", "Yes, an error", "Today"],
+      consent: { at: "Today, 07:06", channel: "Voice agent (spoken yes)" },
+      shutoff: "Main valve next to the water meter in the hallway cupboard."
+    },
+    "JOB-1033": {
+      caseId: "CASE-1033", stage: "working", language: "Italian",
+      answers: ["Yes, all the time", "No, this is the only one", "A few days"],
+      consent: { at: "Mon, 14:22", channel: "Tenant portal (tap)" },
+      quote: 140
+    },
+    "JOB-1030": {
+      caseId: "CASE-1030", stage: "booked", language: "German",
+      answers: ["Drips when closed", "Only this tap", "Longer"],
+      consent: { at: "Mon, 09:49", channel: "Tenant portal (tap)" },
+      windows: ["Thu 10:00–12:00", "Fri 14:00–16:00", "Mon 08:00–10:00"]
+    },
+    "JOB-1028": {
+      caseId: "CASE-1028", stage: "closed", language: "German",
+      answers: ["Nothing drains", "Just this one", "Today"],
+      consent: { at: "Last week", channel: "Tenant portal (tap)" },
+      quote: 118,
+      workNote: "Cleared grease from the trap and the branch pipe. Flushed and tested, drains freely.",
+      tenantConfirmed: true,
+      invoice: { number: "INV-1028-01", net: 118, vat: 22.42, gross: 140.42 },
+      feedback: { rating: "Great", onTime: "Yes" },
+      followUp: "Still working after seven days. Unit record updated."
+    },
+    "JOB-1026": {
+      caseId: "CASE-1026", stage: "review", language: "Turkish",
+      answers: ["All taps", "Mostly mornings", "A few days"],
+      consent: { at: "Today, 10:32", channel: "Tenant portal (tap)" }
+    }
+  };
+  window.CENTRIX_PARTNER_JOBS.forEach((job) => {
+    Object.assign(job, { windows: [], linkedCase: null, shutoff: null, quote: null, workNote: "", tenantConfirmed: false, invoice: null, feedback: null, followUp: null, reminder: null }, WORKFLOW[job.id] || {});
+  });
+})();

@@ -15,16 +15,39 @@
     in_progress: "In progress",
     done: "Done"
   };
-  // The one next step for each status, with the button label, icon and toast text
-  const NEXT = {
-    new: { to: "scheduled", label: "Accept job", icon: "check", toast: "Job accepted. The tenant can now pick a time slot." },
-    scheduled: { to: "in_progress", label: "I'm on the way", icon: "van", toast: "The tenant knows you're on the way." },
-    in_progress: { to: "done", label: "Mark as done", icon: "flag", toast: "Job marked as done. Upload the work report next." }
-  };
+  const POLICY = window.CENTRIX_PARTNER_POLICY;
+  const AI = window.CentrixAI;
+  let live = false;
+  AI.status.then((st) => {
+    live = st.live;
+    const badge = $("ai-mode");
+    badge.textContent = st.live ? (st.voice ? "Live AI · voice" : "Live AI") : "Demo mode";
+    badge.classList.toggle("is-live", st.live);
+  });
+  // The partner's part of the final workflow, in order (steps 10–21)
+  const FLOW = [
+    "Job accepted",
+    "3 time windows proposed",
+    "Tenant picked a slot",
+    "On the way, ETA sent",
+    `Cost check (up to €${fmt(POLICY.preApprovedLimit)})`,
+    "Repair done, work note",
+    "Tenant confirmed the fix",
+    "Invoice sent",
+    "Seven-day follow-up"
+  ];
+  // Where each stage sits in FLOW (the step that is current)
+  const STAGE_AT = { review: 0, propose: 1, awaiting_pick: 2, booked: 3, on_the_way: 4, cost_check: 4, approval: 4, working: 5, confirm: 6, invoice: 7, follow_up: 8, closed: 9 };
   const ICONS = {
     check: '<path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
     van: '<path d="M1.5 4.5h8v6h-8zM9.5 6.5h3l2 2v2h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="4.5" cy="11.5" r="1.4" fill="currentColor"/><circle cx="12" cy="11.5" r="1.4" fill="currentColor"/>',
     flag: '<path d="M4 14V2.5M4 3h8l-1.8 3L12 9H4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    clock: '<circle cx="8" cy="8" r="5.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.2l2.2 1.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+    pin: '<path d="M8 14.5s4.5-4.2 4.5-7.8a4.5 4.5 0 0 0-9 0c0 3.6 4.5 7.8 4.5 7.8z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6.6" r="1.6" fill="currentColor"/>',
+    euro: '<path d="M11.5 4.2A4.5 4.5 0 1 0 11.5 11.8M2.5 7h6.5M2.5 9h6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+    send: '<path d="M2.5 8 13.5 3 10 13.5 7.5 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>',
+    mic: '<rect x="5.5" y="1.8" width="5" height="8" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 7.5a4.5 4.5 0 0 0 9 0M8 12v2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+    lock: '<rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/>',
     chat: '<path d="M2.5 3.5h11v7h-6l-3 2.5v-2.5h-2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>'
   };
 
@@ -35,8 +58,10 @@
 
   // ---------- top bar ----------
 
-  $("app-user").textContent = session.name;
-  $("app-avatar").textContent = initials(session.name);
+  $("app-user").textContent = session.company ? `${session.name} · ${session.company}` : session.name;
+  const appAvatar = $("app-avatar");
+  appAvatar.textContent = POLICY.photo ? "" : initials(session.name);
+  if (POLICY.photo) { appAvatar.classList.add("has-photo"); appAvatar.style.backgroundImage = `url("${POLICY.photo}")`; }
   $("logout").addEventListener("click", (event) => {
     const btn = event.currentTarget;
     btn.disabled = true;
@@ -318,25 +343,82 @@
     }));
 
     const props = [
+      ["Case", job.caseId],
       ["Address", job.address],
       ["Area", job.district],
       ["Floor", job.floor],
       ["Tenant", job.tenant],
+      ["Language", job.language && job.language !== "German" ? `${job.language} (your brief is in German)` : "German"],
       ["Access", job.access],
       ["Time slot", job.slot],
       ["Reported", job.reported]
     ];
+    if (job.shutoff) props.splice(7, 0, ["Shut-off", job.shutoff]);
     $("d-props").replaceChildren(...props.flatMap(([k, v]) => {
       const dt = document.createElement("dt");
       dt.textContent = k;
       const dd = document.createElement("dd");
       dd.textContent = v;
+      if (k === "Tenant" && job.tenantPhoto) {
+        // the tenant's profile picture next to their name
+        const av = document.createElement("span");
+        av.className = "avatar avatar-sm has-photo";
+        av.setAttribute("aria-hidden", "true");
+        av.style.backgroundImage = `url("${job.tenantPhoto}")`;
+        dd.classList.add("with-avatar");
+        dd.prepend(av);
+      }
       return [dt, dd];
     }));
 
     renderSteps(job);
+    renderBrief(job);
+    renderFlow(job);
     renderActions(job);
     renderThread(job);
+  }
+
+  // Job brief (step 8) and consent record (step 9): what the tenant agreed to share
+  function renderBrief(job) {
+    const box = $("d-brief");
+    const rows = [];
+    if (job.answers && job.answers.length) rows.push(["Tenant's answers", job.answers.join(" · ")]);
+    if (job.linkedCase) rows.push(["Linked case", `${job.linkedCase.id}, ${job.linkedCase.unit}: “${job.linkedCase.text}”. One visit covers both.`]);
+    rows.push(["Repair policy", `Up to €${fmt(POLICY.preApprovedLimit)} net pre-approved. Above that, ${POLICY.manager} approves your quote first.`]);
+    if (job.consent) rows.push(["Consent", `Given ${job.consent.at} via ${job.consent.channel.toLowerCase()}`]);
+    const dl = document.createElement("dl");
+    dl.className = "props";
+    rows.forEach(([k, v]) => {
+      const dt = document.createElement("dt");
+      dt.textContent = k;
+      const dd = document.createElement("dd");
+      dd.textContent = v;
+      dl.append(dt, dd);
+    });
+    const label = document.createElement("p");
+    label.className = "wf-label";
+    label.textContent = "Not shared with you";
+    const withheld = document.createElement("ul");
+    withheld.className = "wf-withheld";
+    POLICY.withheld.forEach((w) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">${ICONS.lock}</svg>`;
+      li.append(w);
+      withheld.append(li);
+    });
+    box.replaceChildren(dl, label, withheld);
+  }
+
+  // The partner's steps of the workflow, with done / current markers
+  function renderFlow(job) {
+    const at = STAGE_AT[job.stage] ?? 0;
+    $("d-flow").replaceChildren(...FLOW.map((s, i) => {
+      const li = document.createElement("li");
+      li.className = i < at ? "is-done" : i === at ? "is-current" : "";
+      if (i === at) li.setAttribute("aria-current", "step");
+      li.textContent = s;
+      return li;
+    }));
   }
 
   // Progress line: New → Scheduled → In progress → Done
@@ -352,9 +434,17 @@
     }));
   }
 
+  // The next step for this job, based on its stage in the final workflow.
+  // Every real step has Undo; "Demo:" buttons play the tenant or the manager.
   function renderActions(job) {
     const box = $("d-actions");
-    const step = NEXT[job.status];
+    const card = document.createElement("div");
+    card.className = "wf-card";
+    const title = document.createElement("p");
+    title.className = "wf-label";
+    title.textContent = job.stage === "closed" ? "Case closed" : "Next step";
+    card.append(title);
+
     const chat = document.createElement("button");
     chat.type = "button";
     chat.className = "btn-ghost btn-lg";
@@ -366,45 +456,461 @@
       input.focus();
     });
 
-    if (!step) {
-      const p = document.createElement("p");
-      p.className = "status-note";
-      p.textContent = "This job is closed. The work report and invoice are linked to the unit in centrix.";
-      box.replaceChildren(p, chat);
-      return;
-    }
+    const build = STAGES[job.stage] || STAGES.review;
+    build(job, card);
+    const row = document.createElement("div");
+    row.className = "wf-row";
+    row.append(chat);
+    box.replaceChildren(card, row);
+  }
 
-    const primary = document.createElement("button");
-    primary.type = "button";
-    primary.className = "btn-primary btn-lg";
-    primary.innerHTML = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">${ICONS[step.icon]}</svg><span class="btn-label"></span>`;
-    primary.querySelector(".btn-label").textContent = step.label;
-    primary.addEventListener("click", () => {
-      // short busy state, so the click clearly "lands"
-      primary.disabled = true;
-      primary.setAttribute("aria-busy", "true");
-      primary.classList.add("is-loading");
-      const before = { status: job.status, slot: job.slot, messages: job.messages.length };
-      setTimeout(() => {
-        job.status = step.to;
-        if (step.to === "scheduled" && job.slot === "Not booked yet") job.slot = "Waiting for the tenant to pick a slot";
-        job.messages.push({ from: "centrix", time: now(), text: `Status changed to “${STATUS[step.to]}”. The tenant has been notified.` });
-        refreshAll(job);
-        const next = $("d-actions").querySelector(".btn-primary, .btn-ghost");
-        if (next) next.focus();
-        toast(step.toast, {
-          label: "Undo",
-          run: () => {
-            job.status = before.status;
-            job.slot = before.slot;
-            job.messages.length = before.messages;
-            refreshAll(job);
-            toast("Change undone.");
-          }
+  const STAGES = {
+    // Step 10: the manager dispatched this job to you. Accept it.
+    review(job, card) {
+      card.append(note("The manager dispatched this job to you. Check the brief, then accept it."));
+      card.append(primary("Accept job", "check", () => go(job, "Job accepted. Propose 3 time windows next.", () => {
+        job.status = "scheduled";
+        job.stage = "propose";
+        job.slot = "Waiting for your 3 time windows";
+        log(job, "centrix", "Job accepted. The tenant has been notified.");
+      })));
+    },
+
+    // Step 11: propose 3 time windows (typed or dictated). 12b sends you back here.
+    propose(job, card) {
+      card.append(note("Propose 3 time windows. The tenant picks one, by tap or by voice."));
+      const fields = [0, 1, 2].map((i) => {
+        const wrap = document.createElement("label");
+        wrap.className = "wf-field";
+        const span = document.createElement("span");
+        span.textContent = `Window ${i + 1}`;
+        const inp = document.createElement("input");
+        inp.type = "text";
+        inp.autocomplete = "off";
+        inp.placeholder = POLICY.suggestedWindows[i];
+        wrap.append(span, inp);
+        card.append(wrap);
+        return inp;
+      });
+      const error = errorLine();
+      const tools = document.createElement("div");
+      tools.className = "wf-tools";
+      const suggest = textBtn("Use suggested times", () => {
+        fields.forEach((f, i) => { f.value = POLICY.suggestedWindows[i]; });
+        error.textContent = "";
+      });
+      tools.append(suggest, micBtn(async (text) => {
+        // OpenAI turns "tomorrow at ten, Friday two to four…" into 3 clean windows
+        if (live) {
+          try {
+            const r = await AI.ask("windows", { text });
+            if (r.windows && r.windows.length) {
+              r.windows.slice(0, 3).forEach((w, i) => { fields[i].value = w; });
+              error.textContent = r.windows.length < 3 ? "I heard fewer than 3 windows. Add the rest." : "";
+              return;
+            }
+          } catch (e) { /* fall through to plain text */ }
+        }
+        const empty = fields.find((f) => !f.value.trim()) || fields[2];
+        empty.value = text;
+      }));
+      card.append(tools, error);
+      card.append(primary("Send 3 windows to the tenant", "send", () => {
+        const values = fields.map((f) => f.value.trim());
+        if (values.some((v) => !v)) { error.textContent = "Fill in all 3 windows, or use the suggested times."; fields[values.findIndex((v) => !v)].focus(); return false; }
+        if (new Set(values.map((v) => v.toLowerCase())).size < 3) { error.textContent = "The 3 windows must be different."; return false; }
+        return go(job, "Windows sent. The tenant picks one.", () => {
+          job.windows = values;
+          job.stage = "awaiting_pick";
+          job.slot = "Tenant is choosing";
+          log(job, "partner", `I can come: ${values.join(", ")}.`);
         });
-      }, 450);
+      }));
+    },
+
+    // Step 12: the tenant picks one, or none fit.
+    awaiting_pick(job, card) {
+      card.append(note("Waiting for the tenant to pick one of your windows:"));
+      card.append(list(job.windows));
+      card.append(...job.windows.map((w, i) => demo(`Demo: tenant picks window ${i + 1}`, () => change(job, () => {
+        job.stage = "booked";
+        job.slot = w;
+        job.reminder = "Day-before reminder scheduled for the tenant";
+        log(job, "tenant", `${w} works for me.`);
+        log(job, "centrix", `Confirmation sent to ${job.tenant} and ${POLICY.manager}: ${w}.`);
+      }))));
+      card.append(demo("Demo: none of these fit", () => change(job, () => {
+        job.stage = "propose";
+        job.slot = "Waiting for new time windows";
+        log(job, "tenant", "None of these times work for me. Could you propose new ones?");
+      })));
+    },
+
+    // Steps 13–15: booked, reminder, then "on the way" with a spoken ETA.
+    booked(job, card) {
+      card.append(note(`Booked: ${job.slot}.${job.reminder ? ` ${job.reminder}.` : ""}`));
+      const label = document.createElement("p");
+      label.className = "wf-label";
+      label.textContent = "ETA when you leave";
+      const seg = document.createElement("div");
+      seg.className = "wf-seg";
+      seg.setAttribute("role", "radiogroup");
+      seg.setAttribute("aria-label", "ETA in minutes");
+      let eta = 15;
+      [10, 15, 20, 30].forEach((m) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = `${m} min`;
+        b.setAttribute("role", "radio");
+        b.setAttribute("aria-checked", String(m === eta));
+        b.addEventListener("click", () => {
+          eta = m;
+          seg.querySelectorAll("button").forEach((x) => x.setAttribute("aria-checked", String(x === b)));
+        });
+        seg.append(b);
+      });
+      card.append(label, seg);
+      card.append(primary("I'm on the way", "van", () => go(job, `The tenant hears your ETA: about ${eta} minutes.`, () => {
+        job.status = "in_progress";
+        job.stage = "on_the_way";
+        job.eta = eta;
+        log(job, "centrix", `Spoken ETA sent to ${job.tenant}: about ${eta} minutes.`);
+      })));
+    },
+
+    on_the_way(job, card) {
+      card.append(note(`On the way. The tenant expects you in about ${job.eta || 15} minutes.`));
+      const first = job.tenant.split(" ")[0];
+      card.append(textBtn("▶ Play what the tenant hears", () => AI.speak(`Hi ${first}, this is ${session.name.split(" ")[0]}${session.company ? ` from ${session.company}` : ""}. I'm on my way and will be with you in about ${job.eta || 15} minutes.`)));
+      card.append(primary("I've arrived", "pin", () => go(job, "Check the cost before you start.", () => {
+        job.stage = "cost_check";
+        log(job, "partner", "I've arrived.");
+      })));
+    },
+
+    // Step 16: on-site cost check against the pre-approved limit (16b: manager approves).
+    cost_check(job, card) {
+      card.append(note(`Before you start: does the repair stay within €${fmt(POLICY.preApprovedLimit)} net?`));
+      const { wrap, inp } = numberField("Your quote, € net", job.quote || "");
+      const error = errorLine();
+      card.append(wrap, error);
+      card.append(primary("Check cost", "euro", () => {
+        const net = Number(inp.value);
+        if (!inp.value || !(net > 0)) { error.textContent = "Enter your quote in euros, for example 140."; inp.focus(); return false; }
+        const within = net <= POLICY.preApprovedLimit;
+        return go(job, within ? "Within the limit. You can start." : "Over the limit. Waiting for the manager.", () => {
+          job.quote = net;
+          job.stage = within ? "working" : "approval";
+          log(job, "centrix", within
+            ? `Quote €${fmt(net)} net is within the €${fmt(POLICY.preApprovedLimit)} pre-approved limit. Repair can start.`
+            : `Quote €${fmt(net)} net is over the €${fmt(POLICY.preApprovedLimit)} limit. Sent to ${POLICY.manager} for approval.`);
+        });
+      }));
+    },
+
+    approval(job, card) {
+      card.append(note(`Your quote of €${fmt(job.quote)} net is with ${POLICY.manager}. Don't start until it's approved.`));
+      card.append(demo("Demo: manager approves the quote", () => change(job, () => {
+        job.stage = "working";
+        log(job, "centrix", `${POLICY.manager} approved the quote of €${fmt(job.quote)} net. You can start.`);
+      })));
+    },
+
+    // Step 17: repair done, with a typed or dictated work note.
+    working(job, card) {
+      card.append(note("Repair in progress. When you're done, add a work note: what you found and what you fixed."));
+      const area = document.createElement("textarea");
+      area.className = "wf-input";
+      area.rows = 3;
+      area.placeholder = "Found a loose nut on the trap. Tightened it, replaced the seal, tested 10 minutes.";
+      area.value = job.workNote || "";
+      area.setAttribute("aria-label", "Work note");
+      const error = errorLine();
+      const tools = document.createElement("div");
+      tools.className = "wf-tools";
+      tools.append(micBtn(async (text) => {
+        let note = text;
+        if (live) {
+          try { note = (await AI.ask("work_note", { text })).note || text; } catch (e) { /* keep the raw dictation */ }
+        }
+        area.value = (area.value ? area.value + " " : "") + note;
+      }));
+      card.append(area, tools, error);
+      card.append(primary("Mark repair done", "flag", () => {
+        const text = area.value.trim();
+        if (text.length < 10) { error.textContent = "Write a short work note first (at least a sentence)."; area.focus(); return false; }
+        return go(job, "Work note saved. The tenant is asked to confirm the fix.", () => {
+          job.workNote = text;
+          job.stage = "confirm";
+          log(job, "partner", `Work note: ${text}`);
+          log(job, "centrix", `${job.tenant} is asked to confirm the repair worked.`);
+        });
+      }));
+    },
+
+    // Step 18: the tenant confirms the fix. No invoice before that.
+    confirm(job, card) {
+      card.append(note("Waiting for the tenant to confirm the problem is fixed. The invoice opens after that."));
+      card.append(demo("Demo: tenant confirms it's fixed", () => change(job, () => {
+        job.tenantConfirmed = true;
+        job.stage = "invoice";
+        log(job, "tenant", "Yes, it's fixed. Thank you!");
+      })));
+      card.append(demo("Demo: tenant says it's not fixed", () => change(job, () => {
+        job.status = "scheduled";
+        job.stage = "propose";
+        job.slot = "Return visit: propose new windows";
+        log(job, "tenant", "It's still not right, unfortunately.");
+        log(job, "centrix", "Return visit needed at no extra cost. Propose new time windows.");
+      })));
+    },
+
+    // Step 19: invoice from the work note, linked to the case and the unit.
+    invoice(job, card) {
+      card.append(note("Build the invoice from your work note. It's linked to the case and the unit."));
+      const hours = numberField("Labour, hours", 1, 0.25);
+      const parts = numberField("Parts, € net", Math.max(0, Math.round((job.quote || 140) - POLICY.callOut - POLICY.hourly)));
+      const lines = document.createElement("ul");
+      lines.className = "wf-lines";
+      const error = errorLine();
+      const calc = () => {
+        const h = Math.max(0, Number(hours.inp.value) || 0);
+        const pt = Math.max(0, Number(parts.inp.value) || 0);
+        const net = POLICY.callOut + h * POLICY.hourly + pt;
+        const vat = Math.round(net * POLICY.vat) / 100;
+        return { h, pt, net, vat, gross: net + vat };
+      };
+      const warn = document.createElement("p");
+      warn.className = "wf-note wf-warn";
+      const draw = () => {
+        const c = calc();
+        warn.textContent = job.quote && c.net > job.quote ? `This is €${money(c.net - job.quote)} above your quote of €${fmt(job.quote)} net. Explain the difference in a message.` : "";
+        lines.replaceChildren(
+          line("Call-out", POLICY.callOut),
+          line(`Labour ${c.h} h × €${POLICY.hourly}`, c.h * POLICY.hourly),
+          line("Parts", c.pt),
+          line("Net", c.net),
+          line(`VAT ${POLICY.vat}%`, c.vat),
+          line("Total", c.gross, true)
+        );
+      };
+      [hours.inp, parts.inp].forEach((i) => i.addEventListener("input", draw));
+      draw();
+      const grid = document.createElement("div");
+      grid.className = "wf-grid";
+      grid.append(hours.wrap, parts.wrap);
+      card.append(grid, lines, warn, error);
+      card.append(primary("Send invoice", "send", () => {
+        const c = calc();
+        if (!(c.h > 0)) { error.textContent = "Add the labour time."; hours.inp.focus(); return false; }
+        return go(job, "Invoice sent and linked to the unit.", () => {
+          job.invoice = { number: `INV-${job.id.slice(4)}-01`, net: c.net, vat: c.vat, gross: c.gross };
+          job.status = "done";
+          job.stage = "follow_up";
+          job.slot = "Done today";
+          log(job, "centrix", `Invoice ${job.invoice.number} (€${money(c.gross)}) sent to ${POLICY.manager} and linked to ${job.caseId} and ${job.address}.`);
+          job.feedback = { rating: "Great", onTime: "Yes" };
+          log(job, "centrix", "Tenant feedback: service “Great”, plumber on time.");
+        });
+      }));
+    },
+
+    // Step 21: seven-day follow-up, then the case closes.
+    follow_up(job, card) {
+      card.append(summary(job));
+      card.append(note("centrix checks with the tenant in seven days that it stayed fixed."));
+      card.append(demo("Demo: seven days later", () => change(job, () => {
+        job.stage = "closed";
+        job.followUp = "Still fixed after seven days. Unit record updated.";
+        log(job, "centrix", `Seven-day check: still fixed. ${job.caseId} closed and the unit record updated.`);
+      })));
+    },
+
+    closed(job, card) {
+      card.append(summary(job));
+      card.append(note(job.followUp || "This job is closed. The work report and invoice are linked to the unit in centrix."));
+    }
+  };
+
+  // Apply a real step with a busy state, then offer Undo
+  function go(job, toastText, apply) {
+    change(job, apply, toastText);
+    return true;
+  }
+
+  function change(job, apply, toastText) {
+    const before = JSON.stringify(job);
+    apply();
+    refreshAll(job);
+    const next = $("d-actions").querySelector(".wf-card input, .wf-card textarea, .btn-primary, .demo-btn");
+    if (next) next.focus();
+    toast(toastText || "Updated.", {
+      label: "Undo",
+      run: () => {
+        Object.keys(job).forEach((k) => delete job[k]);
+        Object.assign(job, JSON.parse(before));
+        refreshAll(job);
+        toast("Change undone.");
+      }
     });
-    box.replaceChildren(primary, chat);
+  }
+
+  function log(job, from, text) { job.messages.push({ from, time: now(), text }); }
+
+  function primary(label, icon, run) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn-primary btn-lg wf-primary";
+    b.innerHTML = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">${ICONS[icon]}</svg><span class="btn-label"></span>`;
+    b.querySelector(".btn-label").textContent = label;
+    b.addEventListener("click", () => {
+      // short busy state, so the click clearly "lands"
+      b.disabled = true;
+      b.setAttribute("aria-busy", "true");
+      b.classList.add("is-loading");
+      setTimeout(() => {
+        if (run() === false) {
+          b.disabled = false;
+          b.removeAttribute("aria-busy");
+          b.classList.remove("is-loading");
+        }
+      }, 350);
+    });
+    return b;
+  }
+
+  function demo(label, run) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "demo-btn";
+    b.textContent = label;
+    b.addEventListener("click", run);
+    return b;
+  }
+
+  function note(text) {
+    const p = document.createElement("p");
+    p.className = "wf-note";
+    p.textContent = text;
+    return p;
+  }
+
+  function list(items) {
+    const ul = document.createElement("ul");
+    ul.className = "wf-windows";
+    items.forEach((w) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">${ICONS.clock}</svg>`;
+      li.append(w);
+      ul.append(li);
+    });
+    return ul;
+  }
+
+  function errorLine() {
+    const p = document.createElement("p");
+    p.className = "wf-error";
+    p.setAttribute("role", "alert");
+    return p;
+  }
+
+  function textBtn(label, run) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "text-btn";
+    b.textContent = label;
+    b.addEventListener("click", run);
+    return b;
+  }
+
+  function numberField(labelText, value, step) {
+    const wrap = document.createElement("label");
+    wrap.className = "wf-field";
+    const span = document.createElement("span");
+    span.textContent = labelText;
+    const inp = document.createElement("input");
+    inp.type = "number";
+    inp.min = "0";
+    inp.step = String(step || 1);
+    inp.inputMode = "decimal";
+    inp.value = value;
+    wrap.append(span, inp);
+    return { wrap, inp };
+  }
+
+  function line(label, value, total) {
+    const li = document.createElement("li");
+    if (total) li.className = "is-total";
+    const k = document.createElement("span");
+    k.textContent = label;
+    const v = document.createElement("span");
+    v.textContent = `€${money(value)}`;
+    li.append(k, v);
+    return li;
+  }
+
+  function summary(job) {
+    const ul = document.createElement("ul");
+    ul.className = "wf-lines";
+    const rows = [];
+    if (job.quote) rows.push(["Quote", `€${fmt(job.quote)} net`]);
+    if (job.invoice) rows.push([`Invoice ${job.invoice.number}`, `€${money(job.invoice.gross)}`]);
+    rows.push(["Tenant confirmed", job.tenantConfirmed ? "Yes" : "No"]);
+    if (job.feedback) rows.push(["Feedback", `${job.feedback.rating}, on time: ${job.feedback.onTime}`]);
+    rows.forEach(([k, v]) => {
+      const li = document.createElement("li");
+      const a = document.createElement("span");
+      a.textContent = k;
+      const b = document.createElement("span");
+      b.textContent = v;
+      li.append(a, b);
+      ul.append(li);
+    });
+    return ul;
+  }
+
+  // Dictation for time windows and work notes: record → ElevenLabs speech-to-text
+  // (Scribe) through the centrix server; the browser's recogniser is the fallback.
+  function micBtn(onText) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "text-btn wf-mic";
+    b.setAttribute("aria-pressed", "false");
+    const label = document.createElement("span");
+    label.textContent = "Dictate";
+    b.innerHTML = `<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">${ICONS.mic}</svg>`;
+    b.append(" ", label);
+    let handle = null;
+    const set = (mode) => {
+      b.classList.toggle("is-live", mode === "live");
+      b.disabled = mode === "busy";
+      b.setAttribute("aria-pressed", String(mode === "live"));
+      label.textContent = mode === "live" ? "Stop dictating" : mode === "busy" ? "Writing it down…" : "Dictate";
+    };
+    b.addEventListener("click", async () => {
+      if (handle) {
+        const h = handle;
+        handle = null;
+        set("busy");
+        try {
+          const r = await h.stop();
+          if (r.text) await onText(r.text);
+          else toast("I didn't catch that. Try again, or type instead.");
+        } catch (e) {
+          toast("Couldn't understand the recording. Try again, or type instead.");
+        }
+        set("idle");
+        return;
+      }
+      try {
+        handle = await AI.listen();
+        set("live");
+      } catch (e) {
+        set("idle");
+        toast(/denied|allowed|permission/i.test(e.message) ? "Allow microphone access to dictate, or type instead." : "Dictation isn't available here. Type instead.");
+      }
+    });
+    return b;
   }
 
   function refreshAll(job) {
@@ -601,6 +1107,9 @@
   function initials(name) {
     return name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join("");
   }
+
+  function fmt(n) { return Number(n).toLocaleString("en-GB"); }
+  function money(n) { return Number(n).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
   function now() {
     return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
