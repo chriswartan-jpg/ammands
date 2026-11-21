@@ -127,6 +127,7 @@
     if (state.step === "closed") resetCase();
     say("me", text, { raw: true });
     if (state.step === "start") {
+      setActions([]); // the starting buttons are answered by the report; shown again only if it's unclear
       state.report = text;
       if (live) return aiStart(text);
       detectLanguage(text);
@@ -603,6 +604,7 @@
   function managerReview() {
     {
       state.step = "manager_review";
+      setActions([]);
       state.progress = 0;
       say("centrix", `Not clearly plumbing, so your report went to ${POLICY.manager} for review. They'll handle it, or continue it as a plumbing repair.`);
       renderRepair();
