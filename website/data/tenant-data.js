@@ -106,6 +106,7 @@ window.CENTRIX_TENANT = {
   plumbers: [
     {
       id: "p1", name: "Example Plumbing GmbH", initials: "EP", photo: "assets/avatars/example-plumbing.jpg",
+      contact: "Stefan Brandt",   // the plumber who comes to the flat
       distance: "1.2 km", rating: 4.8, reviews: 126, eta: "18 min",
       next: "Tomorrow", from: 45,
       slots: ["Today 16:00–18:00", "Tomorrow 10:00–12:00", "Tomorrow 14:00–16:00"],

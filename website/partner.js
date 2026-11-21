@@ -58,7 +58,7 @@
 
   // ---------- top bar ----------
 
-  $("app-user").textContent = session.name;
+  $("app-user").textContent = session.company ? `${session.name} · ${session.company}` : session.name;
   const appAvatar = $("app-avatar");
   appAvatar.textContent = POLICY.photo ? "" : initials(session.name);
   if (POLICY.photo) { appAvatar.classList.add("has-photo"); appAvatar.style.backgroundImage = `url("${POLICY.photo}")`; }
@@ -581,7 +581,7 @@
     on_the_way(job, card) {
       card.append(note(`On the way. The tenant expects you in about ${job.eta || 15} minutes.`));
       const first = job.tenant.split(" ")[0];
-      card.append(textBtn("▶ Play what the tenant hears", () => AI.speak(`Hi ${first}, this is ${session.name}. I'm on my way and will be with you in about ${job.eta || 15} minutes.`)));
+      card.append(textBtn("▶ Play what the tenant hears", () => AI.speak(`Hi ${first}, this is ${session.name.split(" ")[0]}${session.company ? ` from ${session.company}` : ""}. I'm on my way and will be with you in about ${job.eta || 15} minutes.`)));
       card.append(primary("I've arrived", "pin", () => go(job, "Check the cost before you start.", () => {
         job.stage = "cost_check";
         log(job, "partner", "I've arrived.");

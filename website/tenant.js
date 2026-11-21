@@ -108,7 +108,7 @@
   AI.status.then((st) => { live = st.live; voiceLive = st.voice; renderMode(); renderThread(); });
   $("track-msg").addEventListener("click", () => {
     input.focus();
-    input.placeholder = `Message ${state.plumber ? state.plumber.name : "the plumber"}…`;
+    input.placeholder = `Message ${state.plumber ? plumberName() : "the plumber"}…`;
   });
 
   // ---------- conversation ----------
@@ -131,7 +131,7 @@
     }
     if (live) return aiChat();
     if (["booked", "reminded", "on_the_way", "cost_check", "approval", "working"].includes(state.step)) {
-      return later(() => say("centrix", `Sent to ${state.plumber.name}. They'll reply here.`), 400);
+      return later(() => say("centrix", `Sent to ${plumberName()}. They'll reply here.`), 400);
     }
     withTyping(() => say("ai", "Noted, I've added that to your report for the plumber."));
   }
@@ -189,7 +189,7 @@
       setActions([]);
       state.step = "dispatch";
       renderRepair();
-      say("centrix", `Asked ${state.plumber.name} for new times.`);
+      say("centrix", `Asked ${plumberName()} for new times.`);
       return later(proposeWindows, 1000);
     }
     if (intent === "not_fixed" && ["done", "feedback", "followup_wait", "followup_check"].includes(state.step)) {
@@ -218,7 +218,7 @@
       propertyManager: POLICY.manager,
       neverShared: DATA.withheld,
       consentGiven: state.consent ? `${state.consent.at} via ${state.consent.channel}` : false,
-      plumber: state.plumber ? state.plumber.name : null,
+      plumber: state.plumber ? plumberFull() : null,
       proposedWindows: state.windows,
       bookedSlot: state.slot,
       quote: state.quote ? `€${fmt(state.quote)} net` : null,
@@ -371,7 +371,7 @@
     later(() => {
       state.plumber = DATA.plumbers.find((x) => x.id === DATA.dispatchTo) || DATA.plumbers[0];
       state.progress = 2;
-      say("centrix", `${POLICY.manager} reviewed the brief, set priority to ${state.urgent ? "urgent" : "normal"} and dispatched ${state.plumber.name}.`);
+      say("centrix", `${POLICY.manager} reviewed the brief, set priority to ${state.urgent ? "urgent" : "normal"} and dispatched ${plumberFull()}.`);
       renderRepair();
       renderNearby();
       later(proposeWindows, 900);
@@ -395,7 +395,7 @@
   function noneFit() {
     me("None of these fit");
     withTyping(() => {
-      say("ai", `No problem. I've asked ${state.plumber.name} for new times.`);
+      say("ai", `No problem. I've asked ${plumberName()} for new times.`);
       later(proposeWindows, 1100);
     });
   }
@@ -408,7 +408,7 @@
       state.step = "booked";
       state.progress = 3;
       const access = state.access === "home" ? "you're at home" : "key with the caretaker";
-      say("centrix", `Confirmed: ${state.plumber.name}, ${slot} (${access}). Sent to you and ${POLICY.manager}.`);
+      say("centrix", `Confirmed: ${plumberFull()}, ${slot} (${access}). Sent to you and ${POLICY.manager}.`);
       say("ai", "You're all set. I'll remind you the day before, and you'll see a live ETA once the plumber is on the way.");
       renderRepair();
       renderNearby();
@@ -421,11 +421,11 @@
   // Step 14: reminder the day before, with the option to rebook.
   function remind() {
     state.step = "reminded";
-    say("ai", `Reminder: ${state.plumber.name} comes tomorrow, ${state.slot}. Will you be home, or should we find another time?`, { speak: true });
+    say("ai", `Reminder: ${plumberName()} comes tomorrow, ${state.slot}. Will you be home, or should we find another time?`, { speak: true });
     renderRepair();
     chips([
       ["Yes, see you then", () => { me("Yes, see you then"); withTyping(() => say("ai", "Great, I've let the plumber know.")); }, "check"],
-      ["I need another time", () => { me("I need another time"); state.step = "dispatch"; renderRepair(); withTyping(() => { say("ai", `OK, I've asked ${state.plumber.name} for new times.`); later(proposeWindows, 900); }); }]
+      ["I need another time", () => { me("I need another time"); state.step = "dispatch"; renderRepair(); withTyping(() => { say("ai", `OK, I've asked ${plumberName()} for new times.`); later(proposeWindows, 900); }); }]
     ]);
   }
 
@@ -435,7 +435,7 @@
     state.step = "on_the_way";
     state.progress = 4;
     renderRepair();
-    say("centrix", `${state.plumber.name} is on the way.`);
+    say("centrix", `${plumberName()} is on the way.`);
     later(() => say("plumber", `Hi ${first}, I'm on my way. I'll be there in about 15 minutes.`, { speak: true }), 900);
     showTracking();
   }
@@ -446,7 +446,7 @@
     state.step = "cost_check";
     state.progress = 5;
     renderRepair();
-    say("centrix", `${state.plumber.name} has arrived and is checking the cost against the €${fmt(POLICY.preApprovedLimit)} pre-approved limit.`);
+    say("centrix", `${plumberName()} has arrived and is checking the cost against the €${fmt(POLICY.preApprovedLimit)} pre-approved limit.`);
   }
 
   function quote(net) {
@@ -499,7 +499,7 @@
       state.progress = 2;
       renderRepair();
       return withTyping(() => {
-        say("ai", `Sorry about that. I've asked ${state.plumber.name} to come back at no extra cost.`);
+        say("ai", `Sorry about that. I've asked ${plumberName()} to come back at no extra cost.`);
         later(proposeWindows, 900);
       });
     }
@@ -642,7 +642,7 @@
     $("track-title").textContent = "Plumber on the way";
     $("track-note").textContent = "Getting closer. You'll get a message when they're at the door.";
     setAvatar($("track-avatar"), pro.initials, pro.photo);
-    $("track-name").textContent = `${pro.name} · ${pro.rating} ★`;
+    $("track-name").textContent = `${pro.contact ? `${pro.contact} · ` : ""}${pro.name} · ${pro.rating} ★`;
     $("track").scrollIntoView({ behavior: "smooth", block: "start" });
 
     const home = [HOME.lng, HOME.lat];
@@ -845,7 +845,7 @@
     const av = setAvatar(span("avatar", ""), p.initials, p.photo);
     av.setAttribute("aria-hidden", "true");
     const info = div("pro-info");
-    info.append(span("pro-name", p.name), span("pro-meta", `${p.distance} · ${p.rating} ★ (${p.reviews}) · from €${p.from}`));
+    info.append(span("pro-name", p.name), span("pro-meta", `${p.contact ? `${p.contact} · ` : ""}${p.distance} · ${p.rating} ★ (${p.reviews}) · from €${p.from}`));
     const next = span("pro-next", state.plumber === p ? (state.slot || "Dispatched") : `Free ${p.next.toLowerCase()}`);
     row.append(av, info, next);
     return row;
@@ -859,8 +859,8 @@
       brief: "Check the job brief and agree.",
       dispatch: "Your property manager is dispatching a plumber…",
       windows: "Pick one of the plumber's times.",
-      booked: state.plumber ? `${state.plumber.name} · ${state.slot}` : "",
-      reminded: state.plumber ? `Tomorrow: ${state.plumber.name} · ${state.slot}` : "",
+      booked: state.plumber ? `${plumberName()} · ${state.slot}` : "",
+      reminded: state.plumber ? `Tomorrow: ${plumberName()} · ${state.slot}` : "",
       on_the_way: "Your plumber is on the way.",
       cost_check: "The plumber is checking the cost on site.",
       approval: "Waiting for your property manager to approve the quote.",
@@ -983,7 +983,7 @@
   function me(text) { say("me", text); }
 
   function renderThread() {
-    const who = { ai: "Assistant", me: "You", centrix: "centrix", plumber: state.plumber ? state.plumber.name : "Plumber" };
+    const who = { ai: "Assistant", me: "You", centrix: "centrix", plumber: state.plumber ? plumberFull() : "Plumber" };
     $("thread").replaceChildren(...state.messages.map((m) => {
       const item = document.createElement("li");
       item.className = `t-msg t-msg-${m.from}`;
@@ -1128,6 +1128,10 @@
     return item;
   }
   function button(cls, text) { const b = document.createElement("button"); b.type = "button"; b.className = cls; b.textContent = text; return b; }
+  // The plumber as a person ("Stefan Brandt"), and with the company where it matters
+  function plumberName() { return state.plumber ? (state.plumber.contact || state.plumber.name) : "the plumber"; }
+  function plumberFull() { return state.plumber && state.plumber.contact ? `${state.plumber.contact} (${state.plumber.name})` : plumberName(); }
+
   // A profile picture when there is one, otherwise the initials
   function setAvatar(el, letters, photo) {
     el.textContent = photo ? "" : letters;

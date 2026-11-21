@@ -8,6 +8,24 @@
  * Use one of these on login.html. Pick the matching role (Tenant or Partner).
  */
 window.CENTRIX_DEMO_ACCOUNTS = [
+  // Personal logins for the two people in the demo case
+  {
+    role: "tenant",
+    name: "Lena Hoffmann",
+    email: "lena.hoffmann@centrix.test",
+    password: "lena-5338b4-demo",
+    unit: "Unit 4B, Musterstraße 12, Aachen"
+  },
+  {
+    role: "partner",
+    name: "Stefan Brandt",
+    company: "Example Plumbing GmbH",
+    email: "stefan.brandt@example-plumbing.test",
+    password: "stefan-e06b44-demo",
+    unit: null
+  },
+
+  // Older shared demo logins, still working
   {
     role: "tenant",
     name: "Lena Hoffmann",
