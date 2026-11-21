@@ -1,0 +1,799 @@
+[
+  {
+    "unit_id": "u_01_0",
+    "property_id": "prop_01",
+    "label": "Ground floor",
+    "floor": 0,
+    "size_sqm": 58,
+    "rooms": 2,
+    "lift": false,
+    "boiler": {
+      "model": "Remeha Tzerra",
+      "install_year": 2016,
+      "last_service": "2025-03-15"
+    },
+    "water_shutoff": "Under the kitchen sink, blue tap",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001234567"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007654321"
+      },
+      {
+        "type": "water",
+        "number": "WML-40000"
+      }
+    ],
+    "history": [
+      {
+        "date": "2026-09-17",
+        "case_id": "C-2026-0141",
+        "note": "Kitchen mixer cartridge replaced, Sep 2026"
+      }
+    ]
+  },
+  {
+    "unit_id": "u_01_1",
+    "property_id": "prop_01",
+    "label": "1st floor",
+    "floor": 1,
+    "size_sqm": 46,
+    "rooms": 2,
+    "lift": false,
+    "boiler": {
+      "model": "Intergas Kombi Kompakt",
+      "install_year": 2019,
+      "last_service": "2025-05-15"
+    },
+    "water_shutoff": "In the bathroom, behind the panel under the washbasin",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001242486"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007660328"
+      },
+      {
+        "type": "water",
+        "number": "WML-40131"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_01_2",
+    "property_id": "prop_01",
+    "label": "2nd floor",
+    "floor": 2,
+    "size_sqm": 46,
+    "rooms": 2,
+    "lift": false,
+    "boiler": {
+      "model": "Nefit EcoLine",
+      "install_year": 2011,
+      "last_service": "2025-07-15"
+    },
+    "water_shutoff": "Next to the boiler in the hall cupboard",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001250405"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007666335"
+      },
+      {
+        "type": "water",
+        "number": "WML-40262"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_01_3",
+    "property_id": "prop_01",
+    "label": "3rd floor (attic)",
+    "floor": 3,
+    "size_sqm": 38,
+    "rooms": 1,
+    "lift": false,
+    "boiler": {
+      "model": "Intergas Kombi Kompakt",
+      "install_year": 2021,
+      "last_service": "2025-09-15"
+    },
+    "water_shutoff": "Under the kitchen sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001258324"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007672342"
+      },
+      {
+        "type": "water",
+        "number": "WML-40393"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_02_1",
+    "property_id": "prop_02",
+    "label": "1st floor",
+    "floor": 1,
+    "size_sqm": 62,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Remeha Calenta",
+      "install_year": 2014,
+      "last_service": "2025-05-15"
+    },
+    "water_shutoff": "In the kitchen, cupboard left of the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001266243"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007678349"
+      },
+      {
+        "type": "water",
+        "number": "WML-40524"
+      }
+    ],
+    "history": [
+      {
+        "date": "2026-10-13",
+        "case_id": "C-2026-0158",
+        "note": "Kitchen ceiling repainted after leak from above, Oct 2026"
+      }
+    ]
+  },
+  {
+    "unit_id": "u_02_2",
+    "property_id": "prop_02",
+    "label": "2nd floor",
+    "floor": 2,
+    "size_sqm": 62,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Remeha Calenta",
+      "install_year": 2014,
+      "last_service": "2025-07-15"
+    },
+    "water_shutoff": "In the kitchen, cupboard left of the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001274162"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007684356"
+      },
+      {
+        "type": "water",
+        "number": "WML-40655"
+      }
+    ],
+    "history": [
+      {
+        "date": "2024-03-04",
+        "case_id": "C-2024-0102",
+        "note": "Toilet cistern replaced"
+      },
+      {
+        "date": "2026-10-13",
+        "case_id": "C-2026-0157",
+        "note": "Kitchen siphon replaced, Oct 2026"
+      }
+    ]
+  },
+  {
+    "unit_id": "u_02_3",
+    "property_id": "prop_02",
+    "label": "3rd floor",
+    "floor": 3,
+    "size_sqm": 51,
+    "rooms": 2,
+    "lift": false,
+    "boiler": {
+      "model": "Intergas HRE",
+      "install_year": 2017,
+      "last_service": "2025-09-15"
+    },
+    "water_shutoff": "In the bathroom next to the toilet",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001282081"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007690363"
+      },
+      {
+        "type": "water",
+        "number": "WML-40786"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_03_01",
+    "property_id": "prop_03",
+    "label": "A01",
+    "floor": 0,
+    "size_sqm": 72,
+    "rooms": 3,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Meter cupboard by the front door",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001290000"
+      },
+      {
+        "type": "water",
+        "number": "WML-40917"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_03_02",
+    "property_id": "prop_03",
+    "label": "A02",
+    "floor": 0,
+    "size_sqm": 72,
+    "rooms": 3,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Meter cupboard by the front door",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001297919"
+      },
+      {
+        "type": "water",
+        "number": "WML-41048"
+      }
+    ],
+    "history": [
+      {
+        "date": "2026-09-27",
+        "case_id": "C-2026-0148",
+        "note": "Supply pipe behind the toilet replaced, Sep 2026"
+      }
+    ]
+  },
+  {
+    "unit_id": "u_03_11",
+    "property_id": "prop_03",
+    "label": "B11",
+    "floor": 1,
+    "size_sqm": 72,
+    "rooms": 3,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Meter cupboard by the front door",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001305838"
+      },
+      {
+        "type": "water",
+        "number": "WML-41179"
+      }
+    ],
+    "history": [
+      {
+        "date": "2025-06-12",
+        "case_id": "C-2025-0388",
+        "note": "Kitchen tap replaced (Jekerdal Loodgieters)"
+      }
+    ]
+  },
+  {
+    "unit_id": "u_03_12",
+    "property_id": "prop_03",
+    "label": "B12",
+    "floor": 1,
+    "size_sqm": 72,
+    "rooms": 3,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Meter cupboard by the front door",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001313757"
+      },
+      {
+        "type": "water",
+        "number": "WML-41310"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_03_21",
+    "property_id": "prop_03",
+    "label": "C21",
+    "floor": 2,
+    "size_sqm": 72,
+    "rooms": 3,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Meter cupboard by the front door",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001321676"
+      },
+      {
+        "type": "water",
+        "number": "WML-41441"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_03_22",
+    "property_id": "prop_03",
+    "label": "C22",
+    "floor": 2,
+    "size_sqm": 72,
+    "rooms": 3,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Meter cupboard by the front door",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001329595"
+      },
+      {
+        "type": "water",
+        "number": "WML-41572"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_04_0",
+    "property_id": "prop_04",
+    "label": "Ground floor",
+    "floor": 0,
+    "size_sqm": 85,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Nefit ProLine",
+      "install_year": 2013,
+      "last_service": "2025-03-15"
+    },
+    "water_shutoff": "Cellar, front wall (shared main valve)",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001337514"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007732412"
+      },
+      {
+        "type": "water",
+        "number": "WML-41703"
+      }
+    ],
+    "history": [
+      {
+        "date": "2023-11-20",
+        "case_id": "C-2023-0410",
+        "note": "Lead pipe flagged during boiler service; replacement advised"
+      }
+    ]
+  },
+  {
+    "unit_id": "u_04_1",
+    "property_id": "prop_04",
+    "label": "1st floor",
+    "floor": 1,
+    "size_sqm": 78,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Vaillant ecoTEC",
+      "install_year": 2018,
+      "last_service": "2025-05-15"
+    },
+    "water_shutoff": "Kitchen, cupboard under the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001345433"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007738419"
+      },
+      {
+        "type": "water",
+        "number": "WML-41834"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_04_2",
+    "property_id": "prop_04",
+    "label": "2nd floor",
+    "floor": 2,
+    "size_sqm": 64,
+    "rooms": 2,
+    "lift": false,
+    "boiler": {
+      "model": "Vaillant ecoTEC",
+      "install_year": 2018,
+      "last_service": "2025-07-15"
+    },
+    "water_shutoff": "Kitchen, cupboard under the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001353352"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007744426"
+      },
+      {
+        "type": "water",
+        "number": "WML-41965"
+      }
+    ],
+    "history": [
+      {
+        "date": "2026-11-16",
+        "case_id": "C-2026-0174",
+        "note": "Bathroom tap washer replaced, Nov 2026"
+      }
+    ]
+  },
+  {
+    "unit_id": "u_05_1",
+    "property_id": "prop_05",
+    "label": "87A (ground left)",
+    "floor": 0,
+    "size_sqm": 55,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Intergas Kombi Kompakt",
+      "install_year": 2015,
+      "last_service": "2025-05-15"
+    },
+    "water_shutoff": "Kitchen, under the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001361271"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007750433"
+      },
+      {
+        "type": "water",
+        "number": "WML-42096"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_05_2",
+    "property_id": "prop_05",
+    "label": "87B (ground right)",
+    "floor": 0,
+    "size_sqm": 55,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Vaillant atmoMAG geyser",
+      "install_year": 1997,
+      "last_service": "2025-07-15"
+    },
+    "water_shutoff": "Kitchen, under the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001369190"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007756440"
+      },
+      {
+        "type": "water",
+        "number": "WML-42227"
+      }
+    ],
+    "history": [
+      {
+        "date": "2026-11-03",
+        "case_id": "C-2026-0170",
+        "note": "Geyser replaced by combi boiler (Intergas), Oct 2026"
+      }
+    ]
+  },
+  {
+    "unit_id": "u_05_3",
+    "property_id": "prop_05",
+    "label": "87C (1st left)",
+    "floor": 1,
+    "size_sqm": 55,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Intergas Kombi Kompakt",
+      "install_year": 2015,
+      "last_service": "2025-09-15"
+    },
+    "water_shutoff": "Kitchen, under the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001377109"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007762447"
+      },
+      {
+        "type": "water",
+        "number": "WML-42358"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_05_4",
+    "property_id": "prop_05",
+    "label": "87D (1st right)",
+    "floor": 1,
+    "size_sqm": 55,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Remeha Tzerra",
+      "install_year": 2020,
+      "last_service": "2025-11-15"
+    },
+    "water_shutoff": "Kitchen, under the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001385028"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007768454"
+      },
+      {
+        "type": "water",
+        "number": "WML-42489"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_05_5",
+    "property_id": "prop_05",
+    "label": "87E (2nd left)",
+    "floor": 2,
+    "size_sqm": 55,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Intergas Kombi Kompakt",
+      "install_year": 2015,
+      "last_service": "2025-04-15"
+    },
+    "water_shutoff": "Kitchen, under the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001392947"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007774461"
+      },
+      {
+        "type": "water",
+        "number": "WML-42620"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_05_6",
+    "property_id": "prop_05",
+    "label": "87F (2nd right)",
+    "floor": 2,
+    "size_sqm": 55,
+    "rooms": 3,
+    "lift": false,
+    "boiler": {
+      "model": "Remeha Tzerra",
+      "install_year": 2020,
+      "last_service": "2025-06-15"
+    },
+    "water_shutoff": "Kitchen, under the sink",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001400866"
+      },
+      {
+        "type": "gas",
+        "ean": "871600000007780468"
+      },
+      {
+        "type": "water",
+        "number": "WML-42751"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_06_1",
+    "property_id": "prop_06",
+    "label": "0.1",
+    "floor": 0,
+    "size_sqm": 48,
+    "rooms": 2,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Technical cupboard in the hall",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001408785"
+      },
+      {
+        "type": "water",
+        "number": "WML-42882"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_06_2",
+    "property_id": "prop_06",
+    "label": "0.2",
+    "floor": 0,
+    "size_sqm": 52,
+    "rooms": 2,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Technical cupboard in the hall",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001416704"
+      },
+      {
+        "type": "water",
+        "number": "WML-43013"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_06_3",
+    "property_id": "prop_06",
+    "label": "1.1",
+    "floor": 1,
+    "size_sqm": 48,
+    "rooms": 2,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Technical cupboard in the hall",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001424623"
+      },
+      {
+        "type": "water",
+        "number": "WML-43144"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_06_4",
+    "property_id": "prop_06",
+    "label": "1.2",
+    "floor": 1,
+    "size_sqm": 52,
+    "rooms": 2,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Technical cupboard in the hall",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001432542"
+      },
+      {
+        "type": "water",
+        "number": "WML-43275"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_06_5",
+    "property_id": "prop_06",
+    "label": "2.1",
+    "floor": 2,
+    "size_sqm": 48,
+    "rooms": 2,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Technical cupboard in the hall",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001440461"
+      },
+      {
+        "type": "water",
+        "number": "WML-43406"
+      }
+    ],
+    "history": []
+  },
+  {
+    "unit_id": "u_06_6",
+    "property_id": "prop_06",
+    "label": "2.2",
+    "floor": 2,
+    "size_sqm": 52,
+    "rooms": 2,
+    "lift": true,
+    "boiler": null,
+    "water_shutoff": "Technical cupboard in the hall",
+    "meters": [
+      {
+        "type": "electricity",
+        "ean": "871600000001448380"
+      },
+      {
+        "type": "water",
+        "number": "WML-43537"
+      }
+    ],
+    "history": []
+  }
+]

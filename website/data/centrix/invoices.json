@@ -1,0 +1,308 @@
+[
+  {
+    "invoice_id": "INV-2026-0141",
+    "job_id": "J-2026-0141",
+    "case_id": "C-2026-0141",
+    "unit_id": "u_01_0",
+    "partner_id": "p_03",
+    "issued_at": "2026-09-11T12:00:00Z",
+    "lines": [
+      {
+        "description": "Call-out",
+        "qty": 1,
+        "unit_price_eur": 39,
+        "total_eur": 39
+      },
+      {
+        "description": "Labour",
+        "qty": 0.5,
+        "unit_price_eur": 58,
+        "total_eur": 29.0
+      },
+      {
+        "description": "Tap cartridge 35 mm",
+        "qty": 1,
+        "unit_price_eur": 24.5,
+        "total_eur": 24.5
+      }
+    ],
+    "subtotal_eur": 92.5,
+    "vat_rate_pct": 21,
+    "vat_eur": 19.43,
+    "total_eur": 111.93,
+    "bill_to": "property_manager",
+    "bill_to_contact_id": "pm_org",
+    "status": "paid",
+    "document": "invoices/INV-2026-0141.pdf"
+  },
+  {
+    "invoice_id": "INV-2026-0148",
+    "job_id": "J-2026-0148",
+    "case_id": "C-2026-0148",
+    "unit_id": "u_03_02",
+    "partner_id": "p_01",
+    "issued_at": "2026-09-21T00:30:00Z",
+    "lines": [
+      {
+        "description": "Emergency call-out (evening)",
+        "qty": 1,
+        "unit_price_eur": 95,
+        "total_eur": 95
+      },
+      {
+        "description": "Labour",
+        "qty": 2.0,
+        "unit_price_eur": 62,
+        "total_eur": 124.0
+      },
+      {
+        "description": "Copper pipe 15 mm, 1 m",
+        "qty": 1,
+        "unit_price_eur": 14.0,
+        "total_eur": 14.0
+      },
+      {
+        "description": "Compression fittings 15 mm",
+        "qty": 2,
+        "unit_price_eur": 6.5,
+        "total_eur": 13.0
+      },
+      {
+        "description": "Wall repair kit",
+        "qty": 1,
+        "unit_price_eur": 18.0,
+        "total_eur": 18.0
+      }
+    ],
+    "subtotal_eur": 264.0,
+    "vat_rate_pct": 21,
+    "vat_eur": 55.44,
+    "total_eur": 319.44,
+    "bill_to": "property_manager",
+    "bill_to_contact_id": "pm_org",
+    "status": "paid",
+    "document": "invoices/INV-2026-0148.pdf"
+  },
+  {
+    "invoice_id": "INV-2026-0152",
+    "job_id": "J-2026-0152",
+    "case_id": "C-2026-0152",
+    "unit_id": "u_01_1",
+    "partner_id": "p_03",
+    "issued_at": "2026-10-02T10:00:00Z",
+    "lines": [
+      {
+        "description": "Call-out",
+        "qty": 1,
+        "unit_price_eur": 39,
+        "total_eur": 39
+      },
+      {
+        "description": "Labour",
+        "qty": 0.75,
+        "unit_price_eur": 58,
+        "total_eur": 43.5
+      }
+    ],
+    "subtotal_eur": 82.5,
+    "vat_rate_pct": 21,
+    "vat_eur": 17.32,
+    "total_eur": 99.82,
+    "bill_to": "tenant",
+    "bill_to_contact_id": "c_202",
+    "status": "paid",
+    "document": "invoices/INV-2026-0152.pdf"
+  },
+  {
+    "invoice_id": "INV-2026-0157",
+    "job_id": "J-2026-0157",
+    "case_id": "C-2026-0157",
+    "unit_id": "u_02_2",
+    "partner_id": "p_01",
+    "issued_at": "2026-10-07T16:00:00Z",
+    "lines": [
+      {
+        "description": "Call-out",
+        "qty": 1,
+        "unit_price_eur": 45,
+        "total_eur": 45
+      },
+      {
+        "description": "Labour",
+        "qty": 1.0,
+        "unit_price_eur": 62,
+        "total_eur": 62.0
+      },
+      {
+        "description": "Siphon 40 mm",
+        "qty": 1,
+        "unit_price_eur": 19.0,
+        "total_eur": 19.0
+      },
+      {
+        "description": "Seal set",
+        "qty": 1,
+        "unit_price_eur": 6.0,
+        "total_eur": 6.0
+      }
+    ],
+    "subtotal_eur": 132.0,
+    "vat_rate_pct": 21,
+    "vat_eur": 27.72,
+    "total_eur": 159.72,
+    "bill_to": "property_manager",
+    "bill_to_contact_id": "pm_org",
+    "status": "paid",
+    "document": "invoices/INV-2026-0157.pdf"
+  },
+  {
+    "invoice_id": "INV-2026-0163",
+    "job_id": "J-2026-0163",
+    "case_id": "C-2026-0163",
+    "unit_id": "u_04_1",
+    "partner_id": "p_03",
+    "issued_at": "2026-10-15T19:00:00Z",
+    "lines": [
+      {
+        "description": "Call-out",
+        "qty": 1,
+        "unit_price_eur": 39,
+        "total_eur": 39
+      },
+      {
+        "description": "Labour",
+        "qty": 1.0,
+        "unit_price_eur": 58,
+        "total_eur": 58.0
+      }
+    ],
+    "subtotal_eur": 97.0,
+    "vat_rate_pct": 21,
+    "vat_eur": 20.37,
+    "total_eur": 117.37,
+    "bill_to": "tenant",
+    "bill_to_contact_id": "c_214",
+    "status": "paid",
+    "document": "invoices/INV-2026-0163.pdf"
+  },
+  {
+    "invoice_id": "INV-2026-0170",
+    "job_id": "J-2026-0170",
+    "case_id": "C-2026-0170",
+    "unit_id": "u_05_2",
+    "partner_id": "p_02",
+    "issued_at": "2026-10-28T11:00:00Z",
+    "lines": [
+      {
+        "description": "Call-out",
+        "qty": 1,
+        "unit_price_eur": 55,
+        "total_eur": 55
+      },
+      {
+        "description": "Labour",
+        "qty": 3.5,
+        "unit_price_eur": 68,
+        "total_eur": 238.0
+      },
+      {
+        "description": "Intergas Kombi Kompakt HRE 28/24",
+        "qty": 1,
+        "unit_price_eur": 1650.0,
+        "total_eur": 1650.0
+      },
+      {
+        "description": "Flue and connection set",
+        "qty": 1,
+        "unit_price_eur": 185.0,
+        "total_eur": 185.0
+      }
+    ],
+    "subtotal_eur": 2128.0,
+    "vat_rate_pct": 21,
+    "vat_eur": 446.88,
+    "total_eur": 2574.88,
+    "bill_to": "property_manager",
+    "bill_to_contact_id": "pm_org",
+    "status": "paid",
+    "document": "invoices/INV-2026-0170.pdf"
+  },
+  {
+    "invoice_id": "INV-2026-0174",
+    "job_id": "J-2026-0174",
+    "case_id": "C-2026-0174",
+    "unit_id": "u_04_2",
+    "partner_id": "p_03",
+    "issued_at": "2026-11-17T15:00:00Z",
+    "lines": [
+      {
+        "description": "Call-out",
+        "qty": 1,
+        "unit_price_eur": 39,
+        "total_eur": 39
+      },
+      {
+        "description": "Labour",
+        "qty": 0.5,
+        "unit_price_eur": 58,
+        "total_eur": 29.0
+      },
+      {
+        "description": "Tap washer set",
+        "qty": 1,
+        "unit_price_eur": 4.5,
+        "total_eur": 4.5
+      },
+      {
+        "description": "O-rings",
+        "qty": 1,
+        "unit_price_eur": 3.0,
+        "total_eur": 3.0
+      }
+    ],
+    "subtotal_eur": 75.5,
+    "vat_rate_pct": 21,
+    "vat_eur": 15.86,
+    "total_eur": 91.36,
+    "bill_to": "tenant",
+    "bill_to_contact_id": "c_215",
+    "status": "sent",
+    "document": "invoices/INV-2026-0174.pdf"
+  },
+  {
+    "invoice_id": "INV-2026-0177",
+    "job_id": "J-2026-0177",
+    "case_id": "C-2026-0177",
+    "unit_id": "u_01_3",
+    "partner_id": "p_01",
+    "issued_at": "2026-11-19T13:00:00Z",
+    "lines": [
+      {
+        "description": "Call-out",
+        "qty": 1,
+        "unit_price_eur": 45,
+        "total_eur": 45
+      },
+      {
+        "description": "Labour",
+        "qty": 0.75,
+        "unit_price_eur": 62,
+        "total_eur": 46.5
+      },
+      {
+        "description": "Geberit fill valve",
+        "qty": 1,
+        "unit_price_eur": 32.0,
+        "total_eur": 32.0
+      }
+    ],
+    "subtotal_eur": 123.5,
+    "vat_rate_pct": 21,
+    "vat_eur": 25.93,
+    "total_eur": 149.43,
+    "bill_to": "property_manager",
+    "bill_to_contact_id": "pm_org",
+    "status": "sent",
+    "document": "invoices/INV-2026-0177.pdf"
+  }
+]

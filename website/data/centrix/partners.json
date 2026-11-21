@@ -1,0 +1,538 @@
+[
+  {
+    "partner_id": "p_01",
+    "name": "Jekerdal Loodgieters",
+    "category": "plumbing",
+    "kvk": "00000001",
+    "services": [
+      "leak",
+      "blockage",
+      "running_toilet",
+      "dripping_tap",
+      "low_pressure",
+      "burst_pipe",
+      "sewer_smell",
+      "lead_pipe_replacement"
+    ],
+    "service_area_postcodes": [
+      "6211",
+      "6212",
+      "6213",
+      "6221",
+      "6222",
+      "6224",
+      "6229"
+    ],
+    "emergency_24_7": true,
+    "response_time_hours": {
+      "emergency": 2,
+      "urgent": 24,
+      "normal": 72
+    },
+    "rates_eur_excl_vat": {
+      "call_out": 45,
+      "hourly": 62,
+      "emergency_call_out": 95,
+      "evening_weekend_surcharge_pct": 50
+    },
+    "rating": 4.7,
+    "jobs_done_for_us": 61,
+    "languages": [
+      "nl",
+      "en",
+      "de"
+    ],
+    "connector": {
+      "channel": "partner_portal",
+      "job_notifications": [
+        "portal",
+        "whatsapp"
+      ],
+      "status_updates": "portal buttons + dictation",
+      "invoice_format": "UBL e-invoice + PDF"
+    },
+    "technicians": [
+      {
+        "technician_id": "t_01",
+        "name": "Bram Peters",
+        "avatar": "assets/avatars/bram-peters.jpg",
+        "phone": "+31 6 0000 0901",
+        "languages": [
+          "nl",
+          "en"
+        ]
+      },
+      {
+        "technician_id": "t_02",
+        "name": "Niels Hermans",
+        "avatar": "assets/avatars/niels-hermans.jpg",
+        "phone": "+31 6 0000 0902",
+        "languages": [
+          "nl",
+          "de"
+        ]
+      }
+    ],
+    "availability": [
+      {
+        "start": "2026-11-23T08:00:00Z",
+        "end": "2026-11-23T10:00:00Z"
+      },
+      {
+        "start": "2026-11-23T11:00:00Z",
+        "end": "2026-11-23T13:00:00Z"
+      },
+      {
+        "start": "2026-11-23T14:00:00Z",
+        "end": "2026-11-23T16:00:00Z"
+      },
+      {
+        "start": "2026-11-24T08:00:00Z",
+        "end": "2026-11-24T10:00:00Z"
+      },
+      {
+        "start": "2026-11-24T11:00:00Z",
+        "end": "2026-11-24T13:00:00Z"
+      },
+      {
+        "start": "2026-11-24T14:00:00Z",
+        "end": "2026-11-24T16:00:00Z"
+      },
+      {
+        "start": "2026-11-25T08:00:00Z",
+        "end": "2026-11-25T10:00:00Z"
+      },
+      {
+        "start": "2026-11-25T11:00:00Z",
+        "end": "2026-11-25T13:00:00Z"
+      },
+      {
+        "start": "2026-11-25T14:00:00Z",
+        "end": "2026-11-25T16:00:00Z"
+      },
+      {
+        "start": "2026-11-26T08:00:00Z",
+        "end": "2026-11-26T10:00:00Z"
+      },
+      {
+        "start": "2026-11-26T11:00:00Z",
+        "end": "2026-11-26T13:00:00Z"
+      },
+      {
+        "start": "2026-11-26T14:00:00Z",
+        "end": "2026-11-26T16:00:00Z"
+      },
+      {
+        "start": "2026-11-27T08:00:00Z",
+        "end": "2026-11-27T10:00:00Z"
+      },
+      {
+        "start": "2026-11-27T11:00:00Z",
+        "end": "2026-11-27T13:00:00Z"
+      },
+      {
+        "start": "2026-11-27T14:00:00Z",
+        "end": "2026-11-27T16:00:00Z"
+      },
+      {
+        "start": "2026-11-30T08:00:00Z",
+        "end": "2026-11-30T10:00:00Z"
+      },
+      {
+        "start": "2026-11-30T11:00:00Z",
+        "end": "2026-11-30T13:00:00Z"
+      },
+      {
+        "start": "2026-11-30T14:00:00Z",
+        "end": "2026-11-30T16:00:00Z"
+      }
+    ]
+  },
+  {
+    "partner_id": "p_02",
+    "name": "Maasland Installatietechniek B.V.",
+    "category": "plumbing_heating",
+    "kvk": "00000002",
+    "services": [
+      "no_hot_water",
+      "boiler",
+      "leak",
+      "low_pressure",
+      "radiator",
+      "block_heating"
+    ],
+    "service_area_postcodes": [
+      "6211",
+      "6212",
+      "6213",
+      "6214",
+      "6215",
+      "6216",
+      "6221",
+      "6222",
+      "6223",
+      "6224",
+      "6225",
+      "6229"
+    ],
+    "emergency_24_7": true,
+    "response_time_hours": {
+      "emergency": 4,
+      "urgent": 24,
+      "normal": 96
+    },
+    "rates_eur_excl_vat": {
+      "call_out": 55,
+      "hourly": 68,
+      "emergency_call_out": 110,
+      "evening_weekend_surcharge_pct": 50
+    },
+    "rating": 4.4,
+    "jobs_done_for_us": 38,
+    "languages": [
+      "nl",
+      "en",
+      "fr"
+    ],
+    "connector": {
+      "channel": "api",
+      "job_notifications": [
+        "webhook"
+      ],
+      "status_updates": "REST callback",
+      "invoice_format": "UBL e-invoice"
+    },
+    "technicians": [
+      {
+        "technician_id": "t_03",
+        "name": "Karim Bouzid",
+        "avatar": "assets/avatars/karim-bouzid.jpg",
+        "phone": "+31 6 0000 0903",
+        "languages": [
+          "nl",
+          "fr",
+          "ar"
+        ]
+      }
+    ],
+    "availability": [
+      {
+        "start": "2026-11-23T09:00:00Z",
+        "end": "2026-11-23T11:00:00Z"
+      },
+      {
+        "start": "2026-11-23T13:00:00Z",
+        "end": "2026-11-23T15:00:00Z"
+      },
+      {
+        "start": "2026-11-24T09:00:00Z",
+        "end": "2026-11-24T11:00:00Z"
+      },
+      {
+        "start": "2026-11-24T13:00:00Z",
+        "end": "2026-11-24T15:00:00Z"
+      },
+      {
+        "start": "2026-11-25T09:00:00Z",
+        "end": "2026-11-25T11:00:00Z"
+      },
+      {
+        "start": "2026-11-25T13:00:00Z",
+        "end": "2026-11-25T15:00:00Z"
+      },
+      {
+        "start": "2026-11-26T09:00:00Z",
+        "end": "2026-11-26T11:00:00Z"
+      },
+      {
+        "start": "2026-11-26T13:00:00Z",
+        "end": "2026-11-26T15:00:00Z"
+      },
+      {
+        "start": "2026-11-27T09:00:00Z",
+        "end": "2026-11-27T11:00:00Z"
+      },
+      {
+        "start": "2026-11-27T13:00:00Z",
+        "end": "2026-11-27T15:00:00Z"
+      },
+      {
+        "start": "2026-11-30T09:00:00Z",
+        "end": "2026-11-30T11:00:00Z"
+      },
+      {
+        "start": "2026-11-30T13:00:00Z",
+        "end": "2026-11-30T15:00:00Z"
+      }
+    ]
+  },
+  {
+    "partner_id": "p_03",
+    "name": "Sint-Pieter Sanitair & Riool",
+    "category": "plumbing",
+    "kvk": "00000003",
+    "services": [
+      "blockage",
+      "sewer_smell",
+      "running_toilet",
+      "leak",
+      "dripping_tap"
+    ],
+    "service_area_postcodes": [
+      "6211",
+      "6212",
+      "6221",
+      "6224",
+      "6225",
+      "6229"
+    ],
+    "emergency_24_7": false,
+    "response_time_hours": {
+      "emergency": null,
+      "urgent": 24,
+      "normal": 48
+    },
+    "rates_eur_excl_vat": {
+      "call_out": 39,
+      "hourly": 58,
+      "emergency_call_out": null,
+      "evening_weekend_surcharge_pct": 0
+    },
+    "rating": 4.8,
+    "jobs_done_for_us": 24,
+    "languages": [
+      "nl",
+      "en"
+    ],
+    "connector": {
+      "channel": "email",
+      "job_notifications": [
+        "email with one-click accept link"
+      ],
+      "status_updates": "reply links in the email",
+      "invoice_format": "PDF"
+    },
+    "technicians": [
+      {
+        "technician_id": "t_04",
+        "name": "Tim Lardinois",
+        "avatar": "assets/avatars/tim-lardinois.jpg",
+        "phone": "+31 6 0000 0904",
+        "languages": [
+          "nl",
+          "en"
+        ]
+      }
+    ],
+    "availability": [
+      {
+        "start": "2026-11-23T08:00:00Z",
+        "end": "2026-11-23T10:00:00Z"
+      },
+      {
+        "start": "2026-11-23T10:00:00Z",
+        "end": "2026-11-23T12:00:00Z"
+      },
+      {
+        "start": "2026-11-23T13:00:00Z",
+        "end": "2026-11-23T15:00:00Z"
+      },
+      {
+        "start": "2026-11-24T08:00:00Z",
+        "end": "2026-11-24T10:00:00Z"
+      },
+      {
+        "start": "2026-11-24T10:00:00Z",
+        "end": "2026-11-24T12:00:00Z"
+      },
+      {
+        "start": "2026-11-24T13:00:00Z",
+        "end": "2026-11-24T15:00:00Z"
+      },
+      {
+        "start": "2026-11-25T08:00:00Z",
+        "end": "2026-11-25T10:00:00Z"
+      },
+      {
+        "start": "2026-11-25T10:00:00Z",
+        "end": "2026-11-25T12:00:00Z"
+      },
+      {
+        "start": "2026-11-25T13:00:00Z",
+        "end": "2026-11-25T15:00:00Z"
+      },
+      {
+        "start": "2026-11-26T08:00:00Z",
+        "end": "2026-11-26T10:00:00Z"
+      },
+      {
+        "start": "2026-11-26T10:00:00Z",
+        "end": "2026-11-26T12:00:00Z"
+      },
+      {
+        "start": "2026-11-26T13:00:00Z",
+        "end": "2026-11-26T15:00:00Z"
+      },
+      {
+        "start": "2026-11-27T08:00:00Z",
+        "end": "2026-11-27T10:00:00Z"
+      },
+      {
+        "start": "2026-11-27T10:00:00Z",
+        "end": "2026-11-27T12:00:00Z"
+      },
+      {
+        "start": "2026-11-27T13:00:00Z",
+        "end": "2026-11-27T15:00:00Z"
+      },
+      {
+        "start": "2026-11-30T08:00:00Z",
+        "end": "2026-11-30T10:00:00Z"
+      },
+      {
+        "start": "2026-11-30T10:00:00Z",
+        "end": "2026-11-30T12:00:00Z"
+      },
+      {
+        "start": "2026-11-30T13:00:00Z",
+        "end": "2026-11-30T15:00:00Z"
+      }
+    ]
+  },
+  {
+    "partner_id": "p_04",
+    "name": "Wyck Elektro",
+    "category": "electrical",
+    "kvk": "00000004",
+    "services": [
+      "socket",
+      "fuse",
+      "lighting",
+      "doorbell"
+    ],
+    "service_area_postcodes": [
+      "6211",
+      "6221",
+      "6222",
+      "6224",
+      "6229"
+    ],
+    "emergency_24_7": false,
+    "response_time_hours": {
+      "emergency": null,
+      "urgent": 24,
+      "normal": 72
+    },
+    "rates_eur_excl_vat": {
+      "call_out": 45,
+      "hourly": 60,
+      "emergency_call_out": null,
+      "evening_weekend_surcharge_pct": 0
+    },
+    "rating": 4.5,
+    "jobs_done_for_us": 12,
+    "languages": [
+      "nl",
+      "en"
+    ],
+    "connector": {
+      "channel": "email",
+      "job_notifications": [
+        "email"
+      ],
+      "status_updates": "reply links",
+      "invoice_format": "PDF"
+    },
+    "technicians": [],
+    "availability": [
+      {
+        "start": "2026-11-23T09:00:00Z",
+        "end": "2026-11-23T11:00:00Z"
+      },
+      {
+        "start": "2026-11-23T14:00:00Z",
+        "end": "2026-11-23T16:00:00Z"
+      },
+      {
+        "start": "2026-11-24T09:00:00Z",
+        "end": "2026-11-24T11:00:00Z"
+      },
+      {
+        "start": "2026-11-24T14:00:00Z",
+        "end": "2026-11-24T16:00:00Z"
+      },
+      {
+        "start": "2026-11-25T09:00:00Z",
+        "end": "2026-11-25T11:00:00Z"
+      },
+      {
+        "start": "2026-11-25T14:00:00Z",
+        "end": "2026-11-25T16:00:00Z"
+      },
+      {
+        "start": "2026-11-26T09:00:00Z",
+        "end": "2026-11-26T11:00:00Z"
+      },
+      {
+        "start": "2026-11-26T14:00:00Z",
+        "end": "2026-11-26T16:00:00Z"
+      },
+      {
+        "start": "2026-11-27T09:00:00Z",
+        "end": "2026-11-27T11:00:00Z"
+      },
+      {
+        "start": "2026-11-27T14:00:00Z",
+        "end": "2026-11-27T16:00:00Z"
+      },
+      {
+        "start": "2026-11-30T09:00:00Z",
+        "end": "2026-11-30T11:00:00Z"
+      },
+      {
+        "start": "2026-11-30T14:00:00Z",
+        "end": "2026-11-30T16:00:00Z"
+      }
+    ]
+  },
+  {
+    "partner_id": "p_05",
+    "name": "Heuvelland Warmtepompen",
+    "category": "heat_pump",
+    "kvk": "00000005",
+    "services": [
+      "heat_pump",
+      "underfloor_heating"
+    ],
+    "service_area_postcodes": [
+      "62"
+    ],
+    "emergency_24_7": false,
+    "response_time_hours": {
+      "emergency": null,
+      "urgent": 48,
+      "normal": 120
+    },
+    "rates_eur_excl_vat": {
+      "call_out": 65,
+      "hourly": 75,
+      "emergency_call_out": null,
+      "evening_weekend_surcharge_pct": 0
+    },
+    "rating": 4.2,
+    "jobs_done_for_us": 4,
+    "languages": [
+      "nl"
+    ],
+    "connector": {
+      "channel": "email",
+      "job_notifications": [
+        "email"
+      ],
+      "status_updates": "email",
+      "invoice_format": "PDF"
+    },
+    "technicians": [],
+    "availability": []
+  }
+]
