@@ -72,6 +72,6 @@ Goal: make the four steps from the challenge work, without anyone filling in for
 
 ## After that
 
-- [ ] Write the **partner connector spec**: what any partner must provide to plug in (services, eligibility rules, availability, placing a job, status updates, result)
+- [x] Write the **partner connector spec** ([CONNECTOR-SPEC.md](CONNECTOR-SPEC.md)): what any partner must provide to plug in (services, eligibility rules, availability, placing a job, status updates, result)
 - [ ] A place where the result is visible on the unit (simple centrix view), for the demo
 - [ ] Rehearse the demo: show one report live from start to finish
