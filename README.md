@@ -86,6 +86,8 @@ Then open <http://localhost:8000>. The badge says **Demo mode** and the portals 
 
 The test accounts are in [`website/data/demo-accounts.js`](website/data/demo-accounts.js). They're fake and protect nothing. Pick the matching role (Tenant or Partner) on the login page.
 
+The Maastricht data set (`website/data/centrix/`, see [`docs/fake-data-structure.md`](docs/fake-data-structure.md)) has a login for every tenant who reported a case and every plumber. The password is the first name + `-demo`, for example `leyla.yilmaz@example.com` / `leyla-demo` (tenant) or `bram.peters@jekerdal.test` / `bram-demo` (partner).
+
 ## Tech
 
 - Plain HTML, CSS and JavaScript

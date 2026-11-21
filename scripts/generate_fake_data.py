@@ -1,10 +1,13 @@
 """Generate the Maastricht fake data set for centrix (one JSON file per collection).
 
 Usage: python3 -I gen.py <output_dir>
-Everything is made up. Times are UTC ("Z"). "Now" in the data is 2026-11-21 09:00Z.
+Everything is made up. Times are Maastricht local time with their UTC offset. "Now" is 2026-11-21 09:00 local.
 """
 import json, sys, os
 from datetime import datetime, timedelta, date
+from zoneinfo import ZoneInfo
+
+TZ = ZoneInfo("Europe/Amsterdam")
 
 OUT = sys.argv[1]
 NOW = datetime(2026, 11, 21, 9, 0)
@@ -12,7 +15,7 @@ VAT = 21
 
 
 def iso(dt):
-    return dt.strftime("%Y-%m-%dT%H:%M:00Z")
+    return dt.replace(tzinfo=TZ).isoformat(timespec="seconds")
 
 
 def T(s):
@@ -246,6 +249,7 @@ partners = [
      "service_area_postcodes": ["6211", "6212", "6213", "6221", "6222", "6224", "6229"], "emergency_24_7": True,
      "response_time_hours": {"emergency": 2, "urgent": 24, "normal": 72},
      "rates_eur_excl_vat": {"call_out": 45, "hourly": 62, "emergency_call_out": 95, "evening_weekend_surcharge_pct": 50},
+     "base": {"address": "Bieslanderweg 4, Maastricht (Sint Pieter)", "lat": 50.8335, "lng": 5.6905},
      "rating": 4.7, "jobs_done_for_us": 61, "languages": ["nl", "en", "de"],
      "connector": {"channel": "partner_portal", "job_notifications": ["portal", "whatsapp"], "status_updates": "portal buttons + dictation", "invoice_format": "UBL e-invoice + PDF"},
      "technicians": [
@@ -257,6 +261,7 @@ partners = [
      "service_area_postcodes": ["6211", "6212", "6213", "6214", "6215", "6216", "6221", "6222", "6223", "6224", "6225", "6229"], "emergency_24_7": True,
      "response_time_hours": {"emergency": 4, "urgent": 24, "normal": 96},
      "rates_eur_excl_vat": {"call_out": 55, "hourly": 68, "emergency_call_out": 110, "evening_weekend_surcharge_pct": 50},
+     "base": {"address": "Bedrijventerrein Beatrixhaven, Maastricht", "lat": 50.8720, "lng": 5.7060},
      "rating": 4.4, "jobs_done_for_us": 38, "languages": ["nl", "en", "fr"],
      "connector": {"channel": "api", "job_notifications": ["webhook"], "status_updates": "REST callback", "invoice_format": "UBL e-invoice"},
      "technicians": [
@@ -267,6 +272,7 @@ partners = [
      "service_area_postcodes": ["6211", "6212", "6221", "6224", "6225", "6229"], "emergency_24_7": False,
      "response_time_hours": {"emergency": None, "urgent": 24, "normal": 48},
      "rates_eur_excl_vat": {"call_out": 39, "hourly": 58, "emergency_call_out": None, "evening_weekend_surcharge_pct": 0},
+     "base": {"address": "Sint Hubertuslaan 10, Maastricht", "lat": 50.8410, "lng": 5.6870},
      "rating": 4.8, "jobs_done_for_us": 24, "languages": ["nl", "en"],
      "connector": {"channel": "email", "job_notifications": ["email with one-click accept link"], "status_updates": "reply links in the email", "invoice_format": "PDF"},
      "technicians": [
@@ -276,6 +282,7 @@ partners = [
      "services": ["socket", "fuse", "lighting", "doorbell"], "service_area_postcodes": ["6211", "6221", "6222", "6224", "6229"], "emergency_24_7": False,
      "response_time_hours": {"emergency": None, "urgent": 24, "normal": 72},
      "rates_eur_excl_vat": {"call_out": 45, "hourly": 60, "emergency_call_out": None, "evening_weekend_surcharge_pct": 0},
+     "base": {"address": "Akersteenweg 60, Maastricht", "lat": 50.8450, "lng": 5.7230},
      "rating": 4.5, "jobs_done_for_us": 12, "languages": ["nl", "en"],
      "connector": {"channel": "email", "job_notifications": ["email"], "status_updates": "reply links", "invoice_format": "PDF"},
      "technicians": [], "availability": availability(2, [9, 14])},
@@ -283,6 +290,7 @@ partners = [
      "services": ["heat_pump", "underfloor_heating"], "service_area_postcodes": ["62"], "emergency_24_7": False,
      "response_time_hours": {"emergency": None, "urgent": 48, "normal": 120},
      "rates_eur_excl_vat": {"call_out": 65, "hourly": 75, "emergency_call_out": None, "evening_weekend_surcharge_pct": 0},
+     "base": {"address": "Margraten", "lat": 50.8210, "lng": 5.8200},
      "rating": 4.2, "jobs_done_for_us": 4, "languages": ["nl"],
      "connector": {"channel": "email", "job_notifications": ["email"], "status_updates": "email", "invoice_format": "PDF"},
      "technicians": [], "availability": []},
@@ -400,7 +408,7 @@ CASES = [
          summary="No hot water since this morning, boiler shows error F28", problem="no_hot_water", urgency="urgent",
          answers=[("Does the boiler show an error code?", "F28"), ("Do you have heating?", "No")],
          photos=1, partner="p_02", tech="t_03", cost_bearer="landlord"),
-    dict(id="C-2026-0187", unit="u_05_3", by="c_218", at="2026-11-20 21:30", channel="portal", lang="nl", status="awaiting_consent",
+    dict(id="C-2026-0187", unit="u_05_3", by="c_218", at="2026-11-20 19:30", channel="portal", lang="nl", status="dispatched",
          text="De douchemengkraan lekt aan de onderkant, er staat steeds een plasje.",
          summary="Shower mixer leaks at the bottom", problem="leak", urgency="normal",
          answers=[("Is water still coming out right now?", "Only when the shower is on"), ("Since when?", "A few days")],
@@ -696,7 +704,7 @@ unit_by_id["u_04_0"]["history"].insert(0, {"date": "2023-11-20", "case_id": "C-2
 # ---------------------------------------------------------------- non-case events (other moments in a property's life)
 extra = [
     ("tenant.move_in_scheduled", "2026-11-15 10:00", "u_03_22", "c_227", {"move_in_date": "2026-12-01", "contract_id": next(x["contract_id"] for x in contracts if x.get("contact_id") == "c_227")}),
-    ("tenant.move_out_scheduled", "2026-10-30 14:00", "u_06_6", "c_228", {"move_out_date": "2026-11-30", "inspection_at": "2026-11-30T10:00:00Z"}),
+    ("tenant.move_out_scheduled", "2026-10-30 14:00", "u_06_6", "c_228", {"move_out_date": "2026-11-30", "inspection_at": iso(T("2026-11-30 10:00"))}),
     ("contract.expiring", "2026-11-01 06:00", None, None, {"contract_id": next(x["contract_id"] for x in contracts if x.get("category") == "block_heating"), "property_id": "prop_03", "ends": "2026-12-31"}),
     ("boiler.service_due", "2026-11-20 06:00", "u_01_2", "c_203", {"boiler": "Nefit EcoLine", "install_year": 2011, "note": "15 years old: replacement advised at next service"}),
 ]
@@ -712,7 +720,7 @@ for i, m in enumerate(comms, 1):
 cases.sort(key=lambda c: c["reported_at"])
 
 # ---------------------------------------------------------------- write
-meta = {"generated_for": "reltix challenge 'Plug a Partner into centrix'", "city": "Maastricht", "now": iso(NOW), "timezone_note": "All times are UTC (Z).",
+meta = {"generated_for": "reltix challenge 'Plug a Partner into centrix'", "city": "Maastricht", "now": iso(NOW), "timezone_note": "All times are Maastricht local time (Europe/Amsterdam) with their UTC offset.",
         "fake": True, "note": "All people, companies, phone numbers, emails, KvK and EAN numbers are made up. Street names are real Maastricht streets; house numbers and postcodes are illustrative."}
 files = {"_meta": meta, "property_manager": property_manager, "properties": properties, "units": units, "contacts": contacts,
          "contracts": contracts, "partners": partners, "cases": cases, "jobs": jobs, "consents": consents,

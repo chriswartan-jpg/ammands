@@ -5,7 +5,7 @@
     "partner_id": "p_03",
     "technician_id": "t_04",
     "status": "closed",
-    "created_at": "2026-09-08T09:40:00Z",
+    "created_at": "2026-09-08T09:40:00+02:00",
     "brief": {
       "title": "Kitchen tap keeps dripping when closed",
       "category": "plumbing",
@@ -52,16 +52,16 @@
     "consent_id": "CON-2026-0141",
     "proposed_windows": [
       {
-        "start": "2026-09-10T10:00:00Z",
-        "end": "2026-09-10T12:00:00Z"
+        "start": "2026-09-10T10:00:00+02:00",
+        "end": "2026-09-10T12:00:00+02:00"
       },
       {
-        "start": "2026-09-11T10:00:00Z",
-        "end": "2026-09-11T12:00:00Z"
+        "start": "2026-09-11T10:00:00+02:00",
+        "end": "2026-09-11T12:00:00+02:00"
       },
       {
-        "start": "2026-09-12T10:00:00Z",
-        "end": "2026-09-12T12:00:00Z"
+        "start": "2026-09-12T10:00:00+02:00",
+        "end": "2026-09-12T12:00:00+02:00"
       }
     ],
     "appointment_id": "APT-2026-0141",
@@ -75,7 +75,7 @@
     "partner_id": "p_01",
     "technician_id": "t_01",
     "status": "closed",
-    "created_at": "2026-09-19T21:25:00Z",
+    "created_at": "2026-09-19T21:25:00+02:00",
     "brief": {
       "title": "Water coming from the wall behind the toilet, spreading into the hall",
       "category": "plumbing",
@@ -125,8 +125,8 @@
     "consent_id": "CON-2026-0148",
     "proposed_windows": [
       {
-        "start": "2026-09-19T22:30:00Z",
-        "end": "2026-09-20T00:30:00Z"
+        "start": "2026-09-19T22:30:00+02:00",
+        "end": "2026-09-20T00:30:00+02:00"
       }
     ],
     "appointment_id": "APT-2026-0148",
@@ -140,7 +140,7 @@
     "partner_id": "p_03",
     "technician_id": "t_04",
     "status": "closed",
-    "created_at": "2026-09-29T20:05:00Z",
+    "created_at": "2026-09-29T20:05:00+02:00",
     "brief": {
       "title": "Shower drain very slow",
       "category": "plumbing",
@@ -189,16 +189,16 @@
     "consent_id": "CON-2026-0152",
     "proposed_windows": [
       {
-        "start": "2026-10-01T08:00:00Z",
-        "end": "2026-10-01T10:00:00Z"
+        "start": "2026-10-01T08:00:00+02:00",
+        "end": "2026-10-01T10:00:00+02:00"
       },
       {
-        "start": "2026-10-02T08:00:00Z",
-        "end": "2026-10-02T10:00:00Z"
+        "start": "2026-10-02T08:00:00+02:00",
+        "end": "2026-10-02T10:00:00+02:00"
       },
       {
-        "start": "2026-10-03T08:00:00Z",
-        "end": "2026-10-03T10:00:00Z"
+        "start": "2026-10-03T08:00:00+02:00",
+        "end": "2026-10-03T10:00:00+02:00"
       }
     ],
     "appointment_id": "APT-2026-0152",
@@ -212,7 +212,7 @@
     "partner_id": "p_01",
     "technician_id": "t_02",
     "status": "closed",
-    "created_at": "2026-10-06T08:32:00Z",
+    "created_at": "2026-10-06T08:32:00+02:00",
     "brief": {
       "title": "Leak under the kitchen sink, cupboard floor soft",
       "category": "plumbing",
@@ -266,8 +266,8 @@
     "consent_id": "CON-2026-0157",
     "proposed_windows": [
       {
-        "start": "2026-10-06T14:00:00Z",
-        "end": "2026-10-06T16:00:00Z"
+        "start": "2026-10-06T14:00:00+02:00",
+        "end": "2026-10-06T16:00:00+02:00"
       }
     ],
     "appointment_id": "APT-2026-0157",
@@ -281,7 +281,7 @@
     "partner_id": "p_03",
     "technician_id": "t_04",
     "status": "closed",
-    "created_at": "2026-10-14T15:40:00Z",
+    "created_at": "2026-10-14T15:40:00+02:00",
     "brief": {
       "title": "Toilet blocked, the only toilet in the flat",
       "category": "plumbing",
@@ -328,8 +328,8 @@
     "consent_id": "CON-2026-0163",
     "proposed_windows": [
       {
-        "start": "2026-10-14T17:00:00Z",
-        "end": "2026-10-14T19:00:00Z"
+        "start": "2026-10-14T17:00:00+02:00",
+        "end": "2026-10-14T19:00:00+02:00"
       }
     ],
     "appointment_id": "APT-2026-0163",
@@ -343,7 +343,7 @@
     "partner_id": "p_02",
     "technician_id": "t_03",
     "status": "closed",
-    "created_at": "2026-10-26T08:15:00Z",
+    "created_at": "2026-10-26T08:15:00+01:00",
     "brief": {
       "title": "No hot water, old gas geyser won't ignite (tenant 84, lives alone)",
       "category": "plumbing",
@@ -390,26 +390,26 @@
     "consent_id": "CON-2026-0170",
     "proposed_windows": [
       {
-        "start": "2026-10-27T09:00:00Z",
-        "end": "2026-10-27T11:00:00Z"
+        "start": "2026-10-27T09:00:00+01:00",
+        "end": "2026-10-27T11:00:00+01:00"
       },
       {
-        "start": "2026-10-28T09:00:00Z",
-        "end": "2026-10-28T11:00:00Z"
+        "start": "2026-10-28T09:00:00+01:00",
+        "end": "2026-10-28T11:00:00+01:00"
       },
       {
-        "start": "2026-10-29T09:00:00Z",
-        "end": "2026-10-29T11:00:00Z"
+        "start": "2026-10-29T09:00:00+01:00",
+        "end": "2026-10-29T11:00:00+01:00"
       }
     ],
     "appointment_id": "APT-2026-0170",
     "quote": {
       "amount_eur_excl_vat": 2128.0,
       "description": "Replaced the geyser with a combi boiler; also heats the flat from now on",
-      "submitted_at": "2026-10-27T10:05:00Z",
+      "submitted_at": "2026-10-27T10:05:00+01:00",
       "needs_approval": false,
       "approved_by": "pre_approved_policy",
-      "approved_at": "2026-10-27T10:20:00Z"
+      "approved_at": "2026-10-27T10:20:00+01:00"
     },
     "work_report_id": "WR-2026-0170",
     "invoice_id": "INV-2026-0170"
@@ -420,7 +420,7 @@
     "partner_id": "p_03",
     "technician_id": "t_04",
     "status": "invoiced",
-    "created_at": "2026-11-12T14:10:00Z",
+    "created_at": "2026-11-12T14:10:00+01:00",
     "brief": {
       "title": "Bathroom tap leaks at the handle",
       "category": "plumbing",
@@ -469,16 +469,16 @@
     "consent_id": "CON-2026-0174",
     "proposed_windows": [
       {
-        "start": "2026-11-16T13:00:00Z",
-        "end": "2026-11-16T15:00:00Z"
+        "start": "2026-11-16T13:00:00+01:00",
+        "end": "2026-11-16T15:00:00+01:00"
       },
       {
-        "start": "2026-11-17T13:00:00Z",
-        "end": "2026-11-17T15:00:00Z"
+        "start": "2026-11-17T13:00:00+01:00",
+        "end": "2026-11-17T15:00:00+01:00"
       },
       {
-        "start": "2026-11-18T13:00:00Z",
-        "end": "2026-11-18T15:00:00Z"
+        "start": "2026-11-18T13:00:00+01:00",
+        "end": "2026-11-18T15:00:00+01:00"
       }
     ],
     "appointment_id": "APT-2026-0174",
@@ -492,7 +492,7 @@
     "partner_id": "p_01",
     "technician_id": "t_01",
     "status": "invoiced",
-    "created_at": "2026-11-16T00:40:00Z",
+    "created_at": "2026-11-16T00:40:00+01:00",
     "brief": {
       "title": "Toilet keeps running after flushing",
       "category": "plumbing",
@@ -541,16 +541,16 @@
     "consent_id": "CON-2026-0177",
     "proposed_windows": [
       {
-        "start": "2026-11-18T11:00:00Z",
-        "end": "2026-11-18T13:00:00Z"
+        "start": "2026-11-18T11:00:00+01:00",
+        "end": "2026-11-18T13:00:00+01:00"
       },
       {
-        "start": "2026-11-19T11:00:00Z",
-        "end": "2026-11-19T13:00:00Z"
+        "start": "2026-11-19T11:00:00+01:00",
+        "end": "2026-11-19T13:00:00+01:00"
       },
       {
-        "start": "2026-11-20T11:00:00Z",
-        "end": "2026-11-20T13:00:00Z"
+        "start": "2026-11-20T11:00:00+01:00",
+        "end": "2026-11-20T13:00:00+01:00"
       }
     ],
     "appointment_id": "APT-2026-0177",
@@ -564,7 +564,7 @@
     "partner_id": "p_03",
     "technician_id": "t_04",
     "status": "done",
-    "created_at": "2026-11-14T18:40:00Z",
+    "created_at": "2026-11-14T18:40:00+01:00",
     "brief": {
       "title": "Kitchen sink not draining at all",
       "category": "plumbing",
@@ -613,16 +613,16 @@
     "consent_id": "CON-2026-0179",
     "proposed_windows": [
       {
-        "start": "2026-11-20T13:00:00Z",
-        "end": "2026-11-20T15:00:00Z"
+        "start": "2026-11-20T13:00:00+01:00",
+        "end": "2026-11-20T15:00:00+01:00"
       },
       {
-        "start": "2026-11-21T13:00:00Z",
-        "end": "2026-11-21T15:00:00Z"
+        "start": "2026-11-21T13:00:00+01:00",
+        "end": "2026-11-21T15:00:00+01:00"
       },
       {
-        "start": "2026-11-22T13:00:00Z",
-        "end": "2026-11-22T15:00:00Z"
+        "start": "2026-11-22T13:00:00+01:00",
+        "end": "2026-11-22T15:00:00+01:00"
       }
     ],
     "appointment_id": "APT-2026-0179",
@@ -636,7 +636,7 @@
     "partner_id": "p_01",
     "technician_id": "t_02",
     "status": "quote_pending_approval",
-    "created_at": "2026-11-16T10:45:00Z",
+    "created_at": "2026-11-16T10:45:00+01:00",
     "brief": {
       "title": "Brown water and low pressure in the mornings (1932 building, lead risers)",
       "category": "plumbing",
@@ -685,23 +685,23 @@
     "consent_id": "CON-2026-0181",
     "proposed_windows": [
       {
-        "start": "2026-11-20T08:00:00Z",
-        "end": "2026-11-20T10:00:00Z"
+        "start": "2026-11-20T08:00:00+01:00",
+        "end": "2026-11-20T10:00:00+01:00"
       },
       {
-        "start": "2026-11-21T08:00:00Z",
-        "end": "2026-11-21T10:00:00Z"
+        "start": "2026-11-21T08:00:00+01:00",
+        "end": "2026-11-21T10:00:00+01:00"
       },
       {
-        "start": "2026-11-22T08:00:00Z",
-        "end": "2026-11-22T10:00:00Z"
+        "start": "2026-11-22T08:00:00+01:00",
+        "end": "2026-11-22T10:00:00+01:00"
       }
     ],
     "appointment_id": "APT-2026-0181",
     "quote": {
       "amount_eur_excl_vat": 3850.0,
       "description": "Replace the lead riser for all 3 flats with copper, 2 days work incl. wall openings and restoring",
-      "submitted_at": "2026-11-20T09:05:00Z",
+      "submitted_at": "2026-11-20T09:05:00+01:00",
       "needs_approval": true,
       "approved_by": null,
       "approved_at": null,
@@ -716,7 +716,7 @@
     "partner_id": "p_01",
     "technician_id": "t_01",
     "status": "in_progress",
-    "created_at": "2026-11-18T16:25:00Z",
+    "created_at": "2026-11-18T16:25:00+01:00",
     "brief": {
       "title": "Washing machine tap leaking, floor wet",
       "category": "plumbing",
@@ -766,16 +766,16 @@
     "consent_id": "CON-2026-0183",
     "proposed_windows": [
       {
-        "start": "2026-11-21T08:00:00Z",
-        "end": "2026-11-21T10:00:00Z"
+        "start": "2026-11-21T08:00:00+01:00",
+        "end": "2026-11-21T10:00:00+01:00"
       },
       {
-        "start": "2026-11-22T08:00:00Z",
-        "end": "2026-11-22T10:00:00Z"
+        "start": "2026-11-22T08:00:00+01:00",
+        "end": "2026-11-22T10:00:00+01:00"
       },
       {
-        "start": "2026-11-23T08:00:00Z",
-        "end": "2026-11-23T10:00:00Z"
+        "start": "2026-11-23T08:00:00+01:00",
+        "end": "2026-11-23T10:00:00+01:00"
       }
     ],
     "appointment_id": "APT-2026-0183",
@@ -789,7 +789,7 @@
     "partner_id": "p_03",
     "technician_id": "t_04",
     "status": "scheduled",
-    "created_at": "2026-11-19T12:30:00Z",
+    "created_at": "2026-11-19T12:30:00+01:00",
     "brief": {
       "title": "Sewer smell in the bathroom",
       "category": "plumbing",
@@ -836,16 +836,16 @@
     "consent_id": "CON-2026-0184",
     "proposed_windows": [
       {
-        "start": "2026-11-24T10:00:00Z",
-        "end": "2026-11-24T12:00:00Z"
+        "start": "2026-11-24T10:00:00+01:00",
+        "end": "2026-11-24T12:00:00+01:00"
       },
       {
-        "start": "2026-11-25T10:00:00Z",
-        "end": "2026-11-25T12:00:00Z"
+        "start": "2026-11-25T10:00:00+01:00",
+        "end": "2026-11-25T12:00:00+01:00"
       },
       {
-        "start": "2026-11-26T10:00:00Z",
-        "end": "2026-11-26T12:00:00Z"
+        "start": "2026-11-26T10:00:00+01:00",
+        "end": "2026-11-26T12:00:00+01:00"
       }
     ],
     "appointment_id": "APT-2026-0184",
@@ -859,7 +859,7 @@
     "partner_id": "p_03",
     "technician_id": "t_04",
     "status": "scheduled",
-    "created_at": "2026-11-19T22:50:00Z",
+    "created_at": "2026-11-19T22:50:00+01:00",
     "brief": {
       "title": "Bathroom washbasin drains slowly",
       "category": "plumbing",
@@ -908,16 +908,16 @@
     "consent_id": "CON-2026-0185",
     "proposed_windows": [
       {
-        "start": "2026-11-25T13:00:00Z",
-        "end": "2026-11-25T15:00:00Z"
+        "start": "2026-11-25T13:00:00+01:00",
+        "end": "2026-11-25T15:00:00+01:00"
       },
       {
-        "start": "2026-11-26T13:00:00Z",
-        "end": "2026-11-26T15:00:00Z"
+        "start": "2026-11-26T13:00:00+01:00",
+        "end": "2026-11-26T15:00:00+01:00"
       },
       {
-        "start": "2026-11-27T13:00:00Z",
-        "end": "2026-11-27T15:00:00Z"
+        "start": "2026-11-27T13:00:00+01:00",
+        "end": "2026-11-27T15:00:00+01:00"
       }
     ],
     "appointment_id": "APT-2026-0185",
@@ -931,7 +931,7 @@
     "partner_id": "p_02",
     "technician_id": "t_03",
     "status": "windows_proposed",
-    "created_at": "2026-11-20T07:35:00Z",
+    "created_at": "2026-11-20T07:35:00+01:00",
     "brief": {
       "title": "No hot water since this morning, boiler shows error F28",
       "category": "plumbing",
@@ -980,18 +980,77 @@
     "consent_id": "CON-2026-0186",
     "proposed_windows": [
       {
-        "start": "2026-11-21T13:00:00Z",
-        "end": "2026-11-21T15:00:00Z"
+        "start": "2026-11-21T13:00:00+01:00",
+        "end": "2026-11-21T15:00:00+01:00"
       },
       {
-        "start": "2026-11-24T09:00:00Z",
-        "end": "2026-11-24T11:00:00Z"
+        "start": "2026-11-24T09:00:00+01:00",
+        "end": "2026-11-24T11:00:00+01:00"
       },
       {
-        "start": "2026-11-24T13:00:00Z",
-        "end": "2026-11-24T15:00:00Z"
+        "start": "2026-11-24T13:00:00+01:00",
+        "end": "2026-11-24T15:00:00+01:00"
       }
     ],
+    "appointment_id": null,
+    "quote": null,
+    "work_report_id": null,
+    "invoice_id": null
+  },
+  {
+    "job_id": "J-2026-0187",
+    "case_id": "C-2026-0187",
+    "partner_id": "p_01",
+    "technician_id": null,
+    "status": "offered",
+    "created_at": "2026-11-20T21:30:00+01:00",
+    "brief": {
+      "title": "Shower mixer leaks at the bottom",
+      "category": "plumbing",
+      "problem_type": "leak",
+      "urgency": "normal",
+      "address": "Oranjeplein 87, 6224 KM Maastricht",
+      "unit": "87C (1st left)",
+      "floor": 1,
+      "lift": false,
+      "tenant_first_name": "Lotte",
+      "tenant_phone": "+31 6 0000 0217",
+      "tenant_language": "nl",
+      "description": "De douchemengkraan lekt aan de onderkant, er staat steeds een plasje.",
+      "description_translated": "Shower mixer leaks at the bottom",
+      "answers": [
+        {
+          "q": "Is water still coming out right now?",
+          "a": "Only when the shower is on"
+        },
+        {
+          "q": "Since when?",
+          "a": "A few days"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0187/before_1.jpg"
+      ],
+      "access": "Tenant at home, otherwise caretaker",
+      "water_shutoff": "Kitchen, under the sink",
+      "water_main": "Basement storage corridor, at the end on the right",
+      "boiler": "Intergas Kombi Kompakt",
+      "building_year": 1955,
+      "pipework": "Copper, cast-iron soil stack",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0187",
+    "proposed_windows": [],
     "appointment_id": null,
     "quote": null,
     "work_report_id": null,

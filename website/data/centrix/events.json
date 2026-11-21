@@ -2,7 +2,7 @@
   {
     "event_id": "ev_0001",
     "event": "case.created",
-    "occurred_at": "2026-09-08T07:40:00Z",
+    "occurred_at": "2026-09-08T07:40:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -16,7 +16,7 @@
   {
     "event_id": "ev_0002",
     "event": "case.classified",
-    "occurred_at": "2026-09-08T07:41:00Z",
+    "occurred_at": "2026-09-08T07:41:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -31,7 +31,7 @@
   {
     "event_id": "ev_0003",
     "event": "consent.given",
-    "occurred_at": "2026-09-08T07:46:00Z",
+    "occurred_at": "2026-09-08T07:46:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -45,7 +45,7 @@
   {
     "event_id": "ev_0004",
     "event": "job.dispatched",
-    "occurred_at": "2026-09-08T09:40:00Z",
+    "occurred_at": "2026-09-08T09:40:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -58,7 +58,7 @@
   {
     "event_id": "ev_0005",
     "event": "job.accepted",
-    "occurred_at": "2026-09-08T10:40:00Z",
+    "occurred_at": "2026-09-08T10:40:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -71,7 +71,7 @@
   {
     "event_id": "ev_0006",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-09-08T10:45:00Z",
+    "occurred_at": "2026-09-08T10:45:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -79,29 +79,29 @@
     "data": {
       "job_id": "J-2026-0141",
       "windows": [
-        "2026-09-10T10:00:00Z",
-        "2026-09-11T10:00:00Z",
-        "2026-09-12T10:00:00Z"
+        "2026-09-10T10:00:00+02:00",
+        "2026-09-11T10:00:00+02:00",
+        "2026-09-12T10:00:00+02:00"
       ]
     }
   },
   {
     "event_id": "ev_0007",
     "event": "appointment.booked",
-    "occurred_at": "2026-09-08T11:10:00Z",
+    "occurred_at": "2026-09-08T11:10:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
     "actor": "c_201",
     "data": {
       "appointment_id": "APT-2026-0141",
-      "window_start": "2026-09-10T10:00:00Z"
+      "window_start": "2026-09-10T10:00:00+02:00"
     }
   },
   {
     "event_id": "ev_0008",
     "event": "job.on_the_way",
-    "occurred_at": "2026-09-10T10:05:00Z",
+    "occurred_at": "2026-09-10T10:05:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -114,7 +114,7 @@
   {
     "event_id": "ev_0009",
     "event": "job.started",
-    "occurred_at": "2026-09-10T10:25:00Z",
+    "occurred_at": "2026-09-10T10:25:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -126,7 +126,7 @@
   {
     "event_id": "ev_0010",
     "event": "job.completed",
-    "occurred_at": "2026-09-10T10:55:00Z",
+    "occurred_at": "2026-09-10T10:55:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -139,7 +139,7 @@
   {
     "event_id": "ev_0011",
     "event": "tenant.confirmed_fix",
-    "occurred_at": "2026-09-10T11:55:00Z",
+    "occurred_at": "2026-09-10T11:55:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -151,7 +151,7 @@
   {
     "event_id": "ev_0012",
     "event": "invoice.issued",
-    "occurred_at": "2026-09-11T12:00:00Z",
+    "occurred_at": "2026-09-11T12:00:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -165,7 +165,7 @@
   {
     "event_id": "ev_0013",
     "event": "tenant.feedback",
-    "occurred_at": "2026-09-11T14:00:00Z",
+    "occurred_at": "2026-09-11T14:00:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -173,13 +173,13 @@
     "data": {
       "rating": 5,
       "comment": "Vriendelijke man, snel klaar.",
-      "given_at": "2026-09-11T14:00:00Z"
+      "given_at": "2026-09-11T14:00:00+02:00"
     }
   },
   {
     "event_id": "ev_0014",
     "event": "case.closed",
-    "occurred_at": "2026-09-17T12:00:00Z",
+    "occurred_at": "2026-09-17T12:00:00+02:00",
     "unit_id": "u_01_0",
     "contact_id": "c_201",
     "case_id": "C-2026-0141",
@@ -191,7 +191,7 @@
   {
     "event_id": "ev_0015",
     "event": "case.created",
-    "occurred_at": "2026-09-19T21:15:00Z",
+    "occurred_at": "2026-09-19T21:15:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -205,7 +205,7 @@
   {
     "event_id": "ev_0016",
     "event": "case.classified",
-    "occurred_at": "2026-09-19T21:16:00Z",
+    "occurred_at": "2026-09-19T21:16:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -220,7 +220,7 @@
   {
     "event_id": "ev_0017",
     "event": "consent.given",
-    "occurred_at": "2026-09-19T21:21:00Z",
+    "occurred_at": "2026-09-19T21:21:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -234,7 +234,7 @@
   {
     "event_id": "ev_0018",
     "event": "job.dispatched",
-    "occurred_at": "2026-09-19T21:25:00Z",
+    "occurred_at": "2026-09-19T21:25:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -247,7 +247,7 @@
   {
     "event_id": "ev_0019",
     "event": "job.accepted",
-    "occurred_at": "2026-09-19T21:35:00Z",
+    "occurred_at": "2026-09-19T21:35:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -260,7 +260,7 @@
   {
     "event_id": "ev_0020",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-09-19T21:40:00Z",
+    "occurred_at": "2026-09-19T21:40:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -268,27 +268,27 @@
     "data": {
       "job_id": "J-2026-0148",
       "windows": [
-        "2026-09-19T22:30:00Z"
+        "2026-09-19T22:30:00+02:00"
       ]
     }
   },
   {
     "event_id": "ev_0021",
     "event": "appointment.booked",
-    "occurred_at": "2026-09-19T22:05:00Z",
+    "occurred_at": "2026-09-19T22:05:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
     "actor": "c_209",
     "data": {
       "appointment_id": "APT-2026-0148",
-      "window_start": "2026-09-19T22:30:00Z"
+      "window_start": "2026-09-19T22:30:00+02:00"
     }
   },
   {
     "event_id": "ev_0022",
     "event": "job.on_the_way",
-    "occurred_at": "2026-09-19T22:35:00Z",
+    "occurred_at": "2026-09-19T22:35:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -301,7 +301,7 @@
   {
     "event_id": "ev_0023",
     "event": "job.started",
-    "occurred_at": "2026-09-19T22:55:00Z",
+    "occurred_at": "2026-09-19T22:55:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -313,7 +313,7 @@
   {
     "event_id": "ev_0024",
     "event": "job.completed",
-    "occurred_at": "2026-09-20T00:55:00Z",
+    "occurred_at": "2026-09-20T00:55:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -326,7 +326,7 @@
   {
     "event_id": "ev_0025",
     "event": "tenant.confirmed_fix",
-    "occurred_at": "2026-09-20T01:55:00Z",
+    "occurred_at": "2026-09-20T01:55:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -338,7 +338,7 @@
   {
     "event_id": "ev_0026",
     "event": "invoice.issued",
-    "occurred_at": "2026-09-21T00:30:00Z",
+    "occurred_at": "2026-09-21T00:30:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -352,7 +352,7 @@
   {
     "event_id": "ev_0027",
     "event": "tenant.feedback",
-    "occurred_at": "2026-09-21T02:30:00Z",
+    "occurred_at": "2026-09-21T02:30:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -360,13 +360,13 @@
     "data": {
       "rating": 5,
       "comment": "Midden in de nacht nog geholpen, top.",
-      "given_at": "2026-09-21T02:30:00Z"
+      "given_at": "2026-09-21T02:30:00+02:00"
     }
   },
   {
     "event_id": "ev_0028",
     "event": "case.closed",
-    "occurred_at": "2026-09-27T00:30:00Z",
+    "occurred_at": "2026-09-27T00:30:00+02:00",
     "unit_id": "u_03_02",
     "contact_id": "c_209",
     "case_id": "C-2026-0148",
@@ -378,7 +378,7 @@
   {
     "event_id": "ev_0029",
     "event": "case.created",
-    "occurred_at": "2026-09-29T18:05:00Z",
+    "occurred_at": "2026-09-29T18:05:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -392,7 +392,7 @@
   {
     "event_id": "ev_0030",
     "event": "case.classified",
-    "occurred_at": "2026-09-29T18:06:00Z",
+    "occurred_at": "2026-09-29T18:06:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -407,7 +407,7 @@
   {
     "event_id": "ev_0031",
     "event": "consent.given",
-    "occurred_at": "2026-09-29T18:11:00Z",
+    "occurred_at": "2026-09-29T18:11:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -421,7 +421,7 @@
   {
     "event_id": "ev_0032",
     "event": "job.dispatched",
-    "occurred_at": "2026-09-29T20:05:00Z",
+    "occurred_at": "2026-09-29T20:05:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -434,7 +434,7 @@
   {
     "event_id": "ev_0033",
     "event": "job.accepted",
-    "occurred_at": "2026-09-29T21:05:00Z",
+    "occurred_at": "2026-09-29T21:05:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -447,7 +447,7 @@
   {
     "event_id": "ev_0034",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-09-29T21:10:00Z",
+    "occurred_at": "2026-09-29T21:10:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -455,29 +455,29 @@
     "data": {
       "job_id": "J-2026-0152",
       "windows": [
-        "2026-10-01T08:00:00Z",
-        "2026-10-02T08:00:00Z",
-        "2026-10-03T08:00:00Z"
+        "2026-10-01T08:00:00+02:00",
+        "2026-10-02T08:00:00+02:00",
+        "2026-10-03T08:00:00+02:00"
       ]
     }
   },
   {
     "event_id": "ev_0035",
     "event": "appointment.booked",
-    "occurred_at": "2026-09-29T21:35:00Z",
+    "occurred_at": "2026-09-29T21:35:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
     "actor": "c_202",
     "data": {
       "appointment_id": "APT-2026-0152",
-      "window_start": "2026-10-01T08:00:00Z"
+      "window_start": "2026-10-01T08:00:00+02:00"
     }
   },
   {
     "event_id": "ev_0036",
     "event": "job.on_the_way",
-    "occurred_at": "2026-10-01T08:05:00Z",
+    "occurred_at": "2026-10-01T08:05:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -490,7 +490,7 @@
   {
     "event_id": "ev_0037",
     "event": "job.started",
-    "occurred_at": "2026-10-01T08:25:00Z",
+    "occurred_at": "2026-10-01T08:25:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -502,7 +502,7 @@
   {
     "event_id": "ev_0038",
     "event": "job.completed",
-    "occurred_at": "2026-10-01T09:10:00Z",
+    "occurred_at": "2026-10-01T09:10:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -515,7 +515,7 @@
   {
     "event_id": "ev_0039",
     "event": "tenant.confirmed_fix",
-    "occurred_at": "2026-10-01T10:10:00Z",
+    "occurred_at": "2026-10-01T10:10:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -527,7 +527,7 @@
   {
     "event_id": "ev_0040",
     "event": "invoice.issued",
-    "occurred_at": "2026-10-02T10:00:00Z",
+    "occurred_at": "2026-10-02T10:00:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -541,7 +541,7 @@
   {
     "event_id": "ev_0041",
     "event": "tenant.feedback",
-    "occurred_at": "2026-10-02T12:00:00Z",
+    "occurred_at": "2026-10-02T12:00:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -549,13 +549,13 @@
     "data": {
       "rating": 4,
       "comment": "Quick, but the slot was early.",
-      "given_at": "2026-10-02T12:00:00Z"
+      "given_at": "2026-10-02T12:00:00+02:00"
     }
   },
   {
     "event_id": "ev_0042",
     "event": "case.created",
-    "occurred_at": "2026-10-06T08:12:00Z",
+    "occurred_at": "2026-10-06T08:12:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -569,7 +569,7 @@
   {
     "event_id": "ev_0043",
     "event": "case.classified",
-    "occurred_at": "2026-10-06T08:13:00Z",
+    "occurred_at": "2026-10-06T08:13:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -584,7 +584,7 @@
   {
     "event_id": "ev_0044",
     "event": "consent.given",
-    "occurred_at": "2026-10-06T08:18:00Z",
+    "occurred_at": "2026-10-06T08:18:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -598,7 +598,7 @@
   {
     "event_id": "ev_0045",
     "event": "job.dispatched",
-    "occurred_at": "2026-10-06T08:32:00Z",
+    "occurred_at": "2026-10-06T08:32:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -611,7 +611,7 @@
   {
     "event_id": "ev_0046",
     "event": "job.accepted",
-    "occurred_at": "2026-10-06T08:42:00Z",
+    "occurred_at": "2026-10-06T08:42:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -624,7 +624,7 @@
   {
     "event_id": "ev_0047",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-10-06T08:47:00Z",
+    "occurred_at": "2026-10-06T08:47:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -632,27 +632,27 @@
     "data": {
       "job_id": "J-2026-0157",
       "windows": [
-        "2026-10-06T14:00:00Z"
+        "2026-10-06T14:00:00+02:00"
       ]
     }
   },
   {
     "event_id": "ev_0048",
     "event": "appointment.booked",
-    "occurred_at": "2026-10-06T09:12:00Z",
+    "occurred_at": "2026-10-06T09:12:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
     "actor": "c_206",
     "data": {
       "appointment_id": "APT-2026-0157",
-      "window_start": "2026-10-06T14:00:00Z"
+      "window_start": "2026-10-06T14:00:00+02:00"
     }
   },
   {
     "event_id": "ev_0049",
     "event": "job.on_the_way",
-    "occurred_at": "2026-10-06T14:05:00Z",
+    "occurred_at": "2026-10-06T14:05:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -665,7 +665,7 @@
   {
     "event_id": "ev_0050",
     "event": "job.started",
-    "occurred_at": "2026-10-06T14:25:00Z",
+    "occurred_at": "2026-10-06T14:25:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -677,7 +677,7 @@
   {
     "event_id": "ev_0051",
     "event": "job.completed",
-    "occurred_at": "2026-10-06T15:25:00Z",
+    "occurred_at": "2026-10-06T15:25:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -690,7 +690,7 @@
   {
     "event_id": "ev_0052",
     "event": "tenant.confirmed_fix",
-    "occurred_at": "2026-10-06T16:25:00Z",
+    "occurred_at": "2026-10-06T16:25:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -702,7 +702,7 @@
   {
     "event_id": "ev_0053",
     "event": "case.created",
-    "occurred_at": "2026-10-06T19:30:00Z",
+    "occurred_at": "2026-10-06T19:30:00+02:00",
     "unit_id": "u_02_1",
     "contact_id": "c_205",
     "case_id": "C-2026-0158",
@@ -716,7 +716,7 @@
   {
     "event_id": "ev_0054",
     "event": "case.classified",
-    "occurred_at": "2026-10-06T19:31:00Z",
+    "occurred_at": "2026-10-06T19:31:00+02:00",
     "unit_id": "u_02_1",
     "contact_id": "c_205",
     "case_id": "C-2026-0158",
@@ -731,7 +731,7 @@
   {
     "event_id": "ev_0055",
     "event": "case.linked",
-    "occurred_at": "2026-10-06T19:31:00Z",
+    "occurred_at": "2026-10-06T19:31:00+02:00",
     "unit_id": "u_02_1",
     "contact_id": "c_205",
     "case_id": "C-2026-0158",
@@ -745,7 +745,7 @@
   {
     "event_id": "ev_0056",
     "event": "invoice.issued",
-    "occurred_at": "2026-10-07T16:00:00Z",
+    "occurred_at": "2026-10-07T16:00:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -759,7 +759,7 @@
   {
     "event_id": "ev_0057",
     "event": "tenant.feedback",
-    "occurred_at": "2026-10-07T18:00:00Z",
+    "occurred_at": "2026-10-07T18:00:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -767,13 +767,13 @@
     "data": {
       "rating": 5,
       "comment": "Zelfde dag geholpen!",
-      "given_at": "2026-10-07T18:00:00Z"
+      "given_at": "2026-10-07T18:00:00+02:00"
     }
   },
   {
     "event_id": "ev_0058",
     "event": "case.closed",
-    "occurred_at": "2026-10-08T10:00:00Z",
+    "occurred_at": "2026-10-08T10:00:00+02:00",
     "unit_id": "u_01_1",
     "contact_id": "c_202",
     "case_id": "C-2026-0152",
@@ -785,7 +785,7 @@
   {
     "event_id": "ev_0059",
     "event": "case.closed",
-    "occurred_at": "2026-10-13T16:00:00Z",
+    "occurred_at": "2026-10-13T16:00:00+02:00",
     "unit_id": "u_02_2",
     "contact_id": "c_206",
     "case_id": "C-2026-0157",
@@ -797,7 +797,7 @@
   {
     "event_id": "ev_0060",
     "event": "case.closed",
-    "occurred_at": "2026-10-13T21:30:00Z",
+    "occurred_at": "2026-10-13T21:30:00+02:00",
     "unit_id": "u_02_1",
     "contact_id": "c_205",
     "case_id": "C-2026-0158",
@@ -809,7 +809,7 @@
   {
     "event_id": "ev_0061",
     "event": "case.created",
-    "occurred_at": "2026-10-14T15:20:00Z",
+    "occurred_at": "2026-10-14T15:20:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -823,7 +823,7 @@
   {
     "event_id": "ev_0062",
     "event": "case.classified",
-    "occurred_at": "2026-10-14T15:21:00Z",
+    "occurred_at": "2026-10-14T15:21:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -838,7 +838,7 @@
   {
     "event_id": "ev_0063",
     "event": "consent.given",
-    "occurred_at": "2026-10-14T15:26:00Z",
+    "occurred_at": "2026-10-14T15:26:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -852,7 +852,7 @@
   {
     "event_id": "ev_0064",
     "event": "job.dispatched",
-    "occurred_at": "2026-10-14T15:40:00Z",
+    "occurred_at": "2026-10-14T15:40:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -865,7 +865,7 @@
   {
     "event_id": "ev_0065",
     "event": "job.accepted",
-    "occurred_at": "2026-10-14T15:50:00Z",
+    "occurred_at": "2026-10-14T15:50:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -878,7 +878,7 @@
   {
     "event_id": "ev_0066",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-10-14T15:55:00Z",
+    "occurred_at": "2026-10-14T15:55:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -886,27 +886,27 @@
     "data": {
       "job_id": "J-2026-0163",
       "windows": [
-        "2026-10-14T17:00:00Z"
+        "2026-10-14T17:00:00+02:00"
       ]
     }
   },
   {
     "event_id": "ev_0067",
     "event": "appointment.booked",
-    "occurred_at": "2026-10-14T16:20:00Z",
+    "occurred_at": "2026-10-14T16:20:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
     "actor": "c_214",
     "data": {
       "appointment_id": "APT-2026-0163",
-      "window_start": "2026-10-14T17:00:00Z"
+      "window_start": "2026-10-14T17:00:00+02:00"
     }
   },
   {
     "event_id": "ev_0068",
     "event": "job.on_the_way",
-    "occurred_at": "2026-10-14T17:05:00Z",
+    "occurred_at": "2026-10-14T17:05:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -919,7 +919,7 @@
   {
     "event_id": "ev_0069",
     "event": "job.started",
-    "occurred_at": "2026-10-14T17:25:00Z",
+    "occurred_at": "2026-10-14T17:25:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -931,7 +931,7 @@
   {
     "event_id": "ev_0070",
     "event": "job.completed",
-    "occurred_at": "2026-10-14T18:25:00Z",
+    "occurred_at": "2026-10-14T18:25:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -944,7 +944,7 @@
   {
     "event_id": "ev_0071",
     "event": "tenant.confirmed_fix",
-    "occurred_at": "2026-10-14T19:25:00Z",
+    "occurred_at": "2026-10-14T19:25:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -956,7 +956,7 @@
   {
     "event_id": "ev_0072",
     "event": "invoice.issued",
-    "occurred_at": "2026-10-15T19:00:00Z",
+    "occurred_at": "2026-10-15T19:00:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -970,7 +970,7 @@
   {
     "event_id": "ev_0073",
     "event": "tenant.feedback",
-    "occurred_at": "2026-10-15T21:00:00Z",
+    "occurred_at": "2026-10-15T21:00:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -978,13 +978,13 @@
     "data": {
       "rating": 4,
       "comment": "Dziękuję, szybko.",
-      "given_at": "2026-10-15T21:00:00Z"
+      "given_at": "2026-10-15T21:00:00+02:00"
     }
   },
   {
     "event_id": "ev_0074",
     "event": "case.closed",
-    "occurred_at": "2026-10-21T19:00:00Z",
+    "occurred_at": "2026-10-21T19:00:00+02:00",
     "unit_id": "u_04_1",
     "contact_id": "c_214",
     "case_id": "C-2026-0163",
@@ -996,7 +996,7 @@
   {
     "event_id": "ev_0075",
     "event": "case.created",
-    "occurred_at": "2026-10-26T07:55:00Z",
+    "occurred_at": "2026-10-26T07:55:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1010,7 +1010,7 @@
   {
     "event_id": "ev_0076",
     "event": "case.classified",
-    "occurred_at": "2026-10-26T07:56:00Z",
+    "occurred_at": "2026-10-26T07:56:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1025,7 +1025,7 @@
   {
     "event_id": "ev_0077",
     "event": "consent.given",
-    "occurred_at": "2026-10-26T08:01:00Z",
+    "occurred_at": "2026-10-26T08:01:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1039,7 +1039,7 @@
   {
     "event_id": "ev_0078",
     "event": "job.dispatched",
-    "occurred_at": "2026-10-26T08:15:00Z",
+    "occurred_at": "2026-10-26T08:15:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1052,7 +1052,7 @@
   {
     "event_id": "ev_0079",
     "event": "job.accepted",
-    "occurred_at": "2026-10-26T08:25:00Z",
+    "occurred_at": "2026-10-26T08:25:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1065,7 +1065,7 @@
   {
     "event_id": "ev_0080",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-10-26T08:30:00Z",
+    "occurred_at": "2026-10-26T08:30:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1073,29 +1073,29 @@
     "data": {
       "job_id": "J-2026-0170",
       "windows": [
-        "2026-10-27T09:00:00Z",
-        "2026-10-28T09:00:00Z",
-        "2026-10-29T09:00:00Z"
+        "2026-10-27T09:00:00+01:00",
+        "2026-10-28T09:00:00+01:00",
+        "2026-10-29T09:00:00+01:00"
       ]
     }
   },
   {
     "event_id": "ev_0081",
     "event": "appointment.booked",
-    "occurred_at": "2026-10-26T08:55:00Z",
+    "occurred_at": "2026-10-26T08:55:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
     "actor": "c_217",
     "data": {
       "appointment_id": "APT-2026-0170",
-      "window_start": "2026-10-27T09:00:00Z"
+      "window_start": "2026-10-27T09:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0082",
     "event": "job.on_the_way",
-    "occurred_at": "2026-10-27T09:05:00Z",
+    "occurred_at": "2026-10-27T09:05:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1108,7 +1108,7 @@
   {
     "event_id": "ev_0083",
     "event": "job.started",
-    "occurred_at": "2026-10-27T09:25:00Z",
+    "occurred_at": "2026-10-27T09:25:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1120,7 +1120,7 @@
   {
     "event_id": "ev_0084",
     "event": "quote.submitted",
-    "occurred_at": "2026-10-27T10:05:00Z",
+    "occurred_at": "2026-10-27T10:05:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1134,7 +1134,7 @@
   {
     "event_id": "ev_0085",
     "event": "job.completed",
-    "occurred_at": "2026-10-27T15:00:00Z",
+    "occurred_at": "2026-10-27T15:00:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1147,7 +1147,7 @@
   {
     "event_id": "ev_0086",
     "event": "tenant.confirmed_fix",
-    "occurred_at": "2026-10-27T16:00:00Z",
+    "occurred_at": "2026-10-27T16:00:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1159,7 +1159,7 @@
   {
     "event_id": "ev_0087",
     "event": "invoice.issued",
-    "occurred_at": "2026-10-28T11:00:00Z",
+    "occurred_at": "2026-10-28T11:00:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1173,7 +1173,7 @@
   {
     "event_id": "ev_0088",
     "event": "tenant.feedback",
-    "occurred_at": "2026-10-28T13:00:00Z",
+    "occurred_at": "2026-10-28T13:00:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1181,26 +1181,26 @@
     "data": {
       "rating": 5,
       "comment": "Eindelijk warm water uit de kraan, en nu ook verwarming.",
-      "given_at": "2026-10-28T13:00:00Z"
+      "given_at": "2026-10-28T13:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0089",
     "event": "tenant.move_out_scheduled",
-    "occurred_at": "2026-10-30T14:00:00Z",
+    "occurred_at": "2026-10-30T14:00:00+01:00",
     "unit_id": "u_06_6",
     "contact_id": "c_228",
     "case_id": null,
     "actor": "centrix",
     "data": {
       "move_out_date": "2026-11-30",
-      "inspection_at": "2026-11-30T10:00:00Z"
+      "inspection_at": "2026-11-30T10:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0090",
     "event": "contract.expiring",
-    "occurred_at": "2026-11-01T06:00:00Z",
+    "occurred_at": "2026-11-01T06:00:00+01:00",
     "unit_id": null,
     "contact_id": null,
     "case_id": null,
@@ -1214,7 +1214,7 @@
   {
     "event_id": "ev_0091",
     "event": "case.closed",
-    "occurred_at": "2026-11-03T11:00:00Z",
+    "occurred_at": "2026-11-03T11:00:00+01:00",
     "unit_id": "u_05_2",
     "contact_id": "c_217",
     "case_id": "C-2026-0170",
@@ -1226,7 +1226,7 @@
   {
     "event_id": "ev_0092",
     "event": "case.created",
-    "occurred_at": "2026-11-12T12:10:00Z",
+    "occurred_at": "2026-11-12T12:10:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1240,7 +1240,7 @@
   {
     "event_id": "ev_0093",
     "event": "case.classified",
-    "occurred_at": "2026-11-12T12:11:00Z",
+    "occurred_at": "2026-11-12T12:11:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1255,7 +1255,7 @@
   {
     "event_id": "ev_0094",
     "event": "consent.given",
-    "occurred_at": "2026-11-12T12:16:00Z",
+    "occurred_at": "2026-11-12T12:16:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1269,7 +1269,7 @@
   {
     "event_id": "ev_0095",
     "event": "job.dispatched",
-    "occurred_at": "2026-11-12T14:10:00Z",
+    "occurred_at": "2026-11-12T14:10:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1282,7 +1282,7 @@
   {
     "event_id": "ev_0096",
     "event": "job.accepted",
-    "occurred_at": "2026-11-12T15:10:00Z",
+    "occurred_at": "2026-11-12T15:10:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1295,7 +1295,7 @@
   {
     "event_id": "ev_0097",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-11-12T15:15:00Z",
+    "occurred_at": "2026-11-12T15:15:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1303,29 +1303,29 @@
     "data": {
       "job_id": "J-2026-0174",
       "windows": [
-        "2026-11-16T13:00:00Z",
-        "2026-11-17T13:00:00Z",
-        "2026-11-18T13:00:00Z"
+        "2026-11-16T13:00:00+01:00",
+        "2026-11-17T13:00:00+01:00",
+        "2026-11-18T13:00:00+01:00"
       ]
     }
   },
   {
     "event_id": "ev_0098",
     "event": "appointment.booked",
-    "occurred_at": "2026-11-12T15:40:00Z",
+    "occurred_at": "2026-11-12T15:40:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
     "actor": "c_215",
     "data": {
       "appointment_id": "APT-2026-0174",
-      "window_start": "2026-11-16T13:00:00Z"
+      "window_start": "2026-11-16T13:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0099",
     "event": "case.created",
-    "occurred_at": "2026-11-14T18:20:00Z",
+    "occurred_at": "2026-11-14T18:20:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
@@ -1339,7 +1339,7 @@
   {
     "event_id": "ev_0100",
     "event": "case.classified",
-    "occurred_at": "2026-11-14T18:21:00Z",
+    "occurred_at": "2026-11-14T18:21:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
@@ -1354,7 +1354,7 @@
   {
     "event_id": "ev_0101",
     "event": "consent.given",
-    "occurred_at": "2026-11-14T18:26:00Z",
+    "occurred_at": "2026-11-14T18:26:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
@@ -1368,7 +1368,7 @@
   {
     "event_id": "ev_0102",
     "event": "job.dispatched",
-    "occurred_at": "2026-11-14T18:40:00Z",
+    "occurred_at": "2026-11-14T18:40:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
@@ -1381,7 +1381,7 @@
   {
     "event_id": "ev_0103",
     "event": "job.accepted",
-    "occurred_at": "2026-11-14T18:50:00Z",
+    "occurred_at": "2026-11-14T18:50:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
@@ -1394,7 +1394,7 @@
   {
     "event_id": "ev_0104",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-11-14T18:55:00Z",
+    "occurred_at": "2026-11-14T18:55:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
@@ -1402,29 +1402,29 @@
     "data": {
       "job_id": "J-2026-0179",
       "windows": [
-        "2026-11-20T13:00:00Z",
-        "2026-11-21T13:00:00Z",
-        "2026-11-22T13:00:00Z"
+        "2026-11-20T13:00:00+01:00",
+        "2026-11-21T13:00:00+01:00",
+        "2026-11-22T13:00:00+01:00"
       ]
     }
   },
   {
     "event_id": "ev_0105",
     "event": "appointment.booked",
-    "occurred_at": "2026-11-14T19:20:00Z",
+    "occurred_at": "2026-11-14T19:20:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
     "actor": "c_208",
     "data": {
       "appointment_id": "APT-2026-0179",
-      "window_start": "2026-11-20T13:00:00Z"
+      "window_start": "2026-11-20T13:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0106",
     "event": "tenant.move_in_scheduled",
-    "occurred_at": "2026-11-15T10:00:00Z",
+    "occurred_at": "2026-11-15T10:00:00+01:00",
     "unit_id": "u_03_22",
     "contact_id": "c_227",
     "case_id": null,
@@ -1437,7 +1437,7 @@
   {
     "event_id": "ev_0107",
     "event": "case.created",
-    "occurred_at": "2026-11-15T19:00:00Z",
+    "occurred_at": "2026-11-15T19:00:00+01:00",
     "unit_id": "u_03_12",
     "contact_id": "c_211",
     "case_id": "C-2026-0180",
@@ -1451,7 +1451,7 @@
   {
     "event_id": "ev_0108",
     "event": "case.classified",
-    "occurred_at": "2026-11-15T19:01:00Z",
+    "occurred_at": "2026-11-15T19:01:00+01:00",
     "unit_id": "u_03_12",
     "contact_id": "c_211",
     "case_id": "C-2026-0180",
@@ -1466,7 +1466,7 @@
   {
     "event_id": "ev_0109",
     "event": "case.created",
-    "occurred_at": "2026-11-15T22:40:00Z",
+    "occurred_at": "2026-11-15T22:40:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1480,7 +1480,7 @@
   {
     "event_id": "ev_0110",
     "event": "case.classified",
-    "occurred_at": "2026-11-15T22:41:00Z",
+    "occurred_at": "2026-11-15T22:41:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1495,7 +1495,7 @@
   {
     "event_id": "ev_0111",
     "event": "consent.given",
-    "occurred_at": "2026-11-15T22:46:00Z",
+    "occurred_at": "2026-11-15T22:46:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1509,7 +1509,7 @@
   {
     "event_id": "ev_0112",
     "event": "job.dispatched",
-    "occurred_at": "2026-11-16T00:40:00Z",
+    "occurred_at": "2026-11-16T00:40:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1522,7 +1522,7 @@
   {
     "event_id": "ev_0113",
     "event": "job.accepted",
-    "occurred_at": "2026-11-16T01:40:00Z",
+    "occurred_at": "2026-11-16T01:40:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1535,7 +1535,7 @@
   {
     "event_id": "ev_0114",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-11-16T01:45:00Z",
+    "occurred_at": "2026-11-16T01:45:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1543,29 +1543,29 @@
     "data": {
       "job_id": "J-2026-0177",
       "windows": [
-        "2026-11-18T11:00:00Z",
-        "2026-11-19T11:00:00Z",
-        "2026-11-20T11:00:00Z"
+        "2026-11-18T11:00:00+01:00",
+        "2026-11-19T11:00:00+01:00",
+        "2026-11-20T11:00:00+01:00"
       ]
     }
   },
   {
     "event_id": "ev_0115",
     "event": "appointment.booked",
-    "occurred_at": "2026-11-16T02:10:00Z",
+    "occurred_at": "2026-11-16T02:10:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
     "actor": "c_204",
     "data": {
       "appointment_id": "APT-2026-0177",
-      "window_start": "2026-11-18T11:00:00Z"
+      "window_start": "2026-11-18T11:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0116",
     "event": "case.created",
-    "occurred_at": "2026-11-16T08:45:00Z",
+    "occurred_at": "2026-11-16T08:45:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
@@ -1579,7 +1579,7 @@
   {
     "event_id": "ev_0117",
     "event": "case.classified",
-    "occurred_at": "2026-11-16T08:46:00Z",
+    "occurred_at": "2026-11-16T08:46:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
@@ -1594,7 +1594,7 @@
   {
     "event_id": "ev_0118",
     "event": "consent.given",
-    "occurred_at": "2026-11-16T08:51:00Z",
+    "occurred_at": "2026-11-16T08:51:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
@@ -1608,7 +1608,7 @@
   {
     "event_id": "ev_0119",
     "event": "job.dispatched",
-    "occurred_at": "2026-11-16T10:45:00Z",
+    "occurred_at": "2026-11-16T10:45:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
@@ -1621,7 +1621,7 @@
   {
     "event_id": "ev_0120",
     "event": "job.accepted",
-    "occurred_at": "2026-11-16T11:45:00Z",
+    "occurred_at": "2026-11-16T11:45:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
@@ -1634,7 +1634,7 @@
   {
     "event_id": "ev_0121",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-11-16T11:50:00Z",
+    "occurred_at": "2026-11-16T11:50:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
@@ -1642,29 +1642,29 @@
     "data": {
       "job_id": "J-2026-0181",
       "windows": [
-        "2026-11-20T08:00:00Z",
-        "2026-11-21T08:00:00Z",
-        "2026-11-22T08:00:00Z"
+        "2026-11-20T08:00:00+01:00",
+        "2026-11-21T08:00:00+01:00",
+        "2026-11-22T08:00:00+01:00"
       ]
     }
   },
   {
     "event_id": "ev_0122",
     "event": "appointment.booked",
-    "occurred_at": "2026-11-16T12:15:00Z",
+    "occurred_at": "2026-11-16T12:15:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
     "actor": "c_213",
     "data": {
       "appointment_id": "APT-2026-0181",
-      "window_start": "2026-11-20T08:00:00Z"
+      "window_start": "2026-11-20T08:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0123",
     "event": "job.on_the_way",
-    "occurred_at": "2026-11-16T13:05:00Z",
+    "occurred_at": "2026-11-16T13:05:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1677,7 +1677,7 @@
   {
     "event_id": "ev_0124",
     "event": "job.started",
-    "occurred_at": "2026-11-16T13:25:00Z",
+    "occurred_at": "2026-11-16T13:25:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1689,7 +1689,7 @@
   {
     "event_id": "ev_0125",
     "event": "job.completed",
-    "occurred_at": "2026-11-16T13:55:00Z",
+    "occurred_at": "2026-11-16T13:55:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1702,7 +1702,7 @@
   {
     "event_id": "ev_0126",
     "event": "tenant.confirmed_fix",
-    "occurred_at": "2026-11-16T14:55:00Z",
+    "occurred_at": "2026-11-16T14:55:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1714,7 +1714,7 @@
   {
     "event_id": "ev_0127",
     "event": "case.created",
-    "occurred_at": "2026-11-17T09:10:00Z",
+    "occurred_at": "2026-11-17T09:10:00+01:00",
     "unit_id": "u_06_2",
     "contact_id": "c_223",
     "case_id": "C-2026-0182",
@@ -1728,7 +1728,7 @@
   {
     "event_id": "ev_0128",
     "event": "case.classified",
-    "occurred_at": "2026-11-17T09:11:00Z",
+    "occurred_at": "2026-11-17T09:11:00+01:00",
     "unit_id": "u_06_2",
     "contact_id": "c_223",
     "case_id": "C-2026-0182",
@@ -1743,7 +1743,7 @@
   {
     "event_id": "ev_0129",
     "event": "invoice.issued",
-    "occurred_at": "2026-11-17T15:00:00Z",
+    "occurred_at": "2026-11-17T15:00:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1757,7 +1757,7 @@
   {
     "event_id": "ev_0130",
     "event": "tenant.feedback",
-    "occurred_at": "2026-11-17T17:00:00Z",
+    "occurred_at": "2026-11-17T17:00:00+01:00",
     "unit_id": "u_04_2",
     "contact_id": "c_215",
     "case_id": "C-2026-0174",
@@ -1765,13 +1765,13 @@
     "data": {
       "rating": 4,
       "comment": "Prima",
-      "given_at": "2026-11-17T17:00:00Z"
+      "given_at": "2026-11-17T17:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0131",
     "event": "job.on_the_way",
-    "occurred_at": "2026-11-18T11:05:00Z",
+    "occurred_at": "2026-11-18T11:05:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1784,7 +1784,7 @@
   {
     "event_id": "ev_0132",
     "event": "job.started",
-    "occurred_at": "2026-11-18T11:25:00Z",
+    "occurred_at": "2026-11-18T11:25:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1796,7 +1796,7 @@
   {
     "event_id": "ev_0133",
     "event": "job.completed",
-    "occurred_at": "2026-11-18T12:10:00Z",
+    "occurred_at": "2026-11-18T12:10:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1809,7 +1809,7 @@
   {
     "event_id": "ev_0134",
     "event": "tenant.confirmed_fix",
-    "occurred_at": "2026-11-18T13:10:00Z",
+    "occurred_at": "2026-11-18T13:10:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1821,7 +1821,7 @@
   {
     "event_id": "ev_0135",
     "event": "case.created",
-    "occurred_at": "2026-11-18T16:05:00Z",
+    "occurred_at": "2026-11-18T16:05:00+01:00",
     "unit_id": "u_05_1",
     "contact_id": "c_216",
     "case_id": "C-2026-0183",
@@ -1835,7 +1835,7 @@
   {
     "event_id": "ev_0136",
     "event": "case.classified",
-    "occurred_at": "2026-11-18T16:06:00Z",
+    "occurred_at": "2026-11-18T16:06:00+01:00",
     "unit_id": "u_05_1",
     "contact_id": "c_216",
     "case_id": "C-2026-0183",
@@ -1850,7 +1850,7 @@
   {
     "event_id": "ev_0137",
     "event": "consent.given",
-    "occurred_at": "2026-11-18T16:11:00Z",
+    "occurred_at": "2026-11-18T16:11:00+01:00",
     "unit_id": "u_05_1",
     "contact_id": "c_216",
     "case_id": "C-2026-0183",
@@ -1864,7 +1864,7 @@
   {
     "event_id": "ev_0138",
     "event": "job.dispatched",
-    "occurred_at": "2026-11-18T16:25:00Z",
+    "occurred_at": "2026-11-18T16:25:00+01:00",
     "unit_id": "u_05_1",
     "contact_id": "c_216",
     "case_id": "C-2026-0183",
@@ -1877,7 +1877,7 @@
   {
     "event_id": "ev_0139",
     "event": "job.accepted",
-    "occurred_at": "2026-11-18T16:35:00Z",
+    "occurred_at": "2026-11-18T16:35:00+01:00",
     "unit_id": "u_05_1",
     "contact_id": "c_216",
     "case_id": "C-2026-0183",
@@ -1890,7 +1890,7 @@
   {
     "event_id": "ev_0140",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-11-18T16:40:00Z",
+    "occurred_at": "2026-11-18T16:40:00+01:00",
     "unit_id": "u_05_1",
     "contact_id": "c_216",
     "case_id": "C-2026-0183",
@@ -1898,29 +1898,29 @@
     "data": {
       "job_id": "J-2026-0183",
       "windows": [
-        "2026-11-21T08:00:00Z",
-        "2026-11-22T08:00:00Z",
-        "2026-11-23T08:00:00Z"
+        "2026-11-21T08:00:00+01:00",
+        "2026-11-22T08:00:00+01:00",
+        "2026-11-23T08:00:00+01:00"
       ]
     }
   },
   {
     "event_id": "ev_0141",
     "event": "appointment.booked",
-    "occurred_at": "2026-11-18T17:05:00Z",
+    "occurred_at": "2026-11-18T17:05:00+01:00",
     "unit_id": "u_05_1",
     "contact_id": "c_216",
     "case_id": "C-2026-0183",
     "actor": "c_216",
     "data": {
       "appointment_id": "APT-2026-0183",
-      "window_start": "2026-11-21T08:00:00Z"
+      "window_start": "2026-11-21T08:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0142",
     "event": "case.created",
-    "occurred_at": "2026-11-19T10:30:00Z",
+    "occurred_at": "2026-11-19T10:30:00+01:00",
     "unit_id": "u_02_3",
     "contact_id": "c_207",
     "case_id": "C-2026-0184",
@@ -1934,7 +1934,7 @@
   {
     "event_id": "ev_0143",
     "event": "case.classified",
-    "occurred_at": "2026-11-19T10:31:00Z",
+    "occurred_at": "2026-11-19T10:31:00+01:00",
     "unit_id": "u_02_3",
     "contact_id": "c_207",
     "case_id": "C-2026-0184",
@@ -1949,7 +1949,7 @@
   {
     "event_id": "ev_0144",
     "event": "consent.given",
-    "occurred_at": "2026-11-19T10:36:00Z",
+    "occurred_at": "2026-11-19T10:36:00+01:00",
     "unit_id": "u_02_3",
     "contact_id": "c_207",
     "case_id": "C-2026-0184",
@@ -1963,7 +1963,7 @@
   {
     "event_id": "ev_0145",
     "event": "job.dispatched",
-    "occurred_at": "2026-11-19T12:30:00Z",
+    "occurred_at": "2026-11-19T12:30:00+01:00",
     "unit_id": "u_02_3",
     "contact_id": "c_207",
     "case_id": "C-2026-0184",
@@ -1976,7 +1976,7 @@
   {
     "event_id": "ev_0146",
     "event": "invoice.issued",
-    "occurred_at": "2026-11-19T13:00:00Z",
+    "occurred_at": "2026-11-19T13:00:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -1990,7 +1990,7 @@
   {
     "event_id": "ev_0147",
     "event": "job.accepted",
-    "occurred_at": "2026-11-19T13:30:00Z",
+    "occurred_at": "2026-11-19T13:30:00+01:00",
     "unit_id": "u_02_3",
     "contact_id": "c_207",
     "case_id": "C-2026-0184",
@@ -2003,7 +2003,7 @@
   {
     "event_id": "ev_0148",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-11-19T13:35:00Z",
+    "occurred_at": "2026-11-19T13:35:00+01:00",
     "unit_id": "u_02_3",
     "contact_id": "c_207",
     "case_id": "C-2026-0184",
@@ -2011,29 +2011,29 @@
     "data": {
       "job_id": "J-2026-0184",
       "windows": [
-        "2026-11-24T10:00:00Z",
-        "2026-11-25T10:00:00Z",
-        "2026-11-26T10:00:00Z"
+        "2026-11-24T10:00:00+01:00",
+        "2026-11-25T10:00:00+01:00",
+        "2026-11-26T10:00:00+01:00"
       ]
     }
   },
   {
     "event_id": "ev_0149",
     "event": "appointment.booked",
-    "occurred_at": "2026-11-19T14:00:00Z",
+    "occurred_at": "2026-11-19T14:00:00+01:00",
     "unit_id": "u_02_3",
     "contact_id": "c_207",
     "case_id": "C-2026-0184",
     "actor": "c_207",
     "data": {
       "appointment_id": "APT-2026-0184",
-      "window_start": "2026-11-24T10:00:00Z"
+      "window_start": "2026-11-24T10:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0150",
     "event": "tenant.feedback",
-    "occurred_at": "2026-11-19T15:00:00Z",
+    "occurred_at": "2026-11-19T15:00:00+01:00",
     "unit_id": "u_01_3",
     "contact_id": "c_204",
     "case_id": "C-2026-0177",
@@ -2041,13 +2041,13 @@
     "data": {
       "rating": 5,
       "comment": "Fixed in 30 minutes, thanks!",
-      "given_at": "2026-11-19T15:00:00Z"
+      "given_at": "2026-11-19T15:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0151",
     "event": "case.created",
-    "occurred_at": "2026-11-19T20:50:00Z",
+    "occurred_at": "2026-11-19T20:50:00+01:00",
     "unit_id": "u_05_4",
     "contact_id": "c_219",
     "case_id": "C-2026-0185",
@@ -2061,7 +2061,7 @@
   {
     "event_id": "ev_0152",
     "event": "case.classified",
-    "occurred_at": "2026-11-19T20:51:00Z",
+    "occurred_at": "2026-11-19T20:51:00+01:00",
     "unit_id": "u_05_4",
     "contact_id": "c_219",
     "case_id": "C-2026-0185",
@@ -2076,7 +2076,7 @@
   {
     "event_id": "ev_0153",
     "event": "consent.given",
-    "occurred_at": "2026-11-19T20:56:00Z",
+    "occurred_at": "2026-11-19T20:56:00+01:00",
     "unit_id": "u_05_4",
     "contact_id": "c_219",
     "case_id": "C-2026-0185",
@@ -2090,7 +2090,7 @@
   {
     "event_id": "ev_0154",
     "event": "job.dispatched",
-    "occurred_at": "2026-11-19T22:50:00Z",
+    "occurred_at": "2026-11-19T22:50:00+01:00",
     "unit_id": "u_05_4",
     "contact_id": "c_219",
     "case_id": "C-2026-0185",
@@ -2103,7 +2103,7 @@
   {
     "event_id": "ev_0155",
     "event": "job.accepted",
-    "occurred_at": "2026-11-19T23:50:00Z",
+    "occurred_at": "2026-11-19T23:50:00+01:00",
     "unit_id": "u_05_4",
     "contact_id": "c_219",
     "case_id": "C-2026-0185",
@@ -2116,7 +2116,7 @@
   {
     "event_id": "ev_0156",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-11-19T23:55:00Z",
+    "occurred_at": "2026-11-19T23:55:00+01:00",
     "unit_id": "u_05_4",
     "contact_id": "c_219",
     "case_id": "C-2026-0185",
@@ -2124,29 +2124,29 @@
     "data": {
       "job_id": "J-2026-0185",
       "windows": [
-        "2026-11-25T13:00:00Z",
-        "2026-11-26T13:00:00Z",
-        "2026-11-27T13:00:00Z"
+        "2026-11-25T13:00:00+01:00",
+        "2026-11-26T13:00:00+01:00",
+        "2026-11-27T13:00:00+01:00"
       ]
     }
   },
   {
     "event_id": "ev_0157",
     "event": "appointment.booked",
-    "occurred_at": "2026-11-20T00:20:00Z",
+    "occurred_at": "2026-11-20T00:20:00+01:00",
     "unit_id": "u_05_4",
     "contact_id": "c_219",
     "case_id": "C-2026-0185",
     "actor": "c_219",
     "data": {
       "appointment_id": "APT-2026-0185",
-      "window_start": "2026-11-25T13:00:00Z"
+      "window_start": "2026-11-25T13:00:00+01:00"
     }
   },
   {
     "event_id": "ev_0158",
     "event": "boiler.service_due",
-    "occurred_at": "2026-11-20T06:00:00Z",
+    "occurred_at": "2026-11-20T06:00:00+01:00",
     "unit_id": "u_01_2",
     "contact_id": "c_203",
     "case_id": null,
@@ -2160,7 +2160,7 @@
   {
     "event_id": "ev_0159",
     "event": "case.created",
-    "occurred_at": "2026-11-20T07:15:00Z",
+    "occurred_at": "2026-11-20T07:15:00+01:00",
     "unit_id": "u_01_2",
     "contact_id": "c_203",
     "case_id": "C-2026-0186",
@@ -2174,7 +2174,7 @@
   {
     "event_id": "ev_0160",
     "event": "case.classified",
-    "occurred_at": "2026-11-20T07:16:00Z",
+    "occurred_at": "2026-11-20T07:16:00+01:00",
     "unit_id": "u_01_2",
     "contact_id": "c_203",
     "case_id": "C-2026-0186",
@@ -2189,7 +2189,7 @@
   {
     "event_id": "ev_0161",
     "event": "consent.given",
-    "occurred_at": "2026-11-20T07:21:00Z",
+    "occurred_at": "2026-11-20T07:21:00+01:00",
     "unit_id": "u_01_2",
     "contact_id": "c_203",
     "case_id": "C-2026-0186",
@@ -2203,7 +2203,7 @@
   {
     "event_id": "ev_0162",
     "event": "job.dispatched",
-    "occurred_at": "2026-11-20T07:35:00Z",
+    "occurred_at": "2026-11-20T07:35:00+01:00",
     "unit_id": "u_01_2",
     "contact_id": "c_203",
     "case_id": "C-2026-0186",
@@ -2216,7 +2216,7 @@
   {
     "event_id": "ev_0163",
     "event": "job.accepted",
-    "occurred_at": "2026-11-20T07:45:00Z",
+    "occurred_at": "2026-11-20T07:45:00+01:00",
     "unit_id": "u_01_2",
     "contact_id": "c_203",
     "case_id": "C-2026-0186",
@@ -2229,7 +2229,7 @@
   {
     "event_id": "ev_0164",
     "event": "job.windows_proposed",
-    "occurred_at": "2026-11-20T07:50:00Z",
+    "occurred_at": "2026-11-20T07:50:00+01:00",
     "unit_id": "u_01_2",
     "contact_id": "c_203",
     "case_id": "C-2026-0186",
@@ -2237,16 +2237,16 @@
     "data": {
       "job_id": "J-2026-0186",
       "windows": [
-        "2026-11-21T13:00:00Z",
-        "2026-11-24T09:00:00Z",
-        "2026-11-24T13:00:00Z"
+        "2026-11-21T13:00:00+01:00",
+        "2026-11-24T09:00:00+01:00",
+        "2026-11-24T13:00:00+01:00"
       ]
     }
   },
   {
     "event_id": "ev_0165",
     "event": "job.on_the_way",
-    "occurred_at": "2026-11-20T08:05:00Z",
+    "occurred_at": "2026-11-20T08:05:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
@@ -2259,7 +2259,7 @@
   {
     "event_id": "ev_0166",
     "event": "job.started",
-    "occurred_at": "2026-11-20T08:25:00Z",
+    "occurred_at": "2026-11-20T08:25:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
@@ -2271,7 +2271,7 @@
   {
     "event_id": "ev_0167",
     "event": "quote.submitted",
-    "occurred_at": "2026-11-20T09:05:00Z",
+    "occurred_at": "2026-11-20T09:05:00+01:00",
     "unit_id": "u_04_0",
     "contact_id": "c_213",
     "case_id": "C-2026-0181",
@@ -2285,7 +2285,7 @@
   {
     "event_id": "ev_0168",
     "event": "job.on_the_way",
-    "occurred_at": "2026-11-20T13:05:00Z",
+    "occurred_at": "2026-11-20T13:05:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
@@ -2298,7 +2298,7 @@
   {
     "event_id": "ev_0169",
     "event": "job.started",
-    "occurred_at": "2026-11-20T13:25:00Z",
+    "occurred_at": "2026-11-20T13:25:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
@@ -2310,7 +2310,7 @@
   {
     "event_id": "ev_0170",
     "event": "job.completed",
-    "occurred_at": "2026-11-20T14:25:00Z",
+    "occurred_at": "2026-11-20T14:25:00+01:00",
     "unit_id": "u_03_01",
     "contact_id": "c_208",
     "case_id": "C-2026-0179",
@@ -2323,7 +2323,7 @@
   {
     "event_id": "ev_0171",
     "event": "case.created",
-    "occurred_at": "2026-11-20T21:30:00Z",
+    "occurred_at": "2026-11-20T19:30:00+01:00",
     "unit_id": "u_05_3",
     "contact_id": "c_218",
     "case_id": "C-2026-0187",
@@ -2337,7 +2337,7 @@
   {
     "event_id": "ev_0172",
     "event": "case.classified",
-    "occurred_at": "2026-11-20T21:31:00Z",
+    "occurred_at": "2026-11-20T19:31:00+01:00",
     "unit_id": "u_05_3",
     "contact_id": "c_218",
     "case_id": "C-2026-0187",
@@ -2351,8 +2351,35 @@
   },
   {
     "event_id": "ev_0173",
+    "event": "consent.given",
+    "occurred_at": "2026-11-20T19:36:00+01:00",
+    "unit_id": "u_05_3",
+    "contact_id": "c_218",
+    "case_id": "C-2026-0187",
+    "actor": "c_218",
+    "data": {
+      "consent_id": "CON-2026-0187",
+      "partner_id": "p_01",
+      "channel": "portal"
+    }
+  },
+  {
+    "event_id": "ev_0174",
+    "event": "job.dispatched",
+    "occurred_at": "2026-11-20T21:30:00+01:00",
+    "unit_id": "u_05_3",
+    "contact_id": "c_218",
+    "case_id": "C-2026-0187",
+    "actor": "pm_02",
+    "data": {
+      "job_id": "J-2026-0187",
+      "partner_id": "p_01"
+    }
+  },
+  {
+    "event_id": "ev_0175",
     "event": "job.on_the_way",
-    "occurred_at": "2026-11-21T08:05:00Z",
+    "occurred_at": "2026-11-21T08:05:00+01:00",
     "unit_id": "u_05_1",
     "contact_id": "c_216",
     "case_id": "C-2026-0183",
@@ -2363,9 +2390,9 @@
     }
   },
   {
-    "event_id": "ev_0174",
+    "event_id": "ev_0176",
     "event": "job.started",
-    "occurred_at": "2026-11-21T08:25:00Z",
+    "occurred_at": "2026-11-21T08:25:00+01:00",
     "unit_id": "u_05_1",
     "contact_id": "c_216",
     "case_id": "C-2026-0183",
@@ -2375,9 +2402,9 @@
     }
   },
   {
-    "event_id": "ev_0175",
+    "event_id": "ev_0177",
     "event": "case.created",
-    "occurred_at": "2026-11-21T08:40:00Z",
+    "occurred_at": "2026-11-21T08:40:00+01:00",
     "unit_id": "u_06_1",
     "contact_id": "c_222",
     "case_id": "C-2026-0188",
@@ -2389,9 +2416,9 @@
     }
   },
   {
-    "event_id": "ev_0176",
+    "event_id": "ev_0178",
     "event": "case.classified",
-    "occurred_at": "2026-11-21T08:41:00Z",
+    "occurred_at": "2026-11-21T08:41:00+01:00",
     "unit_id": "u_06_1",
     "contact_id": "c_222",
     "case_id": "C-2026-0188",

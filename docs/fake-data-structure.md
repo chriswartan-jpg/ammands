@@ -8,7 +8,7 @@ The reltix track description says there is **no reltix dataset or API**. We make
 - **Profile pictures:** every tenant who reported a case, and every plumber, has a portrait in [`website/assets/avatars/`](../website/assets/avatars/).
 - **Regenerate:** `python3 scripts/generate_fake_data.py website/data/centrix`. The script holds the hand-written cases and derives jobs, events, messages and invoices from them, so the IDs always match.
 
-"Now" in the data is **Saturday 21 November 2026, 09:00 UTC**. All times are UTC (`Z`).
+"Now" in the data is **Saturday 21 November 2026, 09:00** in Maastricht. All times are local time with their UTC offset (`+01:00` in winter, `+02:00` in summer).
 
 ---
 
@@ -233,8 +233,15 @@ What we made up, and why we think it is realistic:
 
 ---
 
-## 5. Next steps
+## 5. How the portals use it
 
-- Connect the portals to these files (they still use `website/data/*.js`). The tenant portal can log in as any tenant with a case; the partner portal as any technician.
-- Use `events.json` as the trigger feed for the automation (phase 3 of the build plan).
-- Write the partner connector spec based on the `connector`, `services`, `service_area_postcodes`, `availability` and `jobs.brief` fields.
+[`website/data/centrix-loader.js`](../website/data/centrix-loader.js) reads these JSON files in the browser and builds the data each portal expects, for whoever is logged in:
+
+- **Tenant portal:** the tenant's home (unit, address, floor, access, shut-off, building, repair history), the repair policy, the plumbers that cover their postcode (with distance and free windows), the open cases in the same building (for the duplicate check) and the next case number.
+- **Partner portal:** the plumber's jobs with brief, consent, linked case, windows, appointment, quote, work note, invoice, feedback and messages, and the company's rates and free windows.
+
+Log in on `login.html` with any tenant who reported a case or any plumber. The accounts are in [`website/data/demo-accounts.js`](../website/data/demo-accounts.js), and the password is the first name + `-demo` (e.g. `leyla.yilmaz@example.com` / `leyla-demo`, `bram.peters@jekerdal.test` / `bram-demo`). The old Aachen accounts (Lena, Stefan) still use the old data.
+
+The JSON is loaded with `fetch`, so serve the `website` folder (`npm start` or `python3 -m http.server`); opened as a file, the portals fall back to the old data.
+
+**Not yet shown:** the tenant portal only runs a *new* report; it doesn't list the tenant's existing cases yet, and there is no centrix (property manager) view of all cases.

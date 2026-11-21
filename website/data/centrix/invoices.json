@@ -5,7 +5,7 @@
     "case_id": "C-2026-0141",
     "unit_id": "u_01_0",
     "partner_id": "p_03",
-    "issued_at": "2026-09-11T12:00:00Z",
+    "issued_at": "2026-09-11T12:00:00+02:00",
     "lines": [
       {
         "description": "Call-out",
@@ -41,7 +41,7 @@
     "case_id": "C-2026-0148",
     "unit_id": "u_03_02",
     "partner_id": "p_01",
-    "issued_at": "2026-09-21T00:30:00Z",
+    "issued_at": "2026-09-21T00:30:00+02:00",
     "lines": [
       {
         "description": "Emergency call-out (evening)",
@@ -89,7 +89,7 @@
     "case_id": "C-2026-0152",
     "unit_id": "u_01_1",
     "partner_id": "p_03",
-    "issued_at": "2026-10-02T10:00:00Z",
+    "issued_at": "2026-10-02T10:00:00+02:00",
     "lines": [
       {
         "description": "Call-out",
@@ -119,7 +119,7 @@
     "case_id": "C-2026-0157",
     "unit_id": "u_02_2",
     "partner_id": "p_01",
-    "issued_at": "2026-10-07T16:00:00Z",
+    "issued_at": "2026-10-07T16:00:00+02:00",
     "lines": [
       {
         "description": "Call-out",
@@ -161,7 +161,7 @@
     "case_id": "C-2026-0163",
     "unit_id": "u_04_1",
     "partner_id": "p_03",
-    "issued_at": "2026-10-15T19:00:00Z",
+    "issued_at": "2026-10-15T19:00:00+02:00",
     "lines": [
       {
         "description": "Call-out",
@@ -191,7 +191,7 @@
     "case_id": "C-2026-0170",
     "unit_id": "u_05_2",
     "partner_id": "p_02",
-    "issued_at": "2026-10-28T11:00:00Z",
+    "issued_at": "2026-10-28T11:00:00+01:00",
     "lines": [
       {
         "description": "Call-out",
@@ -233,7 +233,7 @@
     "case_id": "C-2026-0174",
     "unit_id": "u_04_2",
     "partner_id": "p_03",
-    "issued_at": "2026-11-17T15:00:00Z",
+    "issued_at": "2026-11-17T15:00:00+01:00",
     "lines": [
       {
         "description": "Call-out",
@@ -275,7 +275,7 @@
     "case_id": "C-2026-0177",
     "unit_id": "u_01_3",
     "partner_id": "p_01",
-    "issued_at": "2026-11-19T13:00:00Z",
+    "issued_at": "2026-11-19T13:00:00+01:00",
     "lines": [
       {
         "description": "Call-out",

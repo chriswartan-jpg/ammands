@@ -16,7 +16,7 @@
   const DATA = window.CENTRIX_TENANT;
   const HOME = DATA.home;
   const POLICY = DATA.policy;
-  const CASE_ID = "CASE-1042";
+  const CASE_ID = DATA.nextCaseId || "CASE-1042";
   const $ = (id) => document.getElementById(id);
   const AI = window.CentrixAI;
   let live = false;          // OpenAI available through the centrix server
@@ -807,7 +807,7 @@
     const net = state.quote || avgPrice();
     const vat = Math.round(net * POLICY.vat) / 100;
     return {
-      number: `INV-${CASE_ID.slice(5)}-01`,
+      number: `INV-${CASE_ID.replace(/^C(ASE)?-/, "")}-01`,
       lines: [["Call-out", DATA.callOut], ["Labour and parts", net - DATA.callOut]],
       net, vat, gross: net + vat
     };

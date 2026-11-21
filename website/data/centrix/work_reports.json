@@ -4,7 +4,7 @@
     "job_id": "J-2026-0141",
     "case_id": "C-2026-0141",
     "technician_id": "t_04",
-    "completed_at": "2026-09-10T10:55:00Z",
+    "completed_at": "2026-09-10T10:55:00+02:00",
     "finding": "Worn ceramic cartridge in the mixer tap",
     "work_done": "Replaced the cartridge, tested",
     "labour_hours": 0.5,
@@ -19,7 +19,7 @@
       "photos/C-2026-0141/after_1.jpg"
     ],
     "dictated": true,
-    "tenant_confirmed_at": "2026-09-10T11:55:00Z",
+    "tenant_confirmed_at": "2026-09-10T11:55:00+02:00",
     "home_record_update": "Kitchen mixer cartridge replaced, Sep 2026"
   },
   {
@@ -27,7 +27,7 @@
     "job_id": "J-2026-0148",
     "case_id": "C-2026-0148",
     "technician_id": "t_01",
-    "completed_at": "2026-09-20T00:55:00Z",
+    "completed_at": "2026-09-20T00:55:00+02:00",
     "finding": "Corroded copper supply pipe in the wall behind the toilet",
     "work_done": "Opened the wall, replaced 60 cm of pipe, pressure-tested, closed temporarily",
     "labour_hours": 2.0,
@@ -52,7 +52,7 @@
       "photos/C-2026-0148/after_1.jpg"
     ],
     "dictated": true,
-    "tenant_confirmed_at": "2026-09-20T01:55:00Z",
+    "tenant_confirmed_at": "2026-09-20T01:55:00+02:00",
     "home_record_update": "Supply pipe behind the toilet replaced, Sep 2026"
   },
   {
@@ -60,7 +60,7 @@
     "job_id": "J-2026-0152",
     "case_id": "C-2026-0152",
     "technician_id": "t_04",
-    "completed_at": "2026-10-01T09:10:00Z",
+    "completed_at": "2026-10-01T09:10:00+02:00",
     "finding": "Hair and soap build-up in the shower trap",
     "work_done": "Cleaned the trap and the branch pipe with a spiral",
     "labour_hours": 0.75,
@@ -69,7 +69,7 @@
       "photos/C-2026-0152/after_1.jpg"
     ],
     "dictated": false,
-    "tenant_confirmed_at": "2026-10-01T10:10:00Z",
+    "tenant_confirmed_at": "2026-10-01T10:10:00+02:00",
     "home_record_update": null
   },
   {
@@ -77,7 +77,7 @@
     "job_id": "J-2026-0157",
     "case_id": "C-2026-0157",
     "technician_id": "t_02",
-    "completed_at": "2026-10-06T15:25:00Z",
+    "completed_at": "2026-10-06T15:25:00+02:00",
     "finding": "Cracked siphon, water ran down behind the cupboard",
     "work_done": "Replaced siphon and seals, dried the cupboard",
     "labour_hours": 1.0,
@@ -97,7 +97,7 @@
       "photos/C-2026-0157/after_1.jpg"
     ],
     "dictated": false,
-    "tenant_confirmed_at": "2026-10-06T16:25:00Z",
+    "tenant_confirmed_at": "2026-10-06T16:25:00+02:00",
     "home_record_update": "Kitchen siphon replaced, Oct 2026"
   },
   {
@@ -105,7 +105,7 @@
     "job_id": "J-2026-0163",
     "case_id": "C-2026-0163",
     "technician_id": "t_04",
-    "completed_at": "2026-10-14T18:25:00Z",
+    "completed_at": "2026-10-14T18:25:00+02:00",
     "finding": "Blockage in the soil pipe below the toilet (wet wipes)",
     "work_done": "Cleared with a drain machine, camera check OK",
     "labour_hours": 1.0,
@@ -114,7 +114,7 @@
       "photos/C-2026-0163/after_1.jpg"
     ],
     "dictated": false,
-    "tenant_confirmed_at": "2026-10-14T19:25:00Z",
+    "tenant_confirmed_at": "2026-10-14T19:25:00+02:00",
     "home_record_update": null
   },
   {
@@ -122,7 +122,7 @@
     "job_id": "J-2026-0170",
     "case_id": "C-2026-0170",
     "technician_id": "t_03",
-    "completed_at": "2026-10-27T15:00:00Z",
+    "completed_at": "2026-10-27T15:00:00+01:00",
     "finding": "1997 geyser beyond repair (thermocouple and heat exchanger)",
     "work_done": "Replaced the geyser with a combi boiler; also heats the flat from now on",
     "labour_hours": 3.5,
@@ -142,7 +142,7 @@
       "photos/C-2026-0170/after_1.jpg"
     ],
     "dictated": true,
-    "tenant_confirmed_at": "2026-10-27T16:00:00Z",
+    "tenant_confirmed_at": "2026-10-27T16:00:00+01:00",
     "home_record_update": "Geyser replaced by combi boiler (Intergas), Oct 2026"
   },
   {
@@ -150,7 +150,7 @@
     "job_id": "J-2026-0174",
     "case_id": "C-2026-0174",
     "technician_id": "t_04",
-    "completed_at": "2026-11-16T13:55:00Z",
+    "completed_at": "2026-11-16T13:55:00+01:00",
     "finding": "Worn washer and O-ring",
     "work_done": "Replaced washer and O-rings",
     "labour_hours": 0.5,
@@ -170,7 +170,7 @@
       "photos/C-2026-0174/after_1.jpg"
     ],
     "dictated": true,
-    "tenant_confirmed_at": "2026-11-16T14:55:00Z",
+    "tenant_confirmed_at": "2026-11-16T14:55:00+01:00",
     "home_record_update": "Bathroom tap washer replaced, Nov 2026"
   },
   {
@@ -178,7 +178,7 @@
     "job_id": "J-2026-0177",
     "case_id": "C-2026-0177",
     "technician_id": "t_01",
-    "completed_at": "2026-11-18T12:10:00Z",
+    "completed_at": "2026-11-18T12:10:00+01:00",
     "finding": "Fill valve not closing",
     "work_done": "Replaced the fill valve, adjusted the float",
     "labour_hours": 0.75,
@@ -193,7 +193,7 @@
       "photos/C-2026-0177/after_1.jpg"
     ],
     "dictated": false,
-    "tenant_confirmed_at": "2026-11-18T13:10:00Z",
+    "tenant_confirmed_at": "2026-11-18T13:10:00+01:00",
     "home_record_update": "Toilet fill valve replaced, Nov 2026"
   },
   {
@@ -201,7 +201,7 @@
     "job_id": "J-2026-0179",
     "case_id": "C-2026-0179",
     "technician_id": "t_04",
-    "completed_at": "2026-11-20T14:25:00Z",
+    "completed_at": "2026-11-20T14:25:00+01:00",
     "finding": "Grease plug in the kitchen drain",
     "work_done": "Cleared the drain, advised not to pour fat down the sink",
     "labour_hours": 1.0,
