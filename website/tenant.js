@@ -3,6 +3,10 @@
 
   // Tenant portal: one conversation from "something is wrong" to "it's fixed".
   // No forms: the assistant asks only what centrix doesn't know yet.
+  // Follows the final workflow (21 steps): report → language → classify → duplicate
+  // check → follow-ups → photo → urgency → job brief → consent → manager dispatch →
+  // plumber's 3 time windows → booking → reminder → on the way → cost check →
+  // work note → tenant confirms → invoice → feedback → seven-day follow-up.
   // Everything runs in the browser on data/tenant-data.js (demo only).
 
   let session = null;
@@ -11,17 +15,32 @@
 
   const DATA = window.CENTRIX_TENANT;
   const HOME = DATA.home;
+  const POLICY = DATA.policy;
+  const CASE_ID = "CASE-1042";
   const $ = (id) => document.getElementById(id);
-  const STEPS = ["Reported", "Booked", "On the way", "Working", "Done"];
+  const STEPS = ["Reported", "Brief and consent", "Dispatched", "Booked", "On the way", "Repair", "Fixed and invoiced", "Closed"];
 
   const state = {
-    step: "start",       // start → urgency → photo → choose → slot → consent → booked → on_the_way → working → done → closed
+    // start → manager_review → followup → photo → brief → dispatch → windows → booked →
+    // reminded → on_the_way → cost_check → approval → working → done → feedback →
+    // followup_wait → closed
+    step: "start",
     problem: null,       // key in DATA.problems
+    report: "",          // the tenant's own words
+    language: null,      // { code, name } when not English
+    linked: null,        // duplicate case in the same building
+    answers: [],         // [{ q, a }]
     urgent: false,
     photo: null,
     plumber: null,
     slot: null,
+    windows: null,       // the 3 windows the plumber proposed
+    windowRound: 0,
     access: "caretaker",
+    consent: null,       // { at, channel }
+    quote: null,         // net € the plumber quoted on site
+    invoice: null,
+    feedback: {},
     progress: -1,        // index in STEPS
     messages: []
   };
@@ -74,170 +93,239 @@
     event.target.value = "";
     if (file && file.type.startsWith("image/")) onPhoto(URL.createObjectURL(file));
   });
+  $("mic-btn").addEventListener("click", dictate);
   $("track-msg").addEventListener("click", () => {
     input.focus();
     input.placeholder = `Message ${state.plumber ? state.plumber.name : "the plumber"}…`;
   });
-  $("demo-next").addEventListener("click", demoNext);
 
   // ---------- conversation ----------
-  say("ai", `Hi ${first}, what's going on in your home? Describe it in your own words, or pick one below.`);
+  say("ai", `Hi ${first}, what's going on in your home? Type or tap the microphone and describe it in your own words, or pick one below.`);
   showProblemChips();
 
   function onText(text) {
+    if (state.step === "closed") resetCase();
     me(text);
     if (state.step === "start") {
+      state.report = text;
+      detectLanguage(text);
       const key = classify(text);
-      if (key) return withTyping(() => askUrgency(key));
+      if (key) return withTyping(() => startCase(key));
       return withTyping(() => {
-        say("ai", "Thanks. Which of these is closest?");
-        showProblemChips();
+        say("ai", "I'm not sure this is a plumbing problem. Which of these is closest?");
+        showProblemChips(true);
       });
     }
-    if (["booked", "on_the_way", "working"].includes(state.step)) {
+    if (["booked", "reminded", "on_the_way", "cost_check", "approval", "working"].includes(state.step)) {
       return later(() => say("centrix", `Sent to ${state.plumber.name}. They'll reply here.`), 400);
     }
     withTyping(() => say("ai", "Noted, I've added that to your report for the plumber."));
   }
 
-  function askUrgency(key) {
-    const p = DATA.problems[key];
-    state.problem = key;
-    state.step = "urgency";
-    state.progress = 0;
-    renderRepair();
-    say("ai", `That sounds like: ${p.title.toLowerCase()}. ${p.question}`);
-    chips([
-      [p.yes, () => { me(p.yes); state.urgent = true; withTyping(askPhoto); }],
-      [p.no, () => { me(p.no); state.urgent = false; withTyping(askPhoto); }]
-    ]);
+  // Step 2: language detection. The voice agent keeps talking in the tenant's language.
+  function detectLanguage(text) {
+    const words = text.toLowerCase().split(/[^\p{L}]+/u).filter(Boolean);
+    let best = null, bestHits = 0;
+    Object.entries(DATA.languages).forEach(([code, lang]) => {
+      const hits = lang.words.filter((w) => w.includes(" ") ? text.toLowerCase().includes(w) : words.includes(w)).length;
+      if (hits > bestHits) { best = { code, name: lang.name }; bestHits = hits; }
+    });
+    if (best && bestHits >= 2) {
+      state.language = best;
+      say("centrix", `Language detected: ${best.name}. The voice agent answers you in ${best.name}; the plumber gets the brief in German.`);
+    }
   }
 
+  // Steps 3 and 4: classified as plumbing, then the duplicate check in the same building.
+  function startCase(key) {
+    state.problem = key;
+    state.progress = 0;
+    state.step = "followup";
+    const p = DATA.problems[key];
+    if (!state.report) state.report = p.title;
+    say("centrix", `Classified as plumbing: ${p.label.toLowerCase()}. Case ${CASE_ID} opened for ${HOME.unit}.`);
+    const dup = DATA.openCases.find((c) => c.problem === key);
+    if (dup) {
+      state.linked = dup;
+      say("centrix", `Possible same leak: ${dup.id} from ${dup.unit}, “${dup.text}” (${dup.reported}). Both cases are now linked, so one plumber visit covers them.`);
+    }
+    renderRepair();
+    askFollowUp(0);
+  }
+
+  // Step 5: up to 3 one-tap follow-up questions.
+  function askFollowUp(i) {
+    const p = DATA.problems[state.problem];
+    const f = p.followUps[i];
+    if (!f) return withTyping(askPhoto);
+    say("ai", i === 0 ? `That sounds like: ${p.title.toLowerCase()}. ${f.q}` : f.q);
+    chips(f.options.map(([label, urgent]) => [label, () => {
+      me(label);
+      state.answers.push({ q: f.q, a: label });
+      if (urgent) state.urgent = true;
+      withTyping(() => askFollowUp(i + 1));
+    }]));
+  }
+
+  // Step 6: optional photo.
   function askPhoto() {
     state.step = "photo";
-    say("ai", "A photo helps the plumber bring the right parts. Want to add one?");
+    say("ai", "A photo helps the plumber bring the right parts. Want to add one? It's optional.");
     chips([
       ["Add a photo", () => $("photo-input").click(), "camera"],
-      ["Skip", () => { me("Skip the photo"); withTyping(showEstimate); }]
+      ["Skip", () => { me("Skip the photo"); withTyping(checkUrgency); }]
     ]);
   }
 
   function onPhoto(url) {
-    if (state.step !== "photo") {
-      state.messages.push({ from: "me", image: url, time: now() });
-      renderThread();
-      return;
-    }
-    state.photo = url;
     state.messages.push({ from: "me", image: url, time: now() });
     renderThread();
-    withTyping(showEstimate);
+    if (state.step !== "photo") return;
+    state.photo = url;
+    withTyping(checkUrgency);
   }
 
-  function showEstimate() {
+  // Step 7: urgency check from the answers, with the urgent path (7b).
+  function checkUrgency() {
+    if (state.urgent) {
+      say("centrix", `Urgent. The voice agent is calling you now on ${HOME.phone}, and ${POLICY.manager} has been alerted.`);
+      say("ai", "While you wait, close the water here:", { card: noteCard("Shut-off valve", HOME.shutoff, "From your home record.") });
+    }
+    showBrief();
+  }
+
+  // Steps 8 and 9: the job brief and the tenant's consent.
+  function showBrief() {
     const p = DATA.problems[state.problem];
-    state.step = "choose";
+    state.step = "brief";
+    state.progress = 1;
+    renderRepair();
     say("ai", "Here's what I think it is, and what it usually costs:", { card: estimateCard(p) });
-    say("ai", "These plumbers near you can help. Pick one:");
-    showPlumberCards();
+    say("ai", "This is the job brief the plumber will receive. Nothing is shared until you agree:", { card: briefCard() });
+    setActions([]);
   }
 
-  function choosePlumber(pro) {
-    state.plumber = pro;
-    me(`${pro.name}`);
+  function giveConsent(card) {
+    state.consent = { at: now(), channel: "Tenant portal (tap)" };
+    card.classList.add("is-done");
+    card.querySelectorAll("button").forEach((b) => { b.disabled = true; b.classList.remove("is-loading"); });
+    card.querySelector(".btn-primary").textContent = "Agreed ✓";
+    me("Agree and send");
+    withTyping(dispatch);
+  }
+
+  // Step 10: the manager reviews the brief, sets priority and dispatches.
+  function dispatch() {
+    state.step = "dispatch";
+    say("centrix", `Consent saved at ${state.consent.at} via ${state.consent.channel.toLowerCase()}. Brief sent to ${POLICY.manager} for review.`);
+    renderRepair();
+    later(() => {
+      state.plumber = DATA.plumbers.find((x) => x.id === DATA.dispatchTo) || DATA.plumbers[0];
+      state.progress = 2;
+      say("centrix", `${POLICY.manager} reviewed the brief, set priority to ${state.urgent ? "urgent" : "normal"} and dispatched ${state.plumber.name}.`);
+      renderRepair();
+      renderNearby();
+      later(proposeWindows, 900);
+    }, 1400);
+  }
+
+  // Steps 11 and 12: the plumber proposes 3 windows, the tenant picks one or asks for new ones (12b).
+  function proposeWindows() {
+    state.step = "windows";
+    const pro = state.plumber;
+    state.windows = state.windowRound % 2 === 0 ? pro.slots : pro.moreSlots;
+    state.windowRound += 1;
+    say("plumber", `Hi ${first}, I can come at one of these times. Which suits you?`);
+    renderRepair();
+    chips([
+      ...state.windows.map((s) => [s, () => chooseSlot(s), "clock"]),
+      ["None of these fit", noneFit]
+    ]);
+  }
+
+  function noneFit() {
+    me("None of these fit");
     withTyping(() => {
-      state.step = "slot";
-      say("ai", `${pro.name} can come at these times. Which suits you?`);
-      chips(pro.slots.map((s) => [s, () => chooseSlot(s), "clock"]));
+      say("ai", `No problem. I've asked ${state.plumber.name} for new times.`);
+      later(proposeWindows, 1100);
     });
   }
 
+  // Step 13: confirmation to tenant and manager.
   function chooseSlot(slot) {
     state.slot = slot;
     me(slot);
     withTyping(() => {
-      state.step = "consent";
-      say("ai", `Before I book, this is what ${state.plumber.name} will see:`, { card: consentCard() });
-      setActions([]);
-    });
-  }
-
-  function book(card) {
-    state.step = "booked";
-    state.progress = 1;
-    // lock the consent card so it reads as a record, not an open question
-    card.classList.add("is-done");
-    card.querySelectorAll("button").forEach((b) => { b.disabled = true; b.classList.remove("is-loading"); });
-    const okBtn = card.querySelector(".btn-primary");
-    okBtn.textContent = "Booked ✓";
-    me("Agree and book");
-    setActions([]);
-    const access = state.access === "home" ? "tenant at home" : "key with the caretaker";
-    withTyping(() => {
-      say("centrix", `Booked with ${state.plumber.name}, ${state.slot} (${access}). Consent saved at ${now()} via the portal.`);
-      say("ai", "You're all set. You'll see every update here, and a live map once the plumber is on the way.");
+      state.step = "booked";
+      state.progress = 3;
+      const access = state.access === "home" ? "you're at home" : "key with the caretaker";
+      say("centrix", `Confirmed: ${state.plumber.name}, ${slot} (${access}). Sent to you and ${POLICY.manager}.`);
+      say("ai", "You're all set. I'll remind you the day before, and you'll see a live ETA once the plumber is on the way.");
       renderRepair();
       renderNearby();
-      toast("Plumber booked. You can follow the repair here.");
+      toast("Visit booked. You can follow the repair here.");
     });
   }
 
-  function confirmFixed(ok) {
-    setActions([]);
-    if (ok) {
-      me("Yes, it's fixed");
-      state.step = "closed";
-      state.progress = 4;
-      renderRepair();
-      withTyping(() => {
-        say("centrix", `Repair closed. The work report and invoice are saved on ${HOME.unit}.`);
-        say("ai", "Glad it's sorted. If anything else comes up, just tell me here.");
-        toast("Repair closed. Thanks for confirming.");
-      });
-    } else {
-      me("No, it's not fixed yet");
-      state.step = "booked";
-      state.progress = 1;
-      renderRepair();
-      withTyping(() => {
-        say("ai", `Sorry about that. I've asked ${state.plumber.name} to come back at no extra cost. You'll get a new time here.`);
-      });
-    }
+  // ---------- demo controls: move the case forward as the plumber or manager would ----------
+
+  // Step 14: reminder the day before, with the option to rebook.
+  function remind() {
+    state.step = "reminded";
+    say("ai", `Reminder: ${state.plumber.name} comes tomorrow, ${state.slot}. Will you be home, or should we find another time?`, { speak: true });
+    renderRepair();
+    chips([
+      ["Yes, see you then", () => { me("Yes, see you then"); withTyping(() => say("ai", "Great, I've let the plumber know.")); }, "check"],
+      ["I need another time", () => { me("I need another time"); state.step = "dispatch"; renderRepair(); withTyping(() => { say("ai", `OK, I've asked ${state.plumber.name} for new times.`); later(proposeWindows, 900); }); }]
+    ]);
   }
 
-  // ---------- demo controls: move the job forward as the plumber would ----------
-
-  function demoNext() {
-    if (state.step === "booked") return startTrip();
-    if (state.step === "on_the_way") return arrive();
-    if (state.step === "working") return finishJob();
-  }
-
+  // Step 15: on the way, with a spoken ETA.
   function startTrip() {
+    setActions([]);
     state.step = "on_the_way";
-    state.progress = 2;
+    state.progress = 4;
     renderRepair();
     say("centrix", `${state.plumber.name} is on the way.`);
-    later(() => say("plumber", `Hi ${first}, I'm on my way. See you in about 15 minutes.`), 900);
+    later(() => say("plumber", `Hi ${first}, I'm on my way. I'll be there in about 15 minutes.`, { speak: true }), 900);
     showTracking();
   }
 
+  // Step 16: on-site cost check against the pre-approved limit.
   function arrive() {
     stopTracking();
-    state.step = "working";
-    state.progress = 3;
+    state.step = "cost_check";
+    state.progress = 5;
     renderRepair();
-    say("centrix", `${state.plumber.name} has arrived and started the work.`);
+    say("centrix", `${state.plumber.name} has arrived and is checking the cost against the €${fmt(POLICY.preApprovedLimit)} pre-approved limit.`);
   }
 
+  function quote(net) {
+    state.quote = net;
+    if (net <= POLICY.preApprovedLimit) {
+      say("centrix", `Quote €${fmt(net)} net is within the €${fmt(POLICY.preApprovedLimit)} pre-approved limit. The repair starts now.`);
+      state.step = "working";
+    } else {
+      say("centrix", `Quote €${fmt(net)} net is over the €${fmt(POLICY.preApprovedLimit)} limit. ${POLICY.manager} has to approve it before the repair starts.`);
+      state.step = "approval";
+    }
+    renderRepair();
+  }
+
+  function approveQuote() {
+    say("centrix", `${POLICY.manager} approved the quote of €${fmt(state.quote)} net. The repair starts now.`);
+    state.step = "working";
+    renderRepair();
+  }
+
+  // Steps 17 and 18: work note, then the tenant confirms the fix.
   function finishJob() {
     const p = DATA.problems[state.problem];
     state.step = "done";
-    state.progress = 4;
     renderRepair();
-    say("plumber", "All done. Here's what I did:", { card: reportCard(p) });
+    say("plumber", "All done. Here's my work note:", { card: reportCard(p) });
     later(() => {
-      say("ai", "Is the problem fixed?");
+      say("ai", state.problem === "leak" ? "Is it dry now?" : "Is the problem fixed?", { speak: true });
       chips([
         ["Yes, it's fixed", () => confirmFixed(true), "check"],
         ["No, not yet", () => confirmFixed(false)]
@@ -245,12 +333,150 @@
     }, 700);
   }
 
+  function confirmFixed(ok) {
+    setActions([]);
+    if (!ok) {
+      me("No, it's not fixed yet");
+      state.step = "dispatch";
+      state.progress = 2;
+      renderRepair();
+      return withTyping(() => {
+        say("ai", `Sorry about that. No invoice goes out yet. I've asked ${state.plumber.name} to come back at no extra cost.`);
+        later(proposeWindows, 900);
+      });
+    }
+    me("Yes, it's fixed");
+    state.progress = 6;
+    withTyping(() => {
+      // Step 19: the invoice, made from the work note and linked to the case and the unit.
+      state.invoice = buildInvoice();
+      say("centrix", `Invoice ${state.invoice.number} created from the work note and linked to ${CASE_ID} and ${HOME.unit}.`, { card: invoiceCard(state.invoice) });
+      askFeedback();
+    });
+  }
+
+  // Step 20: two quick feedback questions.
+  function askFeedback() {
+    state.step = "feedback";
+    renderRepair();
+    say("ai", "Two quick questions. How was the service?");
+    chips(["Great", "Good", "OK", "Poor"].map((r) => [r, () => {
+      me(r);
+      state.feedback.rating = r;
+      withTyping(() => {
+        say("ai", "Was the plumber on time?");
+        chips([["Yes", () => endFeedback("Yes")], ["No", () => endFeedback("No")]]);
+      });
+    }]));
+  }
+
+  function endFeedback(onTime) {
+    me(onTime);
+    state.feedback.onTime = onTime;
+    withTyping(() => {
+      state.step = "followup_wait";
+      state.progress = 7;
+      say("ai", "Thanks, that helps your property manager. I'll check in once more in seven days to make sure it stays fixed.");
+      renderRepair();
+    });
+  }
+
+  // Step 21: seven-day follow-up, then the unit record is updated and the case closes.
+  function sevenDays() {
+    state.step = "followup_check";
+    renderRepair();
+    say("ai", state.problem === "leak" ? "It's been seven days since the repair. Is it still dry?" : "It's been seven days since the repair. Is everything still working?", { speak: true });
+    chips([
+      ["Yes, all good", () => {
+        me("Yes, all good");
+        withTyping(() => {
+          const p = DATA.problems[state.problem];
+          const month = new Date().toLocaleDateString("en-GB", { month: "short", year: "numeric" });
+          HOME.history.unshift(`${month} · ${p.title.toLowerCase()}: ${p.causes[0].toLowerCase()} fixed`);
+          state.step = "closed";
+          renderHome();
+          renderRepair();
+          say("centrix", `Case ${CASE_ID} closed. Your home record is updated, so the next brief for ${HOME.unit} is better.`);
+          say("ai", "Glad it's sorted. If anything else comes up, just tell me here.");
+          chips(Object.entries(DATA.problems).map(([key, p]) => [p.label, () => { resetCase(); me(p.label); withTyping(() => startCase(key)); }]));
+          toast("Repair closed. Thanks for confirming.");
+        });
+      }, "check"],
+      ["No, it's back", () => {
+        me("No, the problem is back");
+        state.step = "dispatch";
+        state.progress = 2;
+        renderRepair();
+        withTyping(() => {
+          say("centrix", `${CASE_ID} reopened and ${POLICY.manager} notified. The repair is covered, no new call-out fee.`);
+          later(proposeWindows, 900);
+        });
+      }]
+    ]);
+  }
+
+  // A closed case is a record; a new report starts a fresh case.
+  function resetCase() {
+    Object.assign(state, {
+      step: "start", problem: null, report: "", language: null, linked: null, answers: [], urgent: false,
+      photo: null, plumber: null, slot: null, windows: null, windowRound: 0, access: "caretaker",
+      consent: null, quote: null, invoice: null, feedback: {}, progress: -1
+    });
+    renderRepair();
+    renderNearby();
+  }
+
+  // Manager review (3b): not plumbing or unsure.
+  function toManager() {
+    me("Something else");
+    withTyping(() => {
+      state.step = "manager_review";
+      state.progress = 0;
+      say("centrix", `Not clearly plumbing, so your report went to ${POLICY.manager} for review. They'll handle it, or continue it as a plumbing repair.`);
+      renderRepair();
+    });
+  }
+
+  function managerOverride() {
+    say("centrix", `${POLICY.manager} reviewed your report and continued it as a plumbing repair.`);
+    state.problem = "leak";
+    state.progress = 0;
+    state.step = "followup";
+    renderRepair();
+    withTyping(() => askFollowUp(0));
+  }
+
+  function managerKeeps() {
+    say("centrix", `${POLICY.manager} will handle this one directly and contact you. No plumber needed.`);
+    state.step = "start";
+    state.progress = -1;
+    state.report = "";
+    renderRepair();
+    later(() => { say("ai", "Anything else I can help with?"); showProblemChips(); }, 600);
+  }
+
+  // The demo buttons in the "Your repair" card, per step
+  function demoActions() {
+    return {
+      manager_review: [["Demo: manager continues as plumbing", managerOverride], ["Demo: manager handles it", managerKeeps]],
+      booked: [["Demo: day-before reminder", remind], ["Demo: plumber leaves now", startTrip]],
+      reminded: [["Demo: plumber leaves now", startTrip]],
+      on_the_way: [["Demo: plumber arrives", arrive]],
+      cost_check: [[`Demo: quote within €${fmt(POLICY.preApprovedLimit)}`, () => quote(Math.round(avgPrice() / (1 + POLICY.vat / 100)))], [`Demo: quote over €${fmt(POLICY.preApprovedLimit)}`, () => quote(3480)]],
+      approval: [["Demo: manager approves quote", approveQuote]],
+      working: [["Demo: plumber finishes", finishJob]],
+      followup_wait: [["Demo: seven days later", sevenDays]]
+    }[state.step] || [];
+  }
+
   // ---------- live tracking map (only while on the way) ----------
 
-  let trackMap = null, van = null, raf = null;
+  let trackMap = null, van = null, homePin = null, raf = null;
   function showTracking() {
     const pro = state.plumber;
     $("track").hidden = false;
+    $("track-title").textContent = "Plumber on the way";
+    $("track-note").textContent = "Getting closer. You'll get a message when they're at the door.";
     $("track-avatar").textContent = pro.initials;
     $("track-name").textContent = `${pro.name} · ${pro.rating} ★`;
     $("track").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -280,10 +506,12 @@
       const homeEl = document.createElement("div");
       homeEl.className = "home-pin";
       homeEl.innerHTML = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 7.5 8 3l5.5 4.5V13h-3.5V9.5h-4V13H2.5z" fill="currentColor"/></svg>';
-      new maplibregl.Marker({ element: homeEl }).setLngLat(home).addTo(trackMap);
+      if (homePin) homePin.remove();
+      homePin = new maplibregl.Marker({ element: homeEl }).setLngLat(home).addTo(trackMap);
       const vanEl = document.createElement("div");
       vanEl.className = "van-pin";
       vanEl.innerHTML = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M1.5 4.5h8v6h-8zM9.5 6.5h3l2 2v2h-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="4.5" cy="11.5" r="1.4" fill="currentColor"/><circle cx="12" cy="11.5" r="1.4" fill="currentColor"/></svg>';
+      if (van) van.remove();
       van = new maplibregl.Marker({ element: vanEl }).setLngLat(start).addTo(trackMap);
       trackMap.resize();
       trackMap.fitBounds(route.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(start, start)), { padding: 50, duration: 0 });
@@ -333,7 +561,7 @@
       li(`Call-out fee €${DATA.callOut}`, "included"),
       li("Labour and small parts", `€${p.price[0] - DATA.callOut} – €${p.price[1] - DATA.callOut}`)
     );
-    const note = p_("est-note", "The plumber confirms the final price with you before starting. Example prices.");
+    const note = p_("est-note", `Net prices, example ranges. Repairs up to €${fmt(POLICY.preApprovedLimit)} net are pre-approved by your property manager.`);
     const causes = div("est-causes");
     causes.append(span("t-label", "Likely cause"));
     p.causes.forEach((c, i) => causes.append(span("cause-pill" + (i === 0 ? " is-top" : ""), c)));
@@ -341,18 +569,29 @@
     return el;
   }
 
-  function consentCard() {
+  // Job brief (step 8) with consent (step 9): what's shared, what's withheld, how to get in.
+  function briefCard() {
     const el = div("consent");
+    const p = DATA.problems[state.problem];
     const list = document.createElement("ul");
     list.className = "consent-list";
-    const p = DATA.problems[state.problem];
-    [
+    const rows = [
       ["Name and phone", `${HOME.tenant}, ${HOME.phone}`],
       ["Address", `${HOME.address}, ${HOME.floor}`],
       ["Problem", `${p.title}${state.urgent ? " (urgent)" : ""}`],
+      ["Your answers", state.answers.map((x) => x.a).join(" · ") || "None"],
       ["Photo", state.photo ? "1 photo" : "No photo"],
-      ["Time", state.slot]
-    ].forEach(([k, v]) => list.append(li(k, v, true)));
+      ["Shut-off valve", HOME.shutoff],
+      ["Repair policy", `Up to €${fmt(POLICY.preApprovedLimit)} net pre-approved`]
+    ];
+    if (state.linked) rows.push(["Linked case", `${state.linked.id}, ${state.linked.unit}`]);
+    if (state.language) rows.push(["Language", `${state.language.name} (brief in German)`]);
+    rows.forEach(([k, v]) => list.append(li(k, v, true)));
+
+    const withheldLabel = span("t-label", "Never shared with the plumber");
+    const withheld = document.createElement("ul");
+    withheld.className = "consent-list is-withheld";
+    DATA.withheld.forEach((w) => withheld.append(li(w, "", false, false, "lock")));
 
     const accessLabel = span("t-label", "How do they get in?");
     const access = div("seg");
@@ -370,32 +609,55 @@
     });
 
     const actions = div("consent-actions");
-    const ok = button("btn-primary btn-lg", "Agree and book");
+    const ok = button("btn-primary btn-lg", "Agree and send");
     ok.addEventListener("click", () => {
       ok.disabled = true;
       ok.classList.add("is-loading");
-      setTimeout(() => book(el), 450);
+      setTimeout(() => giveConsent(el), 450);
     });
-    const change = button("btn-ghost btn-lg", "Change time");
-    change.addEventListener("click", () => {
-      say("ai", "No problem. Pick another time:");
-      chips(state.plumber.slots.map((s) => [s, () => chooseSlot(s), "clock"]));
-    });
-    actions.append(ok, change);
-    const fine = p_("t-muted t-small", "Only for this repair. You can withdraw consent in your settings.");
-    el.append(list, accessLabel, access, actions, fine);
+    const listen = button("btn-ghost btn-lg", "");
+    listen.append(iconEl("play"), " Read it to me");
+    listen.addEventListener("click", () => speak(`The plumber will receive: ${rows.map(([k, v]) => `${k}: ${v}`).join(". ")}. Your email, owner details, lease and meter numbers are never shared.`));
+    actions.append(ok, listen);
+    const fine = p_("t-muted t-small", "Only for this repair. Your consent is logged with the time and channel, and you can withdraw it in your settings.");
+    el.append(list, withheldLabel, withheld, accessLabel, access, actions, fine);
+    return el;
+  }
+
+  function noteCard(title, text, foot) {
+    const el = div("est");
+    el.append(h3(title), p_("est-note", text));
+    if (foot) el.append(p_("t-muted t-small", foot));
     return el;
   }
 
   function reportCard(p) {
     const el = div("est");
-    const price = Math.round((p.price[0] + p.price[1]) / 2);
-    el.append(h3("Work report"));
-    el.append(p_("est-note", `Fixed: ${p.causes[0].toLowerCase()}. Tested for 10 minutes, no further problems.`));
+    el.append(h3("Work note"));
+    el.append(p_("est-note", `Found and fixed: ${p.causes[0].toLowerCase()}. Tested for 10 minutes, no further problems.`));
+    if (state.linked) el.append(p_("est-note", `Also checked ${state.linked.unit} for ${state.linked.id}: no new water damage.`));
+    return el;
+  }
+
+  function buildInvoice() {
+    const net = state.quote || avgPrice();
+    const vat = Math.round(net * POLICY.vat) / 100;
+    return {
+      number: `INV-${CASE_ID.slice(5)}-01`,
+      lines: [["Call-out", DATA.callOut], ["Labour and parts", net - DATA.callOut]],
+      net, vat, gross: net + vat
+    };
+  }
+
+  function invoiceCard(inv) {
+    const el = div("est");
+    const top = div("est-top");
+    top.append(h3(`Invoice ${inv.number}`), span("est-tag", `Billed to ${POLICY.invoiceTo}`));
     const lines = document.createElement("ul");
     lines.className = "price-lines";
-    lines.append(li("Call-out", `€${DATA.callOut}`), li("Labour and parts", `€${price - DATA.callOut}`), li("Total", `€${price}`, false, true));
-    el.append(lines);
+    inv.lines.forEach(([k, v]) => lines.append(li(k, `€${money(v)}`)));
+    lines.append(li("Net", `€${money(inv.net)}`), li(`VAT ${POLICY.vat}%`, `€${money(inv.vat)}`), li("Total", `€${money(inv.gross)}`, false, true));
+    el.append(top, lines, p_("est-note", `Linked to ${CASE_ID} and ${HOME.unit}. You don't pay this yourself.`));
     return el;
   }
 
@@ -404,46 +666,54 @@
   function renderNearby() {
     const list = $("nearby");
     const title = $("nearby-title");
-    if (state.plumber && state.progress >= 1) {
+    if (state.plumber) {
       title.textContent = "Your plumber";
-      list.replaceChildren(proRow(state.plumber, false));
+      list.replaceChildren(proRow(state.plumber));
       return;
     }
     title.textContent = "Plumbers near you";
-    list.replaceChildren(...DATA.plumbers.map((p) => proRow(p, false)));
+    list.replaceChildren(...DATA.plumbers.map((p) => proRow(p)));
   }
 
-  function proRow(p, withButton) {
+  function proRow(p) {
     const row = document.createElement("li");
     row.className = "pro";
     const av = span("avatar", p.initials);
     av.setAttribute("aria-hidden", "true");
     const info = div("pro-info");
     info.append(span("pro-name", p.name), span("pro-meta", `${p.distance} · ${p.rating} ★ (${p.reviews}) · from €${p.from}`));
-    const booked = state.plumber === p && state.progress >= 1;
-    const next = span("pro-next", booked ? state.slot : `Free ${p.next.toLowerCase()}`);
+    const next = span("pro-next", state.plumber === p ? (state.slot || "Dispatched") : `Free ${p.next.toLowerCase()}`);
     row.append(av, info, next);
-    if (withButton) {
-      const b = button("btn-ghost pro-choose", "Choose");
-      b.setAttribute("aria-label", `Choose ${p.name}`);
-      b.addEventListener("click", () => { setActions([]); choosePlumber(p); });
-      row.append(b);
-    }
     return row;
   }
 
   function renderRepair() {
     const status = {
       start: "No open repair. Report a problem in the chat.",
-      urgency: "Reporting a problem…", photo: "Reporting a problem…", choose: "Choosing a plumber…",
-      slot: "Choosing a time…", consent: "Almost booked…",
+      manager_review: "With your property manager for review.",
+      followup: "Reporting a problem…", photo: "Reporting a problem…",
+      brief: "Check the job brief and agree.",
+      dispatch: "Your property manager is dispatching a plumber…",
+      windows: "Pick one of the plumber's times.",
       booked: state.plumber ? `${state.plumber.name} · ${state.slot}` : "",
+      reminded: state.plumber ? `Tomorrow: ${state.plumber.name} · ${state.slot}` : "",
       on_the_way: "Your plumber is on the way.",
+      cost_check: "The plumber is checking the cost on site.",
+      approval: "Waiting for your property manager to approve the quote.",
       working: "The plumber is working on it.",
       done: "Done. Please confirm it's fixed.",
-      closed: "Repair closed. Report and invoice saved."
+      feedback: "Fixed and invoiced. Two quick questions.",
+      followup_wait: "Fixed. One more check in seven days.",
+      followup_check: "Seven-day check: is it still fixed?",
+      closed: "Repair closed. Your home record is updated."
     }[state.step];
     $("repair-status").textContent = status;
+    const meta = [];
+    if (state.problem && state.step !== "start") meta.push(CASE_ID);
+    if (state.urgent && state.step !== "closed") meta.push("Urgent");
+    if (state.language) meta.push(state.language.name);
+    if (state.linked) meta.push(`Linked: ${state.linked.id}`);
+    $("repair-meta").replaceChildren(...meta.map((m) => span("est-tag" + (m === "Urgent" ? " is-urgent" : ""), m)));
     $("repair-steps").replaceChildren(...STEPS.map((s, i) => {
       const item = document.createElement("li");
       item.className = i < state.progress || state.step === "closed" ? "is-done" : i === state.progress ? "is-current" : "";
@@ -451,10 +721,11 @@
       item.textContent = s;
       return item;
     }));
-    const demo = $("demo-next");
-    const label = { booked: "Demo: plumber leaves now", on_the_way: "Demo: plumber starts work", working: "Demo: plumber finishes" }[state.step];
-    demo.hidden = !label;
-    if (label) demo.textContent = label;
+    $("demo-actions").replaceChildren(...demoActions().map(([label, run]) => {
+      const b = button("demo-btn", label);
+      b.addEventListener("click", () => { setActions([]); run(); });
+      return b;
+    }));
   }
 
   function renderHome() {
@@ -463,7 +734,9 @@
       ["Floor", HOME.floor],
       ["Phone", HOME.phone],
       ["Access", HOME.access],
-      ["Building", HOME.building]
+      ["Shut-off", HOME.shutoff],
+      ["Building", HOME.building],
+      ["Repairs", HOME.history.join("\n")]
     ].flatMap(([k, v]) => {
       const dt = document.createElement("dt");
       dt.textContent = k;
@@ -473,10 +746,46 @@
     }));
   }
 
+  // ---------- voice (browser preview of the ElevenLabs voice agent) ----------
+
+  // Speech-to-text for the report. Uses the browser's built-in recogniser as a stand-in;
+  // in production the ElevenLabs voice agent takes the report.
+  let recogniser = null;
+  function dictate() {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const btn = $("mic-btn");
+    if (!SR) return toast("Voice input isn't available in this browser. Type your message instead.");
+    if (recogniser) { recogniser.stop(); return; }
+    recogniser = new SR();
+    recogniser.lang = navigator.language || "en-GB";
+    recogniser.interimResults = true;
+    btn.classList.add("is-live");
+    btn.setAttribute("aria-pressed", "true");
+    recogniser.onresult = (e) => {
+      input.value = [...e.results].map((r) => r[0].transcript).join(" ");
+      input.dispatchEvent(new Event("input"));
+    };
+    recogniser.onerror = () => toast("Couldn't hear you. Check microphone access, or type instead.");
+    recogniser.onend = () => {
+      recogniser = null;
+      btn.classList.remove("is-live");
+      btn.setAttribute("aria-pressed", "false");
+      input.focus();
+    };
+    recogniser.start();
+  }
+
+  // Text-to-speech for spoken messages. In production this is an ElevenLabs voice.
+  function speak(text) {
+    if (!("speechSynthesis" in window)) return toast("Audio isn't available in this browser.");
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+  }
+
   // ---------- chat rendering ----------
 
   function say(from, text, extra = {}) {
-    state.messages.push({ from, text, time: now(), card: extra.card || null });
+    state.messages.push({ from, text, time: now(), card: extra.card || null, speak: !!extra.speak });
     renderThread();
   }
   function me(text) { say("me", text); }
@@ -501,6 +810,14 @@
       }
       if (m.text) item.append(p_("", m.text));
       if (m.card) item.append(m.card);
+      if (m.speak) {
+        // spoken messages (ElevenLabs voice in production) get a play button
+        const play = button("t-listen", "");
+        play.append(iconEl("play"), " Listen");
+        play.setAttribute("aria-label", "Listen to this message");
+        play.addEventListener("click", () => speak(m.text));
+        item.append(play);
+      }
       const small = document.createElement("small");
       small.textContent = `${who[m.from]} · ${m.time}`;
       item.append(small);
@@ -532,14 +849,10 @@
       return b;
     }));
   }
-  function showProblemChips() {
-    chips(Object.entries(DATA.problems).map(([key, p]) => [p.label, () => { me(p.label); withTyping(() => askUrgency(key)); }]));
-  }
-  function showPlumberCards() {
-    const list = document.createElement("ul");
-    list.className = "t-pros t-pros-pick";
-    DATA.plumbers.forEach((p) => list.append(proRow(p, true)));
-    setActions([list]);
+  function showProblemChips(withOther) {
+    const list = Object.entries(DATA.problems).map(([key, p]) => [p.label, () => { me(p.label); withTyping(() => startCase(key)); }]);
+    if (withOther) list.push(["Something else", toManager]);
+    chips(list);
   }
   function setActions(nodes) {
     $("actions").replaceChildren(...nodes);
@@ -596,7 +909,9 @@
     const paths = {
       camera: '<path d="M2 5.5h2.5L6 3.5h4l1.5 2H14v7H2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/>',
       clock: '<circle cx="8" cy="8" r="5.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.2l2.2 1.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-      check: '<path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>'
+      check: '<path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
+      play: '<path d="M5 3.5v9l7-4.5z" fill="currentColor"/>',
+      lock: '<rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/>'
     };
     const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     s.setAttribute("viewBox", "0 0 16 16");
@@ -610,14 +925,17 @@
   function span(cls, text) { const s = document.createElement("span"); s.className = cls; s.textContent = text; return s; }
   function h3(text) { const h = document.createElement("h3"); h.className = "est-title"; h.textContent = text; return h; }
   function p_(cls, text) { const p = document.createElement("p"); if (cls) p.className = cls; p.textContent = text; return p; }
-  function li(k, v, check, strong) {
+  function li(k, v, check, strong, icon) {
     const item = document.createElement("li");
     if (strong) item.className = "is-total";
-    if (check) item.append(iconEl("check"));
+    if (check || icon) item.append(iconEl(icon || "check"));
     item.append(span("k", k), span("v", v));
     return item;
   }
   function button(cls, text) { const b = document.createElement("button"); b.type = "button"; b.className = cls; b.textContent = text; return b; }
   function initials(name) { return name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join(""); }
+  function avgPrice() { const p = DATA.problems[state.problem]; return Math.round((p.price[0] + p.price[1]) / 2); }
+  function fmt(n) { return n.toLocaleString("en-GB"); }
+  function money(n) { return n.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
   function now() { return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); }
 })();

@@ -226,3 +226,25 @@ body.app.tenant { height: auto; min-height: 100vh; overflow: auto; display: bloc
 .consent.is-done .seg-btn:not([aria-checked="true"]), .consent.is-done .btn-ghost { display: none; }
 .consent.is-done .btn-primary { background: rgba(143, 211, 193, 0.16); color: #8fd3c1; box-shadow: none; transform: none; cursor: default; }
 .t-side .pro-next { white-space: normal; text-align: right; max-width: 110px; }
+
+/* ---------- final workflow additions ---------- */
+.t-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: -4px 0 12px; }
+.t-meta:empty { display: none; }
+.demo-actions { display: grid; gap: 6px; }
+.demo-actions:empty { display: none; }
+#mic-btn.is-live { color: var(--plum); background: var(--sun); box-shadow: 0 0 0 4px var(--sun-soft); }
+.t-listen {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 6px;
+  height: 28px; padding: 0 10px; border-radius: 999px; cursor: pointer;
+  background: none; color: var(--dusk); border: 1px solid var(--line-strong);
+  font: inherit; font-size: 12.5px; transition: color 160ms, border-color 160ms;
+}
+.t-listen:hover { color: var(--cream); border-color: var(--sun-line); }
+.t-listen:focus-visible { outline: none; box-shadow: var(--ring); }
+.consent-list.is-withheld { gap: 6px; color: var(--dusk); }
+.consent-list.is-withheld li { grid-template-columns: 16px 1fr; }
+.consent-list.is-withheld svg { color: var(--danger); }
+.consent-list.is-withheld .v { display: none; }
+.consent .btn-ghost svg { margin-right: 2px; }
+.t-facts dd { white-space: pre-line; }
+.t-msg-centrix .est { text-align: left; }

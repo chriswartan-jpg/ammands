@@ -32,6 +32,20 @@ The setup is generic, so other partners (internet, energy, heating, insurance) c
 | `partner.html` | Partner (plumber) portal: incoming jobs, job details, status updates |
 | `data/` | Fake sample data: demo accounts, tenant data and partner jobs |
 
+### The final workflow (plumbing repair case)
+
+Both portals follow the 21-step final workflow, from the tenant's report to the seven-day follow-up:
+
+| Phase | Tenant portal (`tenant.html`) | Partner portal (`partner.html`) |
+|---|---|---|
+| Report (1–7) | Type or speak the problem, language detection, classification (or manager review), duplicate check with linked cases, up to 3 follow-up questions, optional photo, urgent path with the shut-off valve | Job brief shows the tenant's answers, language, linked case and shut-off valve |
+| Brief and consent (8–10) | Job brief with what is shared and what is never shared, access choice, consent logged with time and channel, manager dispatch | Consent record and "Not shared with you" list; accept the dispatched job |
+| Visit (11–15) | Pick one of the plumber's 3 windows or ask for new ones, confirmation, day-before reminder with rebooking, live ETA | Propose 3 windows (typed, suggested or dictated), ETA picker for "I'm on the way" |
+| Repair (16–18) | Cost check against the €3,000 pre-approved limit, manager approval above it, work note, "Is it dry now?" | Enter the quote (over €3,000 goes to the manager), dictate the work note, wait for the tenant's confirmation |
+| Close (19–21) | Invoice with 19% VAT linked to the case and unit, two feedback questions, seven-day check that updates the home record | Build the invoice from hours and parts, see feedback and the seven-day follow-up |
+
+The manager and the other side of the conversation are played by the dashed **Demo:** buttons. Voice uses the browser's own speech recognition and speech synthesis as a stand-in for the ElevenLabs voice agent, so it needs no API key; where the browser has no speech support, the portals say so and you can type instead.
+
 There's no backend. All data is fake and lives in `website/data/`, and the login only checks it in the browser.
 
 ## Running it locally

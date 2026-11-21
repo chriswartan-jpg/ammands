@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
   <link rel="stylesheet" href="styles.css?v=19">
-  <link rel="stylesheet" href="partner.css?v=7">
+  <link rel="stylesheet" href="partner.css?v=8">
 </head>
 <body class="app">
   <header class="app-bar">
@@ -93,14 +93,20 @@
         <p class="detail-badges" id="d-badges"></p>
         <p class="detail-desc" id="d-desc"></p>
 
+        <div class="detail-actions" id="d-actions"></div>
+
+        <h2 class="panel-title">Case workflow</h2>
+        <ol class="wf-steps" id="d-flow" aria-label="Case workflow"></ol>
+
+        <h2 class="panel-title">Job brief and consent</h2>
+        <div class="wf-brief" id="d-brief"></div>
+
         <h2 class="panel-title">Possible causes</h2>
         <ul class="causes" id="d-causes"></ul>
         <p class="panel-note">Estimated by centrix from the tenant's report and photos.</p>
 
         <h2 class="panel-title">Details</h2>
         <dl class="props" id="d-props"></dl>
-
-        <div class="detail-actions" id="d-actions"></div>
       </div>
 
       <div class="detail-body chat" id="dp-chat" role="tabpanel" aria-labelledby="dt-chat" hidden>
@@ -120,7 +126,7 @@
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="map-style.js?v=1"></script>
-  <script src="data/partner-jobs.js?v=1"></script>
-  <script src="partner.js?v=8"></script>
+  <script src="data/partner-jobs.js?v=2"></script>
+  <script src="partner.js?v=9"></script>
 </body>
 </html>
