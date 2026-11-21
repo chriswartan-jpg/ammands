@@ -2,18 +2,116 @@
 
 Our entry for the reltix hackathon challenge **"Plug a Partner into centrix"** (24 hours).
 
-A property manager sits between residents and the service providers around a building, and most of that contact still happens by phone, email and paper. One broken heater can take a dozen calls before anyone turns up. **centrix** is reltix's platform for property managers. It keeps everything about a property in one record, but partners aren't part of it yet.
-
-We plug in **one partner, a plumber**, and take a report all the way to a finished repair **without the tenant filling in a single form**:
-
-1. **Detect the moment**: a tenant reports a problem ("leak under the kitchen sink") and centrix recognises it as plumbing.
-2. **Hand over context**: centrix pre-fills what it already knows (address, floor, contact, previous cases) and only asks for what is missing (photos, since when, urgency, access).
-3. **Hold the conversation**: the right plumber is picked, and the tenant gives consent and chooses a time slot.
-4. **Close the loop**: the plumber updates the status, and the work report and invoice are linked back to the case and the unit.
-
-The setup is generic, so other partners (internet, energy, heating, insurance) can plug in the same way later.
+A tenant tells centrix what's wrong, in their own words and by voice if they like, and a vetted plumber takes it from there to a finished, invoiced repair. **The tenant never fills in a form.**
 
 ![The centrix landing page with the globe](docs/screenshots/landing.jpg)
+
+## About the project
+
+### The problem
+
+A property manager sits between owners and tenants on one side and every service provider around the building on the other: plumbers, caretakers, insurers, utilities. Most of that contact still runs by phone, email and paper. One broken heater can take a dozen calls and emails before anyone turns up.
+
+Every service is its own silo with its own forms. Providers don't know when a resident needs them, residents type the same details again and again, and the property manager has no easy way to connect it all.
+
+### reltix and centrix
+
+**reltix** manages properties itself and builds the platform it runs on: **centrix**. In centrix, property managers and AI agents work side by side, and everything about a property lives in one structured record: units, owners, tenants, contracts, cases and every message.
+
+What centrix doesn't have yet is **partners**. Because reltix brings thousands of its own units onto the platform from day one, centrix can become a marketplace: partners get customers without paying to find them, residents get faster service, and every new partner makes the network more useful. That's the gap this project fills.
+
+### The challenge
+
+> Pick one partner and integrate it into centrix. Turn a moment in a property's life into a finished outcome, with zero forms.
+
+We had 24 hours and no access to reltix's systems, so we built our own lightweight stand-in with realistic data. Every solution had to cover four steps:
+
+| Step | What it means | How we do it |
+|---|---|---|
+| **1. Detect the moment** | When and for whom is the service needed? | The tenant describes the problem in the chat. centrix recognises it as plumbing, detects the language and spots duplicate reports from the same building. |
+| **2. Hand over context** | Pre-fill what the partner needs | centrix already knows the address, floor, contact details, shut-off valve and earlier repairs. It only asks what it can't know: since when, how bad, a photo, how to get in. |
+| **3. Hold the conversation** | Use the channel that fits best | A chat that works by text or voice, in the tenant's own language. The tenant agrees to what is shared and picks one of the plumber's time windows. |
+| **4. Close the loop** | Keep everyone updated until it's done | Live status from booked to on the way to fixed. The work note and invoice are linked to the case and the unit, and a check seven days later updates the home record. |
+
+### Why plumbing
+
+We chose one partner and took it all the way:
+
+- **It happens often, and it's often urgent.** A leak gets worse by the hour and can damage other flats.
+- **It's full of back-and-forth today.** Who goes, when is the tenant home, how does the plumber get in, who pays.
+- **It has a clear start and end**, from the first report to the invoice.
+- **It's a service a partner delivers**, not a product they sell, so it shows the whole hand-off between tenant, manager and partner.
+
+### Who it helps
+
+| | Before | With centrix |
+|---|---|---|
+| **Tenant** | Calls the office, explains the problem, waits, explains it again to the plumber | Describes it once, by text or voice, in their own language, and follows the repair live |
+| **Plumber** | Gets a vague phone message, calls the tenant to plan a visit and ask how to get in | Gets a complete job brief with photos, access and a shut-off valve location, proposes three time windows, and dictates the work note |
+| **Property manager** | Relays messages between both sides and chases invoices | Only steps in where a decision is needed: unclear reports, urgent cases and quotes over the €3,000 pre-approved limit |
+
+### How one repair runs
+
+Both portals follow the same [21-step workflow](docs/final-workflow.md), from the first report to the seven-day follow-up:
+
+```mermaid
+flowchart LR
+    A["Report<br/><small>steps 1–7</small>"] --> B["Brief and consent<br/><small>steps 8–10</small>"]
+    B --> C["Visit<br/><small>steps 11–15</small>"]
+    C --> D["Repair<br/><small>steps 16–18</small>"]
+    D --> E["Close<br/><small>steps 19–21</small>"]
+```
+
+1. **Report.** The tenant describes the problem. centrix detects the language, classifies it (anything that isn't clearly plumbing goes to the manager), checks for the same leak elsewhere in the building, asks up to three short questions and offers to take a photo. Urgent cases get a call and the shut-off valve location straight away.
+2. **Brief and consent.** centrix writes the job brief and shows the tenant exactly what the plumber gets and what is never shared. The tenant agrees, and the consent is logged with the time and channel. The manager dispatches the job.
+3. **Visit.** The plumber proposes three time windows, and the tenant picks one or asks for new ones. A reminder goes out the day before, and the tenant sees the plumber's ETA on the day.
+4. **Repair.** If the quote is over €3,000, the manager approves it first. The plumber dictates the work note, and the tenant confirms it's fixed.
+5. **Close.** The invoice (with 19% VAT) is built from the work note and linked to the case and the unit. The tenant answers two feedback questions, and seven days later centrix checks it's still fixed and updates the home record.
+
+### Privacy and consent
+
+- Only what the job needs is shared with the plumber: name, phone, address, the problem, photos and access.
+- Some things are **never shared**: email address, owner details, lease and rent, meter numbers, other tenants' details and payment history.
+- Every consent is logged with the time and the channel, only covers this one repair, and can be withdrawn.
+- The OpenAI and ElevenLabs keys stay on the server. The browser never sees them.
+
+### Built for the next partner
+
+Plumbing is the first partner, but the setup is generic. Any partner plugs in by describing the same six things:
+
+| | |
+|---|---|
+| **Services** | What the partner delivers (leaks, blockages, …) |
+| **Eligibility** | Which regions, property types and problems |
+| **Availability** | How time windows are shared |
+| **Placing a job** | Which data centrix sends along |
+| **Status updates** | How the partner reports back |
+| **Result** | Work report, photos and invoice |
+
+So an electrician, an internet provider or a heating company can connect the same way, without a redesign.
+
+### How it's built
+
+```mermaid
+flowchart LR
+    T["Tenant portal"] --> S["centrix server<br/><small>Node, holds the keys</small>"]
+    P["Partner portal"] --> S
+    S --> O["OpenAI<br/><small>understanding, conversation, translation</small>"]
+    S --> E["ElevenLabs<br/><small>speech-to-text, spoken replies</small>"]
+    T -.-> D[("Sample data<br/><small>Maastricht and Aachen</small>")]
+    P -.-> D
+```
+
+- **Website:** plain HTML, CSS and JavaScript, with no build step.
+- **Server:** one small Node file that serves the site and is the only place that talks to OpenAI and ElevenLabs.
+- **Data:** a realistic, made-up data set of buildings, units, tenants, plumbers, cases, consents and invoices in Maastricht. It only holds data a property manager would really have ([details](docs/fake-data-structure.md)).
+- **Without the server**, the portals still work with built-in rules and the browser's own speech support.
+
+### What's next
+
+- More partners: heating, electrician, internet, energy, insurance.
+- More channels: a phone line with an AI voice agent, WhatsApp, and one-click email.
+- Picking the right plumber automatically by region, rating and availability.
 
 ## A look at the app
 
