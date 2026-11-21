@@ -1,0 +1,46 @@
+{
+  "manager_id": "pm_org",
+  "name": "Maaszicht Vastgoedbeheer B.V.",
+  "address": "Stationsstraat 9, 6221 BM Maastricht",
+  "email": "service@maaszicht.example",
+  "phone": "+31 43 000 0000",
+  "staff": [
+    {
+      "staff_id": "pm_01",
+      "name": "Eva Dirix",
+      "role": "property manager",
+      "portfolio": [
+        "prop_01",
+        "prop_02",
+        "prop_04"
+      ]
+    },
+    {
+      "staff_id": "pm_02",
+      "name": "Mark Lemmens",
+      "role": "property manager",
+      "portfolio": [
+        "prop_03",
+        "prop_05",
+        "prop_06"
+      ]
+    }
+  ],
+  "repair_policy": {
+    "pre_approved_limit_eur": 3000,
+    "owner_approval_above_eur": 5000,
+    "vat_rate_pct": 21,
+    "currency": "EUR",
+    "emergency_definition": "Water that cannot be stopped, no toilet in the home, sewage backing up, or no heating/hot water in winter for a vulnerable tenant.",
+    "small_repairs_rule": "Besluit kleine herstellingen: small repairs (e.g. tap washers, unblocking a drain the tenant blocked) are paid by the tenant. The tenant is told before the job is booked.",
+    "invoice_to": "Maaszicht Vastgoedbeheer B.V., Stationsstraat 9, 6221 BM Maastricht"
+  },
+  "never_shared_with_partners": [
+    "tenant_email",
+    "owner_details",
+    "lease_and_rent",
+    "meter_numbers",
+    "other_tenants",
+    "payment_history"
+  ]
+}

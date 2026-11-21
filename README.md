@@ -20,6 +20,7 @@ The setup is generic, so other partners (internet, energy, heating, insurance) c
 | [`PROJECT.md`](PROJECT.md) | Full project description: the problem, the challenge, the end-to-end flow and what we build |
 | [`docs/final-workflow.md`](docs/final-workflow.md) | The final 21-step workflow for one plumbing case, with the diagram, that the portals follow |
 | [`BUILD-PLAN.md`](BUILD-PLAN.md) | Build plan in phases: screens, fake data, automation |
+| [`docs/fake-data-structure.md`](docs/fake-data-structure.md) | The fake Maastricht data set: files, fields, links and assumptions |
 | [`website/`](website/) | The prototype: a static site in plain HTML, CSS and JavaScript |
 
 ### The website
@@ -84,6 +85,8 @@ Then open <http://localhost:8000>. The badge says **Demo mode** and the portals 
 ### Demo accounts
 
 The test accounts are in [`website/data/demo-accounts.js`](website/data/demo-accounts.js). They're fake and protect nothing. Pick the matching role (Tenant or Partner) on the login page.
+
+The Maastricht data set (`website/data/centrix/`, see [`docs/fake-data-structure.md`](docs/fake-data-structure.md)) has a login for every tenant who reported a case and every plumber. The password is the first name + `-demo`, for example `leyla.yilmaz@example.com` / `leyla-demo` (tenant) or `bram.peters@jekerdal.test` / `bram-demo` (partner).
 
 ## Tech
 

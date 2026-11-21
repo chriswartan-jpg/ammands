@@ -1,0 +1,170 @@
+[
+  {
+    "property_id": "prop_01",
+    "name": "Brusselsestraat 74",
+    "address": {
+      "street": "Brusselsestraat",
+      "number": "74",
+      "postcode": "6211 PG",
+      "city": "Maastricht",
+      "district": "Binnenstad"
+    },
+    "lat": 50.8499,
+    "lng": 5.6838,
+    "building_year": 1905,
+    "building_type": "townhouse split into 4 apartments",
+    "units": 4,
+    "lift": false,
+    "heating": "individual gas combi boiler per unit",
+    "energy_label": {
+      "class": "E",
+      "valid_until": "2031-06-30"
+    },
+    "water_main": "Cellar, left of the stairs, behind the meter cabinet",
+    "pipework": "Copper since 1988 renovation; short lead section at the street connection",
+    "owner_contact_id": "c_o01",
+    "manager_staff_id": "pm_01",
+    "caretaker_contact_id": null,
+    "key_location": "Key safe at the manager's office (key K-074)"
+  },
+  {
+    "property_id": "prop_02",
+    "name": "Rechtstraat 58",
+    "address": {
+      "street": "Rechtstraat",
+      "number": "58",
+      "postcode": "6221 EJ",
+      "city": "Maastricht",
+      "district": "Wyck"
+    },
+    "lat": 50.849,
+    "lng": 5.6985,
+    "building_year": 1890,
+    "building_type": "shop with 3 apartments above (shop not managed)",
+    "units": 3,
+    "lift": false,
+    "heating": "individual gas combi boiler per unit",
+    "energy_label": {
+      "class": "F",
+      "valid_until": "2030-02-28"
+    },
+    "water_main": "Entrance hall, cupboard under the stairs",
+    "pipework": "Copper and PVC drains, renovated 2004",
+    "owner_contact_id": "c_o03",
+    "manager_staff_id": "pm_01",
+    "caretaker_contact_id": null,
+    "key_location": "Key safe at the manager's office (key K-058)"
+  },
+  {
+    "property_id": "prop_03",
+    "name": "Scharnerweg 112",
+    "address": {
+      "street": "Scharnerweg",
+      "number": "112",
+      "postcode": "6224 JG",
+      "city": "Maastricht",
+      "district": "Scharn"
+    },
+    "lat": 50.85,
+    "lng": 5.717,
+    "building_year": 1968,
+    "building_type": "gallery flat, 3 floors",
+    "units": 6,
+    "lift": true,
+    "heating": "block heating (central boiler room, shared)",
+    "energy_label": {
+      "class": "C",
+      "valid_until": "2033-09-30"
+    },
+    "water_main": "Boiler room, ground floor (caretaker has the key)",
+    "pipework": "Galvanised steel risers, copper in the flats",
+    "owner_contact_id": "c_o02",
+    "manager_staff_id": "pm_02",
+    "caretaker_contact_id": "c_k01",
+    "key_location": "Caretaker Harrie Bemelmans"
+  },
+  {
+    "property_id": "prop_04",
+    "name": "Sint Maartenslaan 30",
+    "address": {
+      "street": "Sint Maartenslaan",
+      "number": "30",
+      "postcode": "6221 AX",
+      "city": "Maastricht",
+      "district": "Wyck"
+    },
+    "lat": 50.8468,
+    "lng": 5.6993,
+    "building_year": 1932,
+    "building_type": "mansion split into 3 apartments",
+    "units": 3,
+    "lift": false,
+    "heating": "individual gas combi boiler per unit",
+    "energy_label": {
+      "class": "D",
+      "valid_until": "2032-04-30"
+    },
+    "water_main": "Cellar, front wall, under the window",
+    "pipework": "Original lead supply pipe in the risers (known issue), copper in the kitchens",
+    "owner_contact_id": "c_o01",
+    "manager_staff_id": "pm_01",
+    "caretaker_contact_id": null,
+    "key_location": "Key safe at the manager's office (key K-030)"
+  },
+  {
+    "property_id": "prop_05",
+    "name": "Oranjeplein 87",
+    "address": {
+      "street": "Oranjeplein",
+      "number": "87",
+      "postcode": "6224 KM",
+      "city": "Maastricht",
+      "district": "Wittevrouwenveld"
+    },
+    "lat": 50.8558,
+    "lng": 5.7095,
+    "building_year": 1955,
+    "building_type": "walk-up flat (portiekflat), 3 floors",
+    "units": 6,
+    "lift": false,
+    "heating": "individual gas combi boiler per unit (one old gas geyser left in unit 2)",
+    "energy_label": {
+      "class": "D",
+      "valid_until": "2031-11-30"
+    },
+    "water_main": "Basement storage corridor, at the end on the right",
+    "pipework": "Copper, cast-iron soil stack",
+    "owner_contact_id": "c_o02",
+    "manager_staff_id": "pm_02",
+    "caretaker_contact_id": "c_k01",
+    "key_location": "Caretaker Harrie Bemelmans"
+  },
+  {
+    "property_id": "prop_06",
+    "name": "Randwycksingel 15",
+    "address": {
+      "street": "Randwycksingel",
+      "number": "15",
+      "postcode": "6229 EB",
+      "city": "Maastricht",
+      "district": "Randwyck"
+    },
+    "lat": 50.8395,
+    "lng": 5.71,
+    "building_year": 2019,
+    "building_type": "new-build apartment block",
+    "units": 6,
+    "lift": true,
+    "heating": "collective heat pump with underfloor heating",
+    "energy_label": {
+      "class": "A+",
+      "valid_until": "2029-05-31"
+    },
+    "water_main": "Technical room, ground floor (code lock, code with the manager)",
+    "pipework": "PEX supply, PVC drains",
+    "owner_contact_id": "c_o04",
+    "manager_staff_id": "pm_02",
+    "caretaker_contact_id": null,
+    "key_location": "Digital lock, one-time code sent by the manager"
+  }
+]

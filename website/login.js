@@ -77,7 +77,7 @@
     // only (sessionStorage) and only holds the role, display name and company.
     if (account.role === "partner" || account.role === "tenant") {
       try {
-        sessionStorage.setItem("centrix.session", JSON.stringify({ role: account.role, name: account.name, company: account.company || null, email: account.email }));
+        sessionStorage.setItem("centrix.session", JSON.stringify({ role: account.role, id: account.id || null, name: account.name, company: account.company || null, email: account.email }));
         password.value = "";
         location.href = account.role === "partner" ? "partner.html" : "tenant.html";
         return;

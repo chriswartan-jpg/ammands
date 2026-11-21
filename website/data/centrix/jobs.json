@@ -1,0 +1,1059 @@
+[
+  {
+    "job_id": "J-2026-0141",
+    "case_id": "C-2026-0141",
+    "partner_id": "p_03",
+    "technician_id": "t_04",
+    "status": "closed",
+    "created_at": "2026-09-08T09:40:00+02:00",
+    "brief": {
+      "title": "Kitchen tap keeps dripping when closed",
+      "category": "plumbing",
+      "problem_type": "dripping_tap",
+      "urgency": "normal",
+      "address": "Brusselsestraat 74, 6211 PG Maastricht",
+      "unit": "Ground floor",
+      "floor": 0,
+      "lift": false,
+      "tenant_first_name": "Harrie",
+      "tenant_phone": "+31 6 0000 0200",
+      "tenant_language": "nl",
+      "description": "Goedemorgen, de kraan in de keuken blijft druppelen, ook als hij helemaal dicht is.",
+      "description_translated": "Kitchen tap keeps dripping when closed",
+      "answers": [
+        {
+          "q": "Is it dripping or running?",
+          "a": "Dripping, about one drop a second"
+        },
+        {
+          "q": "Since when?",
+          "a": "A week"
+        }
+      ],
+      "photos": [],
+      "access": "Tenant at home",
+      "water_shutoff": "Under the kitchen sink, blue tap",
+      "water_main": "Cellar, left of the stairs, behind the meter cabinet",
+      "boiler": "Remeha Tzerra",
+      "building_year": 1905,
+      "pipework": "Copper since 1988 renovation; short lead section at the street connection",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0141",
+    "proposed_windows": [
+      {
+        "start": "2026-09-10T10:00:00+02:00",
+        "end": "2026-09-10T12:00:00+02:00"
+      },
+      {
+        "start": "2026-09-11T10:00:00+02:00",
+        "end": "2026-09-11T12:00:00+02:00"
+      },
+      {
+        "start": "2026-09-12T10:00:00+02:00",
+        "end": "2026-09-12T12:00:00+02:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0141",
+    "quote": null,
+    "work_report_id": "WR-2026-0141",
+    "invoice_id": "INV-2026-0141"
+  },
+  {
+    "job_id": "J-2026-0148",
+    "case_id": "C-2026-0148",
+    "partner_id": "p_01",
+    "technician_id": "t_01",
+    "status": "closed",
+    "created_at": "2026-09-19T21:25:00+02:00",
+    "brief": {
+      "title": "Water coming from the wall behind the toilet, spreading into the hall",
+      "category": "plumbing",
+      "problem_type": "burst_pipe",
+      "urgency": "emergency",
+      "address": "Scharnerweg 112, 6224 JG Maastricht",
+      "unit": "A02",
+      "floor": 0,
+      "lift": true,
+      "tenant_first_name": "Jos",
+      "tenant_phone": "+31 6 0000 0208",
+      "tenant_language": "nl",
+      "description": "Er komt water uit de muur achter de wc, het loopt de gang in.",
+      "description_translated": "Water coming from the wall behind the toilet, spreading into the hall",
+      "answers": [
+        {
+          "q": "Is water still coming out right now?",
+          "a": "Yes"
+        },
+        {
+          "q": "Can you close the water tap in the meter cupboard?",
+          "a": "Daughter closed it"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0148/before_1.jpg",
+        "photos/C-2026-0148/before_2.jpg"
+      ],
+      "access": "Daughter lets the plumber in",
+      "water_shutoff": "Meter cupboard by the front door",
+      "water_main": "Boiler room, ground floor (caretaker has the key)",
+      "boiler": null,
+      "building_year": 1968,
+      "pipework": "Galvanised steel risers, copper in the flats",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0148",
+    "proposed_windows": [
+      {
+        "start": "2026-09-19T22:30:00+02:00",
+        "end": "2026-09-20T00:30:00+02:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0148",
+    "quote": null,
+    "work_report_id": "WR-2026-0148",
+    "invoice_id": "INV-2026-0148"
+  },
+  {
+    "job_id": "J-2026-0152",
+    "case_id": "C-2026-0152",
+    "partner_id": "p_03",
+    "technician_id": "t_04",
+    "status": "closed",
+    "created_at": "2026-09-29T20:05:00+02:00",
+    "brief": {
+      "title": "Shower drain very slow",
+      "category": "plumbing",
+      "problem_type": "blockage",
+      "urgency": "normal",
+      "address": "Brusselsestraat 74, 6211 PG Maastricht",
+      "unit": "1st floor",
+      "floor": 1,
+      "lift": false,
+      "tenant_first_name": "Elena",
+      "tenant_phone": "+31 6 0000 0201",
+      "tenant_language": "en",
+      "description": "The shower drain is very slow, water stays about 3 cm high after a shower.",
+      "description_translated": "Shower drain very slow",
+      "answers": [
+        {
+          "q": "Is the water not draining at all?",
+          "a": "It drains slowly"
+        },
+        {
+          "q": "One drain or several?",
+          "a": "Just the shower"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0152/before_1.jpg"
+      ],
+      "access": "Tenant at home",
+      "water_shutoff": "In the bathroom, behind the panel under the washbasin",
+      "water_main": "Cellar, left of the stairs, behind the meter cabinet",
+      "boiler": "Intergas Kombi Kompakt",
+      "building_year": 1905,
+      "pipework": "Copper since 1988 renovation; short lead section at the street connection",
+      "linked_case_ids": [],
+      "cost_bearer": "tenant",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0152",
+    "proposed_windows": [
+      {
+        "start": "2026-10-01T08:00:00+02:00",
+        "end": "2026-10-01T10:00:00+02:00"
+      },
+      {
+        "start": "2026-10-02T08:00:00+02:00",
+        "end": "2026-10-02T10:00:00+02:00"
+      },
+      {
+        "start": "2026-10-03T08:00:00+02:00",
+        "end": "2026-10-03T10:00:00+02:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0152",
+    "quote": null,
+    "work_report_id": "WR-2026-0152",
+    "invoice_id": "INV-2026-0152"
+  },
+  {
+    "job_id": "J-2026-0157",
+    "case_id": "C-2026-0157",
+    "partner_id": "p_01",
+    "technician_id": "t_02",
+    "status": "closed",
+    "created_at": "2026-10-06T08:32:00+02:00",
+    "brief": {
+      "title": "Leak under the kitchen sink, cupboard floor soft",
+      "category": "plumbing",
+      "problem_type": "leak",
+      "urgency": "urgent",
+      "address": "Rechtstraat 58, 6221 EJ Maastricht",
+      "unit": "2nd floor",
+      "floor": 2,
+      "lift": false,
+      "tenant_first_name": "Sanne",
+      "tenant_phone": "+31 6 0000 0205",
+      "tenant_language": "nl",
+      "description": "Er lekt water onder de gootsteen in de keuken, de bodem van het kastje is zacht.",
+      "description_translated": "Leak under the kitchen sink, cupboard floor soft",
+      "answers": [
+        {
+          "q": "Is water still coming out right now?",
+          "a": "Only when I use the sink"
+        },
+        {
+          "q": "Is it reaching the floor or other rooms?",
+          "a": "I don't know"
+        },
+        {
+          "q": "Since when?",
+          "a": "A few days"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0157/before_1.jpg",
+        "photos/C-2026-0157/before_2.jpg"
+      ],
+      "access": "Tenant at home",
+      "water_shutoff": "In the kitchen, cupboard left of the sink",
+      "water_main": "Entrance hall, cupboard under the stairs",
+      "boiler": "Remeha Calenta",
+      "building_year": 1890,
+      "pipework": "Copper and PVC drains, renovated 2004",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0157",
+    "proposed_windows": [
+      {
+        "start": "2026-10-06T14:00:00+02:00",
+        "end": "2026-10-06T16:00:00+02:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0157",
+    "quote": null,
+    "work_report_id": "WR-2026-0157",
+    "invoice_id": "INV-2026-0157"
+  },
+  {
+    "job_id": "J-2026-0163",
+    "case_id": "C-2026-0163",
+    "partner_id": "p_03",
+    "technician_id": "t_04",
+    "status": "closed",
+    "created_at": "2026-10-14T15:40:00+02:00",
+    "brief": {
+      "title": "Toilet blocked, the only toilet in the flat",
+      "category": "plumbing",
+      "problem_type": "blockage",
+      "urgency": "urgent",
+      "address": "Sint Maartenslaan 30, 6221 AX Maastricht",
+      "unit": "1st floor",
+      "floor": 1,
+      "lift": false,
+      "tenant_first_name": "Julia",
+      "tenant_phone": "+31 6 0000 0213",
+      "tenant_language": "pl",
+      "description": "Toaleta jest zatkana, woda się podnosi. To jedyna toaleta w mieszkaniu.",
+      "description_translated": "Toilet blocked, the only toilet in the flat",
+      "answers": [
+        {
+          "q": "Is the water rising when you flush?",
+          "a": "Yes"
+        },
+        {
+          "q": "Is it the only toilet?",
+          "a": "Yes"
+        }
+      ],
+      "photos": [],
+      "access": "Tenant at home",
+      "water_shutoff": "Kitchen, cupboard under the sink",
+      "water_main": "Cellar, front wall, under the window",
+      "boiler": "Vaillant ecoTEC",
+      "building_year": 1932,
+      "pipework": "Original lead supply pipe in the risers (known issue), copper in the kitchens",
+      "linked_case_ids": [],
+      "cost_bearer": "tenant",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0163",
+    "proposed_windows": [
+      {
+        "start": "2026-10-14T17:00:00+02:00",
+        "end": "2026-10-14T19:00:00+02:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0163",
+    "quote": null,
+    "work_report_id": "WR-2026-0163",
+    "invoice_id": "INV-2026-0163"
+  },
+  {
+    "job_id": "J-2026-0170",
+    "case_id": "C-2026-0170",
+    "partner_id": "p_02",
+    "technician_id": "t_03",
+    "status": "closed",
+    "created_at": "2026-10-26T08:15:00+01:00",
+    "brief": {
+      "title": "No hot water, old gas geyser won't ignite (tenant 84, lives alone)",
+      "category": "plumbing",
+      "problem_type": "no_hot_water",
+      "urgency": "urgent",
+      "address": "Oranjeplein 87, 6224 KM Maastricht",
+      "unit": "87B (ground right)",
+      "floor": 0,
+      "lift": false,
+      "tenant_first_name": "Sjef",
+      "tenant_phone": "+31 6 0000 0216",
+      "tenant_language": "nl",
+      "description": "Ik heb geen warm water meer, de geiser slaat niet aan.",
+      "description_translated": "No hot water, old gas geyser won't ignite (tenant 84, lives alone)",
+      "answers": [
+        {
+          "q": "Does the geyser show a flame or light?",
+          "a": "No"
+        },
+        {
+          "q": "Do you have heating?",
+          "a": "Yes, gas stove in the living room"
+        }
+      ],
+      "photos": [],
+      "access": "Tenant at home",
+      "water_shutoff": "Kitchen, under the sink",
+      "water_main": "Basement storage corridor, at the end on the right",
+      "boiler": "Vaillant atmoMAG geyser",
+      "building_year": 1955,
+      "pipework": "Copper, cast-iron soil stack",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0170",
+    "proposed_windows": [
+      {
+        "start": "2026-10-27T09:00:00+01:00",
+        "end": "2026-10-27T11:00:00+01:00"
+      },
+      {
+        "start": "2026-10-28T09:00:00+01:00",
+        "end": "2026-10-28T11:00:00+01:00"
+      },
+      {
+        "start": "2026-10-29T09:00:00+01:00",
+        "end": "2026-10-29T11:00:00+01:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0170",
+    "quote": {
+      "amount_eur_excl_vat": 2128.0,
+      "description": "Replaced the geyser with a combi boiler; also heats the flat from now on",
+      "submitted_at": "2026-10-27T10:05:00+01:00",
+      "needs_approval": false,
+      "approved_by": "pre_approved_policy",
+      "approved_at": "2026-10-27T10:20:00+01:00"
+    },
+    "work_report_id": "WR-2026-0170",
+    "invoice_id": "INV-2026-0170"
+  },
+  {
+    "job_id": "J-2026-0174",
+    "case_id": "C-2026-0174",
+    "partner_id": "p_03",
+    "technician_id": "t_04",
+    "status": "invoiced",
+    "created_at": "2026-11-12T14:10:00+01:00",
+    "brief": {
+      "title": "Bathroom tap leaks at the handle",
+      "category": "plumbing",
+      "problem_type": "dripping_tap",
+      "urgency": "normal",
+      "address": "Sint Maartenslaan 30, 6221 AX Maastricht",
+      "unit": "2nd floor",
+      "floor": 2,
+      "lift": false,
+      "tenant_first_name": "Omar",
+      "tenant_phone": "+31 6 0000 0214",
+      "tenant_language": "nl",
+      "description": "Kraan in de badkamer lekt bij de knop, druppelt de hele tijd.",
+      "description_translated": "Bathroom tap leaks at the handle",
+      "answers": [
+        {
+          "q": "Is it dripping or running?",
+          "a": "Dripping"
+        },
+        {
+          "q": "Since when?",
+          "a": "Two weeks"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0174/before_1.jpg"
+      ],
+      "access": "Tenant at home",
+      "water_shutoff": "Kitchen, cupboard under the sink",
+      "water_main": "Cellar, front wall, under the window",
+      "boiler": "Vaillant ecoTEC",
+      "building_year": 1932,
+      "pipework": "Original lead supply pipe in the risers (known issue), copper in the kitchens",
+      "linked_case_ids": [],
+      "cost_bearer": "tenant",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0174",
+    "proposed_windows": [
+      {
+        "start": "2026-11-16T13:00:00+01:00",
+        "end": "2026-11-16T15:00:00+01:00"
+      },
+      {
+        "start": "2026-11-17T13:00:00+01:00",
+        "end": "2026-11-17T15:00:00+01:00"
+      },
+      {
+        "start": "2026-11-18T13:00:00+01:00",
+        "end": "2026-11-18T15:00:00+01:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0174",
+    "quote": null,
+    "work_report_id": "WR-2026-0174",
+    "invoice_id": "INV-2026-0174"
+  },
+  {
+    "job_id": "J-2026-0177",
+    "case_id": "C-2026-0177",
+    "partner_id": "p_01",
+    "technician_id": "t_01",
+    "status": "invoiced",
+    "created_at": "2026-11-16T00:40:00+01:00",
+    "brief": {
+      "title": "Toilet keeps running after flushing",
+      "category": "plumbing",
+      "problem_type": "running_toilet",
+      "urgency": "normal",
+      "address": "Brusselsestraat 74, 6211 PG Maastricht",
+      "unit": "3rd floor (attic)",
+      "floor": 3,
+      "lift": false,
+      "tenant_first_name": "Amara",
+      "tenant_phone": "+31 6 0000 0203",
+      "tenant_language": "en",
+      "description": "The toilet keeps running after flushing, I can hear it all night.",
+      "description_translated": "Toilet keeps running after flushing",
+      "answers": [
+        {
+          "q": "Does it stop by itself?",
+          "a": "No"
+        },
+        {
+          "q": "Is water running into the bowl?",
+          "a": "Yes, a thin stream"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0177/before_1.jpg"
+      ],
+      "access": "Tenant at home",
+      "water_shutoff": "Under the kitchen sink",
+      "water_main": "Cellar, left of the stairs, behind the meter cabinet",
+      "boiler": "Intergas Kombi Kompakt",
+      "building_year": 1905,
+      "pipework": "Copper since 1988 renovation; short lead section at the street connection",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0177",
+    "proposed_windows": [
+      {
+        "start": "2026-11-18T11:00:00+01:00",
+        "end": "2026-11-18T13:00:00+01:00"
+      },
+      {
+        "start": "2026-11-19T11:00:00+01:00",
+        "end": "2026-11-19T13:00:00+01:00"
+      },
+      {
+        "start": "2026-11-20T11:00:00+01:00",
+        "end": "2026-11-20T13:00:00+01:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0177",
+    "quote": null,
+    "work_report_id": "WR-2026-0177",
+    "invoice_id": "INV-2026-0177"
+  },
+  {
+    "job_id": "J-2026-0179",
+    "case_id": "C-2026-0179",
+    "partner_id": "p_03",
+    "technician_id": "t_04",
+    "status": "done",
+    "created_at": "2026-11-14T18:40:00+01:00",
+    "brief": {
+      "title": "Kitchen sink not draining at all",
+      "category": "plumbing",
+      "problem_type": "blockage",
+      "urgency": "urgent",
+      "address": "Scharnerweg 112, 6224 JG Maastricht",
+      "unit": "A01",
+      "floor": 0,
+      "lift": true,
+      "tenant_first_name": "Yasmina",
+      "tenant_phone": "+31 6 0000 0207",
+      "tenant_language": "nl",
+      "description": "Gootsteen in de keuken loopt helemaal niet meer door.",
+      "description_translated": "Kitchen sink not draining at all",
+      "answers": [
+        {
+          "q": "Is the water not draining at all?",
+          "a": "Nothing drains"
+        },
+        {
+          "q": "One drain or several?",
+          "a": "Just the kitchen"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0179/before_1.jpg"
+      ],
+      "access": "Tenant at home",
+      "water_shutoff": "Meter cupboard by the front door",
+      "water_main": "Boiler room, ground floor (caretaker has the key)",
+      "boiler": null,
+      "building_year": 1968,
+      "pipework": "Galvanised steel risers, copper in the flats",
+      "linked_case_ids": [],
+      "cost_bearer": "tenant",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0179",
+    "proposed_windows": [
+      {
+        "start": "2026-11-20T13:00:00+01:00",
+        "end": "2026-11-20T15:00:00+01:00"
+      },
+      {
+        "start": "2026-11-21T13:00:00+01:00",
+        "end": "2026-11-21T15:00:00+01:00"
+      },
+      {
+        "start": "2026-11-22T13:00:00+01:00",
+        "end": "2026-11-22T15:00:00+01:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0179",
+    "quote": null,
+    "work_report_id": "WR-2026-0179",
+    "invoice_id": null
+  },
+  {
+    "job_id": "J-2026-0181",
+    "case_id": "C-2026-0181",
+    "partner_id": "p_01",
+    "technician_id": "t_02",
+    "status": "quote_pending_approval",
+    "created_at": "2026-11-16T10:45:00+01:00",
+    "brief": {
+      "title": "Brown water and low pressure in the mornings (1932 building, lead risers)",
+      "category": "plumbing",
+      "problem_type": "low_pressure",
+      "urgency": "normal",
+      "address": "Sint Maartenslaan 30, 6221 AX Maastricht",
+      "unit": "Ground floor",
+      "floor": 0,
+      "lift": false,
+      "tenant_first_name": "Thomas",
+      "tenant_phone": "+31 6 0000 0212",
+      "tenant_language": "nl",
+      "description": "Het water uit de kraan is soms bruin en de druk is laag, vooral 's ochtends.",
+      "description_translated": "Brown water and low pressure in the mornings (1932 building, lead risers)",
+      "answers": [
+        {
+          "q": "All taps or one?",
+          "a": "All taps"
+        },
+        {
+          "q": "Does it clear after running?",
+          "a": "After a minute"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0181/before_1.jpg"
+      ],
+      "access": "Tenant at home",
+      "water_shutoff": "Cellar, front wall (shared main valve)",
+      "water_main": "Cellar, front wall, under the window",
+      "boiler": "Nefit ProLine",
+      "building_year": 1932,
+      "pipework": "Original lead supply pipe in the risers (known issue), copper in the kitchens",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0181",
+    "proposed_windows": [
+      {
+        "start": "2026-11-20T08:00:00+01:00",
+        "end": "2026-11-20T10:00:00+01:00"
+      },
+      {
+        "start": "2026-11-21T08:00:00+01:00",
+        "end": "2026-11-21T10:00:00+01:00"
+      },
+      {
+        "start": "2026-11-22T08:00:00+01:00",
+        "end": "2026-11-22T10:00:00+01:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0181",
+    "quote": {
+      "amount_eur_excl_vat": 3850.0,
+      "description": "Replace the lead riser for all 3 flats with copper, 2 days work incl. wall openings and restoring",
+      "submitted_at": "2026-11-20T09:05:00+01:00",
+      "needs_approval": true,
+      "approved_by": null,
+      "approved_at": null,
+      "status": "waiting for manager approval (over €3,000)"
+    },
+    "work_report_id": null,
+    "invoice_id": null
+  },
+  {
+    "job_id": "J-2026-0183",
+    "case_id": "C-2026-0183",
+    "partner_id": "p_01",
+    "technician_id": "t_01",
+    "status": "in_progress",
+    "created_at": "2026-11-18T16:25:00+01:00",
+    "brief": {
+      "title": "Washing machine tap leaking, floor wet",
+      "category": "plumbing",
+      "problem_type": "leak",
+      "urgency": "urgent",
+      "address": "Oranjeplein 87, 6224 KM Maastricht",
+      "unit": "87A (ground left)",
+      "floor": 0,
+      "lift": false,
+      "tenant_first_name": "Leyla",
+      "tenant_phone": "+31 6 0000 0215",
+      "tenant_language": "tr",
+      "description": "Çamaşır makinesinin musluğundan su sızıyor, yer ıslak.",
+      "description_translated": "Washing machine tap leaking, floor wet",
+      "answers": [
+        {
+          "q": "Is water still coming out right now?",
+          "a": "Only a little, I closed the tap"
+        },
+        {
+          "q": "Is it reaching other rooms?",
+          "a": "No"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0183/before_1.jpg",
+        "photos/C-2026-0183/before_2.jpg"
+      ],
+      "access": "Tenant at home",
+      "water_shutoff": "Kitchen, under the sink",
+      "water_main": "Basement storage corridor, at the end on the right",
+      "boiler": "Intergas Kombi Kompakt",
+      "building_year": 1955,
+      "pipework": "Copper, cast-iron soil stack",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0183",
+    "proposed_windows": [
+      {
+        "start": "2026-11-21T08:00:00+01:00",
+        "end": "2026-11-21T10:00:00+01:00"
+      },
+      {
+        "start": "2026-11-22T08:00:00+01:00",
+        "end": "2026-11-22T10:00:00+01:00"
+      },
+      {
+        "start": "2026-11-23T08:00:00+01:00",
+        "end": "2026-11-23T10:00:00+01:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0183",
+    "quote": null,
+    "work_report_id": null,
+    "invoice_id": null
+  },
+  {
+    "job_id": "J-2026-0184",
+    "case_id": "C-2026-0184",
+    "partner_id": "p_03",
+    "technician_id": "t_04",
+    "status": "scheduled",
+    "created_at": "2026-11-19T12:30:00+01:00",
+    "brief": {
+      "title": "Sewer smell in the bathroom",
+      "category": "plumbing",
+      "problem_type": "sewer_smell",
+      "urgency": "normal",
+      "address": "Rechtstraat 58, 6221 EJ Maastricht",
+      "unit": "3rd floor",
+      "floor": 3,
+      "lift": false,
+      "tenant_first_name": "Mateo",
+      "tenant_phone": "+31 6 0000 0206",
+      "tenant_language": "en",
+      "description": "There's a sewer smell in the bathroom, especially in the morning.",
+      "description_translated": "Sewer smell in the bathroom",
+      "answers": [
+        {
+          "q": "Where is it strongest?",
+          "a": "Near the shower drain"
+        },
+        {
+          "q": "Since when?",
+          "a": "About a week"
+        }
+      ],
+      "photos": [],
+      "access": "Tenant at home",
+      "water_shutoff": "In the bathroom next to the toilet",
+      "water_main": "Entrance hall, cupboard under the stairs",
+      "boiler": "Intergas HRE",
+      "building_year": 1890,
+      "pipework": "Copper and PVC drains, renovated 2004",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0184",
+    "proposed_windows": [
+      {
+        "start": "2026-11-24T10:00:00+01:00",
+        "end": "2026-11-24T12:00:00+01:00"
+      },
+      {
+        "start": "2026-11-25T10:00:00+01:00",
+        "end": "2026-11-25T12:00:00+01:00"
+      },
+      {
+        "start": "2026-11-26T10:00:00+01:00",
+        "end": "2026-11-26T12:00:00+01:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0184",
+    "quote": null,
+    "work_report_id": null,
+    "invoice_id": null
+  },
+  {
+    "job_id": "J-2026-0185",
+    "case_id": "C-2026-0185",
+    "partner_id": "p_03",
+    "technician_id": "t_04",
+    "status": "scheduled",
+    "created_at": "2026-11-19T22:50:00+01:00",
+    "brief": {
+      "title": "Bathroom washbasin drains slowly",
+      "category": "plumbing",
+      "problem_type": "blockage",
+      "urgency": "normal",
+      "address": "Oranjeplein 87, 6224 KM Maastricht",
+      "unit": "87D (1st right)",
+      "floor": 1,
+      "lift": false,
+      "tenant_first_name": "Hannah",
+      "tenant_phone": "+31 6 0000 0218",
+      "tenant_language": "de",
+      "description": "Das Waschbecken im Bad läuft sehr langsam ab.",
+      "description_translated": "Bathroom washbasin drains slowly",
+      "answers": [
+        {
+          "q": "Is the water not draining at all?",
+          "a": "It drains slowly"
+        },
+        {
+          "q": "One drain or several?",
+          "a": "Just the washbasin"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0185/before_1.jpg"
+      ],
+      "access": "Tenant at home",
+      "water_shutoff": "Kitchen, under the sink",
+      "water_main": "Basement storage corridor, at the end on the right",
+      "boiler": "Remeha Tzerra",
+      "building_year": 1955,
+      "pipework": "Copper, cast-iron soil stack",
+      "linked_case_ids": [],
+      "cost_bearer": "tenant",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0185",
+    "proposed_windows": [
+      {
+        "start": "2026-11-25T13:00:00+01:00",
+        "end": "2026-11-25T15:00:00+01:00"
+      },
+      {
+        "start": "2026-11-26T13:00:00+01:00",
+        "end": "2026-11-26T15:00:00+01:00"
+      },
+      {
+        "start": "2026-11-27T13:00:00+01:00",
+        "end": "2026-11-27T15:00:00+01:00"
+      }
+    ],
+    "appointment_id": "APT-2026-0185",
+    "quote": null,
+    "work_report_id": null,
+    "invoice_id": null
+  },
+  {
+    "job_id": "J-2026-0186",
+    "case_id": "C-2026-0186",
+    "partner_id": "p_02",
+    "technician_id": "t_03",
+    "status": "windows_proposed",
+    "created_at": "2026-11-20T07:35:00+01:00",
+    "brief": {
+      "title": "No hot water since this morning, boiler shows error F28",
+      "category": "plumbing",
+      "problem_type": "no_hot_water",
+      "urgency": "urgent",
+      "address": "Brusselsestraat 74, 6211 PG Maastricht",
+      "unit": "2nd floor",
+      "floor": 2,
+      "lift": false,
+      "tenant_first_name": "Daan",
+      "tenant_phone": "+31 6 0000 0202",
+      "tenant_language": "nl",
+      "description": "Geen warm water sinds vanochtend, ketel geeft F28.",
+      "description_translated": "No hot water since this morning, boiler shows error F28",
+      "answers": [
+        {
+          "q": "Does the boiler show an error code?",
+          "a": "F28"
+        },
+        {
+          "q": "Do you have heating?",
+          "a": "No"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0186/before_1.jpg"
+      ],
+      "access": "Tenant at home",
+      "water_shutoff": "Next to the boiler in the hall cupboard",
+      "water_main": "Cellar, left of the stairs, behind the meter cabinet",
+      "boiler": "Nefit EcoLine",
+      "building_year": 1905,
+      "pipework": "Copper since 1988 renovation; short lead section at the street connection",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0186",
+    "proposed_windows": [
+      {
+        "start": "2026-11-21T13:00:00+01:00",
+        "end": "2026-11-21T15:00:00+01:00"
+      },
+      {
+        "start": "2026-11-24T09:00:00+01:00",
+        "end": "2026-11-24T11:00:00+01:00"
+      },
+      {
+        "start": "2026-11-24T13:00:00+01:00",
+        "end": "2026-11-24T15:00:00+01:00"
+      }
+    ],
+    "appointment_id": null,
+    "quote": null,
+    "work_report_id": null,
+    "invoice_id": null
+  },
+  {
+    "job_id": "J-2026-0187",
+    "case_id": "C-2026-0187",
+    "partner_id": "p_01",
+    "technician_id": null,
+    "status": "offered",
+    "created_at": "2026-11-20T21:30:00+01:00",
+    "brief": {
+      "title": "Shower mixer leaks at the bottom",
+      "category": "plumbing",
+      "problem_type": "leak",
+      "urgency": "normal",
+      "address": "Oranjeplein 87, 6224 KM Maastricht",
+      "unit": "87C (1st left)",
+      "floor": 1,
+      "lift": false,
+      "tenant_first_name": "Lotte",
+      "tenant_phone": "+31 6 0000 0217",
+      "tenant_language": "nl",
+      "description": "De douchemengkraan lekt aan de onderkant, er staat steeds een plasje.",
+      "description_translated": "Shower mixer leaks at the bottom",
+      "answers": [
+        {
+          "q": "Is water still coming out right now?",
+          "a": "Only when the shower is on"
+        },
+        {
+          "q": "Since when?",
+          "a": "A few days"
+        }
+      ],
+      "photos": [
+        "photos/C-2026-0187/before_1.jpg"
+      ],
+      "access": "Tenant at home, otherwise caretaker",
+      "water_shutoff": "Kitchen, under the sink",
+      "water_main": "Basement storage corridor, at the end on the right",
+      "boiler": "Intergas Kombi Kompakt",
+      "building_year": 1955,
+      "pipework": "Copper, cast-iron soil stack",
+      "linked_case_ids": [],
+      "cost_bearer": "landlord",
+      "pre_approved_limit_eur": 3000
+    },
+    "withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "consent_id": "CON-2026-0187",
+    "proposed_windows": [],
+    "appointment_id": null,
+    "quote": null,
+    "work_report_id": null,
+    "invoice_id": null
+  }
+]

@@ -1,0 +1,433 @@
+[
+  {
+    "consent_id": "CON-2026-0141",
+    "case_id": "C-2026-0141",
+    "contact_id": "c_201",
+    "partner_id": "p_03",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-09-08T07:46:00+02:00",
+    "channel": "voice",
+    "wording": "I agree that Sint-Pieter Sanitair & Riool receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0148",
+    "case_id": "C-2026-0148",
+    "contact_id": "c_209",
+    "partner_id": "p_01",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-09-19T21:21:00+02:00",
+    "channel": "voice",
+    "wording": "I agree that Jekerdal Loodgieters receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0152",
+    "case_id": "C-2026-0152",
+    "contact_id": "c_202",
+    "partner_id": "p_03",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-09-29T18:11:00+02:00",
+    "channel": "portal",
+    "wording": "I agree that Sint-Pieter Sanitair & Riool receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0157",
+    "case_id": "C-2026-0157",
+    "contact_id": "c_206",
+    "partner_id": "p_01",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-10-06T08:18:00+02:00",
+    "channel": "portal",
+    "wording": "I agree that Jekerdal Loodgieters receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0163",
+    "case_id": "C-2026-0163",
+    "contact_id": "c_214",
+    "partner_id": "p_03",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-10-14T15:26:00+02:00",
+    "channel": "portal",
+    "wording": "I agree that Sint-Pieter Sanitair & Riool receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0170",
+    "case_id": "C-2026-0170",
+    "contact_id": "c_217",
+    "partner_id": "p_02",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-10-26T08:01:00+01:00",
+    "channel": "voice",
+    "wording": "I agree that Maasland Installatietechniek B.V. receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0174",
+    "case_id": "C-2026-0174",
+    "contact_id": "c_215",
+    "partner_id": "p_03",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-11-12T12:16:00+01:00",
+    "channel": "whatsapp",
+    "wording": "I agree that Sint-Pieter Sanitair & Riool receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0177",
+    "case_id": "C-2026-0177",
+    "contact_id": "c_204",
+    "partner_id": "p_01",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-11-15T22:46:00+01:00",
+    "channel": "portal",
+    "wording": "I agree that Jekerdal Loodgieters receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0179",
+    "case_id": "C-2026-0179",
+    "contact_id": "c_208",
+    "partner_id": "p_03",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-11-14T18:26:00+01:00",
+    "channel": "portal",
+    "wording": "I agree that Sint-Pieter Sanitair & Riool receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0181",
+    "case_id": "C-2026-0181",
+    "contact_id": "c_213",
+    "partner_id": "p_01",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-11-16T08:51:00+01:00",
+    "channel": "email",
+    "wording": "I agree that Jekerdal Loodgieters receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0183",
+    "case_id": "C-2026-0183",
+    "contact_id": "c_216",
+    "partner_id": "p_01",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-11-18T16:11:00+01:00",
+    "channel": "voice",
+    "wording": "I agree that Jekerdal Loodgieters receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0184",
+    "case_id": "C-2026-0184",
+    "contact_id": "c_207",
+    "partner_id": "p_03",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-11-19T10:36:00+01:00",
+    "channel": "whatsapp",
+    "wording": "I agree that Sint-Pieter Sanitair & Riool receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0185",
+    "case_id": "C-2026-0185",
+    "contact_id": "c_219",
+    "partner_id": "p_03",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-11-19T20:56:00+01:00",
+    "channel": "portal",
+    "wording": "I agree that Sint-Pieter Sanitair & Riool receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0186",
+    "case_id": "C-2026-0186",
+    "contact_id": "c_203",
+    "partner_id": "p_02",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-11-20T07:21:00+01:00",
+    "channel": "whatsapp",
+    "wording": "I agree that Maasland Installatietechniek B.V. receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  },
+  {
+    "consent_id": "CON-2026-0187",
+    "case_id": "C-2026-0187",
+    "contact_id": "c_218",
+    "partner_id": "p_01",
+    "data_shared": [
+      "first_name",
+      "phone",
+      "address",
+      "unit_and_floor",
+      "problem_description",
+      "follow_up_answers",
+      "photos",
+      "access_instructions",
+      "water_shutoff_location"
+    ],
+    "data_withheld": [
+      "tenant_email",
+      "owner_details",
+      "lease_and_rent",
+      "meter_numbers",
+      "other_tenants",
+      "payment_history"
+    ],
+    "given_at": "2026-11-20T19:36:00+01:00",
+    "channel": "portal",
+    "wording": "I agree that Jekerdal Loodgieters receives my first name, phone number, address and the details of this report, only to fix this problem.",
+    "revoked_at": null
+  }
+]

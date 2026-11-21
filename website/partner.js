@@ -78,7 +78,7 @@
   const map = new maplibregl.Map({
     container: "map",
     style: window.CentrixMap.styleUrl,
-    center: [6.0858, 50.7752],
+    center: JOBS.length ? [JOBS[0].lng, JOBS[0].lat] : [6.0858, 50.7752],
     zoom: 14.5,
     attributionControl: { compact: true },
     dragRotate: false,
@@ -348,7 +348,7 @@
       ["Area", job.district],
       ["Floor", job.floor],
       ["Tenant", job.tenant],
-      ["Language", job.language && job.language !== "German" ? `${job.language} (your brief is in German)` : "German"],
+      ["Language", job.language && job.language !== (POLICY.briefLanguage || "German") ? `${job.language} (your brief is in ${POLICY.briefLanguage || "German"})` : (POLICY.briefLanguage || "German")],
       ["Access", job.access],
       ["Time slot", job.slot],
       ["Reported", job.reported]

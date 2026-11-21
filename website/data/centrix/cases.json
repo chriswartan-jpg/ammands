@@ -1,0 +1,1992 @@
+[
+  {
+    "case_id": "C-2026-0141",
+    "unit_id": "u_01_0",
+    "property_id": "prop_01",
+    "reported_by": "c_201",
+    "reported_at": "2026-09-08T07:40:00+02:00",
+    "channel": "voice",
+    "language": "nl",
+    "original_text": "Goedemorgen, de kraan in de keuken blijft druppelen, ook als hij helemaal dicht is.",
+    "summary": "Kitchen tap keeps dripping when closed",
+    "category": "plumbing",
+    "problem_type": "dripping_tap",
+    "urgency": "normal",
+    "status": "closed",
+    "follow_up_answers": [
+      {
+        "q": "Is it dripping or running?",
+        "a": "Dripping, about one drop a second"
+      },
+      {
+        "q": "Since when?",
+        "a": "A week"
+      }
+    ],
+    "photos": [],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_03",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0141",
+    "consent_id": "CON-2026-0141",
+    "cost_bearer": "landlord",
+    "cost_note": "Small repair, but paid by the landlord as goodwill (tenant 78, cannot do it himself).",
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": "Replaced the cartridge, tested",
+    "feedback": {
+      "rating": 5,
+      "comment": "Vriendelijke man, snel klaar.",
+      "given_at": "2026-09-11T14:00:00+02:00"
+    },
+    "follow_up_7d": {
+      "due_at": "2026-09-17T10:00:00+02:00",
+      "done_at": "2026-09-17T12:00:00+02:00",
+      "result": "Still fine"
+    },
+    "closed_at": "2026-09-17T12:00:00+02:00",
+    "timeline": [
+      {
+        "at": "2026-09-08T07:40:00+02:00",
+        "step": "reported",
+        "by": "c_201",
+        "note": "via voice"
+      },
+      {
+        "at": "2026-09-08T07:41:00+02:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / dripping_tap"
+      },
+      {
+        "at": "2026-09-08T07:44:00+02:00",
+        "step": "follow_ups_answered",
+        "by": "c_201"
+      },
+      {
+        "at": "2026-09-08T07:46:00+02:00",
+        "step": "consent_given",
+        "by": "c_201"
+      },
+      {
+        "at": "2026-09-08T09:40:00+02:00",
+        "step": "dispatched",
+        "by": "pm_01",
+        "note": "to Sint-Pieter Sanitair & Riool"
+      },
+      {
+        "at": "2026-09-08T10:40:00+02:00",
+        "step": "accepted",
+        "by": "p_03"
+      },
+      {
+        "at": "2026-09-08T10:45:00+02:00",
+        "step": "windows_proposed",
+        "by": "p_03",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-09-08T11:10:00+02:00",
+        "step": "slot_chosen",
+        "by": "c_201",
+        "note": "Thu 10 Sep 10:00"
+      },
+      {
+        "at": "2026-09-09T17:00:00+02:00",
+        "step": "reminder_sent",
+        "by": "centrix_ai"
+      },
+      {
+        "at": "2026-09-10T10:05:00+02:00",
+        "step": "on_the_way",
+        "by": "t_04",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-09-10T10:25:00+02:00",
+        "step": "work_started",
+        "by": "t_04"
+      },
+      {
+        "at": "2026-09-10T10:55:00+02:00",
+        "step": "work_done",
+        "by": "t_04",
+        "note": "Replaced the cartridge, tested"
+      },
+      {
+        "at": "2026-09-10T11:55:00+02:00",
+        "step": "tenant_confirmed",
+        "by": "c_201"
+      },
+      {
+        "at": "2026-09-11T12:00:00+02:00",
+        "step": "invoice_linked",
+        "by": "p_03",
+        "note": "€111.93 incl. VAT, billed to property_manager"
+      },
+      {
+        "at": "2026-09-11T14:00:00+02:00",
+        "step": "feedback_given",
+        "by": "c_201",
+        "note": "5/5"
+      },
+      {
+        "at": "2026-09-17T12:00:00+02:00",
+        "step": "closed",
+        "by": "centrix_ai",
+        "note": "Still fine"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0148",
+    "unit_id": "u_03_02",
+    "property_id": "prop_03",
+    "reported_by": "c_209",
+    "reported_at": "2026-09-19T21:15:00+02:00",
+    "channel": "phone",
+    "language": "nl",
+    "original_text": "Er komt water uit de muur achter de wc, het loopt de gang in.",
+    "summary": "Water coming from the wall behind the toilet, spreading into the hall",
+    "category": "plumbing",
+    "problem_type": "burst_pipe",
+    "urgency": "emergency",
+    "status": "closed",
+    "follow_up_answers": [
+      {
+        "q": "Is water still coming out right now?",
+        "a": "Yes"
+      },
+      {
+        "q": "Can you close the water tap in the meter cupboard?",
+        "a": "Daughter closed it"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0148/before_1.jpg",
+      "photos/C-2026-0148/before_2.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_01",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0148",
+    "consent_id": "CON-2026-0148",
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_02",
+    "review_reason": null,
+    "resolution": "Opened the wall, replaced 60 cm of pipe, pressure-tested, closed temporarily",
+    "feedback": {
+      "rating": 5,
+      "comment": "Midden in de nacht nog geholpen, top.",
+      "given_at": "2026-09-21T02:30:00+02:00"
+    },
+    "follow_up_7d": {
+      "due_at": "2026-09-26T22:30:00+02:00",
+      "done_at": "2026-09-27T00:30:00+02:00",
+      "result": "Dry, tiler finished the wall"
+    },
+    "closed_at": "2026-09-27T00:30:00+02:00",
+    "timeline": [
+      {
+        "at": "2026-09-19T21:15:00+02:00",
+        "step": "reported",
+        "by": "c_209",
+        "note": "via phone"
+      },
+      {
+        "at": "2026-09-19T21:16:00+02:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / burst_pipe"
+      },
+      {
+        "at": "2026-09-19T21:19:00+02:00",
+        "step": "follow_ups_answered",
+        "by": "c_209"
+      },
+      {
+        "at": "2026-09-19T21:19:00+02:00",
+        "step": "urgent_path",
+        "by": "centrix_ai",
+        "note": "Voice agent explained the water shut-off and alerted the manager on call"
+      },
+      {
+        "at": "2026-09-19T21:21:00+02:00",
+        "step": "consent_given",
+        "by": "c_209"
+      },
+      {
+        "at": "2026-09-19T21:25:00+02:00",
+        "step": "dispatched",
+        "by": "pm_02",
+        "note": "to Jekerdal Loodgieters"
+      },
+      {
+        "at": "2026-09-19T21:35:00+02:00",
+        "step": "accepted",
+        "by": "p_01"
+      },
+      {
+        "at": "2026-09-19T21:40:00+02:00",
+        "step": "windows_proposed",
+        "by": "p_01",
+        "note": "1 windows"
+      },
+      {
+        "at": "2026-09-19T22:05:00+02:00",
+        "step": "slot_chosen",
+        "by": "c_209",
+        "note": "Sat 19 Sep 22:30"
+      },
+      {
+        "at": "2026-09-19T22:35:00+02:00",
+        "step": "on_the_way",
+        "by": "t_01",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-09-19T22:55:00+02:00",
+        "step": "work_started",
+        "by": "t_01"
+      },
+      {
+        "at": "2026-09-20T00:55:00+02:00",
+        "step": "work_done",
+        "by": "t_01",
+        "note": "Opened the wall, replaced 60 cm of pipe, pressure-tested, closed temporarily"
+      },
+      {
+        "at": "2026-09-20T01:55:00+02:00",
+        "step": "tenant_confirmed",
+        "by": "c_209"
+      },
+      {
+        "at": "2026-09-21T00:30:00+02:00",
+        "step": "invoice_linked",
+        "by": "p_01",
+        "note": "€319.44 incl. VAT, billed to property_manager"
+      },
+      {
+        "at": "2026-09-21T02:30:00+02:00",
+        "step": "feedback_given",
+        "by": "c_209",
+        "note": "5/5"
+      },
+      {
+        "at": "2026-09-27T00:30:00+02:00",
+        "step": "closed",
+        "by": "centrix_ai",
+        "note": "Dry, tiler finished the wall"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0152",
+    "unit_id": "u_01_1",
+    "property_id": "prop_01",
+    "reported_by": "c_202",
+    "reported_at": "2026-09-29T18:05:00+02:00",
+    "channel": "portal",
+    "language": "en",
+    "original_text": "The shower drain is very slow, water stays about 3 cm high after a shower.",
+    "summary": "Shower drain very slow",
+    "category": "plumbing",
+    "problem_type": "blockage",
+    "urgency": "normal",
+    "status": "closed",
+    "follow_up_answers": [
+      {
+        "q": "Is the water not draining at all?",
+        "a": "It drains slowly"
+      },
+      {
+        "q": "One drain or several?",
+        "a": "Just the shower"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0152/before_1.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_03",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0152",
+    "consent_id": "CON-2026-0152",
+    "cost_bearer": "tenant",
+    "cost_note": "Small repair (Besluit kleine herstellingen). Tenant agreed to pay before booking.",
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": "Cleaned the trap and the branch pipe with a spiral",
+    "feedback": {
+      "rating": 4,
+      "comment": "Quick, but the slot was early.",
+      "given_at": "2026-10-02T12:00:00+02:00"
+    },
+    "follow_up_7d": {
+      "due_at": "2026-10-08T08:00:00+02:00",
+      "done_at": "2026-10-08T10:00:00+02:00",
+      "result": "Draining fine"
+    },
+    "closed_at": "2026-10-08T10:00:00+02:00",
+    "timeline": [
+      {
+        "at": "2026-09-29T18:05:00+02:00",
+        "step": "reported",
+        "by": "c_202",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-09-29T18:06:00+02:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / blockage"
+      },
+      {
+        "at": "2026-09-29T18:09:00+02:00",
+        "step": "follow_ups_answered",
+        "by": "c_202"
+      },
+      {
+        "at": "2026-09-29T18:11:00+02:00",
+        "step": "consent_given",
+        "by": "c_202"
+      },
+      {
+        "at": "2026-09-29T20:05:00+02:00",
+        "step": "dispatched",
+        "by": "pm_01",
+        "note": "to Sint-Pieter Sanitair & Riool"
+      },
+      {
+        "at": "2026-09-29T21:05:00+02:00",
+        "step": "accepted",
+        "by": "p_03"
+      },
+      {
+        "at": "2026-09-29T21:10:00+02:00",
+        "step": "windows_proposed",
+        "by": "p_03",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-09-29T21:35:00+02:00",
+        "step": "slot_chosen",
+        "by": "c_202",
+        "note": "Thu 01 Oct 08:00"
+      },
+      {
+        "at": "2026-09-30T17:00:00+02:00",
+        "step": "reminder_sent",
+        "by": "centrix_ai"
+      },
+      {
+        "at": "2026-10-01T08:05:00+02:00",
+        "step": "on_the_way",
+        "by": "t_04",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-10-01T08:25:00+02:00",
+        "step": "work_started",
+        "by": "t_04"
+      },
+      {
+        "at": "2026-10-01T09:10:00+02:00",
+        "step": "work_done",
+        "by": "t_04",
+        "note": "Cleaned the trap and the branch pipe with a spiral"
+      },
+      {
+        "at": "2026-10-01T10:10:00+02:00",
+        "step": "tenant_confirmed",
+        "by": "c_202"
+      },
+      {
+        "at": "2026-10-02T10:00:00+02:00",
+        "step": "invoice_linked",
+        "by": "p_03",
+        "note": "€99.82 incl. VAT, billed to tenant"
+      },
+      {
+        "at": "2026-10-02T12:00:00+02:00",
+        "step": "feedback_given",
+        "by": "c_202",
+        "note": "4/5"
+      },
+      {
+        "at": "2026-10-08T10:00:00+02:00",
+        "step": "closed",
+        "by": "centrix_ai",
+        "note": "Draining fine"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0157",
+    "unit_id": "u_02_2",
+    "property_id": "prop_02",
+    "reported_by": "c_206",
+    "reported_at": "2026-10-06T08:12:00+02:00",
+    "channel": "portal",
+    "language": "nl",
+    "original_text": "Er lekt water onder de gootsteen in de keuken, de bodem van het kastje is zacht.",
+    "summary": "Leak under the kitchen sink, cupboard floor soft",
+    "category": "plumbing",
+    "problem_type": "leak",
+    "urgency": "urgent",
+    "status": "closed",
+    "follow_up_answers": [
+      {
+        "q": "Is water still coming out right now?",
+        "a": "Only when I use the sink"
+      },
+      {
+        "q": "Is it reaching the floor or other rooms?",
+        "a": "I don't know"
+      },
+      {
+        "q": "Since when?",
+        "a": "A few days"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0157/before_1.jpg",
+      "photos/C-2026-0157/before_2.jpg"
+    ],
+    "linked_case_ids": [
+      "C-2026-0158"
+    ],
+    "assigned_partner_id": "p_01",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0157",
+    "consent_id": "CON-2026-0157",
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": "Replaced siphon and seals, dried the cupboard",
+    "feedback": {
+      "rating": 5,
+      "comment": "Zelfde dag geholpen!",
+      "given_at": "2026-10-07T18:00:00+02:00"
+    },
+    "follow_up_7d": {
+      "due_at": "2026-10-13T14:00:00+02:00",
+      "done_at": "2026-10-13T16:00:00+02:00",
+      "result": "Dry"
+    },
+    "closed_at": "2026-10-13T16:00:00+02:00",
+    "timeline": [
+      {
+        "at": "2026-10-06T08:12:00+02:00",
+        "step": "reported",
+        "by": "c_206",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-10-06T08:13:00+02:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / leak"
+      },
+      {
+        "at": "2026-10-06T08:16:00+02:00",
+        "step": "follow_ups_answered",
+        "by": "c_206"
+      },
+      {
+        "at": "2026-10-06T08:18:00+02:00",
+        "step": "consent_given",
+        "by": "c_206"
+      },
+      {
+        "at": "2026-10-06T08:32:00+02:00",
+        "step": "dispatched",
+        "by": "pm_01",
+        "note": "to Jekerdal Loodgieters"
+      },
+      {
+        "at": "2026-10-06T08:42:00+02:00",
+        "step": "accepted",
+        "by": "p_01"
+      },
+      {
+        "at": "2026-10-06T08:47:00+02:00",
+        "step": "windows_proposed",
+        "by": "p_01",
+        "note": "1 windows"
+      },
+      {
+        "at": "2026-10-06T09:12:00+02:00",
+        "step": "slot_chosen",
+        "by": "c_206",
+        "note": "Tue 06 Oct 14:00"
+      },
+      {
+        "at": "2026-10-06T14:05:00+02:00",
+        "step": "on_the_way",
+        "by": "t_02",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-10-06T14:25:00+02:00",
+        "step": "work_started",
+        "by": "t_02"
+      },
+      {
+        "at": "2026-10-06T15:25:00+02:00",
+        "step": "work_done",
+        "by": "t_02",
+        "note": "Replaced siphon and seals, dried the cupboard"
+      },
+      {
+        "at": "2026-10-06T16:25:00+02:00",
+        "step": "tenant_confirmed",
+        "by": "c_206"
+      },
+      {
+        "at": "2026-10-07T16:00:00+02:00",
+        "step": "invoice_linked",
+        "by": "p_01",
+        "note": "€159.72 incl. VAT, billed to property_manager"
+      },
+      {
+        "at": "2026-10-07T18:00:00+02:00",
+        "step": "feedback_given",
+        "by": "c_206",
+        "note": "5/5"
+      },
+      {
+        "at": "2026-10-13T16:00:00+02:00",
+        "step": "closed",
+        "by": "centrix_ai",
+        "note": "Dry"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0158",
+    "unit_id": "u_02_1",
+    "property_id": "prop_02",
+    "reported_by": "c_205",
+    "reported_at": "2026-10-06T19:30:00+02:00",
+    "channel": "email",
+    "language": "de",
+    "original_text": "Hallo, an der Küchendecke ist ein feuchter Fleck, ungefähr 30 cm groß.",
+    "summary": "Damp patch on the kitchen ceiling (flat below the leak in 2nd floor)",
+    "category": "plumbing",
+    "problem_type": "leak",
+    "urgency": "normal",
+    "status": "closed",
+    "follow_up_answers": [
+      {
+        "q": "Is it dripping?",
+        "a": "No, just a damp patch"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0158/before_1.jpg"
+    ],
+    "linked_case_ids": [
+      "C-2026-0157"
+    ],
+    "assigned_partner_id": "p_01",
+    "suggested_partner_id": null,
+    "job_id": null,
+    "consent_id": null,
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": "No visit needed; damp patch checked by the plumber from above on 6 Oct; painter booked by the manager",
+    "feedback": null,
+    "follow_up_7d": {
+      "due_at": "2026-10-13T19:30:00+02:00",
+      "done_at": "2026-10-13T21:30:00+02:00",
+      "result": "Ceiling dry, repainted"
+    },
+    "closed_at": "2026-10-13T21:30:00+02:00",
+    "timeline": [
+      {
+        "at": "2026-10-06T19:30:00+02:00",
+        "step": "reported",
+        "by": "c_205",
+        "note": "via email"
+      },
+      {
+        "at": "2026-10-06T19:31:00+02:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / leak"
+      },
+      {
+        "at": "2026-10-06T19:31:00+02:00",
+        "step": "linked_to_existing_case",
+        "by": "centrix_ai",
+        "note": "C-2026-0157"
+      },
+      {
+        "at": "2026-10-06T19:34:00+02:00",
+        "step": "follow_ups_answered",
+        "by": "c_205"
+      },
+      {
+        "at": "2026-10-13T21:30:00+02:00",
+        "step": "closed",
+        "by": "centrix_ai",
+        "note": "Ceiling dry, repainted"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0163",
+    "unit_id": "u_04_1",
+    "property_id": "prop_04",
+    "reported_by": "c_214",
+    "reported_at": "2026-10-14T15:20:00+02:00",
+    "channel": "portal",
+    "language": "pl",
+    "original_text": "Toaleta jest zatkana, woda się podnosi. To jedyna toaleta w mieszkaniu.",
+    "summary": "Toilet blocked, the only toilet in the flat",
+    "category": "plumbing",
+    "problem_type": "blockage",
+    "urgency": "urgent",
+    "status": "closed",
+    "follow_up_answers": [
+      {
+        "q": "Is the water rising when you flush?",
+        "a": "Yes"
+      },
+      {
+        "q": "Is it the only toilet?",
+        "a": "Yes"
+      }
+    ],
+    "photos": [],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_03",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0163",
+    "consent_id": "CON-2026-0163",
+    "cost_bearer": "tenant",
+    "cost_note": "Blockage caused by use (wet wipes). Tenant informed in Polish before booking and agreed.",
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": "Cleared with a drain machine, camera check OK",
+    "feedback": {
+      "rating": 4,
+      "comment": "Dziękuję, szybko.",
+      "given_at": "2026-10-15T21:00:00+02:00"
+    },
+    "follow_up_7d": {
+      "due_at": "2026-10-21T17:00:00+02:00",
+      "done_at": "2026-10-21T19:00:00+02:00",
+      "result": "No problems"
+    },
+    "closed_at": "2026-10-21T19:00:00+02:00",
+    "timeline": [
+      {
+        "at": "2026-10-14T15:20:00+02:00",
+        "step": "reported",
+        "by": "c_214",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-10-14T15:21:00+02:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / blockage"
+      },
+      {
+        "at": "2026-10-14T15:24:00+02:00",
+        "step": "follow_ups_answered",
+        "by": "c_214"
+      },
+      {
+        "at": "2026-10-14T15:26:00+02:00",
+        "step": "consent_given",
+        "by": "c_214"
+      },
+      {
+        "at": "2026-10-14T15:40:00+02:00",
+        "step": "dispatched",
+        "by": "pm_01",
+        "note": "to Sint-Pieter Sanitair & Riool"
+      },
+      {
+        "at": "2026-10-14T15:50:00+02:00",
+        "step": "accepted",
+        "by": "p_03"
+      },
+      {
+        "at": "2026-10-14T15:55:00+02:00",
+        "step": "windows_proposed",
+        "by": "p_03",
+        "note": "1 windows"
+      },
+      {
+        "at": "2026-10-14T16:20:00+02:00",
+        "step": "slot_chosen",
+        "by": "c_214",
+        "note": "Wed 14 Oct 17:00"
+      },
+      {
+        "at": "2026-10-14T17:05:00+02:00",
+        "step": "on_the_way",
+        "by": "t_04",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-10-14T17:25:00+02:00",
+        "step": "work_started",
+        "by": "t_04"
+      },
+      {
+        "at": "2026-10-14T18:25:00+02:00",
+        "step": "work_done",
+        "by": "t_04",
+        "note": "Cleared with a drain machine, camera check OK"
+      },
+      {
+        "at": "2026-10-14T19:25:00+02:00",
+        "step": "tenant_confirmed",
+        "by": "c_214"
+      },
+      {
+        "at": "2026-10-15T19:00:00+02:00",
+        "step": "invoice_linked",
+        "by": "p_03",
+        "note": "€117.37 incl. VAT, billed to tenant"
+      },
+      {
+        "at": "2026-10-15T21:00:00+02:00",
+        "step": "feedback_given",
+        "by": "c_214",
+        "note": "4/5"
+      },
+      {
+        "at": "2026-10-21T19:00:00+02:00",
+        "step": "closed",
+        "by": "centrix_ai",
+        "note": "No problems"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0170",
+    "unit_id": "u_05_2",
+    "property_id": "prop_05",
+    "reported_by": "c_217",
+    "reported_at": "2026-10-26T07:55:00+01:00",
+    "channel": "phone",
+    "language": "nl",
+    "original_text": "Ik heb geen warm water meer, de geiser slaat niet aan.",
+    "summary": "No hot water, old gas geyser won't ignite (tenant 84, lives alone)",
+    "category": "plumbing",
+    "problem_type": "no_hot_water",
+    "urgency": "urgent",
+    "status": "closed",
+    "follow_up_answers": [
+      {
+        "q": "Does the geyser show a flame or light?",
+        "a": "No"
+      },
+      {
+        "q": "Do you have heating?",
+        "a": "Yes, gas stove in the living room"
+      }
+    ],
+    "photos": [],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_02",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0170",
+    "consent_id": "CON-2026-0170",
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_02",
+    "review_reason": null,
+    "resolution": "Replaced the geyser with a combi boiler; also heats the flat from now on",
+    "feedback": {
+      "rating": 5,
+      "comment": "Eindelijk warm water uit de kraan, en nu ook verwarming.",
+      "given_at": "2026-10-28T13:00:00+01:00"
+    },
+    "follow_up_7d": {
+      "due_at": "2026-11-03T09:00:00+01:00",
+      "done_at": "2026-11-03T11:00:00+01:00",
+      "result": "Working, tenant happy"
+    },
+    "closed_at": "2026-11-03T11:00:00+01:00",
+    "timeline": [
+      {
+        "at": "2026-10-26T07:55:00+01:00",
+        "step": "reported",
+        "by": "c_217",
+        "note": "via phone"
+      },
+      {
+        "at": "2026-10-26T07:56:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / no_hot_water"
+      },
+      {
+        "at": "2026-10-26T07:59:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_217"
+      },
+      {
+        "at": "2026-10-26T08:01:00+01:00",
+        "step": "consent_given",
+        "by": "c_217"
+      },
+      {
+        "at": "2026-10-26T08:15:00+01:00",
+        "step": "dispatched",
+        "by": "pm_02",
+        "note": "to Maasland Installatietechniek B.V."
+      },
+      {
+        "at": "2026-10-26T08:25:00+01:00",
+        "step": "accepted",
+        "by": "p_02"
+      },
+      {
+        "at": "2026-10-26T08:30:00+01:00",
+        "step": "windows_proposed",
+        "by": "p_02",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-10-26T08:55:00+01:00",
+        "step": "slot_chosen",
+        "by": "c_217",
+        "note": "Tue 27 Oct 09:00"
+      },
+      {
+        "at": "2026-10-26T17:00:00+01:00",
+        "step": "reminder_sent",
+        "by": "centrix_ai"
+      },
+      {
+        "at": "2026-10-27T09:05:00+01:00",
+        "step": "on_the_way",
+        "by": "t_03",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-10-27T09:25:00+01:00",
+        "step": "work_started",
+        "by": "t_03"
+      },
+      {
+        "at": "2026-10-27T10:05:00+01:00",
+        "step": "quote_submitted",
+        "by": "t_03",
+        "note": "€2,128 excl. VAT"
+      },
+      {
+        "at": "2026-10-27T15:00:00+01:00",
+        "step": "work_done",
+        "by": "t_03",
+        "note": "Replaced the geyser with a combi boiler; also heats the flat from now on"
+      },
+      {
+        "at": "2026-10-27T16:00:00+01:00",
+        "step": "tenant_confirmed",
+        "by": "c_217"
+      },
+      {
+        "at": "2026-10-28T11:00:00+01:00",
+        "step": "invoice_linked",
+        "by": "p_02",
+        "note": "€2574.88 incl. VAT, billed to property_manager"
+      },
+      {
+        "at": "2026-10-28T13:00:00+01:00",
+        "step": "feedback_given",
+        "by": "c_217",
+        "note": "5/5"
+      },
+      {
+        "at": "2026-11-03T11:00:00+01:00",
+        "step": "closed",
+        "by": "centrix_ai",
+        "note": "Working, tenant happy"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0174",
+    "unit_id": "u_04_2",
+    "property_id": "prop_04",
+    "reported_by": "c_215",
+    "reported_at": "2026-11-12T12:10:00+01:00",
+    "channel": "whatsapp",
+    "language": "nl",
+    "original_text": "Kraan in de badkamer lekt bij de knop, druppelt de hele tijd.",
+    "summary": "Bathroom tap leaks at the handle",
+    "category": "plumbing",
+    "problem_type": "dripping_tap",
+    "urgency": "normal",
+    "status": "follow_up",
+    "follow_up_answers": [
+      {
+        "q": "Is it dripping or running?",
+        "a": "Dripping"
+      },
+      {
+        "q": "Since when?",
+        "a": "Two weeks"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0174/before_1.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_03",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0174",
+    "consent_id": "CON-2026-0174",
+    "cost_bearer": "tenant",
+    "cost_note": "Small repair (tap washer). Tenant chose a plumber over doing it himself.",
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": "Replaced washer and O-rings",
+    "feedback": {
+      "rating": 4,
+      "comment": "Prima",
+      "given_at": "2026-11-17T17:00:00+01:00"
+    },
+    "follow_up_7d": {
+      "due_at": "2026-11-23T13:00:00+01:00",
+      "done_at": null,
+      "result": null
+    },
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-12T12:10:00+01:00",
+        "step": "reported",
+        "by": "c_215",
+        "note": "via whatsapp"
+      },
+      {
+        "at": "2026-11-12T12:11:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / dripping_tap"
+      },
+      {
+        "at": "2026-11-12T12:14:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_215"
+      },
+      {
+        "at": "2026-11-12T12:16:00+01:00",
+        "step": "consent_given",
+        "by": "c_215"
+      },
+      {
+        "at": "2026-11-12T14:10:00+01:00",
+        "step": "dispatched",
+        "by": "pm_01",
+        "note": "to Sint-Pieter Sanitair & Riool"
+      },
+      {
+        "at": "2026-11-12T15:10:00+01:00",
+        "step": "accepted",
+        "by": "p_03"
+      },
+      {
+        "at": "2026-11-12T15:15:00+01:00",
+        "step": "windows_proposed",
+        "by": "p_03",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-11-12T15:40:00+01:00",
+        "step": "slot_chosen",
+        "by": "c_215",
+        "note": "Mon 16 Nov 13:00"
+      },
+      {
+        "at": "2026-11-15T17:00:00+01:00",
+        "step": "reminder_sent",
+        "by": "centrix_ai"
+      },
+      {
+        "at": "2026-11-16T13:05:00+01:00",
+        "step": "on_the_way",
+        "by": "t_04",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-11-16T13:25:00+01:00",
+        "step": "work_started",
+        "by": "t_04"
+      },
+      {
+        "at": "2026-11-16T13:55:00+01:00",
+        "step": "work_done",
+        "by": "t_04",
+        "note": "Replaced washer and O-rings"
+      },
+      {
+        "at": "2026-11-16T14:55:00+01:00",
+        "step": "tenant_confirmed",
+        "by": "c_215"
+      },
+      {
+        "at": "2026-11-17T15:00:00+01:00",
+        "step": "invoice_linked",
+        "by": "p_03",
+        "note": "€91.36 incl. VAT, billed to tenant"
+      },
+      {
+        "at": "2026-11-17T17:00:00+01:00",
+        "step": "feedback_given",
+        "by": "c_215",
+        "note": "4/5"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0179",
+    "unit_id": "u_03_01",
+    "property_id": "prop_03",
+    "reported_by": "c_208",
+    "reported_at": "2026-11-14T18:20:00+01:00",
+    "channel": "portal",
+    "language": "nl",
+    "original_text": "Gootsteen in de keuken loopt helemaal niet meer door.",
+    "summary": "Kitchen sink not draining at all",
+    "category": "plumbing",
+    "problem_type": "blockage",
+    "urgency": "urgent",
+    "status": "awaiting_confirmation",
+    "follow_up_answers": [
+      {
+        "q": "Is the water not draining at all?",
+        "a": "Nothing drains"
+      },
+      {
+        "q": "One drain or several?",
+        "a": "Just the kitchen"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0179/before_1.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_03",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0179",
+    "consent_id": "CON-2026-0179",
+    "cost_bearer": "tenant",
+    "cost_note": "Small repair (grease blockage). Tenant agreed before booking.",
+    "manager_staff_id": "pm_02",
+    "review_reason": null,
+    "resolution": "Cleared the drain, advised not to pour fat down the sink",
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-14T18:20:00+01:00",
+        "step": "reported",
+        "by": "c_208",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-11-14T18:21:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / blockage"
+      },
+      {
+        "at": "2026-11-14T18:24:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_208"
+      },
+      {
+        "at": "2026-11-14T18:26:00+01:00",
+        "step": "consent_given",
+        "by": "c_208"
+      },
+      {
+        "at": "2026-11-14T18:40:00+01:00",
+        "step": "dispatched",
+        "by": "pm_02",
+        "note": "to Sint-Pieter Sanitair & Riool"
+      },
+      {
+        "at": "2026-11-14T18:50:00+01:00",
+        "step": "accepted",
+        "by": "p_03"
+      },
+      {
+        "at": "2026-11-14T18:55:00+01:00",
+        "step": "windows_proposed",
+        "by": "p_03",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-11-14T19:20:00+01:00",
+        "step": "slot_chosen",
+        "by": "c_208",
+        "note": "Fri 20 Nov 13:00"
+      },
+      {
+        "at": "2026-11-19T17:00:00+01:00",
+        "step": "reminder_sent",
+        "by": "centrix_ai"
+      },
+      {
+        "at": "2026-11-20T13:05:00+01:00",
+        "step": "on_the_way",
+        "by": "t_04",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-11-20T13:25:00+01:00",
+        "step": "work_started",
+        "by": "t_04"
+      },
+      {
+        "at": "2026-11-20T14:25:00+01:00",
+        "step": "work_done",
+        "by": "t_04",
+        "note": "Cleared the drain, advised not to pour fat down the sink"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0180",
+    "unit_id": "u_03_12",
+    "property_id": "prop_03",
+    "reported_by": "c_211",
+    "reported_at": "2026-11-15T19:00:00+01:00",
+    "channel": "portal",
+    "language": "nl",
+    "original_text": "Twee radiatoren in de slaapkamers worden niet warm.",
+    "summary": "Two bedroom radiators stay cold (block heating)",
+    "category": "heating",
+    "problem_type": "radiator",
+    "urgency": "normal",
+    "status": "manager_review",
+    "follow_up_answers": [
+      {
+        "q": "Have you bled the radiators?",
+        "a": "No, don't know how"
+      }
+    ],
+    "photos": [],
+    "linked_case_ids": [],
+    "assigned_partner_id": null,
+    "suggested_partner_id": "p_02",
+    "job_id": null,
+    "consent_id": null,
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_02",
+    "review_reason": "Not plumbing: block heating falls under the boiler-room service contract (ct_ block_heating). Manager checks with Maasland first.",
+    "resolution": null,
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-15T19:00:00+01:00",
+        "step": "reported",
+        "by": "c_211",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-11-15T19:01:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "heating / radiator (unsure, sent to manager)"
+      },
+      {
+        "at": "2026-11-15T19:01:00+01:00",
+        "step": "sent_to_manager_review",
+        "by": "centrix_ai",
+        "note": "Not plumbing: block heating falls under the boiler-room service contract (ct_ block_heating). Manager checks with Maasland first."
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0177",
+    "unit_id": "u_01_3",
+    "property_id": "prop_01",
+    "reported_by": "c_204",
+    "reported_at": "2026-11-15T22:40:00+01:00",
+    "channel": "portal",
+    "language": "en",
+    "original_text": "The toilet keeps running after flushing, I can hear it all night.",
+    "summary": "Toilet keeps running after flushing",
+    "category": "plumbing",
+    "problem_type": "running_toilet",
+    "urgency": "normal",
+    "status": "invoiced",
+    "follow_up_answers": [
+      {
+        "q": "Does it stop by itself?",
+        "a": "No"
+      },
+      {
+        "q": "Is water running into the bowl?",
+        "a": "Yes, a thin stream"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0177/before_1.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_01",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0177",
+    "consent_id": "CON-2026-0177",
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": "Replaced the fill valve, adjusted the float",
+    "feedback": {
+      "rating": 5,
+      "comment": "Fixed in 30 minutes, thanks!",
+      "given_at": "2026-11-19T15:00:00+01:00"
+    },
+    "follow_up_7d": {
+      "due_at": "2026-11-25T11:00:00+01:00",
+      "done_at": null,
+      "result": null
+    },
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-15T22:40:00+01:00",
+        "step": "reported",
+        "by": "c_204",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-11-15T22:41:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / running_toilet"
+      },
+      {
+        "at": "2026-11-15T22:44:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_204"
+      },
+      {
+        "at": "2026-11-15T22:46:00+01:00",
+        "step": "consent_given",
+        "by": "c_204"
+      },
+      {
+        "at": "2026-11-16T00:40:00+01:00",
+        "step": "dispatched",
+        "by": "pm_01",
+        "note": "to Jekerdal Loodgieters"
+      },
+      {
+        "at": "2026-11-16T01:40:00+01:00",
+        "step": "accepted",
+        "by": "p_01"
+      },
+      {
+        "at": "2026-11-16T01:45:00+01:00",
+        "step": "windows_proposed",
+        "by": "p_01",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-11-16T02:10:00+01:00",
+        "step": "slot_chosen",
+        "by": "c_204",
+        "note": "Wed 18 Nov 11:00"
+      },
+      {
+        "at": "2026-11-17T17:00:00+01:00",
+        "step": "reminder_sent",
+        "by": "centrix_ai"
+      },
+      {
+        "at": "2026-11-18T11:05:00+01:00",
+        "step": "on_the_way",
+        "by": "t_01",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-11-18T11:25:00+01:00",
+        "step": "work_started",
+        "by": "t_01"
+      },
+      {
+        "at": "2026-11-18T12:10:00+01:00",
+        "step": "work_done",
+        "by": "t_01",
+        "note": "Replaced the fill valve, adjusted the float"
+      },
+      {
+        "at": "2026-11-18T13:10:00+01:00",
+        "step": "tenant_confirmed",
+        "by": "c_204"
+      },
+      {
+        "at": "2026-11-19T13:00:00+01:00",
+        "step": "invoice_linked",
+        "by": "p_01",
+        "note": "€149.43 incl. VAT, billed to property_manager"
+      },
+      {
+        "at": "2026-11-19T15:00:00+01:00",
+        "step": "feedback_given",
+        "by": "c_204",
+        "note": "5/5"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0181",
+    "unit_id": "u_04_0",
+    "property_id": "prop_04",
+    "reported_by": "c_213",
+    "reported_at": "2026-11-16T08:45:00+01:00",
+    "channel": "email",
+    "language": "nl",
+    "original_text": "Het water uit de kraan is soms bruin en de druk is laag, vooral 's ochtends.",
+    "summary": "Brown water and low pressure in the mornings (1932 building, lead risers)",
+    "category": "plumbing",
+    "problem_type": "low_pressure",
+    "urgency": "normal",
+    "status": "quote_approval",
+    "follow_up_answers": [
+      {
+        "q": "All taps or one?",
+        "a": "All taps"
+      },
+      {
+        "q": "Does it clear after running?",
+        "a": "After a minute"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0181/before_1.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_01",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0181",
+    "consent_id": "CON-2026-0181",
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": null,
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-16T08:45:00+01:00",
+        "step": "reported",
+        "by": "c_213",
+        "note": "via email"
+      },
+      {
+        "at": "2026-11-16T08:46:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / low_pressure"
+      },
+      {
+        "at": "2026-11-16T08:49:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_213"
+      },
+      {
+        "at": "2026-11-16T08:51:00+01:00",
+        "step": "consent_given",
+        "by": "c_213"
+      },
+      {
+        "at": "2026-11-16T10:45:00+01:00",
+        "step": "dispatched",
+        "by": "pm_01",
+        "note": "to Jekerdal Loodgieters"
+      },
+      {
+        "at": "2026-11-16T11:45:00+01:00",
+        "step": "accepted",
+        "by": "p_01"
+      },
+      {
+        "at": "2026-11-16T11:50:00+01:00",
+        "step": "windows_proposed",
+        "by": "p_01",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-11-16T12:15:00+01:00",
+        "step": "slot_chosen",
+        "by": "c_213",
+        "note": "Fri 20 Nov 08:00"
+      },
+      {
+        "at": "2026-11-19T17:00:00+01:00",
+        "step": "reminder_sent",
+        "by": "centrix_ai"
+      },
+      {
+        "at": "2026-11-20T08:05:00+01:00",
+        "step": "on_the_way",
+        "by": "t_02",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-11-20T08:25:00+01:00",
+        "step": "work_started",
+        "by": "t_02"
+      },
+      {
+        "at": "2026-11-20T09:05:00+01:00",
+        "step": "quote_submitted",
+        "by": "t_02",
+        "note": "€3,850 excl. VAT"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0182",
+    "unit_id": "u_06_2",
+    "property_id": "prop_06",
+    "reported_by": "c_223",
+    "reported_at": "2026-11-17T09:10:00+01:00",
+    "channel": "portal",
+    "language": "en",
+    "original_text": "Two sockets in the living room stopped working, the rest is fine.",
+    "summary": "Two living-room sockets dead",
+    "category": "electrical",
+    "problem_type": "socket",
+    "urgency": "normal",
+    "status": "manager_review",
+    "follow_up_answers": [],
+    "photos": [],
+    "linked_case_ids": [],
+    "assigned_partner_id": null,
+    "suggested_partner_id": "p_04",
+    "job_id": null,
+    "consent_id": null,
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_02",
+    "review_reason": "Not plumbing. Routed to the manager; electrician partner Wyck Elektro suggested.",
+    "resolution": null,
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-17T09:10:00+01:00",
+        "step": "reported",
+        "by": "c_223",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-11-17T09:11:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "electrical / socket (unsure, sent to manager)"
+      },
+      {
+        "at": "2026-11-17T09:11:00+01:00",
+        "step": "sent_to_manager_review",
+        "by": "centrix_ai",
+        "note": "Not plumbing. Routed to the manager; electrician partner Wyck Elektro suggested."
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0183",
+    "unit_id": "u_05_1",
+    "property_id": "prop_05",
+    "reported_by": "c_216",
+    "reported_at": "2026-11-18T16:05:00+01:00",
+    "channel": "voice",
+    "language": "tr",
+    "original_text": "Çamaşır makinesinin musluğundan su sızıyor, yer ıslak.",
+    "summary": "Washing machine tap leaking, floor wet",
+    "category": "plumbing",
+    "problem_type": "leak",
+    "urgency": "urgent",
+    "status": "in_progress",
+    "follow_up_answers": [
+      {
+        "q": "Is water still coming out right now?",
+        "a": "Only a little, I closed the tap"
+      },
+      {
+        "q": "Is it reaching other rooms?",
+        "a": "No"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0183/before_1.jpg",
+      "photos/C-2026-0183/before_2.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_01",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0183",
+    "consent_id": "CON-2026-0183",
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_02",
+    "review_reason": null,
+    "resolution": null,
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-18T16:05:00+01:00",
+        "step": "reported",
+        "by": "c_216",
+        "note": "via voice"
+      },
+      {
+        "at": "2026-11-18T16:06:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / leak"
+      },
+      {
+        "at": "2026-11-18T16:09:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_216"
+      },
+      {
+        "at": "2026-11-18T16:11:00+01:00",
+        "step": "consent_given",
+        "by": "c_216"
+      },
+      {
+        "at": "2026-11-18T16:25:00+01:00",
+        "step": "dispatched",
+        "by": "pm_02",
+        "note": "to Jekerdal Loodgieters"
+      },
+      {
+        "at": "2026-11-18T16:35:00+01:00",
+        "step": "accepted",
+        "by": "p_01"
+      },
+      {
+        "at": "2026-11-18T16:40:00+01:00",
+        "step": "windows_proposed",
+        "by": "p_01",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-11-18T17:05:00+01:00",
+        "step": "slot_chosen",
+        "by": "c_216",
+        "note": "Sat 21 Nov 08:00"
+      },
+      {
+        "at": "2026-11-20T17:00:00+01:00",
+        "step": "reminder_sent",
+        "by": "centrix_ai"
+      },
+      {
+        "at": "2026-11-21T08:05:00+01:00",
+        "step": "on_the_way",
+        "by": "t_01",
+        "note": "ETA 20 min"
+      },
+      {
+        "at": "2026-11-21T08:25:00+01:00",
+        "step": "work_started",
+        "by": "t_01"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0184",
+    "unit_id": "u_02_3",
+    "property_id": "prop_02",
+    "reported_by": "c_207",
+    "reported_at": "2026-11-19T10:30:00+01:00",
+    "channel": "whatsapp",
+    "language": "en",
+    "original_text": "There's a sewer smell in the bathroom, especially in the morning.",
+    "summary": "Sewer smell in the bathroom",
+    "category": "plumbing",
+    "problem_type": "sewer_smell",
+    "urgency": "normal",
+    "status": "scheduled",
+    "follow_up_answers": [
+      {
+        "q": "Where is it strongest?",
+        "a": "Near the shower drain"
+      },
+      {
+        "q": "Since when?",
+        "a": "About a week"
+      }
+    ],
+    "photos": [],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_03",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0184",
+    "consent_id": "CON-2026-0184",
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": null,
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-19T10:30:00+01:00",
+        "step": "reported",
+        "by": "c_207",
+        "note": "via whatsapp"
+      },
+      {
+        "at": "2026-11-19T10:31:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / sewer_smell"
+      },
+      {
+        "at": "2026-11-19T10:34:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_207"
+      },
+      {
+        "at": "2026-11-19T10:36:00+01:00",
+        "step": "consent_given",
+        "by": "c_207"
+      },
+      {
+        "at": "2026-11-19T12:30:00+01:00",
+        "step": "dispatched",
+        "by": "pm_01",
+        "note": "to Sint-Pieter Sanitair & Riool"
+      },
+      {
+        "at": "2026-11-19T13:30:00+01:00",
+        "step": "accepted",
+        "by": "p_03"
+      },
+      {
+        "at": "2026-11-19T13:35:00+01:00",
+        "step": "windows_proposed",
+        "by": "p_03",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-11-19T14:00:00+01:00",
+        "step": "slot_chosen",
+        "by": "c_207",
+        "note": "Tue 24 Nov 10:00"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0185",
+    "unit_id": "u_05_4",
+    "property_id": "prop_05",
+    "reported_by": "c_219",
+    "reported_at": "2026-11-19T20:50:00+01:00",
+    "channel": "portal",
+    "language": "de",
+    "original_text": "Das Waschbecken im Bad läuft sehr langsam ab.",
+    "summary": "Bathroom washbasin drains slowly",
+    "category": "plumbing",
+    "problem_type": "blockage",
+    "urgency": "normal",
+    "status": "scheduled",
+    "follow_up_answers": [
+      {
+        "q": "Is the water not draining at all?",
+        "a": "It drains slowly"
+      },
+      {
+        "q": "One drain or several?",
+        "a": "Just the washbasin"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0185/before_1.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_03",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0185",
+    "consent_id": "CON-2026-0185",
+    "cost_bearer": "tenant",
+    "cost_note": "Small repair. Tenant told in German she pays the €39 call-out + labour, and agreed.",
+    "manager_staff_id": "pm_02",
+    "review_reason": null,
+    "resolution": null,
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-19T20:50:00+01:00",
+        "step": "reported",
+        "by": "c_219",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-11-19T20:51:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / blockage"
+      },
+      {
+        "at": "2026-11-19T20:54:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_219"
+      },
+      {
+        "at": "2026-11-19T20:56:00+01:00",
+        "step": "consent_given",
+        "by": "c_219"
+      },
+      {
+        "at": "2026-11-19T22:50:00+01:00",
+        "step": "dispatched",
+        "by": "pm_02",
+        "note": "to Sint-Pieter Sanitair & Riool"
+      },
+      {
+        "at": "2026-11-19T23:50:00+01:00",
+        "step": "accepted",
+        "by": "p_03"
+      },
+      {
+        "at": "2026-11-19T23:55:00+01:00",
+        "step": "windows_proposed",
+        "by": "p_03",
+        "note": "3 windows"
+      },
+      {
+        "at": "2026-11-20T00:20:00+01:00",
+        "step": "slot_chosen",
+        "by": "c_219",
+        "note": "Wed 25 Nov 13:00"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0186",
+    "unit_id": "u_01_2",
+    "property_id": "prop_01",
+    "reported_by": "c_203",
+    "reported_at": "2026-11-20T07:15:00+01:00",
+    "channel": "whatsapp",
+    "language": "nl",
+    "original_text": "Geen warm water sinds vanochtend, ketel geeft F28.",
+    "summary": "No hot water since this morning, boiler shows error F28",
+    "category": "plumbing",
+    "problem_type": "no_hot_water",
+    "urgency": "urgent",
+    "status": "scheduling",
+    "follow_up_answers": [
+      {
+        "q": "Does the boiler show an error code?",
+        "a": "F28"
+      },
+      {
+        "q": "Do you have heating?",
+        "a": "No"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0186/before_1.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_02",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0186",
+    "consent_id": "CON-2026-0186",
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_01",
+    "review_reason": null,
+    "resolution": null,
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-20T07:15:00+01:00",
+        "step": "reported",
+        "by": "c_203",
+        "note": "via whatsapp"
+      },
+      {
+        "at": "2026-11-20T07:16:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / no_hot_water"
+      },
+      {
+        "at": "2026-11-20T07:19:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_203"
+      },
+      {
+        "at": "2026-11-20T07:21:00+01:00",
+        "step": "consent_given",
+        "by": "c_203"
+      },
+      {
+        "at": "2026-11-20T07:35:00+01:00",
+        "step": "dispatched",
+        "by": "pm_01",
+        "note": "to Maasland Installatietechniek B.V."
+      },
+      {
+        "at": "2026-11-20T07:45:00+01:00",
+        "step": "accepted",
+        "by": "p_02"
+      },
+      {
+        "at": "2026-11-20T07:50:00+01:00",
+        "step": "windows_proposed",
+        "by": "p_02",
+        "note": "3 windows"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0187",
+    "unit_id": "u_05_3",
+    "property_id": "prop_05",
+    "reported_by": "c_218",
+    "reported_at": "2026-11-20T19:30:00+01:00",
+    "channel": "portal",
+    "language": "nl",
+    "original_text": "De douchemengkraan lekt aan de onderkant, er staat steeds een plasje.",
+    "summary": "Shower mixer leaks at the bottom",
+    "category": "plumbing",
+    "problem_type": "leak",
+    "urgency": "normal",
+    "status": "dispatched",
+    "follow_up_answers": [
+      {
+        "q": "Is water still coming out right now?",
+        "a": "Only when the shower is on"
+      },
+      {
+        "q": "Since when?",
+        "a": "A few days"
+      }
+    ],
+    "photos": [
+      "photos/C-2026-0187/before_1.jpg"
+    ],
+    "linked_case_ids": [],
+    "assigned_partner_id": "p_01",
+    "suggested_partner_id": null,
+    "job_id": "J-2026-0187",
+    "consent_id": "CON-2026-0187",
+    "cost_bearer": "landlord",
+    "cost_note": null,
+    "manager_staff_id": "pm_02",
+    "review_reason": null,
+    "resolution": null,
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-20T19:30:00+01:00",
+        "step": "reported",
+        "by": "c_218",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-11-20T19:31:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / leak"
+      },
+      {
+        "at": "2026-11-20T19:34:00+01:00",
+        "step": "follow_ups_answered",
+        "by": "c_218"
+      },
+      {
+        "at": "2026-11-20T19:36:00+01:00",
+        "step": "consent_given",
+        "by": "c_218"
+      },
+      {
+        "at": "2026-11-20T21:30:00+01:00",
+        "step": "dispatched",
+        "by": "pm_02",
+        "note": "to Jekerdal Loodgieters"
+      }
+    ]
+  },
+  {
+    "case_id": "C-2026-0188",
+    "unit_id": "u_06_1",
+    "property_id": "prop_06",
+    "reported_by": "c_222",
+    "reported_at": "2026-11-21T08:40:00+01:00",
+    "channel": "portal",
+    "language": "nl",
+    "original_text": "Onder de vaatwasser komt water vandaan.",
+    "summary": "Water coming from under the dishwasher",
+    "category": "plumbing",
+    "problem_type": "leak",
+    "urgency": null,
+    "status": "new",
+    "follow_up_answers": [],
+    "photos": [],
+    "linked_case_ids": [],
+    "assigned_partner_id": null,
+    "suggested_partner_id": null,
+    "job_id": null,
+    "consent_id": null,
+    "cost_bearer": null,
+    "cost_note": null,
+    "manager_staff_id": "pm_02",
+    "review_reason": null,
+    "resolution": null,
+    "feedback": null,
+    "follow_up_7d": null,
+    "closed_at": null,
+    "timeline": [
+      {
+        "at": "2026-11-21T08:40:00+01:00",
+        "step": "reported",
+        "by": "c_222",
+        "note": "via portal"
+      },
+      {
+        "at": "2026-11-21T08:41:00+01:00",
+        "step": "classified",
+        "by": "centrix_ai",
+        "note": "plumbing / leak"
+      }
+    ]
+  }
+]
