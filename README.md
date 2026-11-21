@@ -13,6 +13,58 @@ We plug in **one partner, a plumber**, and take a report all the way to a finish
 
 The setup is generic, so other partners (internet, energy, heating, insurance) can plug in the same way later.
 
+![The centrix landing page with the globe](docs/screenshots/landing.jpg)
+
+## A look at the app
+
+### Tenant portal: report a problem by talking
+
+The tenant just describes the problem, by typing or by voice. Tap the microphone and speak: the recording **stops by itself when you pause**, and ElevenLabs turns it into text **in the message field**, so you can check it before you send it.
+
+| Listening | Your words, ready to send |
+|---|---|
+| ![The microphone is listening: "Listening… stops when you pause"](docs/screenshots/tenant-listening.jpg) | ![The spoken report appears in the message field](docs/screenshots/tenant-dictated.jpg) |
+
+### Answer the questions by voice
+
+centrix asks up to three short questions. Each has quick-reply buttons, and you can **say the answer instead of tapping**. "It started a couple of days ago" presses **A few days**, "yeah" presses the Yes button, and so on.
+
+| "Since when?" | Answered by voice |
+|---|---|
+| ![The Since when question with Today, A few days and Longer](docs/screenshots/tenant-since-when.jpg) | ![The spoken answer pressed A few days](docs/screenshots/tenant-answered-by-voice.jpg) |
+
+What you can say for each kind of question:
+
+| Question | Button | You can say, for example |
+|---|---|---|
+| Since when? | **Today** | "today", "this morning", "tonight", "a few hours ago", "it just started", "vandaag", "heute" |
+| | **A few days** | "a couple of days", "three days", "since yesterday", "since Monday", "last night", "een paar dagen", "gestern" |
+| | **Longer** | "longer", "about two weeks", "more than a week", "10 days", "for months", "quite a while", "al weken" |
+| Yes / no | **Yes …** | "yes", "yeah", "yep", "sure", "correct", "ja", "klopt" |
+| | **No …** | "no", "nope", "nah", "not yet", "nee", "nein" |
+| Rating | Great / Good / OK / Poor | the word itself, e.g. "it was good" |
+| Anything else | the button's text | e.g. "Skip", "None of these fit", "I need another time" |
+
+Unclear answers ("I don't know") press nothing: they stay in the message field and go to the assistant as a normal message.
+
+### Job brief and consent
+
+Before anything is shared, the tenant sees exactly what the plumber gets and what is never shared, picks how the plumber gets in, and agrees.
+
+![The job brief with what is shared, what is never shared, and Agree and send](docs/screenshots/tenant-brief.jpg)
+
+### Partner portal: jobs on a map
+
+The plumber sees their jobs on a map of Maastricht, opens one to read the brief, and follows the case workflow from accepting the job to the invoice.
+
+![The partner portal with the jobs list, the map and the job details](docs/screenshots/partner-job.jpg)
+
+### Login
+
+Tenants and partners log in on the same page.
+
+![The login page with the Tenant and Partner choice](docs/screenshots/login.jpg)
+
 ## What's in this repo
 
 | Path | What it is |
@@ -29,10 +81,10 @@ The setup is generic, so other partners (internet, energy, heating, insurance) c
 |---|---|
 | `index.html` | Landing page |
 | `what-centrix-does.html`, `who-it-helps.html`, `the-difference.html` | Information pages |
-| `login.html` | Demo login for tenants and partners |
+| `login.html` | Login for tenants and partners |
 | `tenant.html` | Tenant portal: report a problem, give consent, pick a time slot, follow the status |
 | `partner.html` | Partner (plumber) portal: incoming jobs, job details, status updates |
-| `data/` | Fake sample data: demo accounts, tenant data and partner jobs |
+| `data/` | Fake sample data: test accounts, tenant data and partner jobs |
 
 ### The final workflow (plumbing repair case)
 
@@ -46,9 +98,9 @@ Both portals follow the 21-step final workflow, from the tenant's report to the 
 | Repair (16–18) | Cost check against the €3,000 pre-approved limit, manager approval above it, work note, "Is it dry now?" | Enter the quote (over €3,000 goes to the manager), dictate the work note, wait for the tenant's confirmation |
 | Close (19–21) | Invoice with 19% VAT linked to the case and unit, two feedback questions, seven-day check that updates the home record | Build the invoice from hours and parts, see feedback and the seven-day follow-up |
 
-The manager and the other side of the conversation are played by the dashed **Demo:** buttons. With the server running, the conversation and voice are live (OpenAI and ElevenLabs, see below). Without it, the portals fall back to built-in rules and the browser's own speech support.
+The manager and the other side of the conversation are played by the dashed buttons in the "Your repair" card (for example "Plumber arrives"). With the server running, the conversation and voice are live (OpenAI and ElevenLabs, see below). Without it, the portals fall back to built-in rules and the browser's own speech support.
 
-The demo data is fake and lives in `website/data/`, and the login only checks it in the browser.
+The sample data is fake and lives in `website/data/`, and the login only checks it in the browser.
 
 ## Running it locally
 
@@ -68,11 +120,11 @@ What runs live:
 | | Tenant portal | Partner portal |
 |---|---|---|
 | **OpenAI** (`gpt-4.1-mini`, configurable) | Reads the first report: language, plumbing or not, problem type, urgency, and writes 3 follow-up questions in the tenant's language. Answers free questions at every step from the case facts (cost, time, what's shared) and spots intents like "can it be later?" (rebook), "it's leaking again" (reopen) or a new emergency. Translates the portal's own messages and cards into the tenant's language. | Turns a dictated sentence ("tomorrow at ten, Friday two to four…") into 3 time windows, and tidies a dictated work note. |
-| **ElevenLabs** | Microphone: record, then Scribe speech-to-text, then the assistant answers. Talking turns on spoken replies (multilingual voice), so it becomes a voice conversation. Every assistant message has a Listen button. | Dictation for time windows and the work note (Scribe), and "Play what the tenant hears" for the spoken ETA. |
+| **ElevenLabs** | Microphone: record until you pause, then Scribe speech-to-text puts your words in the message field. Spoken answers to quick-reply questions press the matching button. Talking turns on spoken replies (multilingual voice), so it becomes a voice conversation. Every assistant message has a Listen button. | Dictation for time windows and the work note (Scribe), and "Play what the tenant hears" for the spoken ETA. |
 
 The badge next to the assistant's name says **Live AI · voice** when the server and keys are there.
 
-### Without a server (demo mode)
+### Without a server (basic mode)
 
 Serve the `website` folder with any static server, for example:
 
@@ -80,9 +132,9 @@ Serve the `website` folder with any static server, for example:
 cd website && python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>. The badge says **Demo mode** and the portals use their built-in rules (keyword classification, fixed questions, browser speech). The maps (MapLibre), the globe (D3) and the fonts load from public CDNs, so you need an internet connection.
+Then open <http://localhost:8000>. The badge says **Basic mode** and the portals use their built-in rules (keyword classification, fixed questions, browser speech). The maps (MapLibre), the globe (D3) and the fonts load from public CDNs, so you need an internet connection.
 
-### Demo accounts
+### Test accounts
 
 The test accounts are in [`website/data/demo-accounts.js`](website/data/demo-accounts.js). They're fake and protect nothing. Pick the matching role (Tenant or Partner) on the login page.
 
