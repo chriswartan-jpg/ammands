@@ -59,7 +59,7 @@
 
     const account = ACCOUNTS.find((a) => a.email.toLowerCase() === emailValue.toLowerCase());
     if (!account || account.password !== password.value) {
-      formError.textContent = "This email and password don't match a demo account. The test accounts are in data/demo-accounts.js.";
+      formError.textContent = "This email and password don't match an account. Check them and try again.";
       password.select();
       password.focus();
       return;
